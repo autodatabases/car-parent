@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="resources/css/autoinfo/autoinfo_add.css?t=1.0"/>
+<script src="resources/js/autoinfo/parts_add.js?t=3.1"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>商品</a>&nbsp;》<a class="on">车型配件添加</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<dl>
+		<dt><span>车型配件新增</span></dt>
+		<dd>
+			<label>配件类型：</label>
+			<select id="partsTypeId">
+				<option value="2">机油滤清器</option>
+				<option value="25">机油</option>
+			</select>
+		</dd>
+		<dd>
+			<label>品牌：</label>
+			<select id="brand">
+				<option value="2">机油滤清器</option>
+				<option value="25">机油</option>
+			</select>
+		</dd>
+		<dd>
+			<label style="color: red;">(*必填)产品编码：</label><input type="text" id="productCode"/>
+		</dd>
+		<dd>
+			<label>产品销售价格：</label><input type="text" id="salePrice"/>
+		</dd>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="autopart_button" value="提交" />
+		<input type="button" class="action-btn" onclick="$('.tables').load('autoinfo/part-list.html')" value="返回" />
+	</div>
+</div>

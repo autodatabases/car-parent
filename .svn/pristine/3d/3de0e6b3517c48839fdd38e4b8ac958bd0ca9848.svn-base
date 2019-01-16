@@ -1,0 +1,149 @@
+//点击跳转
+$("#new").click(function(){
+	$('.tables').load("/admin/keepStatistics/keepStatisticsCenter.html");
+});
+//验证码记录
+var verification = {};
+verification.refresh = function(){
+		verification.dataList();
+}
+var isload = false;
+verification.dataList = function() {
+	if(isload){
+		return;
+	}
+	// if($('#eMonth').val()<10){
+	// 	console.log('0'+$('#eMonth').val())
+	// }
+	var timers=$('#eYear').val()+'-'+$('#eMonth').val()
+	var load = $.loading();
+	isload = true;
+	$.ajax({
+		url : DOMIN.MAIN + "/oilCard/oilcardliucun",
+		type : "post",
+		processData: true,
+		cache : false,
+		async : true,
+		dataType : "json",
+		data :{
+			pageNo:_allPages["oilcard_paga"].pageNo,
+			pageSize:_allPages["oilcard_paga"].pageSize,
+			date:timers
+		},
+		traditional : true,// 使用传统方式序列化
+		success : function(data, textStatus) {
+			console.log(timers)
+			isload=false;
+			load.remove();
+			var returnObj = data;
+			var reTu=data.datasets.resultMap.data
+			console.log(reTu)
+			$('#totalNum').html(reTu.allOpenNum);
+			$('#usedNum').html(reTu.allOpenMoney);
+			$('#openNum').html(reTu.allCardMoney);
+			$('#nuseNum').html(reTu.allAcountMoney);			
+			if (data.success) {
+				$(".tab-list tbody").empty();
+				if(returnObj.list.length>0){
+                    taocanNms = returnObj.list.length;
+					verification.renderHtml(returnObj.list);
+				}else{
+					$(".tab-list tbody").append('<tr><td colspan="11" style="color:red;">没有数据~~</td></tr>');
+				}
+				// 分页
+				setPaginator("oilcard_paga",returnObj.pageInfo.pageIndex, returnObj.pageInfo.pageCount,
+						returnObj.pageInfo.recordCount);
+			}else{
+				isload=false;
+				load.remove();
+				$.tip(data.message);
+			}
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			isload=false;
+			load.remove();
+			$.tip(errorThrown);
+		}
+	});
+}
+
+verification.renderHtml = function(datalist){
+	var html="";
+	for(var i=0;i<datalist.length;i++){
+		html+='<tr>';
+		html+='<td class="timer">'+datalist[i].openDate+'</td>'
+		if(datalist[i].supplier=='0'){
+			html+='<td>北京亿特诺美</td>';
+		}else if(datalist[i].supplier=='1'){
+			html+='<td>上海腾霜</td>';
+		}else if(datalist[i].supplier=='2'){
+			html+='<td>上海腾姆</td>';
+		}else if(datalist[i].supplier=='3'){
+			html+='<td>上海泰奎</td>';
+		}else if(datalist[i].supplier=='4'){
+			html+='<td>上海泰钭</td>';
+		}
+        html+='<td>'+datalist[i].address+'</td>';
+		html+='<td>'+datalist[i].content+'</td>';
+		html+='<td>'+datalist[i].openNum+'</td>';
+		html+='<td>'+datalist[i].openMoney+'</td>';	
+		html+='<td>'+datalist[i].useNum+'</td>';
+		html+='<td>'+datalist[i].useMoney+'</td>';   
+		html+='<td>'+datalist[i].cardMoney+'</td>';   		   
+		html+='<td>'+datalist[i].acountMoney+'</td>';    
+		html+="<td style='cursor:pointer' onclick=deletes('"+datalist[i].openDate+"')>导出</td>";          		          
+		html+='</tr>';
+		
+	}
+	$(".tab-list tbody").append(html);
+}
+$(function(){
+	var counterman_session= sessionStorage.getItem("counterman_session");
+	initExportSelect()
+	if(counterman_session){
+		initPaginator("oilcard_paga", verification.dataList,counterman_session,localStorage.getItem('globalPageSize'));
+		sessionStorage.removeItem("counterman_session");
+	}else{
+		initPaginator("oilcard_paga", verification.dataList,1,localStorage.getItem('globalPageSize'));
+	}
+	verification.dataList();
+	$(".search-box button.search-btn").click(function(){//根据查询条件查询
+		_allPages["oilcard_paga"].pageNo = 1;
+		verification.dataList();
+	});
+});
+$("#exportSelectBtn").click(function(){
+	if($('#eMonth').val()<10){
+		console.log('0'+$('#eMonth').val())
+		timer=$('#eYear').val()+'-'+('0'+$('#eMonth').val())
+	}else{
+		timer=$('#eYear').val()+'-'+$('#eMonth').val()
+	}
+	// var timer=$('#eYear').val()+'-'+$('#eMonth').val()
+	console.log(timer)	
+	window.open('oilCard/exportoilcardliucun?date='+timer);
+});
+function deletes(than){
+	// console.log(than.replace(/-/g, ","))
+	console.log(than)	
+	window.open('oilCard/exportoilcardliucun?date='+than)
+}
+function initExportSelect() {
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	var html = "";
+	var htm='';
+	htm += "<option value="+year+">" + year + "年</option>";
+	for (var i=0; i<12; i++) {
+		if(month - i <= 0) {
+			html += "<option value="+(month - i + 12)+">"+ (month - i + 12) + "月</option>";
+			
+		} else {
+			html += "<option value="+(month - i)+">" + (month - i) + "月</option>";
+		}
+	}
+	
+	$("#eMonth").html(html);
+	$("#eYear").html(htm);
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>白名单设置</title>
+		<link rel="stylesheet" type="text/css" href="resources/css/accountSwitches/accountSwitches.css" />
+		<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css" />
+		<script src="resources/js/jquery/page/myJquery.page.js"></script>
+		<script src="resources/js/accountSwitches/accountSwitches.js"></script>
+	</head>
+	<style>
+	.action-btn {
+		padding: 10px 15px;
+		border: 1px solid #ef811f;
+		background: #fc9338;
+		color: #fff;
+		font-size: 16px;
+		border-radius: 3px;
+		width: 150px;
+		margin-left: 50px;
+	}
+	.exportSelect{
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		box-shadow: 0 1px 10px rgba(0,0,0,0.1) inset;
+		height: 28px;
+		padding: 1px 0;
+		width: 150px;
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 20px;
+	}
+	.content_a {
+		padding: 20px 20px;
+		min-height: 400px;
+	}
+	.content_a>div{
+        margin-top: 20px; 
+	}
+	.account{
+		display: flex;
+		color: #ef811f;
+	}
+	.active{
+		margin-top: 20px;
+	}
+	</style>
+	<body>
+		<div class="tables-top">
+			<p class="crumbs">
+				<span>您的位置：</span>
+				<a>追电基础服务</a>&nbsp;》
+				<a class="on">充值帐号切换</a>
+			</p>
+
+			<!-- 切换头部 -->
+			<div class="tab-top">
+				<span class="on">充值帐号切换</span>
+			</div>
+		</div>
+		
+		<div class="content_a">
+            <div class="account"><p>目前使用账号：</p><span class="accounts"></span></div>
+			<div>
+				<h2>充值帐号设置：</h2>
+			</div>
+			<div>
+				充值帐号:
+				<select name="" id="openQuota">
+					<option value="1">北京亿特诺美</option>
+					<option value="2">上海腾霜</option>
+					<option value="3">上海腾姆</option>
+					<option value="4">上海泰奎</option>
+					<option value="5">上海泰钭</option>
+				</select>
+			</div>
+			<button id='account_button' class="action-btn active">确定</button>
+		</div>
+		
+	</body>
+
+</html>

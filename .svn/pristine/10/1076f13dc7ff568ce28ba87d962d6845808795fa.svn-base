@@ -1,0 +1,98 @@
+//帐户余额查询
+var whiteList = {};
+whiteList.refresh = function(){
+		whiteList.dataList();
+}
+var isload = false;
+whiteList.dataList = function() {
+	if(isload){
+		return ;
+	}
+	var load = $.loading();
+	isload = true;
+	$.ajax({
+		url : DOMIN.MAIN + "/oilCard/oiluserlist",
+		type : "post",
+		processData: true,
+		cache : false,
+		async : true,
+		dataType : "json",
+		data :{
+			pageNo:_allPages["busines_paga"].pageNo,
+			pageSize:_allPages["busines_paga"].pageSize,
+			phone:$.trim($('#userAccounts').val())
+		},
+		traditional : true,// 使用传统方式序列化
+		success : function(data, textStatus) {
+			// console.log(data)
+			isload=false;
+			load.remove();
+			var returnObj = data;
+			if (data.success) {
+				$(".tab-list tbody").empty();
+				if(returnObj.list.length>0){
+                    taocanNms = returnObj.list.length;
+					whiteList.renderHtml(returnObj.list);
+				}else{
+					$(".tab-list tbody").append('<tr><td colspan="6" style="color:red;">没有数据~~</td></tr>');
+				}
+				// 分页
+				setPaginator("busines_paga",returnObj.pageInfo.pageIndex, returnObj.pageInfo.pageCount,
+						returnObj.pageInfo.recordCount);
+			}else{
+				isload=false;
+				load.remove();
+				$.tip(data.message);
+			}
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			isload=false;
+			load.remove();
+			$.tip(errorThrown);
+		}
+	});
+}
+
+whiteList.renderHtml = function(datalist){
+	var html="";
+	for(var i=0;i<datalist.length;i++){
+		html+='<tr>';
+		html+='<td>追电科技</td>'
+        html+='<td>'+datalist[i].phone+'</td>';
+        html+="<td>"+datalist[i].money +"</td>";
+        if(datalist[i].washNumber==null){
+            html+="<td>--</td>"
+        }else{
+            html+="<td>"+datalist[i].washNumber +"</td>";
+        }
+
+        
+		html+='<td>'+$.formatDate(datalist[i].createTime)+'</td>';        
+		html+='</tr>';
+	}
+	$(".tab-list tbody").append(html);
+}
+$(function(){
+	var counterman_session= sessionStorage.getItem("counterman_session");
+	if(counterman_session){
+		initPaginator("busines_paga", whiteList.dataList,counterman_session,localStorage.getItem('globalPageSize'));
+		sessionStorage.removeItem("counterman_session");
+	}else{
+		initPaginator("busines_paga", whiteList.dataList,1,localStorage.getItem('globalPageSize'));
+	}
+	whiteList.dataList();
+	$(".search-box button.search-btn").click(function(){//根据查询条件查询
+		var phone=$.trim($("#userAccounts").val());
+		if(phone==''){
+			$.tip('用户账号不可为空！')
+			return;
+		}
+		if (!(/^1[34578]\d{9}$/.test(phone))) {
+			$.tip("请输入正确的用户账号！");
+			$("#oilcard_button").prop("disabled", false);
+			return;
+		}
+		_allPages["busines_paga"].pageNo = 1;
+		whiteList.dataList();
+	});
+});

@@ -1,0 +1,390 @@
+.header{
+	background: #fff;
+	position: relative;
+	background: #FF3E5B;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+	color: #fff;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/dot/back-fff.png) no-repeat center;
+	background-size:20% ;
+}
+/* img */
+.img-box{
+	height:10.9375rem;
+	position: relative;
+}
+.img-box img{
+	width: 100%;
+	height: 100%;
+}
+.img-box div{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width:96%;
+	height:2.3rem;
+	line-height:2.3rem;
+	background: rgba(0,0,0,.5);
+	padding:0 2%;
+	color: #fff;
+	font-size: 14px;
+}
+.img-box span.tips{
+	display: inline-block;
+	height:24px;
+	line-height:24px;
+	padding: 0 5px;
+}
+.img-box span.blue{
+	background:#4b92e4 ;
+}
+.img-box span.green{
+	background:#62bc5a;
+}
+.img-box span.times{
+	float: right;
+	font-size: 16px;
+}
+.img-box span.times b{
+	font-weight: normal;
+}
+/* 详细信息 */
+.details{
+	background: #fff;
+}
+.text-warp{
+	padding:1rem 10px;
+	overflow: hidden;
+}
+.text-box{
+	border-right:1px solid #ddd;
+	width: 73%;
+	font-size: 0.75rem;
+	color: #6a6a6a;
+	padding-right:2% ;
+	float: left;
+}
+.text-box h3{
+	font-size:1rem;
+	line-height: 1.2;
+	width:100%;
+	color: #000;
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.text-t{
+	overflow: hidden;
+	line-height:0.825rem ;
+	margin-top:1rem;
+}
+.text-t p{
+	color: #eb5060;
+	float: left;
+}
+.text-t p i{
+	display: inline-block;
+	width: 0.75rem;
+    height: 0.75rem;
+    margin: 0 1px;
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+	vertical-align: top;
+}
+/* 状态1 */
+.text-t p.on-1 i:nth-child(1){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-1 i:nth-child(2){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-1 i:nth-child(3){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-1 i:nth-child(4){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-1 i:nth-child(5){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+/* 状态2 */
+.text-t p.on-2 i:nth-child(1){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-2 i:nth-child(2){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-2 i:nth-child(3){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-2 i:nth-child(4){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-2 i:nth-child(5){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+/* 状态3 */
+.text-t p.on-3 i:nth-child(1){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-3 i:nth-child(2){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-3 i:nth-child(3){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-3 i:nth-child(4){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-3 i:nth-child(5){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+/* 状态4 */
+.text-t p.on-4 i:nth-child(1){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-4 i:nth-child(2){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-4 i:nth-child(3){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-4 i:nth-child(4){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-4 i:nth-child(5){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+/* 状态5 */
+.text-t p.on-5 i:nth-child(1){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-5 i:nth-child(2){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-5 i:nth-child(3){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-5 i:nth-child(4){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-5 i:nth-child(5){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+
+.text-t>span{
+	float: right;
+	margin-right: 10px;
+}
+.text-t span b{
+	font-weight: normal;
+	color: #eb5060;
+}
+.text-warp a{
+	display: inline-block;
+	text-align: center;
+	width: 24%;
+	color: #e7392f;
+	font-size: 1rem;
+}
+.text-warp a i{
+	display: block;
+	width:1.7rem;
+	min-height:1.7rem;
+	margin: 0 auto;
+	background: url(../../imgs/dot/tel-icon.png) no-repeat;
+	background-size:85% ;
+}
+/* 开始导航 */
+.gps-go{
+	display: block;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	height: 2rem;
+	line-height: 2rem;
+	font-size: 0.75rem;
+	padding:5px 10px;
+	background:url(../../imgs/dot/right.png) no-repeat 98% center;
+	background-size:0.45rem;
+}
+.gps-go span{
+	float: right;
+	margin-right: 0.8rem;
+	color: #919191;
+}
+.gps-go p{
+	padding-left: 20px;
+	width:39%;
+	height: 2rem;
+	line-height: 2rem;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #676767;
+	background: url(../../imgs/dot/gps.png) no-repeat left center;
+	background-size:0.625rem ;
+}
+.car-service{
+	text-align: center;
+	font-size: 0;
+}
+.car-service span{
+	font-size: 12px;
+	display: inline-block;
+	width: 24%;
+	line-height: 2;
+	border-right: 1px solid #ddd;
+	margin: 1rem 0;
+}
+.car-service span:nth-child(5){
+	border-right:none;
+}
+.car-service span i{
+	display: block;
+	width: 2rem;
+	height: 2rem;
+	margin: 0 auto;
+}
+.car-service span:nth-child(3){
+	display: none;
+}
+/* 洗车 */
+.xc-1{
+	background: url(../../imgs/dot/xc-1.png) no-repeat center;
+	background-size:100%;
+}
+.xc-2{
+	background: url(../../imgs/dot/xc-2.png) no-repeat center;
+	background-size:100%;
+}
+.xc-3{
+	background: url(../../imgs/dot/xc-3.png) no-repeat center;
+	background-size:100%;
+}
+
+/* 保养 */
+.by-1{
+	background: url(../../imgs/dot/by-1.png) no-repeat center;
+	background-size:100%;
+}
+.by-2{
+	background: url(../../imgs/dot/by-2.png) no-repeat center;
+	background-size:100%;
+}
+.by-3{
+	background: url(../../imgs/dot/by-3.png) no-repeat center;
+	background-size:100%;
+}
+
+/* 服务范围 */
+.fwfw-1{
+	background: url(../../imgs/dot/fwfw-1.png) no-repeat center;
+	background-size:100%;
+}
+.fwfw-2{
+	background: url(../../imgs/dot/fwfw-2.png) no-repeat center;
+	background-size:100%;
+}
+
+/* 安装环境 */
+.hj-1{
+	background: url(../../imgs/dot/hj-1.png) no-repeat center;
+	background-size:100%;
+}
+.hj-2{
+	background: url(../../imgs/dot/hj-2.png) no-repeat center;
+	background-size:100%;
+}
+/* 喷漆　*/
+.pq-1{
+	background: url(../../imgs/dot/xqy-xuanzhong.png) no-repeat center;
+	background-size:100%;
+}
+.pq-2{
+	background: url(../../imgs/dot/xqy-weixuanzhong.png) no-repeat center;
+	background-size:100%;
+}
+.pq-3{
+	background: url(../../imgs/dot/xqy-bukexuan.png) no-repeat center;
+	background-size:100%;
+}
+
+/* 服务盒子 */
+.service-box{
+	padding:0.8rem 2% 2rem 2%;
+	display: none;
+}
+.service-box strong{
+	font-size: 1rem;
+	line-height: 3;
+}
+.service-box ul{
+	overflow: hidden;
+}
+.service-box ul li{
+	float:left;
+	width:49%;
+	border:1px solid #ddd;
+	text-align: center;
+	font-size: 12px;
+	background: #fff;
+	border-radius: 5px;
+	line-height: 1.2;
+	padding:10px 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.service-box img{
+	border:1px solid #fff;
+}
+/* 提交按钮 */
+.btn-action{
+	display: block;
+	width: 90%;
+	margin: 20px auto;
+    background: #FF3E5B;
+    border:1px solid #FF3E5B;
+    color: #fff;
+    height: 2.8rem;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.5);
+    -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,.5);
+    -moz-box-shadow: 1px 1px 3px rgba(0,0,0,.5);
+}

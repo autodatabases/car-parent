@@ -1,0 +1,147 @@
+html,body {
+	background: #fff;
+}
+.header{
+	background: #fff;
+	position: relative;
+	background: #FF3E5B;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+	color: #fff;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/dot/back-fff.png) no-repeat center;
+	background-size:20% ;
+}
+.content {
+	width: 100%;
+	overflow: hidden;
+}
+.company {
+	width: 100%;
+	padding: 10px 20px;
+	overflow: hidden;
+	box-sizing: border-box;
+	border-bottom: 1px solid #eee;
+}
+.company li:nth-child(odd) {
+	color: #999999;
+	font-size: 12px;
+	height: 26px;
+	line-height: 26px;
+}
+.compay li:nth-child(even) {
+	color: #333333;
+	font-size: 14px;
+	height: 26px;
+	line-height: 26px;
+}
+.baodan {
+	width: 100%;
+	overflow: hidden;
+}
+.baodan .bd_year {
+	width: 30%;
+	height: 36px;
+	margin: 10px auto;
+	position: relative;
+}
+.bd_year .select {
+	display: block;
+	height: 36px;
+	line-height: 36px;
+	width: 100%;
+	border: 0;
+	border-radius: 5px;
+	background: #eeeeee url(../../imgs/guoshou/xiala.png) no-repeat 88% center;
+	background-size: 18%;
+	padding-left: 12px;
+	box-sizing: border-box;
+}
+.bd_year .bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	opacity: 0.4;
+	z-index: 999;
+}
+.bd_year .option {
+	position: fixed;
+	top: 50%;
+	left: 20%;
+	margin-top: -40px;
+	width: 60%;
+	max-height: 180px;
+	background-color: #fff;
+	border-radius: 5px;
+	z-index: 1000;
+	padding: 10px 0;
+	overflow-y: auto;
+}
+.bd_year .option span {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+.bd_detail {
+	width: 100%;
+	overflow: hidden;
+}
+.bd_detail .table_head {
+	width: 100%;
+	height: 40px;
+	display: flex;
+	color: #fff;
+}
+.bd_detail .table_head span {
+	flex-grow: 1;
+	width: 30%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background-color: #3699fe;
+}
+.bd_detail .table_head span:nth-child(2) {
+	border: 1px solid #dbdbdb;
+	border-width: 0 1px 0 1px;
+	background-color: #64b1ff;
+}
+.bd_detail .item{
+	width: 100%;
+	height: 50px;
+	display: flex;
+}
+.bd_detail .item:nth-child(even){
+	background-color: #eee;
+}
+.bd_detail .item span {
+	flex-grow: 1;
+	width: 30%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+.bd_detail .item span:nth-child(2) {
+	border: 1px solid #dbdbdb;
+	border-width: 0 1px 0 1px;
+}
+.bd_detail .foot_item span {
+	width: 0.1%;
+}
+.bd_detail .foot_item span:nth-child(2) {
+	flex-grow: 2;
+}

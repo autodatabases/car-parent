@@ -1,0 +1,76 @@
+<link rel="stylesheet" type="text/css" href="resources/css/busines/busines-list.css?t=1.5"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/busines/busines-statement.js?t=1.8"></script>
+<div class="tables-top">
+	<p class="crumbs">
+		<span>您的位置：</span><a>商家</a>&nbsp;》<a class="on">商家结算</a>
+	</p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<label>门店名称:</label>
+		<input type="text" id="sellerName" />
+		<label>结算年月</label>
+		<select id="exportSelect" style="margin-left: 20px;"></select>
+		<button class="search-btn">
+			<span>搜索</span>
+		</button>
+		<button class="jiesuan-btn">
+			<span>一键结算</span>
+		</button>
+		<label style="margin-left: 60px;">导出年月</label>
+		<select id="exportSelect01" style="margin-left: 20px;"></select>
+		<button class="export-btn">
+			<span>导出</span>
+		</button>
+	</div>
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>门店名称</th>
+					<th>公司名称</th>
+					<!--<th>结算年月</th>-->
+					<!--<th>已完成订单数</th>-->
+					<th>结算金额</th>
+					<th>开户名称</th>
+					<th>开户账号</th>
+					<th>开户行</th>
+					<th>发票</th>
+					<th>结算状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--<tr>
+					<td>天河万里行轮胎店</td>
+					<td>2017-6</td>
+					<td>40</td>
+					<td>4000.00</td>
+					<td>商家已确认</td>
+					<td><a>导出</a><a>确认完成</a></td>
+				</tr>-->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="businesStatement_paga"></div>
+</div>
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p class="wenzi" style="float: left;">是否确定已跟商家结算</p>
+			<span onclick="audit_close()" class="close">x</span>
+		</div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="audit_button()"
+				value="确认" /> <input type="button" onclick="audit_close()"
+				value="关闭" />
+		</div>
+	</div>
+</div>

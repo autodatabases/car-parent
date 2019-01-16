@@ -1,0 +1,55 @@
+@charset "utf-8";
+.header{
+	background: #fff;
+	position: relative;
+	border-bottom: 1px solid #e0e0e0;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/coupon/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+.list li{
+	border:1px solid #eaeaea;
+	position: relative;
+	padding: 1.5rem 1rem;
+}
+.list li strong{
+	font-weight: normal;
+	font-size: 1rem;
+	display: block;
+}
+.list li span{
+	font-size: 0.75rem;
+}
+.list li i{
+	font-style: normal;
+	position: absolute;
+	right:5% ;
+	top: 50%;
+	margin-top:-0.625rem;
+	font-size: 1.25rem;
+	line-height: 1;
+	color: #4cb012;
+}
+
+
+
+
+
+
+
+
+
+
+
+

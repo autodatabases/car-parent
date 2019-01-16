@@ -1,0 +1,266 @@
+<link rel="stylesheet" type="text/css" href="resources/css/order/order.css?t=1.7" />
+<script src="resources/js/common/initAreaSelect.js" type="text/javascript" charset="utf-8"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>系统</a>&nbsp;》<a class="on">数据分析</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<form class="analysis-form1">
+			<ul>
+				<li>
+					<select id="exportSelect" name="date" style="display:block;"></select>
+				</li>
+				<li>
+					<select id="province"></select>
+					<select id="city"><option value="">选择城市</option></select>
+					<select id="area"><option value="">选择市区</option></select>
+				</li>
+				<li>
+					<button id="exportSelectBtn" type="button" style="display:block;"><span>导出每日下小保养订单</span></button>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<button id="exportSelectBtn3" type="button"  style="display:block;"><span>导出每日下洗车订单</span></button>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<button id="exportSelectBtn8" type="button"  style="display:block;"><span>导出每日下喷漆订单</span></button>
+				</li>
+			</ul>
+	
+			<ul>
+				<li>
+					<button id="exportSelectBtn1" type="button"  style="display:block;"><span>导出每日注册</span></button>
+				</li>
+			</ul>
+	
+	
+			<ul>
+				<li>
+					<button id="exportSelectBtn2" type="button"  style="display:block;"><span>导出每日保单</span></button>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<button id="exportSelectBtn6" type="button"  style="display:block;"><span>导出全部(已完成)订单</span></button>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<button id="exportSelectBtn7" type="button"  style="display:block;"><span>导出(所有)订单</span></button>
+				</li>
+			</ul>
+		</form>
+	</div>
+	<hr/>
+	<div class="search-box clearfix">
+		<form class="analysis-form2">
+			<ul>
+				<li>
+					<select id="exportSelect1" name="date" style="display:block;"></select>
+				</li>
+				<li>
+					<select id="city1" name="address"></select>
+				</li>
+				<li>
+					<select id="source" name="source">
+						<option value="">选择渠道</option>
+						<option value="全部">全部</option>
+					    <option value="互动">互动</option>
+					    <option value="电子">电子</option>
+					    <option value="普通中介">普通中介</option>
+					    <option value="车商">车商</option>
+					    <option value="银保">银保</option>
+					    <option value="个人代理">个人代理</option>
+					    <option value="自主">自主</option>
+					    <option value="其他">其他</option>
+					</select>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<button id="exportSelectBtn4" type="button" style="display:block;"><span>导出本月该城市保单的统计</span></button>
+				</li>
+				<li>
+					<button id="exportSelectBtn5" type="button" style="display:block;"><span>导出本月该城市订单的统计</span></button>
+				</li>
+			</ul>
+		</form>
+	</div>
+	<hr/>
+	<form id="gsagent" action="analysis/importAgentData" method="post" enctype="multipart/form-data" target="import-gsagent-data" style="display: inline-block">
+		<div class="imgUploat">
+			<a href="analysis/import_gsagent_data.xlsx">下载模板</a>
+			<input id="uploadfile" name="gs_agent" type="file" style="width: 180px;"></input>
+			<span style="cursor: pointer;border: 1px solid #F0882C;background: #F0882C;color: #fff;padding: 4px 15px;line-height: 26px;border-radius:5px;">导入国寿车行信息</span>
+		</div>
+	</form>
+	<iframe name="import-gsagent-data" id="import-gsagent-data"  style="width:0px;height: 0px;"></iframe>
+</div>
+<style type="text/css">
+	#uploadfile{
+		display:inline-block;
+		border:1px solid #cecccc;
+		padding:4px;
+	}
+	.imgUploat a{
+		font-size:13px;
+	}
+</style>
+<script>
+$(function(){
+	initExportSelect();
+	initProvince("province");
+	initCity("province","city");
+	initArea("province","city","area");
+	//根据月份和保单地址统计分析保单和订单的一些数据
+	initExportSelect1();
+	getCity1();
+	$("#exportSelectBtn4").click(function(){
+		if("选择城市"==$("#city1 :selected").html()){
+			$.tip("请选择城市");
+			return;
+		}
+		if($("#source").val()==""){
+			$.tip("请选择渠道");
+			return;
+		}
+		var data =$(".analysis-form2").serialize();
+		window.open('analysis/exportanalysisbaodan?'+data);
+	});
+	$("#exportSelectBtn5").click(function(){
+		if("选择城市"==$("#city1 :selected").html()){
+			$.tip("请选择城市");
+			return;
+		}
+		if($("#source").val()==""){
+			$.tip("请选择渠道");
+			return;
+		}
+		var data =$(".analysis-form2").serialize();
+		window.open('analysis/exportanalysisorder?'+data);
+	});
+	$(".imgUploat span").click(function(){
+		if($("#uploadfile").val()!=""){
+			$("#gsagent").submit();
+		}else{
+			$.tip('请选择导入文件！');
+		}
+	});
+	$("#import-gsagent-data").load(function(){
+		debugger
+		if(document.getElementById("import-gsagent-data").contentWindow.document.body.innerText!=""){
+			var val = eval("(" + document.getElementById("import-gsagent-data").contentWindow.document.body.innerText + ")");
+			if(val.success){
+				$.tip("导入成功!!!");
+			}else{
+				$.tip(val.message);
+			}
+			importUserErrList.refresh();
+		}
+    });
+});
+function initExportSelect(){
+	var mydate = new Date();
+	var year=mydate.getFullYear(); //获取完整的年份(4位,1970-????)
+	var month = mydate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+	var html="<option>"+year+'-'+month+"</option>";
+	for(i=1;i<12;i++){
+		if(month-i<=0){
+			html+="<option>"+(year-1)+'-'+(12+month-i)+"</option>";
+		}else{
+			html+="<option>"+year+'-'+(month-i)+"</option>";
+		}
+	}
+	$("#exportSelect").append(html);
+	$("#exportSelectBtn").click(function(){
+		var data =$.parseForm($(".analysis-form1"));
+		console.info(data)
+		window.open('order/exportOrderCountToExcel?date='+$("#exportSelect").val()+'&orderType=2');
+	});
+	$("#exportSelectBtn1").click(function(){
+		var data =$.parseForm($(".analysis-form1"));
+		console.info(data)
+		window.open('order/exportRegisterCountToExcel?date='+$("#exportSelect").val());
+	});
+
+	$("#exportSelectBtn2").click(function(){
+		var data =$.parseForm($(".analysis-form1"));
+		console.info(data)
+		window.open('order/exportBaodanCountToExcel?date='+$("#exportSelect").val());
+	});
+	$("#exportSelectBtn3").click(function(){
+		var data =$.parseForm($(".analysis-form1"));
+		console.info(data)
+		window.open('order/exportOrderCountToExcel?date='+$("#exportSelect").val()+'&orderType=3');
+	});
+	$("#exportSelectBtn6").click(function(){
+		var data =$.parseForm($(".analysis-form1"));
+		console.info(data)
+		//var city = $("#city").find("option:selected").text();
+		window.open('order/exportChinaLifeExcel?date='+$("#exportSelect").val()+'&status=3');//+'&city='+city
+	});
+	$("#exportSelectBtn7").click(function(){
+		//var city = $("#city").find("option:selected").text();
+		var data =$.parseForm($(".analysis-form1"));
+		console.info(data)
+		window.open('order/exportChinaLifeExcel?date='+$("#exportSelect").val()+'&status=-1');//+'&city='+city
+	});
+	$("#exportSelectBtn8").click(function(){
+		var data =$.parseForm($(".analysis-form1"));
+		console.info(data)
+		window.open('order/exportOrderCountToExcel?date='+$("#exportSelect").val()+'&orderType=4');
+	});
+}
+//组织日期
+function initExportSelect1(){
+	var mydate = new Date();
+	var year=mydate.getFullYear(); //获取完整的年份(4位,1970-????)
+	var month = mydate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+	var html="<option>"+year+'-'+month+"</option>";
+	var monthCount = month+12;
+	for(i=1;i<monthCount;i++){
+		if(monthCount-i<=12){
+			html+="<option>"+(year-1)+'-'+(12+month-i)+"</option>";
+		}else{
+			html+="<option>"+year+'-'+(month-i)+"</option>";
+		}
+	}
+	$("#exportSelect1").append(html);
+}
+//组织城市
+function getCity1(){
+	$.ajax({
+		url : DOMIN.MAIN+"/address/queryCityByProvince",
+		type : "post",
+		cache : false,
+		async : false,
+		dataType : "json",
+		data: {
+			provinceId: 20
+		},
+		traditional: true,
+		success : function(data, textStatus){
+			console.log(data)
+			if(data.success){
+				var obj = data.list;
+				//处理返回结果
+				$("#city1").empty();
+				$("#city1").append('<option value="">选择城市</option>');
+				for(var i=0;i<obj.length;i++){
+					$("#city1").append('<option value="'+obj[i].regionname+'">'+obj[i].regionname+'</option>');
+				}
+			}else{
+				alert(data.message);
+			}
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown){
+			alert(errorThrown);
+		}
+	});
+}
+</script>

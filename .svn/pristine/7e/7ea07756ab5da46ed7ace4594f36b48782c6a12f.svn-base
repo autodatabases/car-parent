@@ -1,0 +1,104 @@
+$(function() {
+	//获取数据
+	getType(true,{parentId:""});
+    $("#productAdd_button").click(function() {
+    	productAdd();
+    });
+    $("#product_list").click(function(){
+		$('.tables').load('product/product_list.html');
+	});
+	$("#category_Manager").click(function(){
+		$('.tables').load('product/categoryManager.html');
+	});
+});
+//获取分类
+function getType(isSelect,data){
+	$.ajax({
+		url : DOMIN.MAIN + "/virtualtopup/queryOilGoodsType",
+		type : "GET",
+		processData: true,
+		cache : false,
+		async : true,
+		dataType : "json",
+		data :data,
+		traditional : true,// 使用传统方式序列化
+		success : function(data, textStatus) {
+			var returnObj = data;
+			if (data.success) {
+				$(".productAdd-form #typeName").empty();
+				if(returnObj.list.length>0){
+					productList.renderHtml(returnObj.list);
+				}else{
+					$.tip("暂无类目数据，请先添加类目！");
+				}
+			}else{
+				$.tip(data.message);
+			}
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			$.tip(errorThrown);
+		}
+	});
+}
+function productAdd() { //提交
+    $("#productAdd_button").prop("disabled", true).val("提交中...");
+	var data =$.parseForm($(".productAdd-form"));
+    var postData = $.extend(data,
+			{pageNo:_allPages["oilcard_paga"].pageNo,pageSize:_allPages["oilcard_paga"].pageSize});
+
+    //类目必须填写
+	if(postData.typeName==""){
+		$.tip("请选择商品类目！");
+		 $(".productAdd_button").prop("disabled", false).val("确定");
+		return;
+	}
+    //商品名称必须填写
+    if(postData.goodsName=="") {
+        $.tip("商品名称不能为空！");
+        $(".productAdd_button").prop("disabled", false).val("确定");
+		return;
+    }
+	//商品编号必须填写
+	if(postData.productId==""){
+		$.tip("商品编号不能为空！");
+        $(".productAdd_button").prop("disabled", false).val("确定");
+		return;
+	}
+    //商品面额必须填写
+    if(postData.denomination=="") {
+        $.tip("商品面额不能为空！");
+        $(".productAdd_button").prop("disabled", false).val("确定");
+		return;
+    }
+	//商品售价必须填写
+	if(postData.sale==""){
+		$.tip("商品售价不能为空！");
+        $(".productAdd_button").prop("disabled", false).val("确定");
+		return;
+	}
+    $.ajax({
+        url: DOMIN.MAIN + "/virtualtopup/addOilGoods",
+        type: "post",
+        processData: true,
+        cache: false,
+        async: true,
+        dataType: "json",
+        data: postData,
+        traditional: true, // 使用传统方式序列化
+        success: function(data, textStatus) {
+            if (data.success) {
+                $.tip("操作成功！");
+                setTimeout(function() {
+                    $('.tables').load('product/product_list.html');
+                }, 1000);
+            } else {
+                $.tip(data.message);
+                $(".productAdd_button").prop("disabled", false).val("确定");
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            $.tip(errorThrown);
+            $(".productAdd_button").prop("disabled", false).val("确定");
+        }
+    });
+}

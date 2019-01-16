@@ -1,0 +1,97 @@
+
+/* 表单 */
+.tables{
+	float: left;
+	width: 90%;
+	height:500px;
+}
+.tables>div{
+	border-left: 1px solid #ccc;
+}
+.tables-top{
+	padding-top: 20px;
+    background: url(../../imgs/order/noise.white.png);
+	border-bottom: 1px solid #ccc;
+}
+.tab-top{
+	width: 90%;
+    padding: 0 20px;
+    margin-bottom: -1px;
+}
+.tab-top span{
+	display: inline-block;
+    padding: 10px 20px;
+    background: #ccc;
+    color: #fff;
+    font-size: 14px;
+    -moz-border-radius: 2px 2px 0 0;
+    -webkit-border-radius: 2px 2px 0 0;
+    border-radius: 2px 2px 0 0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.tab-top span:hover{
+    color: #319cff;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+.tab-top span.on{
+    color: #319cff;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+/* 创建角色 */
+.create{
+}
+.create strong{
+	display: block;
+	font-size: 12px;
+}
+.create input{
+	border:1px solid #eaeaea;
+	width:373px;
+	height:28px;
+	margin:20px 0;
+	padding: 5px;
+}
+.create span{
+	color: red;
+	font-size: 20px;
+	margin-left:20px ;
+	vertical-align: middle;
+}
+/* 列表 */
+.tabels-main{
+	padding: 20px 20px;
+	min-height: 400px;
+}
+.create-list{
+	line-height: 48px;
+}
+.create-list dt{
+	background: #f8f8f8;
+	font-size: 12px;
+}
+.create-list dd{
+	font-size: 16px;
+	border-bottom: 1px solid #ebebeb;
+}
+.create-list dl input{
+	margin: 0 10px;
+	width:14px;
+	height:14px;
+	border:1px solid #000;
+}
+.create-list button{
+	width:144px;
+	height:37px;
+	line-height:37px;
+	font-size:14px;
+	color:#fff ;
+	background: #fc9338;
+	border:1px solid #f5811c;
+	border-radius: 5px;
+	margin: 30px 0;
+}
+
+

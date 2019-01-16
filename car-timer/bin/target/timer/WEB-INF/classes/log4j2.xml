@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="off" monitorInterval="1800">
+
+	<properties>
+		<property name="logpath">../logs</property>
+	</properties>
+
+	<appenders>
+		<console name="CONSOLE" target="SYSTEM_OUT">
+			<patternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</console>
+		<rollingFile name="FILE" fileName="${logpath}/car-timer.log"
+			filePattern="${logpath}/$${date:yyyy-MM}/car-timer-%d{MM-dd-yyyy}-%i.log.gz">
+			<patternLayout
+				pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n" />
+			<sizeBasedTriggeringPolicy size="50MB" />
+		</rollingFile>
+	</appenders>
+
+	<loggers>
+		<root level="INFO">
+			<appenderRef ref="CONSOLE" />
+		</root>
+	</loggers>
+</configuration>

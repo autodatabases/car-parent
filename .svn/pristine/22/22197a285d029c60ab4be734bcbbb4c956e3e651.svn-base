@@ -1,0 +1,78 @@
+<link rel="stylesheet" type="text/css" href="resources/css/counterman/area_list.css?t=1.1"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/counterman/area_list.js?t=1.2"></script>
+<div class="tables-top">
+	<p class="crumbs">
+		<span>您的位置：</span><a>业务员</a>&nbsp;》<a class="on">财险职场列表</a>
+	</p>
+		<!-- 切换头部 -->
+	<div class="tab-top">
+		<span class="on">财险职场列表</span>
+		<div id="add_area">新增财险职场</div>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>职场名称:</label>
+				<input type="text" id="careerName" />
+			</li>
+			<li>
+				<label>职场代码:</label>
+				<input type="text" id="careerCode" />
+			</li>
+			<li>
+				<label>所属网点:</label>
+				<input type="text" id="caiDotName" />
+			</li>
+ 			<li>
+				<button class="search-btn">
+					<span>搜索</span>
+				</button>
+			</li>
+		</ul>
+	</div>
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>职场名称</th>
+					<th>职场代码</th>
+					<th>所属网点</th>
+					<th>所属分公司</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--<tr>
+					<td>天河万里行轮胎店</td>
+					<td>马牌门店</td>
+					<td>快修店</td>
+					<td>刘艳会</td>
+					<td>13802910637</td>
+					<td><a>编辑</a><a>停用</a></td>
+				</tr>-->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="counterman_paga"></div>
+</div>
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p class="wenzi" style="float: left;">是否删除该职场</p>
+			<span onclick="audit_close()" class="close">x</span>
+		</div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="audit_button()" value="确认" /> 
+			<input type="button" onclick="audit_close()" value="关闭" />
+		</div>
+	</div>
+</div>

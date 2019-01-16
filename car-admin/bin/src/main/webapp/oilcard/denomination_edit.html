@@ -1,0 +1,47 @@
+<link rel="stylesheet" type="text/css" href="resources/css/oilcard/denomination_edit.css" />
+<script src="resources/js/oilcard/denomination_edit.js?t=1.0"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>增值服务</a>&nbsp;》<a class="on winfo">油卡面额增加</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<dl>
+		<dt><span class="table-title">油卡面额增加</span></dt>
+    <dd>
+			<label>服务商：</label>
+			<select id="suppli">
+			 	<option value="">请选择服务商</option>
+			    <option value="1">欧飞</option>
+  				<option value="2">高阳迅捷</option>
+			</select>
+		</dd>
+	<dd>
+		<label>油卡厂商：</label>
+		<select id="mfrs">
+		 	<option value="">请选择油卡厂商</option>
+		    <option value="0">中石化</option>
+			<option value="1">中石油</option>
+			<option value="2">话费</option>
+		</select>
+	</dd>
+	<dd style="display:none;">
+		<label>产品编号：</label><input type="text" id="identifier" value="" style="text-align:center;" placeholder="请输入产品编号" />
+	</dd>
+    <dd>
+		<label>面额：</label><input type="text" id="number" value="" style="text-align:center;" placeholder="请输入面额" />
+	</dd>
+    <dd>
+		<label>面额状态：</label>
+		<select id="status">
+		 	<option value="">请选择面额状态</option>
+		    <option value="0">正常使用</option>
+			<option value="1">暂停服务</option>
+      		<option value="2">禁用</option>
+		</select>
+	</dd>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="denomination_button" value="提交" />
+		<input type="button" class="action-btn" onclick="$('.tables').load('oilcard/denomination_config.html')" value="返回" />
+	</div>
+</div>

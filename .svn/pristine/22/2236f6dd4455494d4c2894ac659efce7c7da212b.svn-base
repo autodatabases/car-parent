@@ -1,0 +1,55 @@
+@charset "utf-8";
+.header{
+	background: #fff;
+	position: relative;
+	border-bottom: 1px solid #e0e0e0;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/coupon/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+.top{
+	background: #ff3e5b;
+	color: #fff;
+	text-align: center;
+	height: 9.0625rem;
+	line-height: 9.0625rem;
+	font-size: 3.125rem;
+	position: relative;
+}
+.top span{
+	display: block;
+	font-size: 0.875rem;
+	position: absolute;
+	left: 50%;
+	top: 22%;
+	line-height: 1;
+	margin-left: -35px;
+}
+.list{
+	border-top: 1px solid #eaeaea;
+	margin-top: 0.875rem;
+	background: #fff;
+}
+.list a{
+	display: block;
+	line-height: 2.5rem;
+	font-size:0.875rem ;
+	border-bottom: 1px solid #eaeaea;
+	padding:0 3rem;
+	background: url(../../imgs/setlment/more-icon.png) no-repeat 94% center;
+}
+.list a span{
+	float: right;
+	color: #ff3e5b;
+}

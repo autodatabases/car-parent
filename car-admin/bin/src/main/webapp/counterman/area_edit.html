@@ -1,0 +1,31 @@
+<link rel="stylesheet" type="text/css" href="resources/css/counterman/area_edit.css?t=1.0"/>
+<script src="resources/js/counterman/area_edit.js?t=1.0"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>业务员</a>&nbsp;》<a class="on">财险职场列表</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<dl>
+		<dt><span>职场编辑</span></dt>
+		<dd>
+			<label>职场名称：</label><input type="text" id="careerName" value="" placeholder="请输入职场名称"/>
+		</dd>
+		<dd>
+			<label>职场代码：</label><input type="text" id="careerCode" value="" placeholder="请输入职场代码"/>
+		</dd>
+		<dd>
+			<label>财险网点：</label>
+			<select id="points">
+			 	<option value="0">请选择网点</option>
+			</select>
+		</dd>
+		<dd>
+			<label>所属分公司：</label><input type="text" id="branchCompany" value="广州分公司" placeholder="请输入所属分公司"/>
+		</dd>
+
+	</dl>
+	<div>
+		<input type="button" class="action-btn"  id="area_button" value="提交" />
+		<input type="button" class="action-btn" onclick="$('.tables').load('counterman/area_list.html')" value="返回" />
+	</div>
+</div>

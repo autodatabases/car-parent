@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>商品发布</title>
+		<link rel="stylesheet" type="text/css" href="../resources/css/com.css"/>
+		<link rel="stylesheet" type="text/css" href="../resources/css/goods/goods-release.css"/>
+		<script src="../resources/js/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body class="clearfix">
+		<!-- 头部 -->
+		<div class="header clearfix">
+			<h1>惠+车服</h1>
+			<span>后台管理系统</span>
+			<div class="user-info">
+				<span>管理员</span>
+			</div>
+		</div>
+		<!-- 导航 -->
+		<div class="nav">
+			<div class="nav-warp clearfix">
+				<a class="index"><i></i>首页</a>
+				<a class="goods"><i></i>商品</a>
+				<a class="busines"><i></i>商家</a>
+				<a class="order on"><i></i>订单</a>
+				<a class="statics"><i></i>报表</a>
+				<a class="statics"><i></i>会员</a>
+				<a class="statics"><i></i>系统</a>
+				<a class="statics"><i></i>文章</a>
+			</div>
+		</div>
+		<!-- 侧栏 -->
+		<div class="sidebar">
+			<ul>
+				<li class="on"><a>发布商品</a></li>
+				<li><a>商品列表</a></li>
+			</ul>
+		</div>
+		<!-- 表单 -->
+		<div class="tables">
+			<div class="tables-top">
+				<!-- 面包屑 -->
+				<p class="crumbs"><span>您的位置：</span><a>订单</a>&nbsp;》<a>商家订单</a>&nbsp;》<a class="on">服务订单</a></p>
+				<!-- 切换头部 -->
+				<div class="tab-top">
+					<span class="on">发布商品</span>
+				</div>
+			</div>
+			<!-- 匹配车型选择 -->
+			<div class="tabels-main">
+				<div class="title"><span>商品类型：</span></div>
+				<select>
+					<option value="">电瓶</option>
+					<option value="">轮胎</option>
+					<option value="">机油</option>
+				</select>
+				<div class="title"><span>商品类型：</span></div>
+				<div class="list">
+					<table>
+						<tr>
+							<td>标题</td>
+							<td><input type="text"/></td>
+						</tr>
+						<tr>
+							<td>属性</td>
+							<td>
+								<input type="radio" name="radio" checked="checked"/><span>蓝标</span>
+								<input type="radio" name="radio" /><span>银标</span>
+								<input type="radio"  name="radio" /><span>黑标</span>
+							</td>
+						</tr>
+						<tr>
+							<td>品牌</td>
+							<td>
+								<select name="">
+									<option value="">马牌</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>市场价</td>
+							<td><input type="text"/></td>
+						</tr>
+						<tr>
+							<td>结算价</td>
+							<td><input type="text"/></td>
+						</tr>
+						<tr>
+							<td>产品图</td>
+							<td>
+								<img src="../resources/imgs/bg.jpg"/>
+								<span class="upload-btn">
+									<img src="../resources/imgs/goods/upload-btn.png"/>
+									<input type="file" />
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td>操作</td>
+							<td>
+								<i>上架</i><i>下架</i>
+							</td>
+						</tr>
+					</table>
+					<div class="page-box">
+						<input type="button" id="action-btn" value="确认提交" />
+						<input type="button" id="reset-btn" value="重置" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

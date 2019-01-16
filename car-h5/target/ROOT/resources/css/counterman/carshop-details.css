@@ -1,0 +1,69 @@
+html,body {
+	background-color: #f2f2f2;
+}
+/*头部*/
+.header{
+	background: #fff;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	position: relative;
+	background-color: #ff3e5b;
+	color: #fff;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background: url(../../imgs/dot/back-fff.png) no-repeat center;
+	background-size:20% ;
+}
+.content {
+	width: 100%;
+	box-sizing: border-box;
+}
+.content h2 {
+	font-size: 18px;
+	text-align: center;
+	line-height: 3rem;
+	color: #FF3E5A;
+	background: #fff;
+}
+.content ul{
+	width: 100%;
+  	padding: 0.5rem 0;
+  	background: #fff;
+}
+.content .list{
+  	border: 1px solid #DADADA;
+  	border-width: 1px 0;
+}
+.content ul li{
+	padding:0 5%;
+	width: 90%;
+  	line-height: 2rem;
+  	font-size: 15px;
+}
+.content ul li span{
+	color: #8d8d8d;
+}
+.yearContainer{background: #fff;padding:1rem 5%;}
+.yearContainer select{width:40%;padding:0 0.5rem;}
+.yearDisplay{display: none;}
+.localDirect .btn{
+	display: block;
+	border: 0;
+	width: 60%;
+	margin:2rem auto 0;
+	height: 2.5rem;
+	border-radius: 20px;
+	background-color: #ff3e5b;
+	color: #fff;
+	text-align: center;
+}

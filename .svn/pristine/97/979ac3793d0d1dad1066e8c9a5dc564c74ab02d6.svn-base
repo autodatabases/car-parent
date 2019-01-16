@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script type="text/javascript"
+	src="http://api.map.baidu.com/api?v=2.0&ak=134db1b9cf1f1f2b4427210932b34dcb"></script>
+<title>清理缓存</title>
+</head>
+<body>
+	<div style="width:600px;height:480px;border:1px solid gray;margin:30px auto" id="container"></div> 
+	<script type="text/javascript">
+		//删除cookie
+		function delCookie(name) {
+			var exp = new Date();
+			exp.setTime(exp.getTime() - 1);
+			document.cookie = name + "=;path=/;expires=" + exp.toGMTString();
+		}
+		if (document.cookie) {
+			var cookieArr = document.cookie.split(';');
+			for ( var i in cookieArr) {
+				delCookie(cookieArr[i].split("=")[0]);
+			}
+			alert('清理成功，本次清理cookie数量：'+cookieArr.length);
+		}
+	</script>
+</body>
+</html>

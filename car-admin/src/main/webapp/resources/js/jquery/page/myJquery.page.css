@@ -1,0 +1,75 @@
+/*��ҳ��ʽ*/
+.pageDiv{
+	display:none;
+	font-family: "Microsoft Yahei";
+	color: #333;
+	font-size: 14px;
+	width:100%;
+}
+.pageBox{
+	text-align:center;
+}
+/*��ҳ��ť��ʽ*/
+.pageBox .page_a {
+    border: 1px solid #ccc;
+    padding: 5px 7px;
+    margin:0 5px;
+    font-weight: bold;
+    background: #fcfcfc;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 11px;
+    -moz-box-shadow: 1px 1px 2px #ddd;
+    -webkit-box-shadow: 1px 1px 2px #ddd;
+    box-shadow: 1px 1px 2px #ddd;
+    cursor: pointer;
+}
+
+.pageBox .pageDown{
+	-moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #fff;
+    background: #F0882C;
+    border: 1px solid #F0882C;
+}
+
+.pageBox .pageselect {
+	width: 30px;
+	height:20px;
+	line-height:20px;
+    border: 1px solid #ccc;
+    padding: 3px 7px;
+    margin-left: 5px;
+    margin-top: -2px;
+    margin-right: 5px;
+    font-weight: bold;
+    text-align: center;
+    background: #fcfcfc;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 11px;
+    -moz-box-shadow: 1px 1px 2px #ddd;
+    -webkit-box-shadow: 1px 1px 2px #ddd;
+    box-shadow: 1px 1px 2px #ddd;
+    cursor: pointer;
+}
+
+.pageBox .pageDisplay {
+	display: none;
+}
+
+.pageBox .confimBut {
+	background-color: #EEEEEE;
+}
+.pageDisabled{
+	cursor: default;
+}
+.pageDisabled:hover{
+	color: #000000 !important;
+	background-color: #FFF !important;
+	border-color: #CCCCCC !important;
+	cursor: default;
+}

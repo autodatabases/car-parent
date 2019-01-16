@@ -1,0 +1,158 @@
+﻿<link rel="stylesheet" type="text/css" href="resources/css/shop/channel_add.css?t=1.4" />
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/shop/channel_add.js?t=1.7"></script>
+<script src="resources/js/My97DatePicker/WdatePicker.js"></script>
+<div class="tables-top">
+	<!-- 面包屑 -->
+	<p class="crumbs"><span>您的位置：</span><a>积分商城</a>&nbsp;》<a>渠道管理</a></p>
+	<!-- 切换头部 -->
+	<div class="tab-top" id="order_span">
+		<span id="list">渠道列表</span>
+		<span class="on">新增渠道</span>
+	</div>
+</div>
+
+<!-- 列表 -->
+<div class="tabels-main">
+	<dl>
+		<dt><span>渠道编辑</span></dt>
+		<dd>
+			<label>城市：</label><select id="city"></select>
+		</dd>
+		<dd>
+			<label>渠道名称：</label><input type="text" id="channel" class="myInp" value="" placeholder="请输入渠道名称" />
+		</dd>
+		<dd>
+			<label>是否启用积分规则：</label><input type="checkbox" id="jifen" class="myCbox" value=""  />启用积分规则
+		</dd>
+		<dd style="display: none;" id="scoreDd">
+			<label>兑换比例1元 =：</label><input type="text" id="score" class="myInp" value=""  />注：只能精确到小数点后一位
+		</dd>
+
+		<dd>
+			<label>是否启用服务包赠送规则：</label><input type="checkbox" id="fwb" class="myCbox" value=""/>启用服务包规则
+		</dd>
+
+		<dl style="display: none;border-bottom:none;" id="fwBaoDl">
+		<dd>
+		<label></label>
+		    <table id="jiyouList"  class="inBlock">
+    			<!-- <tr><td>1000-1500</td><td>金嘉护超净</td><td><span>x</span></td></tr>
+    			<tr><td>1000-1500</td><td>金嘉护超净</td><td><span>x</span></td></tr> -->
+    		</table>
+   		 </dd>
+		<dd>
+			<label></label><input type="button" class="my-action-btn" id="jiyouAdd" value="添加小保养机油规则" />
+		</dd>
+		<dd>
+			<label>金额范围：</label><input type="text" id="minValFwb" class="myLitInp" value="" placeholder="包含输入金额" />~ <input type="text" id="maxValFwb" class="myLitInp" value="" placeholder="不包含输入金额" />
+		</dd>
+		<dd>
+			<label>小保养次数：</label><input type="text" id="ByNum" class="myInp" value="" placeholder="请输入赠送次数" />
+		</dd>
+		<dd class="carType">
+			<label>指定保养车型：</label><input type="text" id="ByCarType" class="myInp" value="" placeholder="如'宝马-宝马汽车'" />
+			<input type="button" class="my-action-btn" id="addCarType" style="width: 100px;" value="添加车型" />
+			<span style="color:red;font-size:14px;">正确填写格式"车品牌-车生产厂商",若为全部车型，请填写"全部"!!</span>
+		</dd>
+		<dd class="carType1">
+			<label></label>
+			<div id="carTypeList">
+			</div>
+   		 </dd>
+		<dd>
+			<label>洗车次数：</label><input type="text" id="XcNum" class="myInp" value="" placeholder="请输入赠送次数" />
+		</dd>
+		<dd>
+			<label>喷漆次数：</label><input type="text" id="PqNum" class="myInp" value="" placeholder="请输入赠送次数" />
+		</dd>
+		<dd>
+			<label>更换电瓶次数：</label><input type="text" id="DpNum" class="myInp" value="" placeholder="请输入赠送次数" /><input type="button" class="my-action-btn" id="addFwb" style="width: 120px;" value="添加服务包" />
+		</dd>
+		<!--优惠券张数-->
+		<dd>
+			<label>滴滴代驾20元优惠券张数：</label><input type="text" class="myInp" id ="coupon_20" value="" placeholder="请输入赠送张数"/>	
+		</dd>
+        <dd>
+			<label>滴滴代驾50元优惠券张数：</label><input type="text" class="myInp" id ="coupon_50" value="" placeholder="请输入赠送张数"/>	
+		</dd>
+		<dd>
+		    <table id="fwBao" class="inBlock">
+		    	<thead>
+					<tr>
+						<th>服务包范围</th>
+						<th>保养次数</th>
+						<th>保养车型</th>
+						<th>洗车次数</th>
+						<th>喷漆次数</th>
+						<th>更换电瓶次数</th>
+						<th>20元代驾劵张数</th>
+						<th>50元代驾劵张数</th>
+						<th>操作</th>
+					</tr>
+		    	</thead>
+		    	<tbody id="fwbList">
+		    		<!-- <tr>
+		    			<td>0≤保单金额＜1000</td>
+		    			<td>1</td>
+		    			<td>2</td>
+		    			<td>3</td>
+		    			<td>4</td>
+		    			<td>删除</td>
+		    		</tr> -->
+		    	</tbody>
+
+    		</table>
+		</dd>
+		</dl>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="sub_button" value="提交" />
+		<input type="button" class="action-btn" onclick="$('.tables').load('/admin/shop/channel_list.html')" value="取消" />
+	</div>
+</div>
+
+
+<!-- 小保养机油弹窗 -->
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p style="float: left;">添加小保养规则</p>
+			<span style="float: right;" onclick="audit_close()" class="close">x</span>
+		</div>
+		<div class="tips-center">
+			<p id="idIndex">保单金额范围：<span id="id"><input type="text" class="myLitInp" value="" id="minVal" placeholder="包含输入金额" />~<input type="text" class="myLitInp" id="maxVal"  value="" placeholder="不包含输入金额" /></span></p>
+			<p>机 &nbsp;油 &nbsp;类&nbsp; 型：<span>&nbsp;
+				<select style="width: 100px;" id="jiyou_type">
+					<option value="">请选择</option>
+					<option value="1">金嘉护10W-40</option>
+					<option value="2">新磁护5W-40</option>
+					<option value="3">极护5W-40</option>
+				</select>
+			</span></p>
+			<!-- <p>积分兑换比例：<span>1元 = <input type="number" id="scale" value="" placeholder="请输入1元兑换的积分数" /></span></p> -->
+		</div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="audit_button()" value="确认" />
+			<input type="button" onclick="audit_close()" value="关闭" />
+		</div>
+	</div>
+</div>
+
+<!-- 提示弹窗 -->
+<div class="tips-warp-del" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p class="wenzi" style="float: left;">请选择是否删除该条规则</p>
+			<span onclick="audit_close_del()" class="close">x</span>
+		</div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" id="audit_button_del"
+				value="确认" /> <input type="button" onclick="audit_close_del()"
+				value="关闭" />
+		</div>
+	</div>
+</div>

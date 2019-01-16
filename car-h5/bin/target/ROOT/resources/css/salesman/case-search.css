@@ -1,0 +1,102 @@
+.header{
+	position: relative;
+	background: #fff;
+	border-bottom: 1px solid #848484;
+}
+.header h1{
+	font-size: 16px;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/login/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+.back-home{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background: url(../../imgs/index/home.png) no-repeat center;
+	background-size:45% ;
+}
+/* 搜索 */
+.search-box{
+	background: #fff;
+	font-size: 0.75rem;
+	padding-left:1rem;
+	line-height: 2.625rem;
+	height: 2.625rem;
+	margin:1rem 0;
+}
+.search-box input{
+	width:50%;
+	border:none;
+	outline: none;
+	line-height: 2.625rem;
+	height: 2.625rem;
+}
+.search-box a{
+	display: inline-block;
+	background: #07a5ef;
+	color: #fff;
+	float: right;
+	padding: 0 7px;
+}
+.search-box a i{
+	font-size: 1rem;
+	line-height: 1;
+	font-style: normal;
+}
+/* 案件列表 */
+.case-lists li{
+	background: #fff;
+	border-top:1px solid #dadada;
+	border-bottom:1px solid #dadada;
+	overflow: hidden;	
+	margin-bottom: 1rem;
+}
+.case-lists li div{
+	border-bottom: 1px solid #dadada;
+}
+.case-lists li div a{
+	display: block;
+	border-bottom: 1px solid #dadada;
+	width: 90%;
+	font-size: 0.75rem;
+	padding:10px 5%;
+}
+.case-lists li div i{
+	display: block;
+	float: right;
+}
+.case-lists li div p{
+	width:90%;
+	margin:10px 5%;
+	font-size: 0.75rem;
+	color:#c4c4c4;
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow: ellipsis;
+}
+.case-lists li div p span.chepai{
+	color:#000;
+}
+.case-lists li div p span.times{
+	float: right;
+}
+.case-lists li>span{
+	display: block;
+	font-size: 0.75rem;
+	padding: 5px 10px;
+	border:1px solid #07a5ef;
+	color:#07a5ef;
+	margin: 10px;
+	float: right;
+}

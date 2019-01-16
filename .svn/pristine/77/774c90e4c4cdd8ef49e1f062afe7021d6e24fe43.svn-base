@@ -1,0 +1,41 @@
+<link rel="stylesheet" type="text/css" href="resources/css/product/product-list.css?t=1"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/product/product_add.js?t=1.9"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>商品列表</a>&nbsp;》<a class="on">新增商品</a></p>
+	<div class="tab-top">
+		<div id="product_list">新增商品</div>
+		<span class="on">新增商品</span>
+		<div id="category_Manager">商品类目管理</div>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<form class="productAdd-form">
+		<dl>
+			<dt><span>新增商品</span></dt>
+			<dd>
+				<label>商品类目：</label><select type="text" name="typeName" id="typeName" ></select>
+			</dd>
+			<dd>
+				<label>商品名称：</label><input type="text" name="goodsName" id="goodsName" value="" />
+			</dd>
+			<dd>
+				<label>商品编号：</label><input type="number" name=="productId" id="productId"  value="" />
+			</dd>
+			<dd>
+				<label>商品面额：</label><input type="number" name="denomination" id="denomination" value="" />
+			</dd>
+			<dd>
+				<label>商品售价：</label><input type="number" name="sale" id="sale" value="" />
+			</dd>
+		</dl>
+		<div>
+			<button type="button" class="action-btn" onclick="$('.tables').load('product/product-list.html')" >取消</button>
+			<button type="button" class="action-btn" id="productAdd_button" >确定</button>
+		</div>
+	</form>
+
+</div>
+

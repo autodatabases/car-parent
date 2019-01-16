@@ -1,0 +1,405 @@
+package com.emate.shop.h5.controller;
+
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.emate.shop.business.api.OilCardConfigService;
+import com.emate.shop.business.api.OilUserService;
+import com.emate.shop.business.api.SmsService;
+import com.emate.shop.business.model.OilCardConfig;
+import com.emate.shop.business.model.OilConfig;
+import com.emate.shop.business.model.OilUser;
+import com.emate.shop.business.vo.ofvo.OufeiCardInfo;
+import com.emate.shop.common.IPUtil;
+import com.emate.shop.common.Log4jHelper;
+import com.emate.shop.exception.BusinessException;
+import com.emate.shop.rpc.aop.RemoteService;
+import com.emate.shop.rpc.dto.DatasetBuilder;
+import com.emate.shop.rpc.dto.DatasetList;
+import com.emate.shop.rpc.dto.DatasetSimple;
+import com.emate.shop.web.aop.AuthUtil;
+import com.emate.shop.web.validator.Regex;
+import com.emate.shop.web.validator.Required;
+import com.emate.tools.oufei.OufeiOilUtil;
+
+
+@Controller
+@RequestMapping(value="oilUser")
+@PropertySource(value = "classpath:web.properties", ignoreResourceNotFound = true)
+public class OilCardController implements AuthUtil{
+    @Resource
+    private Environment environment;
+	
+	private OilUserService oilUserService;
+	
+	private SmsService smsService;
+	
+	private OilCardConfigService oilCardConfigService;
+	
+	@RemoteService
+	public void setSmsService(SmsService smsService) {
+		this.smsService = smsService;
+	}
+
+	@RemoteService
+	public void setOilUserService(OilUserService oilUserService) {
+		this.oilUserService = oilUserService;
+	}
+	
+	@RemoteService
+	public void setOilCardConfigService(OilCardConfigService oilCardConfigService) {
+		this.oilCardConfigService = oilCardConfigService;
+	}
+	
+	private String checkLoginJson(HttpServletRequest request){
+		if(this.getUserId(request, AuthUtil.CAR_OIL_TOKEN)==null){
+			throw new BusinessException("用户未登陆！");
+		}
+		return null;
+	}
+	
+	/**
+	 * 登录页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/oilLogin.html")
+	public String login(HttpServletRequest request) throws Exception {
+		return "oilCard/oilLogin";
+	}
+	
+	
+	/**
+	 * 个人信息页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/oilAccount.html")
+	public String oilAccount(HttpServletRequest request) throws Exception {
+		if(this.getUserId(request, AuthUtil.CAR_OIL_TOKEN)==null){
+			return "oilCard/oilLogin";
+		}
+		return "oilCard/oilAccount";
+	}
+	
+	
+	/**
+	 * 充值页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/recharge.html")
+	public String recharge(HttpServletRequest request) throws Exception {
+		if(this.getUserId(request, AuthUtil.CAR_OIL_TOKEN)==null){
+			return "oilCard/oilLogin";
+		}
+		return "oilCard/recharge";
+	}
+	
+	
+	/**
+	 * 充值油卡界面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/chargecard.html")
+	public String chargecard(HttpServletRequest request) throws Exception {
+		if(this.getUserId(request, AuthUtil.CAR_OIL_TOKEN)==null){
+			return "oilCard/oilLogin";
+		}
+		return "oilCard/chargecard";
+	}
+	
+	
+	/**
+	 * 话费充值界面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/mobile.html")
+	public String mobile(HttpServletRequest request) throws Exception {
+		if(this.getUserId(request, AuthUtil.CAR_OIL_TOKEN)==null){
+			return "oilCard/oilLogin";
+		}
+		return "oilCard/mobile";
+	}
+	
+	
+	/**
+	 * 订单列表
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/order-list.html")
+	public String order(HttpServletRequest request) throws Exception {
+		if(this.getUserId(request, AuthUtil.CAR_OIL_TOKEN)==null){
+			return "oilCard/oilLogin";
+		}
+		return "oilCard/order-list";
+	}
+
+	
+	/**
+	 * 发送短信验证码---油卡
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/sendSms")
+	@ResponseBody
+	public DatasetSimple<String> sendSmsForOil(HttpServletRequest request,
+			@Required String mobile) throws Exception {
+		return smsService.sendSmsCode(mobile,SmsService.SMS_TYPE_1);
+	}
+	
+	/**
+	 * 用户登录
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/login")
+	@ResponseBody
+	public DatasetSimple<String> login(HttpServletRequest request,
+			@Required String userName,
+			@Required String smsCode,
+			@Required String tokenCode) throws Exception {
+		DatasetSimple<OilUser> user = oilUserService.userLogin(userName, smsCode, tokenCode, IPUtil.getIP(request));
+		if(user.isSuccess()){
+			return DatasetBuilder.fromDataSimple(getToken(user.getData().getId()));
+		}
+		return DatasetBuilder.fromMessageSimple(user.getMessage());
+	}
+
+	
+	/**
+	 * 个人信息---油卡
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/infocenter")
+	@ResponseBody
+	public DatasetSimple<OilUser> infocenter(HttpServletRequest request) throws Exception {
+		checkLoginJson(request);
+		DatasetSimple<OilUser> oilUser = oilUserService.getOilUser(this.getUserId(request, AuthUtil.CAR_OIL_TOKEN));
+		//油卡服务商充值接口
+		DatasetSimple<OilConfig> oilConfig = oilUserService.queryOilConfig();
+		oilUser.putDataset("oilConfig", oilConfig);
+		return oilUser;
+	}
+	
+	
+	/**
+	 * 充值---油卡
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/recharge")
+	@ResponseBody
+	public DatasetSimple<String> recharge(HttpServletRequest request,
+			@Required @Regex("\\d{18}") String rechargeCode) throws Exception {
+		//校验登录
+		checkLoginJson(request);
+		return oilUserService.recharge(this.getUserId(request, AuthUtil.CAR_OIL_TOKEN), rechargeCode);
+	}
+	
+	 /**
+     * 用户查询自己的订单列表
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="queryLogList",method=RequestMethod.POST)
+    @ResponseBody
+    public DatasetList<Map<String,Object>> queryLogList(HttpServletRequest request,
+    		String orderNo,String userPhone,String pageNo,
+    		String pageSize) {
+    	checkLoginJson(request);
+    	//获取用户id
+    	Long userId = this.getUserId(request, AuthUtil.CAR_OIL_TOKEN);
+    	DatasetList<Map<String, Object>> data = oilUserService.queryOilOrders(userId, 
+    			orderNo, userPhone, pageNo, pageSize);
+    	return data;
+        
+    }
+    
+	/**
+	 * 查询油卡面额
+	 * @param request
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@RequestMapping("/queryall")
+	@ResponseBody
+	public DatasetList<OilCardConfig> adminQueryPage(HttpServletRequest request,@Regex("\\d+") String pageNo,@Regex("\\d+") String pageSize,OilCardConfig oilCardConfig){
+		//检查登录
+		checkLoginJson(request);
+		
+		return oilCardConfigService.queryOilCardConfig(oilCardConfig, Integer.valueOf(pageNo), Integer.valueOf(pageSize));
+	}
+    
+	/**
+	 * 充值中石化
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/sinopec")
+	@ResponseBody
+	public DatasetSimple<String> sinopec(HttpServletRequest request,@Required String oilCardNo,
+			@Required @Regex("\\d+")String money,String goodId, @Required @Regex("\\d{11}")String mobile) 
+					throws Exception {
+		//校验登录
+		checkLoginJson(request);
+		//获取用户id
+		Long userId = this.getUserId(request, AuthUtil.CAR_OIL_TOKEN);
+		//ip
+		String ip = IPUtil.getIP(request);
+		return oilUserService.chargeOilCard(userId, oilCardNo, money, goodId, 
+				mobile,"0",ip);
+	}
+	
+	
+	/**
+	 * 充值中石油
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/cnpc")
+	@ResponseBody
+	public DatasetSimple<String> cnpc(HttpServletRequest request,@Required String oilCardNo,
+			@Required @Regex("\\d+")String money,String goodId,@Required @Regex("\\d{11}")String mobile)
+					throws Exception {
+		//校验登录
+		checkLoginJson(request);
+		//获取用户id
+		Long userId = this.getUserId(request, AuthUtil.CAR_OIL_TOKEN);
+		//ip
+		String ip = IPUtil.getIP(request);
+		return oilUserService.chargeOilCard(userId, oilCardNo, money, goodId, 
+				mobile,"1",ip);
+	}
+	/**
+	 * 欧飞油卡回调
+	 * @param request
+	 * @param ret_code
+	 * @param sporder_id
+	 * @param ordersuccesstime
+	 * @param err_msg
+	 * @param gascard_code
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/oufeioilback")
+    @ResponseBody
+    public void ouFeiOilBack(HttpServletRequest request,
+            String ret_code,String sporder_id,String ordersuccesstime,
+            String err_msg, String gascard_code ) throws Exception {
+    	oilUserService.ofOilBack(ret_code, err_msg, sporder_id, 
+    			ordersuccesstime);
+    }
+	
+	/**
+	 * 手机充值
+	 * @param request
+	 * @param proId
+	 * @param phone
+	 * @param supplier
+	 * @param money
+	 * @return
+	 */
+	@RequestMapping("/phoneRecharge")
+	@ResponseBody
+	public DatasetSimple<String> phoneRecharge(HttpServletRequest request,
+			String proId,String phone,String supplier,String money){
+		//检查登录
+		checkLoginJson(request);
+		//根据id查询油卡用户信息
+		Long userId = this.getUserId(request, AuthUtil.CAR_OIL_TOKEN);
+		String ip = IPUtil.getIP(request);
+		return oilUserService.chargeMobilePhone(userId, phone, money,ip);
+	}
+
+	/**
+	 * 欧飞话费回调接口
+	 * @param ret_code
+	 * @param err_msg
+	 * @param sporder_id
+	 * @param ordersuccesstime
+	 */
+	@RequestMapping("/ofphoneback")
+	@ResponseBody
+	public void  ouFeicallBack(String ret_code,String err_msg,
+			String sporder_id,String ordersuccesstime){
+        oilUserService.ofPhoneBack(ret_code,err_msg,sporder_id,ordersuccesstime);
+        
+    }
+	/**
+	 * 查询油卡信息
+	 * @param request
+	 * @param oilCardNo
+	 * @param oilType
+	 * @return
+	 */
+	@RequestMapping("/ofcardinfo")
+	@ResponseBody
+    public DatasetSimple<Map<String,String>> queryCardInfo(HttpServletRequest request,String oilCardNo,@Regex("^[1,2]$")String oilType) {
+		
+		//检验登录
+		checkLoginJson(request);
+		//校验参数
+		if("1".equals(oilType)){
+			//中石化油卡卡号规则要求
+			if(oilCardNo.length()!=19 || !oilCardNo.startsWith("1")){
+				throw new BusinessException("中国石化加油卡是“1”开头19位卡号!");
+			}	
+		}else{
+			//中石油油卡卡号规则要求
+			if(oilCardNo.length()!=16 || !oilCardNo.startsWith("9")){
+				throw new BusinessException("中国石油加油卡是“9”开头16位卡号!");
+			}
+		}
+		Map<String, String> params = new HashMap<String,String>();
+		
+		String merchantid = this.environment.getRequiredProperty("ofoil.merchantid");
+		String userpwd = this.environment.getRequiredProperty("ofoil.userpwd");
+		String key = this.environment.getRequiredProperty("ofoil.key");
+		String version = this.environment.getRequiredProperty("ofoil.version");
+		params.put("userid", merchantid);
+		params.put("userpwd", userpwd);
+		params.put("keyStr", key);
+		params.put("version", version);
+		params.put("game_userid", oilCardNo);//卡号
+		params.put("chargeType", oilType);//1:中石化;2:中石油
+		
+		String cardUrl = this.environment.getRequiredProperty("ofoil.cardquery.url");
+		OufeiCardInfo queryCardInfo = null;
+		try {
+			Log4jHelper.getLogger().info("开始调用欧飞查询卡号信息接口~~~~");
+			queryCardInfo = OufeiOilUtil.queryCardInfo(cardUrl, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log4jHelper.getLogger().info("欧飞查询卡号信息接口异常~~~~");
+			throw new BusinessException("查询油卡信息失败,请从稍后重试~");
+		}
+		if(Objects.isNull(queryCardInfo)){
+			Log4jHelper.getLogger().info("欧飞查询卡号信息接口响应为空~~~~");
+			throw new BusinessException("未查询到该油卡信息");
+		}
+		Map<String, String> result = new HashMap<String,String>();
+		if("1".equals(queryCardInfo.getRetcode())){
+			result.put("cardNo", queryCardInfo.getGame_userid());
+			result.put("cardName", queryCardInfo.getUsername());
+		}else{
+			Log4jHelper.getLogger().info("欧飞卡号查询接口失败:"+queryCardInfo.getRetcode());
+			throw new BusinessException("查询失败,msg:"+ OufeiOilUtil.getMsg(queryCardInfo.getRetcode()));
+		}
+		return DatasetBuilder.fromDataSimple(result);
+	}
+}

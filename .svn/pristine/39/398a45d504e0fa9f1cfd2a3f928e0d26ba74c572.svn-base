@@ -1,0 +1,113 @@
+﻿<link rel="stylesheet" type="text/css" href="resources/css/order/order.css?t=1.1" />
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/order/jicaiorder.js?t=1.0"></script>
+			
+
+<div class="tables-top">
+	<!-- 面包屑 -->
+	<p class="crumbs"><span>您的位置：</span><a >订单</a>&nbsp;》<a >集彩订单管理</a>&nbsp;》<a class="on">集彩订单</a></p>
+	<!-- 切换头部 -->
+	<div class="tab-top" id="order_span">
+		<span rel="" class="on">全部</span>
+		<span  rel="0">未发货</span>
+		<span  rel="1">已发货</span>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<label>订单编号：</label>
+		<input type="text"  id=""/>
+		<button><span>搜索</span></button>
+	</div>
+	<!-- 切换列表 -->
+	<ul class="tab-warp">
+		<li class="on">
+			<!-- 表格 -->
+			<div class="tab-list">
+				<table>
+					<thead>
+						<tr>
+							<th class="bh">订单编号</th>
+							<th class="">客户姓名</th>
+							<th class="">客户手机号</th>
+							<th class="">商品名称</th>
+							<th class="">采购数量</th>
+							<th class="">订单状态</th>
+							<th class="">下单时间</th>
+							<th class="">操作</th>
+						</tr>
+					</thead>
+					<tbody  class="fixordar">
+						
+						
+					</tbody>
+				</table>
+			</div>
+			<!-- 分页 -->
+			<div class="page-box" id="jicaiorder_paga">
+				
+			</div>
+		</li>
+		
+	</ul>
+</div>
+<!-- 提示弹窗 -->
+<div class="tips-warp" style="display:none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top"><p class="wenzi" style="float:left;">确认已发货</p><span onclick="audit_close()" class="close">x</span></div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="audit_button()" value="确认" />
+			<input type="button"  onclick="audit_close()" value="关闭" />
+		</div>
+	</div>
+</div>
+<!-- 订单弹层 -->
+<div class="order-tip jicaiorder-tip" style="display:none;">
+	<div class="tips-bg"></div>
+	<div class="order-tip-box">
+		<div class="order-tips-top">
+			订单详情
+			<span>×</span>
+		</div>
+		<div class="order-tips-list">
+			<ul>
+				<li>
+					<label>订单编号</label>
+					<span></span>
+				</li>
+				<li>
+					<label>客户姓名</label>
+					<span></span>
+				</li>
+				<li>
+					<label>客户手机号</label>
+					<span></span>
+				</li>
+				<li>
+					<label>商品名称</label>
+					<span></span>
+				</li>
+				<li>
+					<label>采购数量</label>
+					<span></span>
+				</li>
+				<li>
+					<label>订单状态</label>
+					<span style="color:red;"></span>
+				</li>
+				<li>
+					<label>下单时间</label>
+					<span></span>
+				</li>
+			</ul>
+		</div>
+		<div class="order-tip-btn">
+			<button>确认</button>
+			<button>关闭</button>
+		</div>
+	</div>
+</div>

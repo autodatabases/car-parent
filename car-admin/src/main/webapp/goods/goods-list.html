@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>商品列表</title>
+		<link rel="stylesheet" type="text/css" href="../resources/css/com.css"/>
+		<link rel="stylesheet" type="text/css" href="../resources/css/goods/goods-list.css" />
+		<script src="../resources/js/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body class="clearfix">
+		<!-- 头部 -->
+		<div class="header clearfix">
+			<h1>惠+车服</h1>
+			<span>后台管理系统</span>
+			<div class="user-info">
+				<span>管理员</span>
+			</div>
+		</div>
+		<!-- 导航 -->
+		<div class="nav">
+			<div class="nav-warp clearfix">
+				<a class="index"><i></i>首页</a>
+				<a class="goods on"><i></i>商品</a>
+				<a class="busines"><i></i>商家</a>
+				<a class="order"><i></i>订单</a>
+				<a class="statics"><i></i>报表</a>
+				<a class="statics"><i></i>会员</a>
+				<a class="statics"><i></i>系统</a>
+				<a class="statics"><i></i>文章</a>
+			</div>
+		</div>
+		<!-- 侧栏 -->
+		<div class="sidebar">
+			<ul>
+				<li><a>发布商品</a></li>
+				<li class="on"><a>商品列表</a></li>
+			</ul>
+		</div>
+		<!-- 表单 -->
+		<div class="tables">
+			<div class="tables-top">
+				<!-- 面包屑 -->
+				<p class="crumbs"><span>您的位置：</span><a>商品管理</a>&nbsp;》<a class="on">商品列表</a></p>
+			</div>
+			<!-- 列表 -->
+			<div class="tabels-main">
+				<!-- 切换列表 -->
+				<ul class="tab-warp">
+					<li class="on">
+						<!-- 筛选 -->
+						<div class="screen">
+							<span><i class="on"></i>商品类型</span>
+							<span><i class="on"></i>商品标题</span>
+							<span><i class="on"></i>商品规格</span>
+							<span><i class="on"></i>市场价</span>
+							<span><i class="on"></i>结算价</span>
+						</div>
+						<!-- 表格 -->
+						<div class="tab-list">
+							<table>
+								<thead>
+									<tr>
+										<th class="bh">商品ID</th>
+										<th class="ddxq">商品类型</th>
+										<th class="khxx">商品标题</th>
+										<th class="sjxx">商品规格</th>
+										<th class="jsxx">市场价</th>
+										<th class="jsxx">结算价</th>
+										<th class="jsxx">缩略图</th>
+										<th class="cz">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="bh">1</td>
+										<td class="ddxq">
+											<p>电瓶</p>
+										</td>
+										<td class="khxx">
+											<p>奔驰电瓶</p>
+										</td>
+										<td class="sjxx">
+											<p>蓝标</p>
+										</td>
+										<td class="jsxx">
+											<p>888.88</p>
+										</td>
+										<td class="jsxx">
+											<p>888.88</p>
+										</td>
+										<td class="jsxx">
+											<img src="../../../../target/admin/resources/imgs/bg_1.jpg" alt="" />
+										</td>
+										<td class="cz">
+											<a>编辑</a>
+											<a>上架</a>
+										</td>
+									</tr>
+								</tbody>
+								<thead>
+									<tr>
+										<th class="bh">商品ID</th>
+										<th class="ddxq">商品类型</th>
+										<th class="khxx">商品标题</th>
+										<th class="sjxx">商品规格</th>
+										<th class="jsxx">市场价</th>
+										<th class="jsxx">结算价</th>
+										<th class="jsxx">缩略图</th>
+										<th class="cz">操作</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<!-- 分页 -->
+						<div class="page-box">
+							<div class="page-main fr">
+								<span class="first-page">首页</span>
+								<span class="prev-page">上一页</span>
+								<span class="page-btn">
+									<span class="active-btn">1</span>
+									<span>2</span>
+									<span>3</span>
+									<span>4</span>
+									<span>5</span>
+								</span>
+								<span class="next-page">下一页</span>
+								<span class="last-page">尾页</span>
+							</div>
+							<select name="">
+								<option value="">显示10条</option>
+								<option value="">显示15条</option>
+								<option value="">显示20条</option>
+							</select>
+							<span>当前显示 1 到 10 条  总计 51 条</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

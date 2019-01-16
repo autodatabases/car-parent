@@ -1,0 +1,91 @@
+
+/* 表单 */
+.tables{
+	float: left;
+	width: 90%;
+	height:500px;
+}
+.tables>div{
+	border-left: 1px solid #ccc;
+}
+.tables-top{
+	padding-top: 20px;
+    background: url(../../imgs/order/noise.white.png);
+	border-bottom: 1px solid #ccc;
+}
+.tab-top{
+	width: 90%;
+    padding: 0 20px;
+    margin-bottom: -1px;
+}
+.tab-top span{
+	display: inline-block;
+    padding: 10px 20px;
+    background: #ccc;
+    color: #fff;
+    font-size: 14px;
+    -moz-border-radius: 2px 2px 0 0;
+    -webkit-border-radius: 2px 2px 0 0;
+    border-radius: 2px 2px 0 0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.tab-top span:hover{
+    color: #319cff;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+.tab-top span.on{
+    color: #fc9338;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+.tab-top div{
+	display: inline-block;
+	cursor: pointer;
+	color: #fff;
+	background: #fc9338;
+	width: 143px;
+	height:32px;
+	line-height: 34px;
+	text-align: center;
+	margin-top: -5px;
+	margin-left: 5px;
+}
+/* 列表 */
+.tabels-main{
+	padding: 20px 20px;
+	min-height: 400px;
+}
+/* 切换列表 */
+.tab-warp{
+}
+.tab-list table{
+	width: 100%;
+	vertical-align: middle;
+}
+.tab-list thead th,.tab-list tbody td {
+    padding: 7px 10px;
+    border-left: 0;
+    text-align: left;
+}
+.tab-list thead tr th{
+	text-align: center;
+	background: #fcfcfc;
+}
+.tab-list tbody td{
+	vertical-align: middle;
+	line-height: 24px;
+	text-align: center;
+	border-bottom: 1px solid #ebebeb;
+}
+.tab-list tbody td a{
+	color: #333;
+	margin:0 10px;
+}
+.tab-list tbody td a:hover{
+	color:#fc9338;
+}
+
+
+

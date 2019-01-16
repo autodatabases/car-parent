@@ -1,0 +1,92 @@
+remote.service.url=${remote.service.url}
+
+login.url=/user/login.html
+auth.token.name=CAR_H5_TOKEN
+# Redis settings
+#redis.host=${redis.host}
+redis.port=${redis.port}
+redis.pass=${redis.pass}
+
+redis.maxIdle=${redis.maxIdle}
+redis.maxTotal=${redis.maxTotal}
+redis.maxWait=${redis.maxWait}
+redis.testOnBorrow=${redis.testOnBorrow}
+
+car.web.contextpath=${car.web.contextpath}
+
+wx.domain=http://gd.emateglobal.com
+
+#login to www.emateglobal.com password
+car.auto.key=LSEx3MGb
+car.auto.login.domin=${car.auto.login.domin}
+#weixin config
+wx.domain=${wx.domain}
+wx.token=${wx.token}
+wx.encodingAESKey=${wx.encodingAESKey}
+wx.corpId=${wx.corpId}
+wx.secret=${wx.secret}
+#sms config
+sms.domain=${sms.domain}
+#oil card trade
+oil.trade.appId=${oil.trade.appId}
+oil.trade.appSecret=${oil.trade.appSecret}
+oil.trade.url=${oil.trade.url}
+
+### kuantu carwash
+kt.carwash.appId=${kt.carwash.appId}
+kt.carwash.appKey=${kt.carwash.appKey}
+kt.carwash.url=${kt.carwash.url}
+kt.carwash.productNo=${kt.carwash.productNo}
+kt.carwash.expire=${kt.carwash.expire}
+
+#gaoyangxunji oil card recharge
+gyxj.oilcard.url=${gyxj.oilcard.url}
+gyxj.oilcard.merchantid=${gyxj.oilcard.merchantid}
+gyxj.oilcard.key=${gyxj.oilcard.key}
+
+#phone recharge
+gyphone.numberserchUrl=${gyphone.numberserchUrl}
+gyphone.ordersendUrl=${gyphone.ordersendUrl}
+gyphone.productsearchUrl=${gyphone.productsearchUrl}
+gyphone.ordersarchUrl=${gyphone.ordersarchUrl}
+
+gyphone.agentid=${gyphone.agentid}
+gyphone.merchantkey=${gyphone.merchantkey}
+gyphone.source=${gyphone.source}
+
+# shengda carwash
+shengda.carwash.url=${shengda.carwash.url}
+shengda.carwash.source=${shengda.carwash.source}
+shengda.carwash.orgSource=${shengda.carwash.orgSource}
+shengda.carwash.carType=${shengda.carwash.carType}
+shengda.carwash.generationRule=${shengda.carwash.generationRule}
+shengda.carwash.userOrderType=${shengda.carwash.userOrderType}
+shengda.carwash.key=${shengda.carwash.key}
+shengda.carwash.key3Des=${shengda.carwash.key3Des}
+shengda.carwash.expire=${shengda.carwash.expire}
+
+#oufei oil recharge
+ofoil.cardquery.url=${ofoil.cardquery.url}
+ofoil.recharge.url=${ofoil.recharge.url}
+ofoil.orderquery.url=${ofoil.orderquery.url}
+
+ofoil.mobilecharge.url=${ofoil.mobilecharge.url}
+
+ofoil.merchantid=${ofoil.merchantid}
+ofoil.userpwd=${ofoil.userpwd}
+ofoil.key=${ofoil.key}
+ofoil.version=${ofoil.version}
+ofoil.callback.url=${ofoil.callback.url}
+
+ofoil.phonecallback.url=${ofoil.phonecallback.url}
+
+#shengda daijia order
+shengda.driver.orderurl=${shengda.driver.orderurl}
+shengda.driver.source=${shengda.driver.source}
+shengda.driver.driverType=${shengda.driver.driverType}
+shengda.driver.key=${shengda.driver.key}
+
+#update driver order appointmentTime
+shengda.driver.updatetimeurl=${shengda.driver.updatetimeurl}
+#cancel driver order 
+shengda.driver.cancelorderurl=${shengda.driver.cancelorderurl}

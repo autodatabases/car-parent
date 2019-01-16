@@ -1,0 +1,98 @@
+@charset "utf-8";
+.header{
+	background: #fff;
+	position: relative;
+	border-bottom: 1px solid #e0e0e0;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/coupon/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+/* 步骤 */
+.step{
+	position: relative;
+	padding-top: 2rem;
+	padding-bottom: 0.875rem;
+	font-size: 0.75rem;
+}
+.step span{
+	position: absolute;
+	top:0.3rem;
+	color: #ff3e5b;
+}
+.step span.one{
+	left: 5%;
+}
+.step span.two{
+	left:50% ;
+	margin-left: -38px;
+}
+.step span.three{
+	right:5% ;
+}
+.step div{
+	width:90%;
+	height:0.3125rem;
+	background: #e9e9e9;
+	margin-left: 5%;
+}
+.step div:after{
+	content: "";
+	display: block;
+	background: #ff3e5b;
+	height: 100%;
+	width:100%;
+}
+.step i{
+	display: block;
+	position: absolute;
+	width:1rem;
+	height:1rem;
+	border-radius: 50%;
+	border:1px solid #ff3e5b;
+	background: #fff;
+	right: 3%;
+	top: 1.625rem;
+}
+.step i:after{
+	content: "";
+	display: block;
+	width:0.7rem;
+	height:0.7rem;
+	border-radius: 50%;
+	background: #ff3e5b;
+	margin-top:0.15rem ;
+	margin-left:0.15rem ;
+}
+/* 等待审核 */
+.wait{
+	text-align: center;
+	font-size: 0.75rem;
+	line-height: 2;
+}
+.wait img{
+	margin: 2rem 0;
+	width: 4.625rem;
+	height: 4.625rem;
+}
+
+
+
+
+
+
+
+
+
+
+

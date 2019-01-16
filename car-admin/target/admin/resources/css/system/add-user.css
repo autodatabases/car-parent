@@ -1,0 +1,82 @@
+
+/* 表单 */
+.tables{
+	float: left;
+	width: 90%;
+	height:500px;
+}
+.tables>div{
+	border-left: 1px solid #ccc;
+}
+.tables-top{
+	padding-top: 20px;
+    background: url(../../imgs/order/noise.white.png);
+	border-bottom: 1px solid #ccc;
+}
+.tab-top{
+	width: 90%;
+    padding: 0 20px;
+    margin-bottom: -1px;
+}
+.tab-top span{
+	display: inline-block;
+    padding: 10px 20px;
+    background: #ccc;
+    color: #fff;
+    font-size: 14px;
+    -moz-border-radius: 2px 2px 0 0;
+    -webkit-border-radius: 2px 2px 0 0;
+    border-radius: 2px 2px 0 0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.tab-top span:hover{
+    color: #fc9338;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+.tab-top span.on{
+    color: #fc9338;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+/* 列表 */
+.tabels-main{
+	padding: 20px 20px;
+	min-height: 400px;
+}
+/* 表单 */
+.role-forms>div{
+	border-bottom: 1px solid #ebebeb;
+	line-height: 33px;
+	padding-left: 10px;
+	padding:10px 0;
+}
+.role-forms>div label{
+	display: inline-block;
+	width:99px ;
+	vertical-align: middle;
+}
+.role-forms>div input{
+	width:263px;
+	height:31px;
+	border:1px solid #dbdbdb;
+	padding: 0;
+	text-indent: 10px;
+}
+.role-forms>div select{
+	width: 262px;
+	text-indent: 10px;
+}
+.role-forms>input{
+	width:144px;
+	height:37px;
+	background:#fc9338 ;
+	font-size: 15px;
+	color:#fff;
+	border:1px solid #f27c12;
+	border-radius:3px;
+	margin-top: 20px;
+}
+
+

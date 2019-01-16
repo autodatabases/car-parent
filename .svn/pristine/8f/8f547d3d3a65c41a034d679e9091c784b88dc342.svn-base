@@ -1,0 +1,31 @@
+#gaoyangxunji oil card recharge
+gyxj.oilcard.url=${gyxj.oilcard.url}
+gyxj.oilcard.merchantid=${gyxj.oilcard.merchantid}
+gyxj.oilcard.key=${gyxj.oilcard.key}
+
+#phone recharge
+gyphone.numberserchUrl=${gyphone.numberserchUrl}
+gyphone.ordersendUrl=${gyphone.ordersendUrl}
+gyphone.productsearchUrl=${gyphone.productsearchUrl}
+gyphone.ordersarchUrl=${gyphone.ordersarchUrl}
+gyphone.agentid=${gyphone.agentid}
+gyphone.merchantkey=${gyphone.merchantkey}
+gyphone.source=${gyphone.source}
+gyphone.callback.url=${gyphone.callback.url}
+
+#oufei oil recharge
+ofoil.cardquery.url=${ofoil.cardquery.url}
+ofoil.recharge.url=${ofoil.recharge.url}
+ofoil.orderquery.url=${ofoil.orderquery.url}
+ofoil.mobilecharge.url=${ofoil.mobilecharge.url}
+ofoil.flowcharge.url=${ofoil.flowcharge.url}
+ofoil.getcardpassword.url=${ofoil.getcardpassword.url}
+ofoil.getmobinfo.url=${ofoil.getmobinfo.url}
+ofoil.telquery.url=${ofoil.telquery.url}
+ofoil.flowcheck.url=${ofoil.flowcheck.url}
+ofoil.effectStartTime=${ofoil.effectStartTime}
+ofoil.effectTime=${ofoil.effectTime}
+ofoil.range=${ofoil.range}
+ofoil.key=${ofoil.key}
+ofoil.version=${ofoil.version}
+ofoil.callback.url=${ofoil.callback.url}

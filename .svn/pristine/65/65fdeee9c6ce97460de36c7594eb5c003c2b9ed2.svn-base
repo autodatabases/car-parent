@@ -1,0 +1,21 @@
+remote.service.url=${remote.service.url}
+
+# Redis settings
+#redis.host=${redis.host}
+redis.port=${redis.port}
+redis.pass=${redis.pass}
+
+auth.token.name=CAR_ADMIN_TOKEN
+  
+redis.maxIdle=${redis.maxIdle}
+redis.maxTotal=${redis.maxTotal}
+redis.maxWait=${redis.maxWait}
+redis.testOnBorrow=${redis.testOnBorrow}
+
+wx.domain=${wx.domain}
+wx.token=${wx.token}
+wx.encodingAESKey=${wx.encodingAESKey}
+wx.corpId=${wx.corpId}
+wx.secret=${wx.secret}
+#sms config
+sms.domain=${sms.domain}

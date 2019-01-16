@@ -1,0 +1,101 @@
+body{
+	background: #fbfbfb;
+}
+.header{
+	background: #fff;
+	position: relative;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../imgs/index/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+.search{
+	background: #d6d6d6;
+	-webkit-box-sizing: border-box; 
+	-moz-box-sizing: border-box; 
+	box-sizing: border-box;
+	padding:0.9375rem 5%;
+}
+.search input{
+	display: inline-block;
+	width:100%;
+	height:100%;
+	border: 0;
+	height:1.6875rem;
+	text-align: center;
+	background:#fff url(../imgs/index/search.png) no-repeat 4rem center;
+	background-size:0.8rem ;
+	font-size: 10px;
+}
+.search input:focus{
+	background:#fff;
+}
+.city>span{
+	display: block;
+	height:1.5625rem;
+	line-height:1.5625rem;
+	background: #f0eff4;
+	border-bottom: 1px solid #e0e0e0;
+	font-size: 14px;
+	padding-left: 5%;
+}
+.city p{
+	padding-left: 5%;
+	display: block;
+	background: #f1f5f4;
+	border-bottom: 1px solid #e0e0e0;
+	font-size: 0.5625rem;
+}
+.city p span{
+	display: inline-block;
+	width:3.3125rem;
+	height:1.4375rem;
+	line-height:1.4375rem;
+	margin:0.5rem 0;
+	text-align: center;
+	background: #fbfbfb;
+	border-radius: 14px;
+	border:1px solid #e0e0e0;
+	
+}
+.city p span:active{
+	background: #ff3e5b;
+	color: #fff;
+}
+.search-list{
+	background: #fff;
+}
+.search-list li{
+	border-bottom: 1px solid #f1f5f4;
+	font-size: 14px;
+	line-height: 2.0625rem;
+	text-indent: 1.4375rem;
+}
+.search-list li:active{
+	background: #ff3e5b;
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

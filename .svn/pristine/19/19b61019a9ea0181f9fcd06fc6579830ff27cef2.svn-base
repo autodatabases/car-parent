@@ -1,0 +1,209 @@
+<link rel="stylesheet" type="text/css" href="resources/css/busines/busines-audie.css?t=1.0"/>
+<script src="resources/js/common/initAreaSelect.js" type="text/javascript" charset="utf-8"></script>
+<script src="resources/js/fixseller/seller-edit.js?t=3.4"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>商家</a>&nbsp;》<a class="on">商家列表</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<dl>
+		<dt><span>商家编辑</span></dt>
+		<dd>
+			<label>门店名称：</label><input type="text" id="selectName" value="" placeholder="请输入店铺名称"/>
+		</dd>
+		<dd>
+			<label>法人姓名：</label><input type="text" id="corporateName" value="" placeholder="请输入法人姓名"/>
+		</dd>
+		<dd>
+			<label>营业执照编号：</label><input type="text" id="businessLicense_id" value="" placeholder="请输入营业执照编号"/>
+		</dd>
+		<dd>
+			<label>服务网点地址：</label><input type="text" id="serviceNetwork" value="" placeholder="请输入服务网点地址"/>
+		</dd>
+		<dd>
+			<label>服务电话：</label><input type="text" id="serviceTelephone" value="" placeholder="请输入服务电话"/>
+		</dd>
+		<dd>
+			<label>经度：</label><input type="text" id="sellerPostion_x" value="" />
+			<span style="color:red;font-size:12px;">例如：113.282707</span>
+		</dd>
+		<dd>
+			<label>纬度：</label><input type="text" id="sellerPostion_y" value="" />
+			<span style="color:red;font-size:12px;">例如：23.152396</span>
+		</dd>
+		<dd>
+			<label>工时费：</label><input type="number" id="servicePrice"value="" />
+		</dd>
+		<dd>
+			<label>省市区：</label>
+			<select id="province">
+			</select>
+			<select id="city">
+			</select>
+			<select id="area">
+			</select>
+		</dd>
+		<dd>
+			<label>是否能小保养：</label>
+			<select id="properties_xi">
+			 <option value="0">否</option>
+			<option value="1">是</option>
+			</select>
+		</dd>
+		<dd>
+			<label>是否能洗车：</label>
+			<select id="properties_xiao">
+				<option value="0">否</option>
+			    <option value="2">是</option>
+			</select>
+		</dd>
+		<dd>
+			<label>是否能钣金：</label>
+			<select id="properties_dian">
+				<option value="0">否</option>
+			    <option value="4">是</option>
+			</select>
+		</dd>
+		<dd>
+			<label>是否能换轮胎：</label>
+			<select id="properties_ban">
+			 	<option value="0">否</option>
+			    <option value="8">是</option>
+			</select>
+		</dd>
+		<dd>
+			<label>是否能喷漆：</label>
+			<select id="properties_pen">
+				<option value="0">否</option>
+			    <option value="16">是</option>
+			</select>
+		</dd>
+		<dd>
+			<label>店铺类型：</label>
+			<select id="sellerGrade">
+			 	<option value="0">其他</option>
+			    <option value="1">快修店</option>
+				<option value="2">4s店</option>
+				<option value="3">修理厂</option>
+			</select>
+		</dd>
+		<dd>
+			<label>结算类型：</label>
+			<select id="settleType">
+			 	<option value="0">商家代销</option>
+			    <option value="1">商家直结</option>
+			</select>
+		</dd>
+		<dd>
+			<label>加盟类型：</label>
+			<select id="joinType">
+			 	<option value="0">马牌门店</option>
+			    <option value="1">国寿</option>
+				<option value="2">陌拜用户</option>
+			</select>
+		</dd>
+		<dd>
+			<label>评分：</label>
+			<select id="scoreService">
+			 	<option value="1">1分</option>
+			    <option value="2">2分</option>
+				<option value="3">3分</option>
+				<option value="4">4分</option>
+				<option value="5">5分</option>
+			</select>
+		</dd>
+		<dd>
+			<label>店铺排序：</label><input type="number" id="seller_order" name = "seller_order" value="" />
+			<span style="color:red;font-size:12px;">例如：1</span>
+		</dd>
+	</dl>
+	<dl>
+		<dt><span>负责人</span></dt>
+		<dd>
+			<label>收货负责人：</label><input type="text" id="shouhuo" value="" />
+			<label>结算负责人：</label><input type="text" id="jiesuan" value="" />
+		</dd>
+		<dd>
+			<label>对接负责人：</label><input type="text" id="duijie" value="" />
+			<label>保险代理负责人：</label><input type="text" id="baoxian" value="" />
+		</dd>
+	</dl>
+	<dl>
+		<dt><span>账号信息</span></dt>
+		<dd>
+			<label>开户名称：</label><input type="text" id="accountName" value="" />
+		</dd>
+		<dd>
+			<label>开户账号：</label><input type="text" id="accountNumber" value="" />
+			<label>开户银行：</label><input type="text" id="account" value="" />
+		</dd>
+	</dl>
+	<dl>
+		<dt><span>详细信息</span></dt>
+		<dd>
+			<label>工位信息：</label><input type="text" id="workbay"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" value="" />
+		</dd>
+		<dd>
+			<label>微信号：</label><input type="text" id="weixin" value="" />
+		</dd>
+		<dd>
+			<label>营业执照注册公司全称：</label><input type="text" id="fullName" value="" />
+		</dd>
+		<dd>
+			<label>维修资质：</label><input type="text" id="wxZizhi" value="" />
+		</dd>
+		<dd>
+			<label>服务场地面积（平米）：</label><input type="text" id="sellerArea"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9]+/,'');}).call(this)" onblur="this.v();" value="" />
+		</dd>
+		<dd>
+			<label>员工总数：</label><input type="text" id="employee"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9]+/,'');}).call(this)" onblur="this.v();" value="" />
+		</dd>
+		<dd>
+			<label>营业时间：</label><input type="text" id="openTime" value="" />
+		</dd>
+		<dd>
+			<label>区域经理：</label><input type="text" id="areaManager" value="" />
+		</dd>
+	</dl>
+	<dl>
+		<dt><span>资质上传</span></dt>
+		<dd class="upload">
+			<form id="submit_form" method="post" action="img/uploadImg?imgtype=sellerInfo" target="exec_target" enctype="multipart/form-data">			
+				<div class="img-warp dotPhoto">
+					<div class="img-box" style="display:none;"><img id="shopPic"/></div>
+					<div class="upload-btn"><input type="file" name="file_upload" id="" value="" /></div>
+				</div>
+				<p class="dotPhoto_p">点击按钮上传网点照片</p>
+			</form>
+		</dd>
+		<iframe id="exec_target" name="exec_target" style="display:none;"></iframe>
+		<iframe id="exec_targets" name="exec_targets" style="display:none;"></iframe>  	
+		<dd class="upload">
+			<form id="submit_forms" method="post" action="img/uploadImg?imgtype=sellerInfo" target="exec_targets" enctype="multipart/form-data">			
+				<div class="img-warp businessLicense">
+					<div class="img-box" style="display:none;"><img id="businessLicence"/></div>
+					<div class="upload-btn"><input type="file" name="file_upload" id="" value="" /></div>
+				</div>
+				<p class="businessLi_p">点击按钮上传营业执照照片</p>
+			</form>	
+		</dd>
+		<dd>
+			<label>是否有电脑和网络：</label>
+			<select id="hasNetwork">
+			     <option value="0">否</option>
+				 <option value="1">是</option>
+			</select>
+		</dd>
+		<dd>
+			<label>推荐渠道：</label><input type="text" id="channel" value="" />
+		</dd>
+		<dd>
+			<label>服务范围：</label><input type="text" id="service" value="" /><span style="color:red;font-size:12px;">注意：多个服务范围用，分隔</span>
+		</dd>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="busines_button" value="提交" />
+		<!--<input type="button" class="reset-btn" id=""  value="重置"/>-->
+		<input type="button" class="action-btn" onclick="$('.tables').load('fixseller/seller-list.html')" value="返回" />
+	</div>
+</div>

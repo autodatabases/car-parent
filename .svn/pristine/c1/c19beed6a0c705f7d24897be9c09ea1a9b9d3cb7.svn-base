@@ -1,0 +1,81 @@
+<link rel="stylesheet" type="text/css" href="resources/css/oilcard/kaitongyouka.css?t=1" />
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css" />
+<script src="resources/js/oilcard/kaitongyouka.js?t=1.1"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>增值服务</a>&nbsp;》<a class="on">开通油卡</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<dl>
+		<dt><span>开通油卡</span></dt>
+		<dd>
+			<label>序列号：</label><input type="text" id="startCode" value="" placeholder="请输入开始序列号" /> --  <input type="text" id="endCode" value="" placeholder="请输入结束序列号" />
+			<button class="searchBtn">搜索</button>
+		</dd>
+		<dd class="code_number" style="display:none;">
+			<label>油卡序列号：</label> <span style="color:#ef811f;font-size:18px;">1111111-1111111，共500张</span>
+		</dd>
+		<dd>
+			<label>供应商：</label>
+			<select id="supplier" style="width:4rem;">
+				<option value="">请选择供应商</option>
+				<option value="0">北京亿特诺美</option>
+				<option value="1">上海腾霜</option>
+				<option value="2">上海腾姆</option>
+				<option value="3">上海泰奎</option>
+				<option value="4">上海泰钭</option>
+			</select>
+		</dd>
+        <dd>
+			<label>油卡城市：</label>
+			<select id="address"></select>
+		</dd>
+		<dd>
+			<label>申请人：</label><input type="text" id="proposer" value="" placeholder="请输入申请人" />
+		</dd>
+		<dd>
+			<label>购买方：</label><input type="text" id="buyer" value="" placeholder="请输入购买方" />
+		</dd>
+		<dd>
+			<label>备注：</label>
+            <textarea id="remark" maxlength="50" rows="8" cols="60" placeholder="请输入备注信息(最多输入50个字符)"></textarea>
+		</dd>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="oilcard_button" value="确认开通" />
+	</div>
+</div>
+<!-- 弹出层 -->
+<div class="child_html" style="display:none">
+	<div class="tips-bg"></div>
+	<div class="child_content">
+		<div class="tab-list" id="child-list">
+			<table>
+				<thead>
+					<tr>
+						<th>序列号</th>
+	                    <th>面额</th>
+						<th>创建时间</th>
+						<th>失效时间</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- <tr>
+						<td>dongdong</td>
+						<td>13521322513</td>
+						<td>粤J12345</td>
+						<td>100</td>
+						<td>广州</td>
+						<td>成功</td>
+						<td>2017-04-07 17:45:38</td>
+						<td><a>备注</a></td>
+					</tr> -->
+				</tbody>
+			</table>
+		</div>
+		<!-- 分页 -->
+		<div class="page-box" id="child_paga">
+		</div>
+	</div>
+
+</div>

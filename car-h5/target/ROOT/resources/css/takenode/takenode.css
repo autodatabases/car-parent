@@ -1,0 +1,124 @@
+/*头部*/
+html,body {
+    background: #fff;
+}
+a,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+.header{
+	background: #eee;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	position: relative;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+
+.content {
+    width: 100%;
+    background-color: #fff;
+}
+.content > div.item {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+    box-sizing: border-box;
+
+}
+.content > div.item > input{
+    width: 60%;
+    border: 0;
+    padding-left: 1rem;
+}
+.content > div.item > input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #c7c7c7;
+    font-size: 12px;
+}
+.content > div.item > input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #c7c7c7;
+    font-size: 12px;
+}
+.content > div.item > input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #c7c7c7;
+    font-size: 12px;
+}
+.content > div.item > input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:    #c7c7c7;
+    font-size: 12px;
+}
+.content .name {
+    background:url(../../imgs/takenode/tubiao_name.png) no-repeat left bottom 0.6rem;
+	background-size:5% ;
+}
+.content .phone {
+    background:url(../../imgs/takenode/tubiao_phone.png) no-repeat left bottom 0.6rem;
+	background-size:5% ;
+}
+
+.content .dates {
+    background:url(../../imgs/takenode/tubiao_date.png) no-repeat left bottom 0.6rem;
+	background-size:5% ;
+    position: relative;
+}
+.content .dates input{
+    z-index: 2;
+}
+.content .dates span {
+    position: absolute;
+    bottom: 1rem;
+    right: 1.6rem;
+    width: 1.2rem;
+    height: 0.6rem;
+    background: url(../../imgs/takenode/xiabiao.png) no-repeat;
+    background-size: 100% 100%;
+    z-index: 1;
+}
+
+.content .item1{
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 1rem;
+}
+.content .upload h3 {
+    font-size: 16px;
+    color: #2aaff4;
+}
+.content .upload input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity:0);
+    z-index: 10;
+}
+.content .img-warp {
+    padding: 1rem 0 2rem 0;
+}
+.content .img-warp >div {
+    width: 80%;
+    height: 9rem;
+    margin: 0 auto;
+    position: relative;
+}
+.upload-btn {
+    background: url(../../imgs/takenode/upload.png) no-repeat left top;
+    background-size: 100% 100%;
+}
+.btn {
+	width: 100%;
+    height: 3rem;
+    border: 1px solid #2aaff4;
+    border-radius: 5px;
+    line-height: 3rem;
+    text-align: center;
+    background-color: #2aaff4;
+    color: #fff;
+}

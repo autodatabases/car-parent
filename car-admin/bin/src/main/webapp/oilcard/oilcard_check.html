@@ -1,0 +1,118 @@
+<link rel="stylesheet" type="text/css" href="resources/css/oilcard/oilcard_check.css"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/oilcard/oilcard_check.js?t=1.8"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>增值服务</a>&nbsp;》<a class="on">油卡核销</a></p>
+	<div class="tab-top">
+		<span class="on">油卡核销列表</span>
+        <ul class="statusTab" status="-1">
+            <li rel="-1" class="on">全部</li>
+            <li rel="1">已使用</li>
+            <li rel="9">未开通</li>
+            <li rel="0">未使用</li>
+            <li rel="3">已过期</li>
+            <li rel="2">已冻结</li>
+        </ul>
+
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<div class="search-box clearfix">
+		<!-- <div class="jine">
+			发放总金额：<span id="money_one"/></span>
+			充值总金额：<span id="money_two"/></span>
+			交易总金额：<span id="money_three"/></span>
+		</div> -->
+		<!-- 搜索 条件-->
+		<form class="oil-checkForm">
+			<label>序列号:</label>
+			<input type="text" id="num" name="num" />
+	        <label>开通城市:</label>
+			<select id="address" name="address"></select>
+			<label>序列号范围:</label>
+			<input type="text" class="xuhao" name="startNum" id="startNum" style="margin-right:10px;"/> --
+			<input type="text" class="xuhao" name="endNum" id="endNum" />
+			<label>时间:</label>
+			<select id="date" name="date"></select>
+	        <br/><br/>
+	        <label>开通时间:</label>
+			<select id="batchDate" name="batchDate"></select>
+	        <label>批次:</label>
+	        <select id="batchNum" name="batchNum">
+	            <option value="">请选择批次</option>
+	        </select>
+			<button type="button" class="search-btn">
+				<span>搜索</span>
+			</button>
+	        <button type="button" class="export" id="exportSelectBtn">导出</button>
+			<br/><br/>
+		</form>
+		<div class="dateNum">
+			总计：<span id="totalNum">0</span>
+			已使用：<span id="usedNum">0</span>
+			未开通：<span id="openNum">0</span>
+			未使用：<span id="nuseNum">0</span>
+			已过期：<span id="overNum">0</span>
+			已冻结：<span id="freedNum">0</span>
+			总金额：<span id="moneyNum">0</span>
+		</div>
+	</div>
+
+
+	<div class="tab-list tab-list-check">
+		<table>
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>批次号</th>
+					<th>供应商</th>
+					<th>购买方</th>
+					<th>充值账户</th>
+					<th>开通城市</th>
+					<th>金额</th>
+					<th>状态</th>
+					<th>时间</th>
+					<!-- <th>备注</th>-->
+					<th>操作</th> 
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<!-- <td>dongdong</td>
+					<td>13521322513</td>
+					<td>粤J12345</td>
+					<td>100</td>
+					<td>广州</td>
+					<td>成功</td>
+					<td>2017-04-07 17:45:38</td>
+					<td><a>备注</a></td> -->
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="oilcard_paga">
+	</div>
+</div>
+	<!-- 备注弹层 -->
+<div id="orderOperRemark" style="display:none;background: #fff;border:2px solid #ccc;box-shadow:8px 8px 1px #888888;
+border-radius:5px;
+position: fixed;top: 30%;left: 30%;width: 400px;height: 200px;padding: 50px 80px;">
+	<div>
+		<dl>
+			<dt>
+				<span>请输入备注信息</span>
+			</dt>
+			<dd>
+				<textarea id="orderOperRemarkContent" maxlength="2000" rows="8" cols="60" placeholder="请输入备注信息"></textarea>
+			</dd>
+			<input type="hidden" id="orderOperRemark-orderNo" name="orderOperRemark-orderNo"/>
+		</dl>
+		<div class="tips-bottom">
+			<input type="button"  onclick="submitRemak();" value="提交" />
+			<input type="button"  onclick="closeRemak();" value="取消" />
+		</div>
+	</div>
+</div>

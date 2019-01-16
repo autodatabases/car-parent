@@ -1,0 +1,74 @@
+.header{
+	background: #fff;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	margin-bottom:1rem ;
+	position: relative;
+}
+.header span{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.content {
+	width: 100%;
+}
+.con_box {
+	width:80%;
+	height: 15rem;
+	margin: 5rem auto;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 0.5rem;
+	padding-top: 2rem;
+	box-shadow: 3px 3px 1px #ccc;
+}
+.con_box div {
+	width: 80%;
+	height: 3rem;
+	margin: 0 auto;
+	padding-top: 1rem;
+}
+.con_box div input {
+	border: 0;
+	height: 3rem;
+	margin-left: 12%;
+	width: 88%;
+}
+.con_box .phoneNumber {
+	background: url(../../imgs/oilCard/login/phoneNumber.png) no-repeat 0 1.5rem;
+	background-size: 8%;
+	border-bottom: 1px solid #ccc;
+}
+.con_box .code {
+	background: url(../../imgs/oilCard/login/code.png) no-repeat 0 1.5rem;
+	background-size: 8%;
+	border-bottom: 1px solid #ccc;
+}
+.con_box .code input[type=number] {
+	width: 40%;
+}
+.con_box .code input[type=button] {
+	font-size: 12px;
+	width: 37%;
+	box-sizing: border-box;
+	padding: 0 5%;
+	height: 2rem;
+	margin-top: 0.5rem;
+	margin-left: 8%;
+	border-radius: 4px;
+}
+.con_box .login_btn input{
+	width: 8rem;
+	height: 2.5rem;
+	margin-top: 2rem;
+	font-size: 15px;
+	color: #fff;
+	background-color: #0ab519;
+	border-radius: 4px;
+	padding: 0;
+	margin-left: 0;
+}
+.con_box .login_btn {
+	width: 8rem;
+}

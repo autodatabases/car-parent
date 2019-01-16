@@ -1,0 +1,84 @@
+.header{
+	background: #fff;
+	position: relative;
+	background: #FF3E5B;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+	color: #fff;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/dot/back-fff.png) no-repeat center;
+	background-size:20% ;
+}
+.content {
+    width: 100%;
+    overflow: hidden;
+}
+.washCode {
+    width: 80%;
+    height: auto;
+    margin: 3rem auto;
+    background: url(../../imgs/carWash/washCode.png) no-repeat 0 0;
+    background-size: 100% 100%;
+    text-align: center;
+}
+.washCode p:nth-child(1){
+    font-size: 14px;
+    padding-top: 2rem;
+}
+.washCode p:nth-child(2){
+    font-size: 14px;
+}
+.washCode p:nth-child(3){
+    width: 50%;
+	margin: 0.5rem auto;
+	/*height: 8rem;*/
+	overflow: hidden;
+}
+.washCode p:nth-child(3) img{
+    width: 100%;
+	height: 100%;
+}
+.washCode p:nth-child(4){
+    font-size: 22px;
+    line-height: 3rem;
+    color: #FF3E5B;
+}
+.washCode p:nth-child(5){
+    font-size: 12px;
+    line-height: 3rem;
+    color: #666666;
+}
+.washCode p:nth-child(6){
+    width: 80%;
+    margin: 0 auto;
+    font-size: 12px;
+    border-top: 2px dashed #eee;
+    line-height: 3rem;
+}
+.washCode p:nth-child(6) span{
+    color: #FF3E5B;
+}
+.status{
+	text-align: center;
+}
+
+.myTip{
+	text-align: center;
+	color: red;
+}
+.myMsg{
+	text-align: center;
+	width: 86%;
+	margin: 0 auto;
+	color: #6b6b6b;
+	font-size: 13px;
+}

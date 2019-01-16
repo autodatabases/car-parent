@@ -1,0 +1,95 @@
+<link rel="stylesheet" type="text/css" href="resources/css/shop/jilv_add.css?t=1.0" />
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/shop/jilv_add.js?t=1.0"></script>
+<script src="resources/js/My97DatePicker/WdatePicker.js"></script>
+<div class="tables-top">
+	<!-- 面包屑 -->
+	<p class="crumbs"><span>您的位置：</span><a>积分商城</a>&nbsp;》<a>洗车管理</a></p>
+	<!-- 切换头部 -->
+	<div class="tab-top" id="order_span">
+		<span id="list">渠道列表</span>
+		<span class="on">新增渠道</span>
+	</div>
+</div>
+
+<!-- 列表 -->
+<div class="tabels-main">
+	<dl>
+		<dt><span>渠道编辑</span></dt>
+		<dd>
+			<label>城市：</label><select id="city"></select>
+		</dd>
+		<div id="orderLevel">
+			<dd>
+				<label>购置价范围：</label><input style="width: 130px" type="number" id="minPrice" class="myInp" value="" placeholder="起始值" />
+					~
+				<input style="width: 130px" type="number" id="maxPrice" class="myInp" value="" placeholder="结束值" />
+			</dd>
+			<dd>
+				<label>机滤价格：</label><input type="number" id="oneTime" class="myInp" value="" placeholder="请输入机滤价格" />
+				<input id="addPrice" style="background: #fc9338;color:#fff;padding: 2px 5px;cursor: pointer;border-radius:5px;width:60px;" type="button" value="添 加">
+			</dd>
+		</div>
+		<dd>
+		    <table id="fwBao" class="inBlock">
+		    	<thead>
+					<tr>
+						<th>购置价范围</th>
+						<th>机滤价格</th>
+						<th>操作</th>
+					</tr>
+		    	</thead>
+		    	<tbody id="fwbList">
+		    		<!-- <tr>
+		    			<td>0≤保单金额＜1000</td>
+		    			<td>1</td>
+		    			<td>2</td>
+		    			<td>3</td>
+		    			<td>4</td>
+		    			<td>删除</td>
+		    		</tr> -->
+		    	</tbody>
+
+    		</table>
+		</dd>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="sub_button" value="提交" />
+		<input type="button" class="action-btn" onclick="$('.tables').load('/admin/shop/jilv_config.html')" value="取消" />
+	</div>
+</div>
+<style>
+#fwBao  tr td{
+	text-align: center;
+	border: 1px solid #ddd;
+}
+
+#fwBao{
+	margin-left: 50px;
+}
+
+#fwBao  tr th{
+	width: 100px;
+	height: 25px;
+	text-align: center;
+	border: 1px solid #ddd;
+	background: #f7f7f7;
+}
+#fwBao  tr th:first-child{
+	width: 200px;
+}
+
+#fwbList{
+	min-height: 10px;
+}
+
+#fwbList tr td span{
+	font-size: 20px;
+	cursor:pointer;
+	display: inline-block;
+}
+	.inBlock {
+    display: inline-block;
+}
+</style>

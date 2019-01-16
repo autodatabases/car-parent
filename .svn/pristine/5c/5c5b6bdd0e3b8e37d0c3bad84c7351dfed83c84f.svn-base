@@ -1,0 +1,36 @@
+$(function() {
+	getTypeList();
+	$(".search-box button").click(function(){//根据查询条件查询
+		_allPages["oilcard_paga"].pageNo = 1;
+		productList.dataList();
+	});
+	$("#add_product").click(function(){
+		$('.tables').load('product/product-add.html');
+	});
+	$("#product_list").click(function(){
+		$('.tables').load('product/product_list.html');
+	});
+});
+//获取类目信息
+function getTypeList(){
+	$.ajax({
+        url: DOMIN.MAIN + "/virtualtopup/queryOilGoodsTypeName",
+        type: "GET",
+        processData: true,
+        cache: false,
+        async: true,
+        dataType: "json",
+        data: {},
+        traditional: true, // 使用传统方式序列化
+        success: function(data, textStatus) {
+            if (data.success) {
+                //todo类目信息
+            } else {
+                $.tip(data.message);
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            $.tip(errorThrown);
+        }
+    });
+}

@@ -1,0 +1,124 @@
+﻿<link rel="stylesheet" type="text/css" href="resources/css/counterman/orders/orders.css?t=1.2" />
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/counterman/orders/orders.js?t=1.2"></script>
+<script src="resources/js/My97DatePicker/WdatePicker.js"></script>
+
+
+<div class="tables-top">
+	<!-- 面包屑 -->
+	<p class="crumbs"><span>您的位置：</span><a>业务员</a>&nbsp;》<a>订单列表</a></p>
+	<!-- 切换头部 -->
+	<div class="tab-top" id="order_span">
+		<span rel="a" class="on">全部</span>
+		<!-- <span  rel="0">待审核</span> -->
+		<span  rel="1">待收货</span>
+		<span  rel="2">已完成</span>
+		<!-- <span  rel="3">已取消</span> -->
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>订单编号：</label>
+				<input type="text"  id="orderNo"/>
+				<label>业务员手机：</label>
+				<input type="text"  id="countermanPhone"/>
+				<label>下单时间：</label>
+				<input id="startTimes" type="text" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'%y-%M-%d %H:%m:%s',readOnly:true})" readonly="readonly"/>
+				<input id="endTimes" type="text" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'%y-%M-%d %H:%m:%s',readOnly:true})" readonly="readonly"/>
+				<button><span>搜索</span></button>
+			</li>
+		</ul>
+	</div>
+	<style>
+		.order-status{
+			color: red;
+			font-weight: bold;
+		}
+		.create-time{
+			color: #0e9508;
+			font-weight: normal;
+		}
+		.finish-time{
+			color: #9c27b0;
+			font-weight: normal;
+		}
+		.seller-phone{
+			color: #0961ec;
+			font-weight: normal;
+		}
+	</style>
+	<!-- 切换列表 -->
+	<ul class="tab-warp">
+		<li class="on">
+			<!-- 筛选 -->
+<!-- 			<div class="screen">
+				<span><i class="on"></i>订单详情</span>
+				<span><i class="on"></i>业务员信息</span>
+				<span><i class="on"></i>商品信息</span>
+				<span><i class="on"></i>备注信息</span>
+			</div> -->
+			<!-- 表格 -->
+			<div class="tab-list">
+				<table style="font-size: 12px;">
+					<thead>
+						<tr>
+							<th class="bh">编号</th>
+							<th class="ddxq">订单详情</th>
+							<th class="khxx">业务员信息</th>
+							<th class="sjxx">商品信息</th>
+							<th class="jsxx">备注信息</th>
+							<th class="cz">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<!-- 分页 -->
+			<div class="page-box" id="order_paga">
+
+			</div>
+		</li>
+
+	</ul>
+</div>
+<!-- 提示弹窗 -->
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p class="wenzi" style="float: left;">请选择是否停用该店铺</p>
+			<span onclick="audit_close()" class="close">x</span>
+		</div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="audit_button()"
+				value="确认" /> <input type="button" onclick="audit_close()"
+				value="关闭" />
+		</div>
+	</div>
+</div>
+<!-- 备注弹层 -->
+<div id="orderOperRemark" style="display:none;background: #fff;border:2px solid #ccc;box-shadow:8px 8px 1px #888888;
+border-radius:5px;
+position: fixed;top: 30%;left: 30%;width: 400px;height: 200px;padding: 50px 80px;">
+	<div>
+		<dl>
+			<dt>
+				<span>请输入备注信息</span>
+			</dt>
+			<dd>
+				<textarea id="orderOperRemarkContent" maxlength="2000" rows="8" cols="60" placeholder="请输入备注信息"></textarea>
+			</dd>
+			<input type="hidden" id="orderOperRemark-orderNo" name="orderOperRemark-orderNo"/>
+		</dl>
+		<div class="tips-bottom">
+			<input type="button"  onclick="submitRemak();" value="提交" />
+			<input type="button"  onclick="closeRemak();" value="取消" />
+		</div>
+	</div>
+</div>

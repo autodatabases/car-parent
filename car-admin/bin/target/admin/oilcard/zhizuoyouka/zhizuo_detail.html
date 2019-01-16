@@ -1,0 +1,98 @@
+<link rel="stylesheet" type="text/css" href="resources/css/oilcard/zhizuoyouka/zhizuo_detail.css"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/oilcard/zhizuoyouka/zhizuo_detail.js"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>增值服务</a>&nbsp;》<a>制卡记录</a>&nbsp;》<a class="on">制卡详情</a></p>
+	<div class="tab-top">
+		<span class="on">制卡详情</span>
+        <div id="zhizuo_list">制作记录</div>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<div class="search-box clearfix">
+		<label>序列号范围:</label>
+		<input type="text" class="xuhao" id="startNum" /> --
+		<input type="text" class="xuhao" id="endNum" />
+		<button class="search-btn" id="search-btn">
+			<span>查询</span>
+		</button>
+		<button type="button" class="export" id="exportSelectBtn">导出</button>
+		<span style="color:red;padding-left:1rem;">温馨提示：只能导出已处理的油卡</span>
+	</div>
+    <div class="tab-list" id="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>开始序号</th>
+					<th>结束序号</th>
+					<th>数量</th>
+                    <th>面额</th>
+					<th>状态</th>
+					<th>开通时间</th>
+					<th>失效时间</th>
+					<th>操作</th>
+                    <th>导出</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- <tr>
+					<td>dongdong</td>
+					<td>13521322513</td>
+					<td>粤J12345</td>
+					<td>100</td>
+					<td>广州</td>
+					<td>成功</td>
+					<td>2017-04-07 17:45:38</td>
+					<td><a>备注</a></td>
+				</tr> -->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="oilcard_paga">
+	</div>
+	<div class="back_btn">
+		<input type="button" class="action-btn" id="back_btn" value="返回" />
+	</div>
+
+</div>
+<!-- 弹出层 -->
+<div class="child_html" style="display:none">
+	<div class="tips-bg"></div>
+	<div class="child_content">
+		<div class="tab-list" id="child-list">
+			<table>
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>序列号</th>
+	                    <th>面额</th>
+						<th>卡密</th>
+						<th>状态</th>
+						<th>开通时间</th>
+						<th>失效时间</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- <tr>
+						<td>dongdong</td>
+						<td>13521322513</td>
+						<td>粤J12345</td>
+						<td>100</td>
+						<td>广州</td>
+						<td>成功</td>
+						<td>2017-04-07 17:45:38</td>
+						<td><a>备注</a></td>
+					</tr> -->
+				</tbody>
+			</table>
+		</div>
+		<!-- 分页 -->
+		<div class="page-box" id="child_paga">
+		</div>
+	</div>
+
+</div>

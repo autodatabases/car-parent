@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+		location="C:\Users\董夫行\.m2\repository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
+	<context id="MysqlTables" targetRuntime="MyBatis3">
+		<plugin type="com.emate.code.generator.MysqlPageInfoPluginAdapter" />
+		<commentGenerator type="com.emate.code.generator.MysqlCommentGenerator">
+			<property name="javaFileEncoding" value="UTF-8"/>
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://car.emateglobal.com:3306/ematecar?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false" 
+			userId="root"
+			password="ikj34sM">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="true" />
+		</javaTypeResolver>
+		<javaModelGenerator targetPackage="com.emate.shop.business.model"
+			targetProject="../car-core/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="false" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.emate.shop.mapper"
+			targetProject="src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.emate.shop.mapper" targetProject="src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!-- 
+		SELECT concat(  '        ',
+						'<table schema="', 
+						t.TABLE_SCHEMA, 
+						'" tableName="', 
+						t.TABLE_NAME, 
+						'"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>') tt 
+		  FROM information_schema.`TABLES` t
+         WHERE t.TABLE_SCHEMA = 'ematecar'
+		 --> <!-- 
+         <table schema="ematecar" tableName="access_token"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+        <table schema="ematecar" tableName="autoBrand"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+        <table schema="ematecar" tableName="autoPose"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+        <table schema="ematecar" tableName="regions"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+       
+        <table schema="ematecar" tableName="user_address"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+        <table schema="ematecar" tableName="wx_user_bind"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+         <table schema="ematecar" tableName="seller"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		  <table schema="ematecar" tableName="user_package"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		  <table schema="ematecar" tableName="user_info"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		   <table schema="ematecar" tableName="user_msg"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		   <table schema="ematecar" tableName="news"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		   <table schema="ematecar" tableName="user_package"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		    <table schema="ematecar" tableName="power_price"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		     <table schema="ematecar" tableName="orders"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		     <table schema="ematecar" tableName="feedback"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		     <table schema="ematecar" tableName="system_user_role_relation"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		     <table schema="ematecar" tableName="system_user"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		    <table schema="ematecar" tableName="system_action"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		    <table schema="ematecar" tableName="system_menu"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		    <table schema="ematecar" tableName="system_page"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		    <table schema="ematecar" tableName="system_role"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		    <table schema="ematecar" tableName="system_role_action_relation"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		    <table schema="ematecar" tableName="system_role_page_relation"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		       <table schema="ematecar" tableName="random_code"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		        <table schema="ematecar" tableName="tyre_info"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		        <table schema="ematecar" tableName="orders"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		         <table schema="ematecar" tableName="engine_oil"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		          <table schema="ematecar" tableName="jilv_info"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		            <table schema="ematecar" tableName="oil_barcode"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		              <table schema="ematecar" tableName="auto_info"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		   <table schema="ematecar" tableName="auto_part_relation"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		   <table schema="ematecar" tableName="auto_parts"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		    <table schema="ematecar" tableName="import_user_info"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		     <table schema="ematecar" tableName="orders"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		      <table schema="ematecar" tableName="seller_report"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		        <table schema="ematecar" tableName="system_user"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		        	<table schema="ematecar" tableName="seller_info"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		        	<table schema="ematecar" tableName="seller"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		        	 <table schema="ematecar" tableName="user_info"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		        	  <table schema="ematecar" tableName="order_trace"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		        	   <table schema="ematecar" tableName="user"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+		  -->
+	<!--  <table schema="ematecar" tableName="seller_report"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table> -->
+	  <!-- 运行命令：mybatis-generator:generate -X -->
+	  <table schema="ematecar" tableName="oil_recharge_code"><generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post" /></table>
+	</context>
+</generatorConfiguration> 

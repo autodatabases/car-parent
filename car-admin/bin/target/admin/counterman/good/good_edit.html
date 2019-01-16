@@ -1,0 +1,78 @@
+<link rel="stylesheet" type="text/css" href="resources/css/counterman/good/good_edit.css?t=1.1"/>
+<script src="resources/js/counterman/good/good_edit.js?t=1.8"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>业务员</a>&nbsp;》<a class="on">商品编辑</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main table01">
+	<dl>
+		<dt><span>商品编辑</span></dt>
+		<dd>
+			<label>商品名称：</label><input type="text" id="goodName" value="" placeholder="请输入商品名称"/>
+		</dd>
+		<dd>
+			<label>财险网点：</label>
+			<select id="points" scale="0">
+			 	<option value="0" scale="0">请选择网点</option>
+			</select>
+			<!-- <span class="scaleTips scale"></span> -->
+		</dd>
+		<dd>
+			<label>商品金额：</label><input type="text" id="goodPrice" value="" placeholder="请输入商品金额"/>元
+			<!-- <span class="scaleTips money"></span> -->
+		</dd>
+		<dd>
+			<label>商品积分：</label><input type="text" id="goodScore" value="" placeholder="请输入商品积分"/>
+		</dd>
+		<dd>
+			<label>国寿结算金额：</label><input type="text" id="guoPrice" value="" placeholder="请输入结算金额"/>元
+		</dd>
+		<dd>
+			<label>商品库存：</label><input type="text" id="goodNumber" value="" placeholder="请输入商品库存"/>
+		</dd>
+
+		<dd class="upload">
+			<form id="submit_form" method="post" action="img/uploadImg?imgtype=counterman" target="exec_target" enctype="multipart/form-data">
+				<div class="img-warp goodPhoto">
+					<div class="img-box" style="display:none;cursor:pointer"><img id="goodImg"/></div>
+					<div class="upload-btn"><input type="file" name="file_upload" id="" value="" /></div>
+				</div>
+				<p class="goodPhoto_p">点击按钮上传商品照片 <span style="color:red;"> 注意：请上传正方形的图片</span></p>
+			</form>
+		</dd>
+		<iframe id="exec_target" name="exec_target" style="display:none;"></iframe>
+		<dd>
+			<label>商品状态：</label>
+			<select id="goodStatus">
+			 	<option value="0">上架</option>
+			    <option value="1">下架</option>
+			</select>
+		</dd>
+		<dd>
+			<label>商品简介：</label> <textarea id="introduce" maxlength="2000" rows="8" cols="60" placeholder="请输入商品简介"></textarea>
+		</dd>
+	</dl>
+	<div>
+		<input type="button" class="action-btn"  id="countermanGood_button" value="提交" />
+		<input type="button" class="action-btn" onclick="$('.tables').load('counterman/good/good_list.html')" value="返回" />
+	</div>
+</div>
+<div class="tabels-main table02" style="display:none">
+	<dl>
+		<dt><span>批量新增商品</span></dt>
+		<dd>
+			<form id="daoru" action="countermanGood/batchinsertgood?imgpath=counterman" method="post" enctype="multipart/form-data" target="import-model">
+				<div class="imgUploat">
+					<input id="uploadfile" name="insert_good" type="file" style="width: 250px;"></input>
+					<a href="counterman/good/counterman_good.xlsx">下载模板</a>
+				</div>
+			</form>
+
+		</dd>
+		<iframe name="import-model" id="import-model"  style="width:0px;height: 0px;"></iframe>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="piliang_button" value="提交" />
+		<input type="button" class="action-btn" onclick="$('.tables').load('counterman/good/good_list.html')" value="返回" />
+	</div>
+</div>

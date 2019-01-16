@@ -1,0 +1,125 @@
+/* 表单 */
+.tables{
+	float: left;
+	width: 90%;
+	min-height:500px;
+	background: #fff;
+}
+.tables>div{
+	border-left: 1px solid #ccc;
+}
+.tables-top{
+	padding-top:20px;
+    background: url(../../imgs/com/noise.white.png);
+	border-bottom: 1px solid #ccc;
+}
+.tabels-main{
+	padding: 30px;
+}
+.tabels-main dl{
+	border-bottom: 1px dashed #d2d2d2;
+	padding-bottom:20px;
+	margin-bottom: 20px;
+}
+.tabels-main dl dt{
+	padding-bottom: 10px;
+}
+.tabels-main dl dt span{
+	display: inline-block;
+	border-bottom: 4px solid #fb9337;
+	line-height: 40px;
+	font-size: 20px;
+	padding: 0 10px;
+
+}
+.tabels-main dl dd{
+	padding: 10px 0;
+}
+.tabels-main dl dd label{
+	display: inline-block;
+	line-height: 32px;
+	width:180px;
+	text-align: right;
+}
+.tabels-main dl dd input{
+	border:1px solid #dbdbdb;
+	border-radius:3px;
+	height:30px;
+	width: 200px;
+	margin-right: 10px;
+	text-indent: 5px;
+	background: #fff;
+}
+.tabels-main dl dd.upload{
+	overflow: hidden;
+}
+.tabels-main dl dd.upload div div{
+	float: left;
+	width:150px;
+	height:150px;
+	border:1px solid #ddd;
+	position: relative;
+	margin-right: 20px;
+}
+.tabels-main dl dd.upload div.img-warp{
+	width:100%;
+	overflow: hidden;
+}
+.tabels-main dl dd.upload div.upload-btn{
+	border:2px dashed #ddd;
+	background: #efefef url(../../imgs/com/add-img.png) no-repeat;
+}
+.tabels-main dl dd.upload div div input{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	cursor: pointer;
+	opacity: 0;
+	filter:alpha(opacity:0);
+	z-index: 10;
+}
+.tabels-main dl dd.upload div div.img-box img{
+	width: 100%;
+	height: 100%;
+}
+.tabels-main dl dd.upload p{
+	padding: 20px;
+}
+.action-btn{
+	padding: 10px 15px;
+	border:1px solid #ef811f;
+	background: #fc9338;
+	color:#fff;
+	font-size:16px;
+	border-radius: 3px;
+	width: 150px;
+	margin-left: 50px;
+}
+.tabels-main dl dd select{
+	width:14%;
+}
+.tabels-main .imgUploat {
+   padding-left: 110px;
+}
+.tabels-main .imgUploat a {
+    margin-left: 20px;
+    cursor: pointer;
+    border: 1px solid #F0882C;
+    background: #F0882C;
+    color: #fff;
+    padding: 3px 10px;
+    line-height: 26px;
+    border-radius: 5px;
+}
+.tabels-main .imgUploat input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    color: #333;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    margin-right: 20px;
+}

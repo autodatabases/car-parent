@@ -1,0 +1,68 @@
+.header{
+	position: relative;
+	background: #eb505e;
+}
+.header h1{
+	font-size: 16px;
+	line-height: 2.75rem;
+	text-align: center;
+	color: #fff;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/dot/back-fff.png) no-repeat center;
+	background-size:20% ;
+}
+.back-home{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background: url(../../imgs/index/home-fff.png) no-repeat center;
+	background-size:45% ;
+}
+/* 表单 */
+.forms{
+	background: #fff;
+	border-top: 1px solid #bbb;
+	margin:1rem 0;
+	position: relative;
+}
+.forms input{
+	width: 95%;
+	padding-left: 5%;
+	border:none;
+	border-bottom: 1px solid #bbb;
+	outline: none;
+	height: 3rem;
+	line-height: 3rem;
+	font-size: 14px;
+}
+.forms span{
+	position: absolute;
+	right: 0;
+	bottom: 1px;
+	display: block;
+	height: 3rem;
+	line-height: 3rem;
+	color: #e9515e;
+	font-size: 14px;
+	border-left: 1px solid #bbb;
+	padding: 0 10px;
+}
+.action-btn{
+	display: block;
+	border:1px solid #eb505e;
+	background: #eb505e;
+	font-size: 16px;
+	color: #fff;
+	width: 90%;
+	height: 2.625rem;
+	line-height: 2.625rem;
+	margin:3rem auto;
+}

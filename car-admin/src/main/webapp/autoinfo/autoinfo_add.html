@@ -1,0 +1,31 @@
+<link rel="stylesheet" type="text/css" href="resources/css/autoinfo/autoinfo_add.css?t=1.0"/>
+<script src="resources/js/autoinfo/autoinfo_add.js?t=3.1"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>商品</a>&nbsp;》<a class="on">车型添加</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<dl>
+		<dt><span>车型新增</span></dt>
+		<dd>
+			<label>品牌：</label><input type="text" id="brand" value="" />
+		</dd>
+		<dd>
+			<label>车系：</label><input type="text" id="autolineName" value="" />
+		</dd>
+		<dd>
+			<label>生产年份：</label><input type="text" id="productTime" value="" />
+		</dd>
+		<dd>
+			<label>排量：</label><input type="text" id="engineDisp" value="" />
+		</dd>
+		<dd>
+			<label>机油用量：</label><input type="text" id="oilAmount" value="" />
+		</dd>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="auto_button" value="提交" />
+		<!--<input type="button" class="reset-btn" id=""  value="重置"/>-->
+		<input type="button" class="action-btn" onclick="$('.tables').load('autoinfo/auto-list.html')" value="返回" />
+	</div>
+</div>

@@ -1,0 +1,225 @@
+/* 表单 */
+.tables{
+	float: left;
+	width: 90%;
+	min-height:500px;
+}
+.tables>div{
+	border-left: 1px solid #ccc;
+}
+.tables-top{
+	padding-top: 20px;
+    background: url(../../imgs/com/noise.white.png);
+	border-bottom: 1px solid #ccc;
+	min-height: 80px;
+}
+.tab-top{
+	width: 90%;
+    padding: 0 20px;
+    margin-bottom: -1px;
+}
+/* 列表 */
+.tabels-main{
+	padding: 20px 20px;
+	min-height: 400px;
+}
+/* 搜索 */
+.search-box{
+	padding:10px 20px;
+	border:1px solid #ccc;
+	text-align:left ;
+}
+.search-box button{
+	height:28px;
+	margin-top:-2px;
+	display: inline-block;
+    border: 1px solid #ccc;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: inset 0 1px 0 #fff;
+    -webkit-box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 #fff;
+    font-weight: bold;
+    background:#f7f7f7;
+    color: #666;
+    padding: 0;
+     margin-left: 20px;
+}
+.search-box button.search-btn{
+    background:#f7f7f7 url(../../imgs/sprites.png) no-repeat -10px -15px;
+}
+.search-box button.export-btn{
+    margin-left: 10px;
+    padding: 0 10px;
+}
+.search-box button span{
+	height: 18px;
+    line-height: 18px;
+    padding: 4px 10px;
+    display: block;
+    background: #f7f7f7;
+    -moz-box-shadow: inset 0 1px 0 #fff;
+    -webkit-box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.search-box button.search-btn span{
+    margin-left: 25px;
+}
+.search-box input{
+    padding:5px 10px;
+    border: 1px solid #ccc;
+    color: #333;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    margin-right: 20px;
+    background: #fff;
+}
+.search-box ul{
+	overflow:hidden;
+}
+.search-box ul li{
+	float:left;
+	margin:10px 0;
+}
+.search-box ul li select{
+	margin:3px 10px 3px 5px;
+}
+/* 切换列表 */
+.tab-list {
+	border-left: 1px solid #ddd;
+}
+.tab-list table{
+	width: 100%;
+	vertical-align: middle;
+	font-size:12px;
+}
+.tab-list thead th,.tab-list tbody td {
+    padding: 7px 10px;
+    border: 1px solid #ddd;
+    border-left: 0;
+    text-align: center;
+}
+.tab-list thead tr th{
+	text-align: center;
+	background: #fcfcfc;
+}
+.tab-list thead tr th:nth-child(odd){
+	background: #f7f7f7;
+}
+.tab-list thead tr th.bh,.tab-list thead tr th.cz{
+	background: #fcfcfc;
+}
+.tab-list tbody{
+	border-bottom:1px solid #ddd;
+}
+.tab-list tbody th{
+	border-right:1px solid #ddd;
+	line-height: 30px;
+}
+.tab-list tbody tr td:nth-child(even){
+	background: #fcfcfc;
+}
+.tab-list tbody td{
+	vertical-align: middle;
+	line-height: 24px;
+}
+.tab-list tbody td a{
+	color: #333;
+	margin: 0 10px;
+}
+.tab-list tbody td a:hover{
+	color:#fc9338;
+}
+select{
+	border-radius:1px;
+	padding:0;
+	margin-right:10px;
+	width:100px;
+}
+/*弹窗*/
+.tips-warp .tips-box {
+	width: 500px;
+	margin-left: -250px;
+	margin-top: -200px;
+	top: 50%;
+	z-index: 99;
+	animation: none;
+	-webkit-animation: none;
+	-moz-animation: none;
+	-o-animation: none;
+}
+.tips-warp .tips-center {
+	margin: 10px 0;
+}
+.tips-warp .tips-bg{
+	z-index: 89;
+}
+.tip-center input{
+	border: 1px solid #ccc;
+	width: 200px;
+	height: 30px;
+	border-radius: 5px;
+	line-height: 30px;
+	text-align: center;
+}
+.tip-center p {
+	text-align: left;
+	width: 80%;
+	margin: 1rem auto;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 0 10px;
+	text-indent:2em;
+	word-wrap: break-word;
+	min-height: 6rem;
+	max-height: 6rem;
+	overflow-y: scroll;
+}
+.tip-center p span {
+	padding-left: 20px;
+}
+#remark {
+	margin-top: 0.5rem;
+	border-radius: 5px;
+	font-size: 12px;
+}
+.comment span {
+	margin:0 auto;
+	cursor:pointer;
+	width:160px;
+	display:block;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+/* //备注弹出层 */
+.orderRemark{
+	background: #fff;
+	border:2px solid #ccc;
+	border-radius:5px;
+	position: fixed;
+	top: 30%;
+	left: 30%;
+	width: 500px;
+	height: 300px;
+	z-index: 101;
+}
+.orderRemark dl {
+	width: 80%;
+	margin: 0.5rem auto;
+}
+.orderRemark span {
+	line-height: px;
+}
+.orderRemark .orderRemark_top {
+	height: 1rem;
+	line-height: 1rem;
+	font-size: 18px;
+	padding-left: 0.2rem;
+}

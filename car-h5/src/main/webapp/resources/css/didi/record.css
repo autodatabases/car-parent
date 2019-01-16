@@ -1,0 +1,57 @@
+.warp{
+	min-height: 100%;
+	position:relative;
+	overflow: hidden;
+    padding: 0 0 1.7rem;
+    background: #fff;
+}
+/*头部*/
+.header{
+	background: #fff;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	position: relative;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/index/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+
+/*主体内容*/
+.warp ul li{
+	font-size: .75rem;
+	padding: 1rem 1.25rem;
+	border-bottom: 1px solid #e4e4e4;
+}
+.warp ul li p{
+	line-height: 1.6rem;
+}
+.warp ul li .red{
+	color: #ff3e59;
+}
+
+
+/*无兑换券*/
+.no_have{
+	text-align: center;
+	height: 100%;
+	background: #fff;
+    font-weight: 600;
+	display: none;
+}
+.no_have img{
+	width: 6.5rem;
+	height: auto;
+	margin-top: 7.3rem;
+	margin-bottom: 2rem;
+}

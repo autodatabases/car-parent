@@ -1,0 +1,36 @@
+remote.service.url=${remote.service.url}
+
+# Redis settings
+#redis.host=${redis.host}
+redis.port=${redis.port}
+redis.pass=${redis.pass}
+  
+  
+redis.maxIdle=${redis.maxIdle}
+redis.maxTotal=${redis.maxTotal}
+redis.maxWait=${redis.maxWait}
+redis.testOnBorrow=${redis.testOnBorrow}
+
+
+kuaidi100.callback.url=${kuaidi100.callback.url}
+kuaidi100.poll.url=http://poll.kuaidi100.com/poll
+kuaidi100.poll.key=otfMjnkq1191
+kuaidi100.poll.salt=EMATE
+
+#phone recharge
+gyphone.numberserchUrl=${gyphone.numberserchUrl}
+gyphone.ordersendUrl=${gyphone.ordersendUrl}
+gyphone.productsearchUrl=${gyphone.productsearchUrl}
+gyphone.ordersarchUrl=${gyphone.ordersarchUrl}
+
+gyphone.agentid=${gyphone.agentid}
+gyphone.merchantkey=${gyphone.merchantkey}
+gyphone.source=${gyphone.source}
+
+#gaoyangxunji oil card recharge
+gyxj.oilcard.url=${gyxj.oilcard.url}
+gyxj.oilcard.merchantid=${gyxj.oilcard.merchantid}
+gyxj.oilcard.key=${gyxj.oilcard.key}
+
+
+car.h5.contextpath=http://127.0.0.1:8080

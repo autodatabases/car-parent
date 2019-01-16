@@ -1,0 +1,59 @@
+body, html{
+	width: 100%;
+	height: 100%;
+	margin:0;
+	padding: 0;
+	font-size:16px;
+	font-family:"Microsoft YaHei","微软雅黑","MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+}
+header,span,h1,div,img {
+	padding: 0;
+	margin: 0;
+}
+/*头部*/
+.header{
+	height: 8%;
+	background: #fff;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	position: relative;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/oilCard/back.png) no-repeat center;
+	background-size:20% ;
+}
+
+#l-map{
+	height: 92%;
+	width:100%;
+}
+/*导航按钮*/
+.btn {
+	width: 100%;
+	height: 1.5rem;
+	border: 0;
+	color: #fff;
+	background-color: #ff3e5b;
+	border-radius: 10px;
+}
+.icon {
+	margin: 0;
+	position: absolute;
+	top: -50px;
+	left: 30%;
+	width: 100px;
+	height: 30px;
+	background: url(../../imgs/counterman/renshou.png) no-repeat 0 0;
+	background-size: 100%;
+	z-index: 100001;
+}

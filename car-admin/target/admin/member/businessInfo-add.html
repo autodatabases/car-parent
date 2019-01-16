@@ -1,0 +1,21 @@
+<link rel="stylesheet" type="text/css" href="resources/css/member/businessInfo-add.css?t=1.0"/>
+<script src="resources/js/member/businessInfo-add.js?t=1.1"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>会员</a>&nbsp;》<a class="on">业务员添加</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<dl>
+		<dt><span>业务员新增</span></dt>
+		<dd>
+			<label>工号：</label><input type="text" id="businessCode" value="" />
+		</dd>
+		<dd>
+			<label>姓名：</label><input type="text" id="businessName" value="" />
+		</dd>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="businessInfo_button" value="提交" />
+		<input type="button" class="action-btn" onclick="$('.tables').load('member/business-info.html')" value="返回" />
+	</div>
+</div>

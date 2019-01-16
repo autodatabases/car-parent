@@ -1,0 +1,88 @@
+<link rel="stylesheet" type="text/css" href="resources/css/oilcard/takenode_info.css"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/oilcard/takenode_info.js"></script>
+<div class="tables-top">
+	<p class="crumbs">
+		<span>您的位置：</span><a>增值服务</a>&nbsp;》<a class="on">查勘录入信息</a>
+	</p>
+
+	<!-- 切换头部 -->
+	<div class="tab-top">
+		<span class="on">查勘录入信息</span>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<ul>
+            <li>
+				<label>车主名称:</label>
+				<input type="text" id="userName" />
+			</li>
+			<li>
+				<label>车主手机号:</label>
+				<input type="text" id="userPhone" />
+			</li>
+ 			<li>
+				<button class="search-btn">
+					<span>搜索</span>
+				</button>
+			</li>
+			<li>
+				<select id="eMonth">
+					<option></option>
+					<option></option>
+				</select>
+			</li>
+			<li>
+				<button type="button" class="export" id="exportSelectBtn">导出</button>
+			</li>
+		</ul>
+	</div>
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+                    <th>车主姓名</th>
+					<th>车主手机号</th>
+                    <th>保险到期日</th>
+					<th>驾驶证照片</th>
+					<th>申请人</th>
+					<th>创建时间</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--<tr>
+					<td>1</td>
+					<td>黄埔</td>
+					<td>2017-3-31</td>
+					<td>2017-3-31</td>
+					<td><a>编辑</a><a>删除</a></td>
+				</tr>-->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="taocan_paga"></div>
+</div>
+<!-- <div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p style="float: left;">添加或修改洗车套餐</p>
+			<span style="float: right;" onclick="audit_close()" class="close">x</span>
+		</div>
+		<div class="tips-center">
+			<p>套餐洗车次数：<span><input type="text" id="buyNm" value="" placeholder="请输入套餐洗车次数" /></span></p>
+			<p>赠送洗车次数：<span><input type="text" id="preNm" value="" placeholder="请输入赠送洗车次数" /></span></p>
+			<p>套餐价格：<span style="padding-left: 45px;"><input type="number" id="price" value="" placeholder="请输入套餐价格" /></span></p>
+		</div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="audit_button()" value="确认" />
+			<input type="button" onclick="audit_close()" value="关闭" />
+		</div>
+	</div>
+</div> -->

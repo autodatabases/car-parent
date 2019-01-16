@@ -1,0 +1,94 @@
+.header{
+	background: #fff;
+	position: relative;
+	border-bottom: 1px solid #e0e0e0;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/member/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+/* 资料列表 */
+.data-list{
+	border-top: 1px solid #e0e0e0;
+	margin-top: 1rem;
+}
+.data-list li{
+	border-bottom: 1px solid #e0e0e0;
+	background: #fff;
+	line-height: 2.9375rem;
+	height: 2.9375rem;
+	padding: 0 4.375%;
+	overflow: hidden;
+	font-size:0;
+}
+.data-list li label{
+	display: inline-block;
+	width:18.3% ;
+	font-size:0.75rem
+}
+.data-list li  span{
+    font-size:0.75rem
+}
+.data-list li select{
+	width: 35%;
+	outline: none;
+	margin-right: 3%;
+	border: none;
+	font-size:0.75rem
+}
+.data-list input{
+	font-size:0.75rem
+}
+.data-list input[type=text]{
+	width: 74%;
+	border:none;
+	color: #000;
+	height: 3rem;
+}
+.data-list input[type=button]{
+	width: 94%;
+	margin-left: 3%;
+	margin-top:20%;
+	background: #ff3e5b;
+	color: #fff;
+	border:1px solid #ff3e5b;
+	border-radius: 5px;
+	height: 2.5rem;
+	font-size: 1rem;
+	letter-spacing:1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

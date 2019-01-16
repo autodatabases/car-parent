@@ -1,0 +1,20 @@
+$("document").ready(function(){
+	//后台获取兑换优惠券数目
+	$.ajax({
+		url:DOMIN.MAIN+'/didi/getcouponnum',
+		async : false,
+		type:'POST',
+		dataType:'json',
+		error:function(data){
+			$.tip("链接服务器失败！");
+		},
+		success:function(data){
+			if(data.success){
+				$("#unused").html(data.data.unusedCoupon);
+				$("#used").html(data.data.usedCoupon);
+			}else{
+				$.tip(data.message);
+			}
+		}
+	});
+})

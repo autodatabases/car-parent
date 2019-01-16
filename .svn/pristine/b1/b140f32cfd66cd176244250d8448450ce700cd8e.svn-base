@@ -1,0 +1,32 @@
+<link rel="stylesheet" type="text/css" href="resources/css/dataStatistics/dataStatistics.css" />
+
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<!-- <script src="resources/js/common/initAreaSelect.js" type="text/javascript" charset="utf-8"></script> -->
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/dataStatistics/dataStatistics.js"></script>
+<div class="tables-top">
+	<p class="crumbs">
+		<span>您的位置：</span>
+		<a>增值服务</a>&nbsp;》
+		<a class="on">数据统计</a>
+	</p>
+
+	<!-- 切换头部 -->
+	<div class="tab-top">
+		<span class="on">数据统计</span>
+	</div>
+</div>
+
+<span class="exports" style="font-size: 15px; margin: 0 25px;">请选择导出时间:</span>
+<!-- <p style="display: block; font-size: 15px; line-height: 30px">请选择导出时间:</p> -->
+<select id="birth_year" onchange="setDays(this,birth_month,birth_day);" style="width: auto">  
+	<option value="">年</option>  
+		
+</select> <select id="birth_month" onchange="setDays(birth_year,this,birth_day);" style="width: auto">  
+	<option value="">月</option>  
+		
+</select> <select id="birth_day" style="width: auto">  
+	<option value="">日</option>  
+	
+</select>
+<button type="button" class="export" id="allExportSelectBtn">导出充值金额</button>

@@ -1,0 +1,101 @@
+<link rel="stylesheet" type="text/css" href="resources/css/order/order.css?t=1.1" />
+<link rel="stylesheet" type="text/css" href="resources/css/order/daijia.css?t=1.0" />
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/order/daijia.js?t=1.0"></script>
+			
+
+<div class="tables-top">
+	<!-- 面包屑 -->
+	<p class="crumbs"><span>您的位置：</span><a >订单</a>&nbsp;》<a >商家订单</a>&nbsp;》<a class="on">代驾订单</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<div>
+			<ul>
+				<li>
+					<label>用户手机号：</label>
+					<input type="text"  id=""/>
+					<select name="date" class="eMonth">
+						<option></option>
+						<option></option>
+					</select>
+					<select name="type">
+						<option value="20">20元代驾券</option>
+						<option value="50">50元代驾券</option>
+					</select>
+				</li>
+			</ul>
+			<button><span>搜索</span></button>
+		</div>
+		<div>
+			<select class="eMonth">
+				<option></option>
+				<option></option>
+			</select>
+			<button type="button" class="export" id="exportSelectBtn">导出</button>
+		</div>
+	</div>
+		
+	<!-- 切换列表 -->
+	<ul class="tab-warp">
+		<li class="on">
+			<!-- 表格 -->
+			<div class="tab-list">
+				<table>
+					<thead>
+						<tr>
+							<th class="">欧飞账号</th>
+							<th class="">账户名称</th>
+							<th class="">用户手机号</th>
+							<th class="">订单号</th>
+							<th class="">商品名称</th>
+							<th class="">兑换码</th>
+							<th class="">商品金额</th>
+							<th class="">订单状态</th>
+							<th class="">创建时间</th>
+						</tr>
+					</thead>
+					<tbody  class="fixordar">
+											
+					</tbody>
+				</table>
+			</div>
+			<!-- 分页 -->
+			<div class="page-box" id="fixorder_paga">
+				
+			</div>
+		</li>
+		
+	</ul>
+</div>
+<!-- 提示弹窗 -->
+<div class="tips-warp" style="display:none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top"><p class="wenzi" style="float:left;">请选择是否审核该订单</p><span onclick="audit_close()" class="close">x</span></div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="audit_button()" value="确认" />
+			<input type="button"  onclick="audit_close()" value="关闭" />
+		</div>
+	</div>
+</div>
+<!-- 订单弹层 -->
+<div class="order-tip fixorder-tip" style="display:none;">
+	<div class="tips-bg"></div>
+	<div class="order-tip-box">
+		<div class="order-tips-top">
+			订单详情
+			<span>×</span>
+		</div>
+		<div class="order-tips-list">
+			
+		</div>
+		<div class="order-tip-btn">
+			<button id="fix-order-commit">确认</button>
+			<button onclick="$('.order-tip').hide();">关闭</button>
+		</div>
+	</div>
+</div>

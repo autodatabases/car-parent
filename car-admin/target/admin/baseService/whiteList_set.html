@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>白名单设置</title>
+		<link rel="stylesheet" type="text/css" href="resources/css/baseService/baseService.css" />
+		<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css" />
+		<script src="resources/js/jquery/page/myJquery.page.js"></script>
+		<script src="resources/js/baseService/whiteList_set.js"></script>
+	</head>
+	<style>
+	.action-btn {
+		padding: 10px 15px;
+		border: 1px solid #ef811f;
+		background: #fc9338;
+		color: #fff;
+		font-size: 16px;
+		border-radius: 3px;
+		width: 150px;
+		margin-left: 50px;
+	}
+	.exportSelect{
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		box-shadow: 0 1px 10px rgba(0,0,0,0.1) inset;
+		height: 28px;
+		padding: 1px 0;
+		width: 150px;
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 20px;
+	}
+	.content_a {
+		padding: 20px 20px;
+		min-height: 400px;
+	}
+	.content_a>div{
+		margin-top: 20px;
+	}
+	</style>
+	<body>
+		<div class="tables-top">
+			<p class="crumbs">
+				<span>您的位置：</span>
+				<a>追电基础服务</a>&nbsp;》
+				<a class="on">白名单设置</a>
+			</p>
+
+			<!-- 切换头部 -->
+			<div class="tab-top">
+				<span class="on">开通白名单</span>
+			</div>
+		</div>
+		
+		<div class="content_a">
+			<div>
+				用户账号:
+				<input type="text" placeholder="请输入账号" id='userAccount' class="exportSelect">
+			</div>
+			<div>
+				开通额度:
+				<select name="" id="openQuota">
+					<option value="0">选择额度</option>
+					<option value="10">10万</option>
+					<option value="50">50万</option>
+					<option value="100">100万</option>
+					<option value="999">不限额度</option>
+				</select>
+			</div>
+			<div>
+				<p>备注:</p>
+				<textarea id="remark" maxlength="50" rows="8" cols="60" placeholder="请输入备注信息(最多输入50个字符)"></textarea>
+			</div>
+			
+			<button id='oilcard_button' class="action-btn">开通</button>
+			<!-- <input type="button" class="action-btn" id="oilcard_button" value="开通"> -->
+		</div>
+		
+	</body>
+
+</html>

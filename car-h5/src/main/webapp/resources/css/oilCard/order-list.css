@@ -1,0 +1,169 @@
+/*头部*/
+.activeBody{background: #fff;}
+.header{
+	background: #fff;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/oilCard/back.png) no-repeat center;
+	background-size:20% ;
+}
+.searchBox{
+	margin-top: 2.75rem;
+    padding: 1rem 0.4rem 0.5rem 1.5rem;
+	width: 100%;
+	box-sizing: border-box;
+	background: #fff;
+}
+.searchBox input{
+	width: 82%;
+	height: 1.685rem;
+	border: 1px solid #cecece;
+	border-radius: 4px;
+	padding: 2px 0 2px 10px;
+}
+.searchBox span{
+	width:15%;
+	margin-left: 3%;
+	font-size: 1.35rem;
+}
+/* 头部下拉按钮 */
+.xiala{    
+	position: absolute;
+    top: 0.6rem;
+	left: 59%;
+	font-size: 1rem;
+}
+/* tab栏 */
+.tableAll{
+	background: #fff;
+	box-sizing: border-box;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding-left: 0.8rem;
+	display: none;
+}
+.tableAll li{
+	float: left;
+	width: 22%;
+	color:#7d7272;
+	height: 3.125rem;
+	line-height: 3.125rem;
+	text-align: center;
+	margin-left: 4%;
+}
+.tableAll li:nth-child(1){
+	margin-left: 0px;
+}
+.tactive{color:#2aaff4!important;border-bottom: 2px solid #2aaff4;}
+/* 遮罩层 */
+.popBot{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background-color: rgba(0,0,0,.3);
+	z-index: 9998;
+	top: 0;
+	left: 0;
+	display: none;
+}
+.popBot .pop{
+	background: #fff;
+	width:100%;
+	margin-top: 2.75rem;
+	padding-top: 1.5625rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	box-sizing: border-box;
+}
+.popBot .pop ul{
+	overflow: hidden;
+	height: auto;
+	box-sizing: border-box;
+}
+.popBot .pop li{
+    width: 30%;
+    height: 1.875rem;
+    box-sizing: border-box;
+    background: #eeeded;
+    text-align: center;
+    line-height: 1.875rem;
+    float: left;
+    margin-right: 5%;
+    border-radius: 4px;
+    margin-bottom: 2.0625rem;
+    color: #000;
+}
+.popBot .pop li:nth-child(3n+3){margin-right: 0;}
+
+/*内容部分*/
+.content {
+	padding-top: 0.5rem;
+	width: 100%;
+	background: #eee;
+}
+.order-list {
+    padding-bottom: 1rem;
+	overflow: hidden;
+}
+.order-list li {
+    width: 100%;
+    padding: 0 1rem;
+    font-size: 12px;
+    box-sizing: border-box;
+    color: #7d7272;
+    margin-bottom: 0.4rem;
+    background-color: #fff;
+}
+.order-list li p{
+    line-height: 1.8rem;
+}
+.order-list li p:nth-child(1){
+	line-height: 3.6rem;
+    border-bottom: 1px solid #ccc;
+}
+.order-list li p span:nth-child(2){
+    float: right;
+}
+.order-list li .money {
+    font-size: 14px;
+    color: #000;
+    font-weight: bold;
+}
+.tips-word{
+	text-align: center;
+    height: 100%;
+    margin-top: -1rem;
+	background: #fff;
+	padding-top: 4rem;
+	display: none;
+}
+.tips-word span{
+	width: 16.25rem;
+	height: 8.125rem;
+	background: url('../../imgs/oilCard/home/noList.png') no-repeat;
+	background-size: 100% 100%;
+	display: block;
+	margin: 0 auto;
+}
+.tips-word p{
+	color: #aaa;
+	font-size: 1.2rem;
+}

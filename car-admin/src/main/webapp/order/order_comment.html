@@ -1,0 +1,97 @@
+<link rel="stylesheet" type="text/css" href="resources/css/order/order_comment.css?t=1.2"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/order/order_comment.js?t=1.4"></script>
+<div class="tables-top">
+	<p class="crumbs">
+		<span>您的位置：</span><a>商家订单</a>&nbsp;》<a class="on">订单评价列表</a>
+	</p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>订单编号:</label>
+				<input type="text" id="orderNo" />
+			</li>
+			<li>
+				<label>商家名称:</label>
+				<input type="text" id="sellerName" />
+			</li>
+			<li>
+				<label>用户手机号:</label>
+				<input type="text" id="userphone" />
+			</li>
+ 			<li>
+				<button class="search-btn">
+					<span>搜索</span>
+				</button>
+			</li>
+		</ul>
+	</div>
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>订单编号</th>
+					<th>商家手机号</th>
+					<th>商家名称</th>
+					<th>服务星级</th>
+					<th>物流星级</th>
+					<th>评语</th>
+					<th>回访记录</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--<tr>
+					<td>123456789</td>
+					<td>13521322513</td>
+					<td>钉钉轮胎汽修厂</td>
+					<td>5星</td>
+					<td>2星</td>
+					<td>服务very good~~,物流太慢 </td>
+				</tr>-->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="comment_paga"></div>
+</div>
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p style="float: left;">订单评语</p>
+			<span style="float: right;" onclick="audit_close()" class="close">x</span>
+		</div>
+		<div class="tip-center">
+			<p id="orderComment"></p>
+		</div>
+	</div>
+</div>
+<!-- 备注弹层 -->
+<div id="orderOperRemark" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="orderRemark">
+		<div class="orderRemark_top">
+			回访记录
+		</div>
+		<dl>
+			<dt>
+				<span>请输入回访记录(最多输入100个字符)</span>
+			</dt>
+			<dd>
+				<textarea id="orderOperRemarkContent" maxlength="100" rows="8" cols="60" placeholder="请输入回访记录(最多输入100个字符)"></textarea>
+			</dd>
+			<input type="hidden" id="orderOperRemark-orderNo" name="orderOperRemark-orderNo"/>
+		</dl>
+		<div class="tips-bottom">
+			<input type="button"  onclick="submitRemak()" value="提交" />
+			<input type="button"  onclick="closeRemak()" value="取消" />
+		</div>
+	</div>
+</div>

@@ -1,0 +1,73 @@
+<link rel="stylesheet" type="text/css" href="resources/css/oilcard/manage_mingxi.css"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/oilcard/manage_mingxi.js?t=1.7"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>增值服务</a>&nbsp;》<a class="on">油卡批次明細</a></p>
+	<div class="tab-top">
+		<span class="on">油卡批次明細</span>
+		<div id="oilcard_manage">油卡管理</div>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<div class="search-box clearfix">
+		<label>序列号范围:</label>
+		<input type="text" class="xuhao" id="startNum" /> --
+		<input type="text" class="xuhao" id="endNum" />
+		<button class="search-btn">
+			<span>查询</span>
+		</button>
+		<button class="pDongjie" status="0">批量冻结</button>
+		<button class="pDongjie" status="1">批量解冻</button>
+	</div>
+
+
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>序列号</th>
+					<th>卡号</th>
+					<th>开通日期</th>
+					<th>开通城市</th>
+					<th>面值</th>
+					<th>状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- <tr>
+					<td>dongdong</td>
+					<td>13521322513</td>
+					<td>粤J12345</td>
+					<td>100</td>
+					<td>广州</td>
+					<td>成功</td>
+					<td>2017-04-07 17:45:38</td>
+					<td><a>备注</a></td>
+				</tr> -->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="oilcard_paga">
+	</div>
+</div>
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p style="float: left;">信息弹窗</p>
+			<span onclick="audit_close()" class="close">x</span>
+		</div>
+    <div class="tips-center">
+			<p style="text-align:center;font-size:18px;">是否确认冻结此油卡</p>
+		</div>
+		<div class="tips-bottom" style="border-top:1px dashed #ccc">
+			<input type="button" class="ok_btn" value="确认" />
+			<input type="button" onclick="audit_close()" value="关闭" />
+		</div>
+	</div>
+</div>

@@ -1,0 +1,90 @@
+<link rel="stylesheet" type="text/css" href="resources/css/baseService/baseService.css" />
+
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<!-- <script src="resources/js/common/initAreaSelect.js" type="text/javascript" charset="utf-8"></script> -->
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/baseService/whiteList_record.js"></script>
+<div class="tables-top">
+	<p class="crumbs">
+		<span>您的位置：</span>
+		<a>追电基础服务</a>&nbsp;》
+		<a class="on">白名单记录</a>
+	</p>
+
+	<!-- 切换头部 -->
+	<div class="tab-top">
+		<span class="on">白名单记录</span>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<!-- <div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>用户账号:</label>
+				<input type="text" id="userAccount" />
+			</li>
+			<li>
+			
+			<button>
+				<span>搜索</span>
+			</button>
+			</li>
+		</ul>
+	</div> -->
+	<div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>用户账号:</label>
+				<input type="text" id="userAccounts" />
+			</li>
+ 			<li>
+				<button class="search-btn">
+					<span>搜索</span>
+				</button>
+			</li>
+		</ul>
+	</div>
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>用户账号</th>
+					<th>开通额度</th>
+					<th>创建时间</th>
+					<th>备注</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--<tr>
+					<td>天河万里行轮胎店</td>
+					<td>马牌门店</td>
+					<td>快修店</td>
+					<td>刘艳会</td>
+					<td>13802910637</td>
+					<td><a>编辑</a><a>停用</a></td>
+				</tr>-->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="busines_paga"></div>
+</div>
+<!-- <div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p class="wenzi" style="float: left;">请选择是否停用该店铺</p>
+			<span onclick="audit_close()" class="close">x</span>
+		</div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="audit_button()"
+				value="确认" /> <input type="button" onclick="audit_close()"
+				value="关闭" />
+		</div>
+	</div>
+</div> -->

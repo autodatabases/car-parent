@@ -1,0 +1,44 @@
+<link rel="stylesheet" type="text/css" href="resources/css/member/send_service.css?t=1.0" />
+<script src="resources/js/member/send_service.js?t=1.2"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>会员</a>&nbsp;》<a class="on">发送服务</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<form id="chejiahao" action="seller/sendService" method="post" enctype="multipart/form-data" target="import-model">
+		<dl>
+			<dt><span>发送服务</span></dt>
+			<dd>
+				<div class="imgUploat">
+					<input id="uploadfile" name="file" type="file" style="width: 250px;"></input>
+					<a href="member/import_model.xlsx">下载模板</a>
+				</div>
+			</dd>
+			<dd>
+				<label>关键字：</label>
+				<select>
+					<option value="0">车牌号</option>
+				</select>
+			</dd>
+			<dd>
+				<label>服务类型：</label>
+				<select id="service_type" name="serviceType">
+					<option value="-1">请选择服务类型</option>
+					<option value="0">更换电瓶</option>
+					<option value="1">轮胎</option>
+					<option value="2">小保养</option>
+					<option value="3">洗车</option>
+					<option value="4">喷漆</option>
+				</select>
+			</dd>
+			<dd>
+				<label>发送次数：</label><input type="number" name="serviceValue" id="send_number" value="" placeholder="请输入发送次数" />
+			</dd>
+			<iframe name="import-model" id="import-model"  style="width:0px;height: 0px;"></iframe>
+		</dl>	
+		<div>
+			<input type="button" class="action-btn" id="oilcard_button" value="确认发送" />
+		</div>
+	</form>
+	
+</div>

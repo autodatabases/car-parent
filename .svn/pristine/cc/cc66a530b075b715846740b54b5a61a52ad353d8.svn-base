@@ -1,0 +1,147 @@
+﻿ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<link rel="stylesheet" type="text/css" href="../resources/css/com.css?t=1.1"/>
+	<script src="../resources/js/jquery/jquery.min.js"></script>
+	<script src="../resources/js/common/common.js?t=1.1"></script>
+</head>
+<body class="clearfix" style="padding: 10px 10px;">
+   <style>
+   		table{
+   			text-align: center;
+   			width: 100%;
+   			height: 50%;
+   			margin: 10px auto;
+   		}
+   		table td{
+   			border-left:1px soild #efefef;
+   			height: 80px;
+   		}
+   </style>
+	<table border="1" cellpadding="1" id="orders" style="text-align:center;"  >
+		<tr>
+			<td style="font-size: 28px;">惠+车服</td>
+			<td>收货信息</td>
+		</tr>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td id="order1_1" >粤12345</td>
+					</tr>
+					<tr>
+						<td id="order1_2">likk</td>
+					</tr>
+					<tr>
+						<td id="order1_3">5w-30</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<table>
+					<tr>
+						<td id="order1_4">测试</td>
+					</tr>
+					<tr>
+						<td id="order1_5">130000000</td>
+					</tr>
+					<tr>
+						<td id="order1_6">广东广州番禺区白沙镇</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<hr style="margin:20px 0;"/>
+	
+		<table border="1" cellpadding="1" id="orders" width="90%" height="100%"  style="text-align:center;"  >
+		<tr>
+			<td style="font-size: 28px;">惠+车服</td>
+			<td>商家信息</td>
+		</tr>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td id="order2_1" >粤12345</td>
+					</tr>
+					<tr>
+						<td id="order2_2">likk</td>
+					</tr>
+					<tr>
+						<td id="order2_3">5w-30</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<table>
+					<tr>
+						<td id="order2_4">测试</td>
+					</tr>
+					<tr>
+						<td id="order2_5">130000000</td>
+					</tr>
+					<tr>
+						<td id="order2_6">广东广州番禺区白沙镇</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</body>
+<script>
+	var ordersStr =  sessionStorage.getItem('printObj');
+	$(function(){
+		if(ordersStr){
+			var orderArr = ordersStr.split('ematecar');
+			var orders1,orders2;
+			var html = '';
+			for(var i =0;i<orderArr.length;i++){
+				var obj = JSON.parse(orderArr[i]);
+				if(obj.settleType==1){
+					obj.product = obj.product.split(',')[0];
+				}else{
+					obj.product = obj.product.split(',')[0]+","+obj.product.split(',')[1].substr(0,25);
+				}
+				if(obj.product){
+					var jiyous = obj.product.split(',')[0].split('|');
+					var jiyou1 = jiyous[0];
+					var jiyou1Detail = jiyou1.split('_');
+					jiyou1 = jiyou1Detail[0]+" x " + jiyou1Detail[1];
+					if(jiyous.length>1){
+						var jiyou2 = jiyous[1];
+						var jiyou2Detail = jiyou2.split('_');
+						jiyou1 =  jiyou1 + " " + jiyou2Detail[0]+" x " + jiyou2Detail[1];
+					}
+					if(obj.product.split(',').length>1){
+						obj.product = jiyou1 + obj.product.split(',')[1];
+					}else{
+						obj.product = jiyou1;
+					}
+				}
+				if(i==0){
+					$("#order1_1").html(obj.chePai);
+					$("#order1_2").html(obj.userName);
+					$("#order1_3").html(obj.product);
+					$("#order1_4").html(obj.sellerName);
+					$("#order1_5").html(obj.seller + "  " + obj.sellerPhone);
+					$("#order1_6").html(obj.sellerAddress);
+				}else{
+					$("#order2_1").html(obj.chePai);
+					$("#order2_2").html(obj.userName);
+					$("#order2_3").html(obj.product);
+					$("#order2_4").html(obj.sellerName);
+					$("#order2_5").html(obj.seller + "  " + obj.sellerPhone);
+					$("#order2_6").html(obj.sellerAddress);
+				}
+			}
+			print();
+		}
+		
+	});
+</script>
+</html>

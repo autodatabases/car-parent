@@ -1,0 +1,96 @@
+<link rel="stylesheet" type="text/css" href="resources/css/keepStatistics/keepStatisticsCenter.css?t=1.0" />
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/keepStatistics/keepStatisticsCenter.js"></script>
+<script src="resources/js/My97DatePicker/WdatePicker.js"></script>
+<div class="tables-top">
+	<!-- 面包屑 -->
+	<p class="crumbs">
+        <span>您的位置：</span>
+        <a>追电基础服务</a>&nbsp;》
+        <a class="on">留存统计</a>
+    </p>
+	<!-- 切换头部 -->
+	<div class="tab-top" id="order_span">
+		<span id="list">留存统计</span>
+		<span class="on">中支总留存统计</span>
+	</div>
+</div>
+
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 添加账号 -->
+	<div class="search-box clearfix">
+		<form class="oil-checkForm">
+			<label>开通城市:</label>
+			<select id="address" name="address" style="margin-left: 0;"></select>
+			<button type="button" class="search-btn">
+				<span>搜索</span>
+			</button>
+			<button type="button" class="export" id="exportSelectBtn">导出</button>
+			<br/><br/>
+		</form>
+	</div>
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>开卡总数量</th>
+					<th>开通城市</th>
+					<th>卡的总金额</th>
+					<th>使用总数量</th>
+                    <th>使用总金额</th>
+					<th>未充值账户总余额</th>
+					<th>账户总余额</th>                    
+				</tr>
+			</thead>
+			<tbody>
+				<!--<tr>
+					<td>天河万里行轮胎店</td>
+					<td>马牌门店</td>
+					<td>快修店</td>
+					<td>刘艳会</td>
+					<td>13802910637</td>
+					<td><a>编辑</a><a>停用</a></td>
+				</tr>-->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="verification_paga"></div>
+</div>
+<style>
+#fwBao  tr td{
+	text-align: center;
+	border: 1px solid #ddd;
+}
+
+#fwBao{
+	margin-left: 50px;
+}
+
+#fwBao  tr th{
+	width: 100px;
+	height: 25px;
+	text-align: center;
+	border: 1px solid #ddd;
+	background: #f7f7f7;
+}
+#fwBao  tr th:first-child{
+	width: 200px;
+}
+
+#fwbList{
+	min-height: 10px;
+}
+
+#fwbList tr td span{
+	font-size: 20px;
+	cursor:pointer;
+	display: inline-block;
+}
+	.inBlock {
+    display: inline-block;
+}
+</style>

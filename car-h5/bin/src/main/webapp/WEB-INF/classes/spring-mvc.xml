@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<mvc:annotation-driven />
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	
+	<context:component-scan base-package="com.emate.shop.h5.controller" />
+	
+	<!-- 负责异常处理 -->
+	<bean class="com.emate.shop.web.aop.ControllerExceptionAop" />
+	
+	<!-- 负责检查访问权限 -->
+	
+	<bean class="com.emate.shop.web.aop.ControllerAuthAop" />
+	 
+	<!-- 负责检查请求参数 -->
+	<bean class="com.emate.shop.web.aop.ControllerValidateAop" />
+	
+	<!-- 负责注入远程服务代理 -->
+	<bean class="com.emate.shop.rpc.aop.ControllerRemoteServiceAop" />
+	
+
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<bean class="org.springframework.http.MediaType">
+					<constructor-arg index="0" value="application" />
+					<constructor-arg index="1" value="json" />
+					<constructor-arg index="2" value="UTF-8" />
+				</bean>
+			</list>
+		</property>
+		<property name="objectMapper">
+			<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+				<property name="dateFormat">
+					<bean class="java.text.SimpleDateFormat">
+						<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"></constructor-arg>
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="defaultEncoding" value="utf-8"></property>
+		<property name="templateLoaderPath" value="/WEB-INF/ftl/"></property>
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">1</prop>
+				<prop key="defaultEncoding">UTF-8</prop>
+				<prop key="url_escaping_charset">UTF-8</prop>
+				<prop key="locale">zh_CN</prop>
+				<prop key="boolean_format">true,false</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<prop key="time_format">HH:mm:ss</prop>
+				<prop key="number_format">0.######</prop>
+				<prop key="whitespace_stripping">true</prop>
+			</props>
+		</property>
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="_ROOT" value="http://127.0.0.1:8080" />
+				<entry key="_RESOURCES" value="http://127.0.0.1:8080/resources" />
+				<entry key="_COMPRESS" value="false" />
+				<entry key="_version" value="12.1" />
+			</map>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
+		id="viewResolver">
+		<property name="viewResolvers">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+					<property name="order" value="1"></property>
+					<property name="contentType" value="text/html;charset=UTF-8"></property>
+					<property name="cache" value="true"></property>
+					<property name="prefix" value=""></property>
+					<property name="suffix" value=".ftl"></property>
+					<property name="requestContextAttribute" value="request" />
+					<property name="exposeRequestAttributes" value="true"></property>
+					<property name="exposeSessionAttributes" value="true"></property>
+					<property name="exposeSpringMacroHelpers" value="true"></property>
+				</bean>
+				<bean
+					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="order" value="2"></property>
+					<property name="prefix" value="/WEB-INF/jsp/" />
+					<property name="suffix" value=".jsp" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:maxUploadSize="5120000" p:maxInMemorySize="512" p:defaultEncoding="UTF-8" />
+	<mvc:default-servlet-handler />
+</beans>

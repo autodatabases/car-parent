@@ -1,0 +1,204 @@
+.header{
+	position: relative;
+	background: #fff;
+	border-bottom: 1px solid #848484;
+}
+.header h1{
+	font-size: 16px;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/login/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+.back-home{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background: url(../../imgs/index/home.png) no-repeat center;
+	background-size:45% ;
+}
+/* 步骤 */
+.step-box{
+	border-bottom:0.5rem solid #fff;
+	background: #f5f4f9;
+	overflow: hidden;
+	padding: 1rem 0 0.5rem 0;
+}
+.step-box div{
+	float: left;
+	width: 25%;
+	text-align: center;
+	font-size: 0.75rem;
+	line-height: 3;
+	position: relative;
+}
+.step-box span{
+	display: block;
+	width:2.1875rem;
+	height:2.1875rem;
+	line-height:2.1875rem;
+	background: #c8c7cd;
+	color: #fff;
+	margin: 0 auto;
+	border-radius: 50%;
+	font-size: 1.25rem;
+	z-index: 10;
+	position: relative;
+}
+.step-box i{
+	display: block;
+	position: absolute;
+	top: 24%;
+	right: 0;
+	height:2px;
+	width: 100%;
+	background: #c8c7cd;
+	z-index: 1;
+}
+.step-box div:first-child i{
+	width: 50%;
+}
+.step-box div:last-child i{
+	width: 50%;
+	left: 0;
+}
+.step-one i{
+	background: #07a6ee;
+}
+.step-one span{
+	background: #07a6ee;
+}
+.step-two i{
+	background: #07a6ee;
+}
+.step-two span{
+	background: #07a6ee;
+}
+.step-three i{
+	background: #07a6ee;
+}
+.step-three span{
+	background: #07a6ee;
+}
+/*.step-ok i{
+	background: #07a6ee;
+}
+.step-ok span{
+	background: #07a6ee;
+}*/
+/* 选择修理厂 */
+.repair-box{
+	background: #fff;
+}
+.search{
+	background: #e5e5e5;
+	padding: 1rem 0;
+}
+.search>div{
+	display: block;
+	width: 90%;
+	height:2rem;
+	line-height:2rem;
+	text-align: center;
+	font-size: 12px;
+	color: #c8c7cd;
+	margin: 0 auto;
+	position: relative;
+	background: #fff ;
+	border-radius: 5px;
+}
+.search>span{
+	position: absolute;
+}
+.search>div div{
+	position: absolute;
+	width: 100%;
+	height:100%;
+	left: 0;
+	top: 0;
+}
+.search>div>span{
+	display: inline-block;
+	padding-left:30px ;
+	background: url(../../imgs/index/search.png) no-repeat left center;
+}
+.search>div div span{
+	position: absolute;
+	top: 0;
+	right: 0;
+	opacity: 0;
+	background: #F0EFF4;
+	padding: 0 0.65rem;
+	border-radius: 0 5px 5px 0;
+	transition: opacity .3s ease-out;
+	-webkit-transition: opacity .3s ease-out;
+	-moz-transition: opacity .3s ease-out;
+	-ms-transition: opacity .3s ease-out;
+}
+.search input{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 90%;
+	height: 100%;
+	padding:0 5% ;
+	border:none;
+	border-radius: 5px;
+	color: #000;
+	opacity:0;
+	font-size: 14px;
+	transition: opacity .3s ease-out;
+	-webkit-transition: opacity .3s ease-out;
+	-moz-transition: opacity .3s ease-out;
+	-ms-transition: opacity .3s ease-out;
+}
+.search input:focus{
+	opacity: 1;
+}
+.search div div input:focus+span{
+	opacity: 1;
+	
+}
+
+/* 修理厂列表 */
+.repair-list{
+	border-top: 1px solid #dbdbdb;
+}
+.repair-list li{
+	padding: 1rem ;
+	border-bottom: 1px solid #dbdbdb;
+}
+.repair-list li.on{
+	background: #08a6ef;
+	color: #fff;
+}
+.repair-list li.on p{
+	color:#fff;
+}
+.repair-list span{
+	font-size: 1rem;
+}
+.repair-list p{
+	font-size: 0.75rem;
+	color: #9e9e9e;
+}
+/* 下一步 */
+.next-btn{
+	display: block;
+	width:90%;
+	height:2.6rem;
+	background: #08a6ef;
+	color: #fff;
+	border:1px solid #08a6ef;
+	border-radius: 5px;
+	margin: 2rem auto 1rem auto;
+}

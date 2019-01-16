@@ -1,0 +1,58 @@
+/**
+ * 
+ */
+package com.emate.shop.timer.quartz;
+
+//import java.util.Map;
+
+
+import javax.annotation.Resource;
+
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import com.emate.shop.business.api.OilUserService;
+//import com.emate.shop.business.api.SmsService;
+//import com.emate.shop.business.model.OilRechargeCode;
+//import com.emate.shop.common.JacksonHelper;
+import com.emate.shop.common.Log4jHelper;
+import com.emate.shop.rpc.aop.RemoteService;
+//import com.emate.shop.rpc.dto.DatasetList;
+//import com.emate.shop.rpc.dto.DatasetSimple;
+
+//import net.sf.json.JSONArray;
+
+/**
+ * 
+ * 定时发送短信
+ * @author likk
+ *
+ */
+@Component
+@PropertySource(value = "classpath:web.properties", ignoreResourceNotFound = true)
+public class OilCardQuartz {
+
+   @Resource
+   private Environment environment;
+	
+   private OilUserService oilUserService;
+
+   @RemoteService
+    public void setOilUserService(OilUserService oilUserService) {
+	   this.oilUserService = oilUserService;
+   }
+    
+    /**
+     * 欧飞订单查询
+     */
+    @Scheduled(fixedDelay = 10L * 60L * 1000L, initialDelay = 4L * 60L * 1000L)
+    public void  updateGyPhoneResultByOf(){
+    	Log4jHelper.getLogger().info("==========Begin update gyPhone for send every 10 minutes by oufei>>>>>>>>>");
+    	
+    	oilUserService.updateOilOrdersByOfTimer();
+    	
+    	Log4jHelper.getLogger().info("==========after update gyPhone for send  by oufei<<<<<<<<<");
+    }
+}

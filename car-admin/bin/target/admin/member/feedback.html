@@ -1,0 +1,62 @@
+<link rel="stylesheet" type="text/css" href="resources/css/member/feedback-list.css?t=1.1"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/member/feedback-list.js?t=1.1"></script>
+<script src="resources/js/My97DatePicker/WdatePicker.js"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>会员</a>&nbsp;》<a class="on">会员反馈</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<span>手机号:</span>
+		<input type="text"  id="phone"/>
+		<span>创建时间：</span>
+		<input id="startTimes" type="text" placeholder="开始时间" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'%y-%M-%d %H:%m:%s',readOnly:true})"/>
+		<input id="endTimes" type="text" placeholder="结束时间" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'%y-%M-%d %H:%m:%s',readOnly:true})"/>
+		<button><span>搜索</span></button>
+	</div>
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>姓名</th>
+					<th>手机号</th>
+					<th>反馈内容</th>
+					<th>创建时间</th>
+					<th>备注信息</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<!--<td>东东</td>
+					<td>13802910637</td>
+					<td>系统太好了,点个赞</td>
+					<td>2019-09-09 12:00:00</td>-->
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div id="feedback_paga">
+	</div>
+</div>
+<!-- 弹窗 -->
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p style="float: left;">备注</p>
+			<span style="float: right;" onclick="audit_close()" class="close">x</span>
+		</div>
+		<div class="tips-center" id="tips-data">
+			<p><textarea id="remark" maxlength="2000" rows="12" cols="60" placeholder="请填写备注" value=""></textarea></p>
+		</div>
+		<div class="tips-bottom">
+			<input type="button" onclick="audit_submit()" value="确认" />
+		</div>
+	</div>
+</div>

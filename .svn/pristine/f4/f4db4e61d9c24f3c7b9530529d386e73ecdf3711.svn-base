@@ -1,0 +1,249 @@
+package com.emate.shop.business.service;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import javax.annotation.Resource;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.emate.shop.business.api.ServiceOperatorLogService;
+import com.emate.shop.business.constants.PaginationUtil;
+import com.emate.shop.business.model.CarwashConfig;
+import com.emate.shop.business.model.CarwashConfigExample;
+import com.emate.shop.business.model.ImportUserInfo;
+import com.emate.shop.business.model.ImportUserInfoExample;
+import com.emate.shop.business.model.ServiceOperatorLog;
+import com.emate.shop.business.model.ServiceOperatorLogExample;
+import com.emate.shop.business.model.ServiceOperatorLogExample.Criteria;
+import com.emate.shop.business.model.SystemUser;
+import com.emate.shop.common.JacksonHelper;
+import com.emate.shop.datasource.Read;
+import com.emate.shop.datasource.Write;
+import com.emate.shop.exception.BusinessException;
+import com.emate.shop.mapper.CarwashConfigMapper;
+import com.emate.shop.mapper.DefinedMapper;
+import com.emate.shop.mapper.ImportUserInfoMapper;
+import com.emate.shop.mapper.ServiceOperatorLogMapper;
+import com.emate.shop.mapper.SystemUserMapper;
+import com.emate.shop.rpc.dto.DatasetBuilder;
+import com.emate.shop.rpc.dto.DatasetList;
+import com.emate.shop.rpc.dto.DatasetSimple;
+
+@Service
+public class ServiceOperatorLogServiceImpl implements ServiceOperatorLogService{
+
+	
+	@Resource
+	private ServiceOperatorLogMapper serviceLogMapper;
+	
+	@Resource
+	private SystemUserMapper systemUserMapper;
+	
+	@Resource
+	private DefinedMapper definedMapper;
+	
+	@Resource
+	private ImportUserInfoMapper importUserInfoMapper;
+	
+	@Resource
+	private CarwashConfigMapper carwashConfigMapper;
+	
+	@Read
+	@Override
+	public DatasetList<ServiceOperatorLog> adminServiceLogList(Integer pageNo, 
+			Integer pageSize,String num,String serviceType,
+			String verifyStatus,String chePai) {
+		ServiceOperatorLogExample serviceLogEx = new ServiceOperatorLogExample();
+		Criteria cr = serviceLogEx.createCriteria();
+		if(StringUtils.isNotEmpty(num)){
+			cr.andServiceValueEqualTo(Integer.valueOf(num));
+		}
+		if(StringUtils.isNotEmpty(serviceType)){
+			cr.andServiceTypeEqualTo(Integer.valueOf(serviceType));
+		}
+		if(StringUtils.isNotEmpty(verifyStatus)){
+			cr.andVerifyStatusEqualTo(Integer.valueOf(verifyStatus));
+		}
+		if(StringUtils.isNotEmpty(chePai)){
+			cr.andChePaiEqualTo(chePai);
+		}
+		PaginationUtil page = new PaginationUtil(pageNo,pageSize,serviceLogMapper.countByExample(serviceLogEx));
+		serviceLogEx.setLimitStart(page.getStartRow());
+		serviceLogEx.setLimitEnd(page.getSize());
+		serviceLogEx.setOrderByClause(ServiceOperatorLogExample.CREATE_TIME_DESC);
+		List<ServiceOperatorLog> serviceLogs = serviceLogMapper.selectByExample(serviceLogEx);
+		return DatasetBuilder.fromDataList(serviceLogs, page.createPageInfo());
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Write
+	@Transactional
+	public DatasetSimple<String> checkLog(Long serviceId,Long adminId,String verifyStatus) {
+		//参数校验
+		if(Objects.isNull(serviceId)){
+			throw new BusinessException("赠送服务次数记录id不存在");
+		}
+		if(Objects.isNull(adminId)){
+			throw new BusinessException("adminId参数为空");
+		}
+		SystemUser systemUser = systemUserMapper.selectByPrimaryKey(adminId);
+		if(Objects.isNull(systemUser)){
+			throw new BusinessException("请先登录再审核");
+		}
+		ServiceOperatorLog serviceOperatorLog = serviceLogMapper.selectByPrimaryKey(serviceId);
+		if(Objects.isNull(serviceOperatorLog)){
+			throw new BusinessException("未查到赠送服务次数记录~");
+		}
+		if(serviceOperatorLog.getVerifyStatus()!=0){
+			throw new BusinessException("该赠送服务次数记录不是待审核状态");
+		}
+		//权限校验
+		if(!"admin".equals(systemUser.getUserName())){
+			String roleName = definedMapper.queryRoleByName(adminId);
+			if(StringUtils.isEmpty(roleName)){
+				throw new BusinessException("没查到登录用户对应的角色");
+			}
+			if("数据".equals(roleName)||roleName.equals("超级管理员")){
+				
+			}else{
+				throw new BusinessException("您的权限不足,请联系财务人员审核");
+			}
+		}
+		//审核通过添加次数
+		if("1".equals(verifyStatus)){
+			//车牌
+			String chePai = serviceOperatorLog.getChePai();
+			//赠送服务类型
+			Integer serviceType = serviceOperatorLog.getServiceType();
+			//赠送服务次数
+			Integer serviceValue = serviceOperatorLog.getServiceValue();
+			
+			if(Objects.isNull(chePai)){
+				throw new BusinessException("车牌不能为空~~");
+			}
+			ImportUserInfoExample infoEx = new ImportUserInfoExample();
+			infoEx.createCriteria().andChePaiEqualTo(chePai);
+			infoEx.setLimitStart(0);
+			infoEx.setLimitEnd(1);
+			List<ImportUserInfo> list = importUserInfoMapper.selectByExample(infoEx);
+			if(list.isEmpty()){
+				throw new BusinessException("根据车牌查询不到该保单~.车牌:"+chePai);
+			}
+			ImportUserInfo info = list.get(0);
+			
+			//此时需要判断是否有新的保单 如果有 则赠送次数导入新保单
+			infoEx.clear();
+			infoEx.createCriteria().andChePaiEqualTo(chePai+"_newyear");
+			infoEx.setLimitStart(0);
+			infoEx.setLimitEnd(1);
+			List<ImportUserInfo> newList = importUserInfoMapper.selectByExample(infoEx);
+			if(newList.size()>0){
+				info = newList.get(0);
+			}
+			if(2==serviceType){//小保养
+				if((info.getBaoyangTimes()+serviceValue)<=0){
+					info.setBaoyangTimes(0);
+				}else{
+					info.setBaoyangTimes((info.getBaoyangTimes()+serviceValue));
+				}
+			}else if(3==serviceType){//洗车
+				CarwashConfigExample carwashConfigEx = new CarwashConfigExample();
+				carwashConfigEx.createCriteria().andCityNameEqualTo(info.getAddress());
+				List<CarwashConfig> carwashConfigs = carwashConfigMapper.selectByExample(carwashConfigEx);
+				if(carwashConfigs.isEmpty()||CarwashConfig.WASH_TYPE_1.equals(carwashConfigs.get(0).getWashType())){
+					if((info.getXiecheTimes()+serviceValue)<=0){
+						info.setXiecheTimes(0);
+					}else{
+						info.setXiecheTimes((info.getXiecheTimes()+serviceValue));
+					}
+				}else{
+					throw new BusinessException("该车牌:"+info.getChePai()+"所属城市是车服洗车,不能添加洗车服务次数");
+				}
+
+			}else if(4==serviceType){//喷漆
+				if((info.getPenqiTimes()+serviceValue)<=0){
+					info.setPenqiTimes(0);
+				}else{
+					info.setPenqiTimes((info.getPenqiTimes()+serviceValue));
+				}
+			}else if(0==serviceType){//电瓶
+				if((info.getDianpingTimes()+serviceValue)<=0){
+					info.setDianpingTimes(0);
+				}else{
+					info.setDianpingTimes((info.getDianpingTimes()+serviceValue));
+				}
+			}else if(1==serviceType){//轮胎
+				if((info.getLuntaiTimes()+serviceValue)<=0){
+					info.setLuntaiTimes(0);
+				}else{
+					info.setLuntaiTimes((info.getLuntaiTimes()+serviceValue));
+				}
+			}else if(5==serviceType){//20元滴滴券
+				String surplusCouponValue = info.getSurplusCouponValue();
+				Map<String, String> map = new HashMap<String, String>();
+				if(StringUtils.isEmpty(surplusCouponValue)){	
+					map.put("20", String.valueOf(serviceValue));
+					map.put("50", "0");
+				}else{
+					map = JacksonHelper.fromJSON(surplusCouponValue, Map.class);
+					String juan20 =String.valueOf(map.get("20"));
+					Integer i = Integer.valueOf(juan20)+serviceValue;
+					map.put("20", String.valueOf(i));
+				}
+				String json = JacksonHelper.toJSON(map);
+				info.setSurplusCouponValue(json);
+			}else if(6==serviceType){//50元滴滴券
+				String surplusCouponValue = info.getSurplusCouponValue();
+				Map<String, String> map = new HashMap<String, String>();
+				if(StringUtils.isEmpty(surplusCouponValue)){	
+					map.put("50", String.valueOf(serviceValue));
+					map.put("20", "0");
+				}else{
+					map = JacksonHelper.fromJSON(surplusCouponValue, Map.class);
+					String juan50 =String.valueOf(map.get("50"));
+					Integer i = Integer.valueOf(juan50)+serviceValue;
+					map.put("50", String.valueOf(i));
+				}
+				String json = JacksonHelper.toJSON(map);
+				info.setSurplusCouponValue(json);
+			}else{
+				throw new BusinessException("找不到匹配的服务类型");
+			}
+			if(importUserInfoMapper.updateByPrimaryKeySelective(info)!=1){
+				throw new BusinessException("修改保单服务次数失败~,车牌:"+info.getChePai());
+			};
+			serviceOperatorLog.setVerifyStatus(ServiceOperatorLog.VERIFY_STATUS_1);
+			serviceOperatorLog.setUpdateTime(new Date());
+		}else{
+			serviceOperatorLog.setVerifyStatus(ServiceOperatorLog.VERIFY_STATUS_2);
+			serviceOperatorLog.setUpdateTime(new Date());
+		}
+		if(serviceLogMapper.updateByPrimaryKeySelective(serviceOperatorLog)!=1){
+			throw new BusinessException("修改审核状态失败,请联系技术");
+		};
+		return DatasetBuilder.fromDataSimple("SUCCESS");
+	}
+
+	@Override
+	@Write
+	@Transactional
+	public DatasetSimple<String> updateRemark(String remark, Long id) {
+		ServiceOperatorLog serviceOperatorLog = serviceLogMapper.selectByPrimaryKey(id);
+		if(Objects.isNull(serviceOperatorLog)){
+			throw new BusinessException("没查到增加该服务次数记录");
+		}
+		serviceOperatorLog.setRemark(remark);
+		if(serviceLogMapper.updateByPrimaryKeySelective(serviceOperatorLog)!=1){
+			throw new BusinessException("更新失败！");
+		}
+		return DatasetBuilder.fromDataSimple("success");
+	}
+	
+	
+}

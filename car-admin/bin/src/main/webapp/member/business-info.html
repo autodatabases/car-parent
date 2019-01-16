@@ -1,0 +1,79 @@
+<link rel="stylesheet" type="text/css" href="resources/css/member/business-info.css?t=1.0" />	
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/member/business-info.js?t=1.4"></script>
+<!-- 表单 -->	
+<div class="tables-top">
+	<!-- 所处位置 -->
+	<p class="crumbs"><span>您的位置：</span><a>会员</a>&nbsp;》<a class="on">业务员管理</a></p>
+	<!-- 切换头部 -->
+	<div class="tab-top">
+		<span class="on">业务员管理</span>
+		<div id="add_businessInfo">+添加新业务员</div>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>业务员工号：</label>
+				<input type="text"  id="businessCode"/>
+				<label>业务员姓名：</label>
+				<input type="text"  id="businessName"/>
+				<label>业务员手机：</label>
+				<input type="text"  id="phone"/>
+				<button><span>搜索</span></button>
+			</li>
+		</ul>
+	</div>
+	<!-- 切换列表 -->
+	<ul class="tab-warp">
+		<li>
+			<!-- 表格 -->
+			<div class="tab-list">
+				<table>
+					<thead>
+						<tr>
+							<th>工号</th>
+							<th>姓名</th>
+							<th>手机号</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+<!-- 						<tr>
+							<td>01</td>
+							<td>萧峰</td>
+							<td>1111</td>
+							<td>正常</td>
+							<td>
+								<a>删除</a>
+							</td>
+						</tr> -->
+					</tbody>
+				</table>
+				<div id="businessInfo_paginator"></div>
+			</div>
+		</li>
+	</ul>
+</div>
+<!-- 弹窗 -->
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p class="wenzi" style="float: left;">是否删除该业务员</p>
+			<span onclick="businessInfo_close()" class="close">x</span>
+		</div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="businessInfo_button()"
+				value="确认" /> <input type="button" onclick="businessInfo_close()"
+				value="关闭" />
+		</div>
+	</div>
+</div>
+
+	

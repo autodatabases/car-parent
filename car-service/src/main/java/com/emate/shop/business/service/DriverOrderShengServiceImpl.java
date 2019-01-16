@@ -1,0 +1,778 @@
+package com.emate.shop.business.service;
+
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.emate.shop.business.api.DriverOrderShengService;
+import com.emate.shop.business.constants.PaginationUtil;
+import com.emate.shop.business.model.DriverOrderMonitor;
+import com.emate.shop.business.model.DriverOrderMonitorExample;
+import com.emate.shop.business.model.DriverOrderSheng;
+import com.emate.shop.business.model.DriverOrderShengExample;
+import com.emate.shop.business.model.OilAccountRecharge;
+import com.emate.shop.business.model.OilAccountRechargeExample;
+import com.emate.shop.business.model.DriverOrderShengExample.Criteria;
+import com.emate.shop.common.Log4jHelper;
+import com.emate.shop.business.model.OilUser;
+import com.emate.shop.business.model.OilcardOrderRelation;
+import com.emate.shop.business.model.OilcardOrderRelationExample;
+import com.emate.shop.business.model.Regions;
+import com.emate.shop.business.model.RegionsExample;
+import com.emate.shop.datasource.Read;
+import com.emate.shop.datasource.Write;
+import com.emate.shop.exception.BusinessException;
+import com.emate.shop.mapper.DefinedMapper;
+import com.emate.shop.mapper.DriverOrderMonitorMapper;
+import com.emate.shop.mapper.DriverOrderShengMapper;
+import com.emate.shop.mapper.OilAccountRechargeMapper;
+import com.emate.shop.mapper.OilUserMapper;
+import com.emate.shop.mapper.OilcardOrderRelationMapper;
+import com.emate.shop.mapper.RegionsMapper;
+import com.emate.shop.rpc.dto.DatasetBuilder;
+import com.emate.shop.rpc.dto.DatasetList;
+import com.emate.shop.rpc.dto.DatasetSimple;
+import com.emate.tools.ShengDaUtil;
+
+@Service
+public class DriverOrderShengServiceImpl implements DriverOrderShengService{
+
+	@Resource
+	private DefinedMapper definedMapper;
+	
+
+	@Resource
+	private DriverOrderShengMapper driverOrderMapper;
+	
+	@Resource
+	private OilUserMapper oilUserMapper;
+	
+	@Resource
+	private RegionsMapper regionsMapper;
+	
+	@Resource
+	private DriverOrderMonitorMapper orderMonitorMapper;
+	
+	@Resource
+	private OilAccountRechargeMapper oilAccountRechargeMapper;
+	
+	@Resource
+	private OilcardOrderRelationMapper oilcardOrderRelationMapper;
+
+
+	/**
+	 * h5端创建代驾订单
+	 */
+	@Override
+	@Transactional
+	@Write
+	public DatasetSimple<String> createDriverOrder(String driverOrderUrl, Map<String,String> params) {
+		//获取油卡用户userId
+		Long userId = Long.valueOf(params.get("userName"));
+		//查询油卡账户信息
+		OilUser oilUser = definedMapper.queryOilUserbyId(userId);
+		
+		if(Objects.isNull(oilUser)){
+			throw new BusinessException("账户没登录,请重新登录再下单~~");
+		}
+		//预约时间
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date appointmentTime = null;
+		try {
+			appointmentTime = format.parse(params.get("bespeakTime"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Log4jHelper.getLogger().info("预约时间格式不对~~");
+			throw new BusinessException("预约时间格式不对~~");
+		}
+		if(appointmentTime.getTime()-new Date().getTime()>1000*60*60*48){
+			throw new BusinessException("预约时间最晚只能是离现在的两天之内！！");
+		}
+		if(appointmentTime.getTime()-new Date().getTime()<1000*60*30){
+			throw new BusinessException("预约时间最早半小时之后");
+		}
+		//是否属于广东省
+		String city = params.get("city");
+		city = city.substring(0, city.length()-1);
+		RegionsExample regionsEx = new RegionsExample();
+		regionsEx.createCriteria()
+		.andRegionnameEqualTo(city)
+		.andRegiontypeEqualTo(Regions.REGIONTYPE_2);
+		List<Regions> regions = regionsMapper.selectByExample(regionsEx);
+		if(regions.isEmpty()){
+			Log4jHelper.getLogger().info("不存在该市区~~");
+			throw new BusinessException("不存在该市区~~");
+		}
+		if(!Integer.valueOf("20").equals(regions.get(0).getParentid())){
+			Log4jHelper.getLogger().info("暂不支持广东省之外下单~~");
+			throw new BusinessException("暂不支持广东省之外下单~~");
+		}
+		
+		//组织盛大请求参数
+		//检验账户余额和减去该订单消费
+		BigDecimal orderPrice = new BigDecimal(params.get("money"));
+		changeUserMoney(oilUser,params.get("money"),params.get("besCode"));
+		
+		//组织盛大请求参数
+		params.put("userName", oilUser.getPhone());
+		params.remove("money");
+		//发送代驾请求
+		Log4jHelper.getLogger().info("开始调用盛大代驾订单接口~~");
+		Map<String, String> responseMap = null;
+		try {
+			responseMap = ShengDaUtil.driverOrder(driverOrderUrl, params);
+		} catch (Exception e) {
+			throw new BusinessException("代驾订单失败,msg:代驾接口调用失败~~");
+		}
+		Log4jHelper.getLogger().info("盛大代驾订单接口调用完毕~~");
+		if("SUCCESS".equals(responseMap.get("resultCode"))){//请求成功
+			DriverOrderSheng driverOrder = new DriverOrderSheng();
+			//账户id
+			driverOrder.setUserId(userId);
+			//账户手机号
+			driverOrder.setUserPhone(oilUser.getPhone());
+			//乘客姓名
+			driverOrder.setPassengerName(params.get("realName"));
+			//乘客手机号
+			driverOrder.setPassengerPhone(params.get("tel"));
+			//订单号
+			driverOrder.setOrderNo(params.get("besCode"));
+			//订单价格
+			driverOrder.setOrderPrice(orderPrice);
+			//城市
+			driverOrder.setCity(params.get("city"));
+			
+			//起点详细地址
+			driverOrder.setStartAddress(params.get("startAddress"));
+			//终点详细地址
+			driverOrder.setEndAddress(params.get("endAddress"));
+			//起点坐标
+			StringBuffer startBuf = new StringBuffer();
+			startBuf.append(params.get("longitude")).append("_").append(params.get("latitude"));
+			driverOrder.setStartPostion(startBuf.toString());
+			//终点坐标
+			StringBuffer endBuf = new StringBuffer();
+			endBuf.append(params.get("deLongitude")).append("_").append(params.get("deLatitude"));
+			driverOrder.setEndPostion(endBuf.toString());
+			//预约时间修改次数
+			driverOrder.setAppointmentNum(Integer.valueOf("1"));
+			//预约时间
+			driverOrder.setAppointmentTime(appointmentTime);
+			//订单状态
+			driverOrder.setOrderStatus(DriverOrderSheng.ORDER_STATUS_0);
+			//创建时间
+			driverOrder.setCreateTime(new Date());
+			//更新时间
+			driverOrder.setUpdateTime(new Date());
+			int result = driverOrderMapper.insertSelective(driverOrder);
+			if(result!=1){
+				throw new BusinessException("添加代驾订单失败~~");
+			}
+			//订单监控
+			DriverOrderMonitor driverOrderMonitor = new DriverOrderMonitor();
+			driverOrderMonitor.setStatus(DriverOrderMonitor.STATUS_0);
+			driverOrderMonitor.setOrderNo(params.get("besCode"));
+			driverOrderMonitor.setRemark("已接到您的订单,届时会安排代驾司机准时到达");
+			driverOrderMonitor.setCreateTime(new Date());
+			driverOrderMonitor.setUpdateTime(new Date());
+			orderMonitorMapper.insertSelective(driverOrderMonitor);
+		}else{//盛大代驾接口请求失败
+			Log4jHelper.getLogger().info("盛大代驾订单响应结果:"+responseMap.get("resultDesc"));
+			throw new BusinessException(responseMap.get("resultDesc"));
+		}
+		return DatasetBuilder.fromDataSimple("success");
+	}
+	
+	private BigDecimal changeUserMoney(OilUser oilUser,String money,String orderNo){
+		Log4jHelper.getLogger().info("盛大洗车充值账号："+oilUser.getPhone()+",充值名称："+
+				oilUser.getName()+",当前余额："+oilUser.getMoney().intValue()+",充值金额："+money);
+		BigDecimal orderMoney = new BigDecimal(money);
+		BigDecimal userMoney = oilUser.getMoney().subtract(orderMoney);
+		//判断账户余额是否充足
+		if(oilUser.getMoney().intValue()<0 || userMoney.intValue()<0){
+			throw new BusinessException("用户余额不足,请先充值。当前余额:"+oilUser.getMoney().intValue());
+		}
+
+		oilUser.setMoney(userMoney);
+		if(Objects.isNull(oilUser.getCreateTime())){
+			oilUser.setCreateTime(new Date());
+		}
+		oilUser.setUpdateTime(new Date());
+		if(oilUserMapper.updateByPrimaryKeySelective(oilUser)!=1){
+			throw new BusinessException("扣减金额失败");
+		};
+		OilAccountRechargeExample oilAccountRechargeEx = new OilAccountRechargeExample();
+		com.emate.shop.business.model.OilAccountRechargeExample.Criteria cr = oilAccountRechargeEx.createCriteria();
+		cr.andUserIdEqualTo(oilUser.getId());
+		cr.andMoneyGreaterThan(BigDecimal.ZERO);
+		oilAccountRechargeEx.setOrderByClause(OilAccountRechargeExample.CREATE_TIME_ASC);;
+		List<OilAccountRecharge> oilAccountList = oilAccountRechargeMapper.selectByExample(oilAccountRechargeEx);
+		 //返回每个次级账户的金额
+        oilAccountRechargeEx.clear();
+        oilAccountRechargeEx.createCriteria()
+        	.andUserIdEqualTo(oilUser.getId());
+        int count = oilAccountRechargeMapper.countByExample(oilAccountRechargeEx);
+		if(count<=0){
+			//添加账户虚拟油卡信息
+			OilAccountRecharge oilAccountRecharge = new OilAccountRecharge();
+			oilAccountRecharge.setCreateTime(new Date());
+			oilAccountRecharge.setUpdateTime(new Date());
+			oilAccountRecharge.setMoney(oilUser.getMoney());
+			oilAccountRecharge.setCardNo("a"+oilUser.getPhone());
+			oilAccountRecharge.setUserId(oilUser.getId());
+			oilAccountRecharge.setUserPhone(oilUser.getPhone());
+			//添加订单消费记录
+			oilAccountRechargeMapper.insertSelective(oilAccountRecharge);
+			OilcardOrderRelation oilcardOrder = new OilcardOrderRelation();
+			oilcardOrder.setCreateTime(new Date());
+			oilcardOrder.setUpdateTime(new Date());
+			oilcardOrder.setOrderNo(orderNo);
+			oilcardOrder.setOrderType(OilcardOrderRelation.ORDER_TYPE_3);
+			oilcardOrder.setCardNo(oilAccountRecharge.getCardNo());
+			oilcardOrder.setMoney(orderMoney);
+			oilcardOrder.setCardMoney(oilUser.getMoney());//充值卡剩余金额
+			oilcardOrder.setUserId(oilUser.getId());
+			oilcardOrderRelationMapper.insertSelective(oilcardOrder);
+		}else{
+			if(oilAccountList.isEmpty()){
+				throw new BusinessException("账户扣款异常，请联系客服");
+			}
+			for (int i = 0; i < oilAccountList.size(); i++) {
+				OilAccountRecharge oilAccount = oilAccountList.get(i);
+				BigDecimal oilMoney = oilAccount.getMoney();
+				if(orderMoney.compareTo(oilMoney)>0){
+					if(i==oilAccountList.size()-1){
+						throw new BusinessException("子账户余额不足!!!");
+					}
+					oilAccount.setMoney(BigDecimal.ZERO);
+					oilAccount.setUpdateTime(new Date());
+					oilAccountRechargeMapper.updateByPrimaryKeySelective(oilAccount);
+					orderMoney=orderMoney.subtract(oilMoney);
+					OilcardOrderRelation oilcardOrder = new OilcardOrderRelation();
+					oilcardOrder.setCreateTime(new Date());
+					oilcardOrder.setUpdateTime(new Date());
+					oilcardOrder.setOrderNo(orderNo);
+					oilcardOrder.setOrderType(OilcardOrderRelation.ORDER_TYPE_3);
+					oilcardOrder.setCardNo(oilAccount.getCardNo());
+					oilcardOrder.setMoney(oilMoney);
+					oilcardOrder.setCardMoney(BigDecimal.ZERO);
+					oilcardOrder.setUserId(oilUser.getId());
+					oilcardOrderRelationMapper.insertSelective(oilcardOrder);
+					continue;
+				}else{
+					oilMoney = oilMoney.subtract(orderMoney);
+					oilAccount.setMoney(oilMoney);
+					oilAccount.setUpdateTime(new Date());
+					oilAccountRechargeMapper.updateByPrimaryKeySelective(oilAccount);
+					OilcardOrderRelation oilcardOrder = new OilcardOrderRelation();
+					oilcardOrder.setCreateTime(new Date());
+					oilcardOrder.setUpdateTime(new Date());
+					oilcardOrder.setOrderNo(orderNo);
+					oilcardOrder.setOrderType(OilcardOrderRelation.ORDER_TYPE_3);
+					oilcardOrder.setCardNo(oilAccount.getCardNo());
+					oilcardOrder.setMoney(orderMoney);
+					oilcardOrder.setCardMoney(oilMoney);
+					oilcardOrder.setUserId(oilUser.getId());
+					oilcardOrderRelationMapper.insertSelective(oilcardOrder);
+					break;
+				}
+			}
+		}
+		return userMoney;
+	}
+	/**
+	 * 更新预约时间
+	 */
+	@Override
+	@Write
+	@Transactional
+	public DatasetSimple<String> updateAppointmentTime(String orderNo,String appointmentTime,String orderUrl,String source){
+		
+		//订单号必填
+		if(StringUtils.isEmpty(orderNo)){
+			throw new BusinessException("参数代驾订单号为空~~");
+		}
+		
+		//预约时间不能为空
+		if(StringUtils.isEmpty(appointmentTime)){
+			throw new BusinessException("参数预约时间为空~~");
+		}
+		//转化预约时间
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date appTime = null;
+		try {
+			appTime = format.parse(appointmentTime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new BusinessException("参数预约时间转化失败~");
+		}
+		//根据订单号查询订单
+		DriverOrderShengExample driverEx = new DriverOrderShengExample();
+		driverEx.createCriteria().andOrderNoEqualTo(orderNo);
+		List<DriverOrderSheng> driverOrders = driverOrderMapper.selectByExample(driverEx);
+		if(driverOrders.isEmpty()){
+			throw new BusinessException("未查到该代驾订单~~");
+		}
+		
+		DriverOrderSheng driverOrder = driverOrders.get(0);
+		if(DriverOrderSheng.ORDER_STATUS_4.equals(driverOrder.getOrderStatus())
+				||DriverOrderSheng.ORDER_STATUS_3.equals(driverOrder.getOrderStatus())){
+			throw new BusinessException("该代驾订单已完成或已取消,不能修改预约时间~~");
+		}
+		//修改过预约时间就不能再修改
+		if(driverOrder.getAppointmentNum()<=0){
+				return DatasetBuilder.fromDataSimple("1");//代表已修改过一次预约时间
+		}
+		//离预约时间半小时之内不能修改预约时间
+		Date currentappointmentTime = driverOrder.getAppointmentTime();
+		if(currentappointmentTime.getTime()-new Date().getTime()<1000*60*30){
+			return DatasetBuilder.fromDataSimple("0");//代表离预约时间已不到半个小时,不能修改预约时间
+		}
+		//预约时间只能是创建时间的48小时之内
+		Date createTime = driverOrder.getCreateTime();
+		if(appTime.getTime()-createTime.getTime()>=1000*60*60*48){
+			return DatasetBuilder.fromDataSimple("2");//代表离订单创建时间48小时之内
+		}
+		if(appTime.getTime()-new Date().getTime()<1000*60*30){
+			return DatasetBuilder.fromDataSimple("3");//代表离现在半小时之内不能修改预约时间
+		}
+		//把修改预约时间通知告诉盛大
+		
+		//组织盛大请求参数
+		Map<String, String> params = new HashMap<String,String>();
+		params.put("besCode", orderNo);
+		params.put("bespeakTime",appointmentTime);
+		params.put("source",source);
+		//发送代驾请求
+		Log4jHelper.getLogger().info("开始调用盛大代驾订单修改预约时间接口~~");
+		Map<String, String> responseMap = null;
+		try {
+			responseMap = ShengDaUtil.updateAppointmentTime(orderUrl, params);
+		} catch (Exception e) {
+			throw new BusinessException("代驾订单失败,msg:代驾修改预约时间接口调用失败~~");
+		}
+		Log4jHelper.getLogger().info("盛大代驾订单修改预约时间接口调用完毕~~");
+		//通知盛大代驾成功,修改本地数据库
+		if("SUCCESS".equals(responseMap.get("resultCode"))){
+			Map<String, Object> param = new HashMap<String,Object>();
+			param.put("orderNo", orderNo);
+			param.put("appointmentTime", appTime);
+			int result = definedMapper.updateDriverOrder(param);
+			if(result!=1){
+				throw new BusinessException("更新预约时间失败~");
+			}
+			//订单监控
+			DriverOrderMonitor driverOrderMonitor = new DriverOrderMonitor();
+			driverOrderMonitor.setStatus(DriverOrderMonitor.STATUS_5);
+			driverOrderMonitor.setOrderNo(orderNo);
+			driverOrderMonitor.setRemark("订单已修改过一次预约时间");
+			driverOrderMonitor.setCreateTime(new Date());
+			driverOrderMonitor.setUpdateTime(new Date());
+			orderMonitorMapper.insertSelective(driverOrderMonitor);
+		}else{
+			throw new BusinessException(responseMap.get("resultCode")+":"+responseMap.get("resultDesc"));
+		}
+		return DatasetBuilder.fromDataSimple("success");
+	}
+	/**
+	 * h5端用户取消代驾订单
+	 */
+	@Override
+	@Write
+	@Transactional
+	public DatasetSimple<String> cancelDriverOrder(String orderNo,String cancelOrderUrl,String source,String key) {
+		if(StringUtils.isEmpty(orderNo)){
+			throw new BusinessException("参数订单为空~~");
+		}
+		DriverOrderShengExample driverEx = new DriverOrderShengExample();
+		driverEx.createCriteria().andOrderNoEqualTo(orderNo);
+		List<DriverOrderSheng> driverOrders = driverOrderMapper.selectByExample(driverEx);
+		if(driverOrders.isEmpty()){
+			throw new BusinessException("未查询到该订单号的代驾订单");
+		}
+		DriverOrderSheng driverOrder = driverOrders.get(0);
+		driverOrder = definedMapper.queryDriverOrdersbyId(driverOrder.getId());
+		if(!DriverOrderSheng.ORDER_STATUS_0.equals(driverOrder.getOrderStatus())){
+			return DatasetBuilder.fromDataSimple("0");//只有司机未接单情况下,才可以取消订单
+		}
+		//离预约时间半小时之内不能取消订单
+		Date currentappointmentTime = driverOrder.getAppointmentTime();
+		if(currentappointmentTime.getTime()-new Date().getTime()<1000*60*30){
+			return DatasetBuilder.fromDataSimple("1");//离预约时间半小时之内,不能取消订单
+		}
+		Map<String, String> params = new HashMap<String,String>();
+		params.put("besCode", orderNo);
+		params.put("source", source);
+		params.put("status", "5");
+		params.put("key", key);
+		//发送代驾请求
+		Log4jHelper.getLogger().info("开始调用盛大代驾订单取消订单接口~~");
+		Map<String, String> responseMap = null;
+		try {
+			responseMap = ShengDaUtil.cancelDriverOrder(cancelOrderUrl, params);
+		} catch (Exception e) {
+			throw new BusinessException("代驾订单失败,msg:代驾取消订单接口调用失败~~");
+		}
+		Log4jHelper.getLogger().info("盛大代驾订单取消订单接口调用完毕~~");
+		
+		//通知盛大代驾成功,修改本地数据库
+		if("SUCCESS".equals(responseMap.get("resultCode"))){
+			//更新油卡账户余额
+			OilUser user = definedMapper.queryOilUserbyId(driverOrder.getUserId());
+			if(Objects.isNull(user)){
+				throw new BusinessException("找不到用户！");
+			}
+			//打印油卡用户信息
+			Log4jHelper.getLogger().info("充值账号："+user.getPhone()+",订单号："+orderNo
+						+",账户余额："+user.getMoney().intValue()
+						+",代驾订单取消账户添加的金额："+driverOrder.getOrderPrice().doubleValue());
+			//判断账户余额是否充足
+			BigDecimal finalMoney = user.getMoney()
+					.add(driverOrder.getOrderPrice());
+			
+			//增减账户余额
+			user.setMoney(finalMoney);
+			user.setUpdateTime(new Date());
+			
+			//更新主账户余额
+			if(1!=oilUserMapper.updateByPrimaryKeySelective(user)){
+				Log4jHelper.getLogger().error("更新主账户失败");
+				throw new BusinessException("更新账户信息失败！！");
+			};
+			//查询子账户订单关联表
+			OilcardOrderRelationExample oilcardOrderRelationEx = new OilcardOrderRelationExample();
+			com.emate.shop.business.model.OilcardOrderRelationExample.Criteria cr = oilcardOrderRelationEx.createCriteria();
+			cr.andOrderNoEqualTo(orderNo);
+			cr.andOrderTypeEqualTo(OilcardOrderRelation.ORDER_TYPE_3);
+			cr.andUserIdEqualTo(user.getId());
+			List<OilcardOrderRelation> oilcardOrderRelations = oilcardOrderRelationMapper.selectByExample(oilcardOrderRelationEx);
+			if(oilcardOrderRelations.isEmpty()){
+				Log4jHelper.getLogger().error("查询不到子账户订单关联表");
+				throw new BusinessException("查询不到子账户订单关联表");
+			}
+			//更新子账户订单关联表和子账户表
+			for(OilcardOrderRelation oilOrder:oilcardOrderRelations){
+				BigDecimal money = oilOrder.getMoney();
+				oilOrder.setUpdateTime(new Date());
+				oilOrder.setMoney(BigDecimal.ZERO);
+				
+				OilAccountRechargeExample oilAccountRechargeEx = new OilAccountRechargeExample();
+				oilAccountRechargeEx.createCriteria()
+					.andCardNoEqualTo(oilOrder.getCardNo());
+				oilAccountRechargeEx.setLimitStart(0);
+				oilAccountRechargeEx.setLimitEnd(1);
+				List<OilAccountRecharge> oilAccountList = oilAccountRechargeMapper.selectByExample(oilAccountRechargeEx);
+				if(oilAccountList.size()!=1){
+					Log4jHelper.getLogger().error("查询子账户信息失败;卡号"+oilOrder.getCardNo());
+					throw new BusinessException("查询子账户信息失败");
+				}
+				OilAccountRecharge oilAccountRecharge = oilAccountList.get(0);
+				oilAccountRecharge =definedMapper.queryOilAccountbyId(oilAccountRecharge.getId());
+				oilAccountRecharge.setUpdateTime(new Date());
+				BigDecimal cardMoney = oilAccountRecharge.getMoney().add(money);
+				oilAccountRecharge.setMoney(cardMoney);
+				oilOrder.setCardMoney(cardMoney);
+				if(1!=oilcardOrderRelationMapper.updateByPrimaryKeySelective(oilOrder)){
+					Log4jHelper.getLogger().error("更新子账户和订单关联表失败;表id"+oilOrder.getId());
+					throw new BusinessException("更新子账户和订单关联表失败");
+				}
+				if(oilAccountRechargeMapper.updateByPrimaryKeySelective(oilAccountRecharge)!=1){
+					Log4jHelper.getLogger().error("更新子账户失败;表id"+oilAccountRecharge.getId());
+					throw new BusinessException("更新子账户失败");
+				}
+			}
+			//更新订单状态
+			driverOrder.setOrderStatus(DriverOrderSheng.ORDER_STATUS_4);
+			driverOrder.setUpdateTime(new Date());
+			int result = driverOrderMapper.updateByPrimaryKeySelective(driverOrder);
+			if(result!=1){
+				throw new BusinessException("更新订单状态失败~");
+			}
+			//订单监控
+			DriverOrderMonitor driverOrderMonitor = new DriverOrderMonitor();
+			driverOrderMonitor.setStatus(DriverOrderMonitor.STATUS_4);
+			driverOrderMonitor.setOrderNo(orderNo);
+			driverOrderMonitor.setRemark("订单已取消");
+			driverOrderMonitor.setCreateTime(new Date());
+			driverOrderMonitor.setUpdateTime(new Date());
+			orderMonitorMapper.insertSelective(driverOrderMonitor);
+		}else{
+			throw new BusinessException(responseMap.get("resultCode")+":"+responseMap.get("resultDesc"));
+		}
+		return DatasetBuilder.fromDataSimple("success");
+	}
+
+	/**
+	 * h5端用户查询代驾订单记录
+	 */
+
+	@Override
+	@Read
+	public DatasetList<DriverOrderSheng> queryDriverOrderList(Long userId,Integer pageNo,Integer pageSize) {
+		//组织查询条件
+		DriverOrderShengExample driverEx= new DriverOrderShengExample();
+		Criteria c = driverEx.createCriteria();
+		//油卡用户id
+		c.andUserIdEqualTo(userId);
+		/*//订单号
+		if(StringUtils.isNotEmpty(orderNo)){
+			c.andOrderNoEqualTo(orderNo);
+		}
+		//订单状态
+		if(StringUtils.isNotEmpty(orderStatus)){
+			c.andOrderStatusEqualTo(Integer.valueOf(orderStatus));
+		}*/
+		PaginationUtil page = new PaginationUtil(pageNo, pageSize, driverOrderMapper.countByExample(driverEx));
+		driverEx.setLimitStart(page.getStartRow());
+		driverEx.setLimitEnd(page.getSize());
+		driverEx.setOrderByClause(DriverOrderShengExample.CREATE_TIME_DESC);
+		List<DriverOrderSheng> driverOrders = driverOrderMapper.selectByExample(driverEx);
+		return DatasetBuilder.fromDataList(driverOrders, page.createPageInfo());
+	}
+
+	
+
+	/**
+	 * admin端查询代驾订单列表
+	 */
+	@Override
+	@Read
+	public DatasetList<DriverOrderSheng> adminQueryOrderList(String orderNo, String phone, Integer pageNo,
+			Integer pageSize, String orderStatus) {
+		DriverOrderShengExample driverEx = new DriverOrderShengExample();
+		Criteria c = driverEx.createCriteria();
+		//组织参数订单号
+		if(StringUtils.isNotEmpty(orderNo)){
+			c.andOrderNoEqualTo(orderNo);
+		}
+		//组织账户手机号
+		if(StringUtils.isNotEmpty(phone)){
+			c.andUserPhoneEqualTo(phone);
+		}
+		//组织参数订单状态
+		if("0".equals(orderStatus)){
+			c.andOrderStatusEqualTo(DriverOrderSheng.ORDER_STATUS_0);
+		}else if("1".equals(orderStatus)){
+			List<Integer> statusList = new ArrayList<Integer>();
+			statusList.add(DriverOrderSheng.ORDER_STATUS_1);
+			statusList.add(DriverOrderSheng.ORDER_STATUS_2);
+			c.andOrderStatusIn(statusList);
+		}else if("2".equals(orderStatus)){
+			c.andOrderStatusEqualTo(DriverOrderSheng.ORDER_STATUS_3);
+		}else if("3".equals(orderStatus)){
+			c.andOrderStatusEqualTo(DriverOrderSheng.ORDER_STATUS_4);
+		}	
+		//分页
+		PaginationUtil page = new PaginationUtil(pageNo, pageSize, driverOrderMapper.countByExample(driverEx));
+		driverEx.setLimitStart(page.getStartRow());
+		driverEx.setLimitEnd(page.getSize());
+		driverEx.setOrderByClause(DriverOrderShengExample.CREATE_TIME_DESC);
+		List<DriverOrderSheng> driverOrders = driverOrderMapper.selectByExample(driverEx);
+		return DatasetBuilder.fromDataList(driverOrders, page.createPageInfo());
+	}
+
+	@Override
+	@Write
+	@Transactional
+	public DatasetSimple<Map<String, String>> updateDriverRemark(String orderNo, String remark) {
+		//查询代驾订单
+		DriverOrderShengExample driverEx = new DriverOrderShengExample();
+		driverEx.createCriteria().andOrderNoEqualTo(orderNo);
+		List<DriverOrderSheng> driverOrders = driverOrderMapper.selectByExample(driverEx);
+		if(driverOrders.isEmpty()){
+			throw new BusinessException("未查到该代驾订单~");
+		}
+		//修改该代驾订单备注
+		driverOrders.get(0).setRemark(remark);
+		if(driverOrderMapper.updateByPrimaryKeySelective(driverOrders.get(0))!=1){
+			throw new BusinessException("更改该代驾订单备注失败");
+		};
+		HashMap<String, String> result = new HashMap<String,String>();
+		result.put("result", "success");
+		return DatasetBuilder.fromDataSimple(result);
+	}
+	
+	@Override
+	@Write
+	@Transactional
+	public DatasetSimple<Map<String, String>> updateDriverOrder(String source,
+			String orderNo,String status,String driverName,String driverPhone){
+		//source = GDGSCX;besCode:订单号;
+		//status 订单状态:1:派单成功  6:司机已到 2:服务完成 5:取消服务
+		//driverName:司机姓名;driverPhone:司机电话
+		Map<String, String> result = new HashMap<String,String>();
+		DriverOrderShengExample driverOrderShengEx = new DriverOrderShengExample();
+		driverOrderShengEx.createCriteria().andOrderNoEqualTo(orderNo);
+		List<DriverOrderSheng> driverOrders = driverOrderMapper.selectByExample(driverOrderShengEx);
+		if(driverOrders.isEmpty()){
+			Log4jHelper.getLogger().error("代驾第三方回调结果:根据订单号查找不到该订单");
+			throw new BusinessException("订单号:"+orderNo+"根据订单号查找不到该订单");
+		}
+		DriverOrderSheng driverOrder = driverOrders.get(0);
+		if(DriverOrderSheng.ORDER_STATUS_3.equals(driverOrder.getOrderStatus())
+				||DriverOrderSheng.ORDER_STATUS_4.equals(driverOrder.getOrderStatus())){
+			Log4jHelper.getLogger().error("代驾第三方回调结果:该订单已完成或已取消");
+			throw new BusinessException("订单号:"+orderNo+"该订单已完成或已取消");
+		}
+		//status 订单状态:1:派单成功  6:司机已到 2:服务完成 5:取消服务
+		DriverOrderMonitor driverOrderMonitor = new DriverOrderMonitor();
+		if("1".equals(status)){
+			//修改订单
+			driverOrder.setDriverName(driverName);
+			driverOrder.setDriverPhone(driverPhone);
+			driverOrder.setOrderStatus(DriverOrderSheng.ORDER_STATUS_1);
+			//订单监控
+			driverOrderMonitor.setStatus(DriverOrderMonitor.STATUS_1);
+			String driver = driverName + " "+ driverPhone;
+			driverOrderMonitor.setRemark("代驾司机("+driver+")已接单");
+		}else if("6".equals(status)){
+			//修改订单
+			driverOrder.setOrderStatus(DriverOrderSheng.ORDER_STATUS_2);
+			//订单监控
+			driverOrderMonitor.setStatus(DriverOrderMonitor.STATUS_2);
+			driverOrderMonitor.setRemark("代驾司机已到达预定地点");
+		}else if("2".equals(status)){
+			//修改订单
+			driverOrder.setOrderStatus(DriverOrderSheng.ORDER_STATUS_3);
+			driverOrder.setFinishTime(new Date());
+			//订单监控
+			driverOrderMonitor.setStatus(DriverOrderMonitor.STATUS_3);
+			driverOrderMonitor.setRemark("已到达目的地,服务已完成");
+		}else if("5".equals(status)){
+			//修改订单
+			driverOrder.setOrderStatus(DriverOrderSheng.ORDER_STATUS_4);
+			//订单监控
+			driverOrderMonitor.setStatus(DriverOrderMonitor.STATUS_4);
+			driverOrderMonitor.setRemark("订单已取消");
+			//更新油卡账户余额
+			OilUser user = definedMapper.queryOilUserbyId(driverOrder.getUserId());
+			if(Objects.isNull(user)){
+				throw new BusinessException("找不到用户！");
+			}
+			//打印油卡用户信息
+			Log4jHelper.getLogger().info("充值账号："+user.getPhone()+",订单号："+orderNo
+						+",账户余额："+user.getMoney().intValue()
+						+",代驾订单取消回调账户添加的金额："+driverOrder.getOrderPrice().doubleValue());
+			//判断账户余额是否充足
+			BigDecimal finalMoney = user.getMoney()
+					.add(driverOrder.getOrderPrice());
+			
+			//增减账户余额
+			user.setMoney(finalMoney);
+			user.setUpdateTime(new Date());
+			if(Objects.isNull(user.getCreateTime())){
+				user.setCreateTime(new Date());
+			}
+			//更新主账户余额
+			if(1!=oilUserMapper.updateByPrimaryKeySelective(user)){
+				Log4jHelper.getLogger().error("更新主账户失败");
+				throw new BusinessException("更新账户信息失败！！");
+			};
+			//查询子账户订单关联表
+			OilcardOrderRelationExample oilcardOrderRelationEx = new OilcardOrderRelationExample();
+			com.emate.shop.business.model.OilcardOrderRelationExample.Criteria cr = oilcardOrderRelationEx.createCriteria();
+			cr.andOrderNoEqualTo(orderNo);
+			cr.andOrderTypeEqualTo(OilcardOrderRelation.ORDER_TYPE_3);
+			cr.andUserIdEqualTo(user.getId());
+			List<OilcardOrderRelation> oilcardOrderRelations = oilcardOrderRelationMapper.selectByExample(oilcardOrderRelationEx);
+			if(oilcardOrderRelations.isEmpty()){
+				Log4jHelper.getLogger().error("查询不到子账户订单关联表");
+				throw new BusinessException("查询不到子账户订单关联表");
+			}
+			//查询子账户信息
+			Map<String, BigDecimal> cardMoneys = new HashMap<String,BigDecimal>();
+			ArrayList<String> cardNoList = new ArrayList<String>();
+			oilcardOrderRelations.stream().forEach(oilcard -> {
+				cardNoList.add(oilcard.getCardNo());
+				cardMoneys.put(oilcard.getCardNo(), oilcard.getMoney());
+			});
+			OilAccountRechargeExample oilAccountRechargeEx = new OilAccountRechargeExample();
+			oilAccountRechargeEx.createCriteria()
+			.andCardNoIn(cardNoList);
+			List<OilAccountRecharge> oilAccounts = oilAccountRechargeMapper.selectByExample(oilAccountRechargeEx);
+			if(oilAccounts.isEmpty()){
+				Log4jHelper.getLogger().error("查询不到该主账户的子账户");
+				throw new BusinessException("查询不到该主账户的子账户");
+			}
+			//更新子账户信息
+			oilAccounts.stream().forEach(oilAccount -> {
+				BigDecimal addMoney = cardMoneys.get(oilAccount.getCardNo());
+				if(Objects.nonNull(addMoney)){
+					BigDecimal  oilCardmoney =oilAccount.getMoney();
+					oilAccount.setMoney(oilCardmoney.add(addMoney));
+					oilAccount.setUpdateTime(new Date());
+				}
+				if(1!=oilAccountRechargeMapper.updateByPrimaryKeySelective(oilAccount)){
+					Log4jHelper.getLogger().error("更新子账户表失败;表id"+oilAccount.getId());
+					throw new BusinessException("更新子账户表失败");
+				}
+			});
+			//更新子账户订单关联表
+			for(OilcardOrderRelation oilOrder:oilcardOrderRelations){
+				oilOrder.setUpdateTime(new Date());
+				oilOrder.setMoney(BigDecimal.ZERO);
+				if(1!=oilcardOrderRelationMapper.updateByPrimaryKeySelective(oilOrder)){
+					Log4jHelper.getLogger().error("更新子账户和订单关联表失败;表id"+oilOrder.getId());
+					throw new BusinessException("更新子账户和订单关联表失败");
+				}
+			}
+		}else{
+			Log4jHelper.getLogger().error("代驾第三方回调结果:未知订单状态"+status);
+			throw new BusinessException("订单号:"+orderNo+"未知订单状态"+status);
+		}
+		driverOrder.setUpdateTime(new Date());
+		if(1!=driverOrderMapper.updateByPrimaryKeySelective(driverOrder)){
+			Log4jHelper.getLogger().error("代驾第三方回调结果:修改订单信息失败");
+			throw new BusinessException("订单号:"+orderNo+"修改订单信息失败");
+		};
+		//订单监控
+		driverOrderMonitor.setCreateTime(new Date());
+		driverOrderMonitor.setUpdateTime(new Date());
+		//监控订单号
+		driverOrderMonitor.setOrderNo(driverOrder.getOrderNo());
+		orderMonitorMapper.insertSelective(driverOrderMonitor);
+		result.put("resultCode", "SUCCESS");
+		result.put("resultDesc", "成功,系统处理正常");
+		Log4jHelper.getLogger().error("代驾第三方回调结果:回到成功");
+		return DatasetBuilder.fromDataSimple(result);
+	}
+
+	@Override
+	@Read
+	public DatasetSimple<DriverOrderSheng> h5queryorderDetail(String orderNo) {
+		if(StringUtils.isEmpty(orderNo)){
+			throw new BusinessException("参数订单号为空~~");
+		}
+		//查询代驾订单
+		DriverOrderShengExample driverOrderShengEx = new DriverOrderShengExample();
+		driverOrderShengEx.createCriteria().andOrderNoEqualTo(orderNo);
+		List<DriverOrderSheng> driverOrders = driverOrderMapper.selectByExample(driverOrderShengEx);
+		if(driverOrders.isEmpty()){
+			throw new BusinessException("根据订单号未查到该代驾订单");
+		}
+		DriverOrderSheng driverOrderSheng = driverOrders.get(0);
+		DatasetSimple<DriverOrderSheng> result = DatasetBuilder.fromDataSimple(driverOrderSheng);
+		
+		//查询代驾订单监控
+		DriverOrderMonitorExample driverOrderMonitorEx = new DriverOrderMonitorExample();
+		driverOrderMonitorEx.createCriteria().andOrderNoEqualTo(orderNo);
+		driverOrderMonitorEx.setOrderByClause(DriverOrderMonitorExample.CREATE_TIME_ASC);
+		List<DriverOrderMonitor> driverOrderdetails = orderMonitorMapper.selectByExample(driverOrderMonitorEx);
+		result.putDatasetList("orderDetail", driverOrderdetails);
+		
+		return result;
+	}
+	
+}

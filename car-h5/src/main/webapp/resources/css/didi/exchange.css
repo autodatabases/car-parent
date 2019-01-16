@@ -1,0 +1,163 @@
+.warp{
+	min-height: 100%;
+	position:relative;
+	overflow: hidden;
+    padding: 0 1.25rem 1.7rem;
+    background: #fff;
+}
+/*头部*/
+.header{
+	background: #fff;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	position: relative;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/index/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+
+/*主体内容*/
+.warp ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.warp li{
+	margin-top: 1.5rem;
+	color: #fff;
+	overflow: hidden;
+	border-radius: .38rem;
+	box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
+	background: -webkit-linear-gradient(left, #feb914 , #ff8903); /* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #feb914, #ff8903); /* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #feb914, #ff8903); /* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #feb914 , #ff8903); /* 标准的语法 */
+}
+.warp li .logo{
+	float: left;
+	width: 2.95rem;
+	height: 5.2rem;
+	margin-left: 1.5rem;
+	display: inline-block;
+	background: url(../../imgs/didi/daijia.png) no-repeat center;
+	background-size: 100% auto;
+	vertical-align: middle;
+}
+.warp .content{
+	float: left;
+	height: 5.2rem;
+	line-height: 5.2rem;
+	margin-left: 1.3rem;
+	font-size: 1.15rem;
+	letter-spacing: 1px;
+}
+.warp .content span{
+	font-size: 2.4rem;
+}
+.warp .right{
+	float: right;
+	width: 6.3rem;
+	height: 5.2rem;
+	border-left: 1px dashed #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	letter-spacing: 3px;
+}
+.warp .right i{
+	display: inline-block;
+	margin-left: .4rem;
+	width: .615rem;
+	height: 1rem;
+	background: url(../../imgs/index/back-fff.png) no-repeat center;
+	background-size: 100% auto;
+	transform: rotate(180deg);
+}
+.warp .bottom{
+	position: relative;
+	clear: both;
+	background: #fff;
+	color: #666666;
+	font-size: .77rem;
+	line-height: 1.73rem;
+	padding-left: 1rem;
+}
+.warp .bottom::after{
+	display: block;
+	content: "";
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: -.15rem;
+	height: .23em;
+	background: url(../../imgs/didi/border.png) no-repeat center top;
+	background-size: cover;
+}
+@media(max-width: 415px){
+	.warp li .logo{
+		margin-left: 1rem;
+	}
+	.warp .content{
+		margin-left: .8rem;
+		letter-spacing: initial;
+	}
+	.warp .content span{
+		font-size: 2rem;
+	}
+	.warp .right{
+		width: 4.5rem;
+		letter-spacing: initial;
+	}
+	.warp .right i{
+		margin-left: .2rem;
+	}
+}
+
+/*无兑换券*/
+.no_have{
+	text-align: center;
+	height: 100%;
+	background: #fff;
+	font-weight: 600;
+	display: none;
+}
+.no_have img{
+	width: 7.7rem;
+	height: auto;
+	margin-top: 7.3rem;
+	margin-bottom: 2rem;
+}
+
+
+/*支付弹出框*/
+
+.mui-popup .cont {
+	padding: 0.2rem 0;
+	color:#666666;
+	font-size: 18px;
+}
+.mui-popup .cont .num{
+	font-size: 22px;
+	color: #007aff;
+}
+.mui-popup .mui-popup-button{
+	color: #aaaaaa;
+}
+.mui-popup .mui-popup-button:last-child{
+	color: #ff3e59;
+}
+
+.mui-popup .mui_content{
+	text-align: left
+}

@@ -1,0 +1,111 @@
+<link rel="stylesheet" type="text/css" href="resources/css/oilcard/oilcard_list.css?t=1"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/oilcard/oilcard_list.js?t=1.9"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>增值服务</a>&nbsp;》<a class="on">油卡赠送列表</a></p>
+	<div class="tab-top">
+		<span class="on">油卡赠送列表</span>
+		<div id="add_oilcard">赠送增值服务</div>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<div class="search-box clearfix">
+		<form id="sendOilCard" action="oilCard/batchSendCard" method="post" enctype="multipart/form-data" target="import-oilcard-result" style="display:inline;">
+			<div class="imgUploat" style="display:inline;">
+				<input id="uploadfile" name="file_upload" type="file" style="width: 180px;" />
+				<span id ="export" style="cursor: pointer;border: 1px solid #F0882C;background: #F0882C;color: #fff;padding: 3px 10px;line-height: 26px;border-radius:5px;">批量发送</span>
+				<a href="oilcard/import-oilcard-info.xlsx">下载模板</a>
+			</div>
+		</form>
+		<iframe name="import-oilcard-result" id="import-oilcard-result"  style="width:0px;height: 0px;"></iframe>
+
+		<!-- <div class="jine">
+			发放总金额：<span id="money_one"/></span>
+			充值总金额：<span id="money_two"/></span>
+			交易总金额：<span id="money_three"/></span>
+		</div> -->
+		<label style="padding-left:120px;">导出序列号范围:</label>
+		<input type="text" class="xuhao" id="startCode" /> --
+		<input type="text" class="xuhao" id="endCode" />
+		<button type="button" class="export" id="exportSelectBtn">导出</button>
+		<!-- 搜索 条件-->
+		<br/><br/>
+		<label>账户手机号:</label>
+		<input type="text" id="userPhone" />
+		<label>序列号范围:</label>
+		<input type="text" class="xuhao" id="startNum" /> --
+		<input type="text" class="xuhao" id="endNum" />
+		<label>使用状态:</label>
+		<select id="status">
+			<option value="1">已使用</option>
+			<option value="0">未使用</option>
+			<option value="9">未开通</option>
+			<option value="2">已冻结</option>
+			<option value="3">已过期</option>
+		</select>
+		<label>手机号:</label>
+		<input type="text" id="phone" />
+		<button class="search-btn">
+			<span>搜索</span>
+		</button>
+	</div>
+
+
+	<div class="tab-list tab-list-send">
+		<table>
+			<thead>
+				<tr>
+					<th>姓名</th>
+					<th>序列号</th>
+					<th>发放类型</th>
+					<th>开通城市</th>
+					<th>开通时间</th>
+					<th>金额</th>
+					<th>充值账户</th>
+					<!-- <th>区域</th> -->
+					<th>发送状态</th>
+					<th>使用状态</th>
+					<th>创建时间</th>
+					<th>备注</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>dongdong</td>
+					<td>13521322513</td>
+					<td>粤J12345</td>
+					<td>100</td>
+					<td>广州</td>
+					<td>成功</td>
+					<td>2017-04-07 17:45:38</td>
+					<td><a>备注</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="oilcard_paga">
+	</div>
+</div>
+<!-- 备注弹层 -->
+<div id="orderOperRemark" style="display:none;">
+	<div class="tips-bg"></div>
+	<div class="orderRemark">
+		<dl>
+			<dt>
+				<span>请输入备注信息(最多输入50个字符)</span>
+			</dt>
+			<dd>
+				<textarea id="orderOperRemarkContent" maxlength="50" rows="8" cols="60" placeholder="请输入备注信息(最多输入50个字符)"></textarea>
+			</dd>
+			<input type="hidden" id="orderOperRemark-orderNo" name="orderOperRemark-orderNo"/>
+		</dl>
+		<div class="tips-bottom">
+			<input type="button"  onclick="submitRemak()" value="提交" />
+			<input type="button"  onclick="closeRemak()" value="取消" />
+		</div>
+	</div>
+</div>

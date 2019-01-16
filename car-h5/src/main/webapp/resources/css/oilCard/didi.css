@@ -1,0 +1,212 @@
+/*头部*/
+.header{
+	background: #fff;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	position: relative;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/oilCard/back.png) no-repeat center;
+	background-size:20% ;
+}
+
+
+/*优惠卷部分*/
+.container{
+	padding: 0 1.25rem;
+	background: #fff;
+	overflow: hidden;
+}
+.container .cont{
+	padding-bottom: .67rem;
+	border-bottom: 1px solid #dddddd;
+	margin-top:1rem ;
+}
+.container .cont:last-child{
+	border-bottom: none;
+}
+.container .cont .title{
+	padding-bottom: 1rem;
+	font-size: 1rem;
+}
+.cont .coupon_ul::after{
+	content: "";
+	display: block;
+	visibility: hidden;
+	clear: both;
+}
+.cont .coupon_ul li{
+	-o-display: flex;
+	-moz-display: flex;
+	-webkit-display: flex;
+	display: flex;
+	align-items: center;
+	float: left;
+	width: 48%;
+	margin-bottom: .7rem;
+	margin-right: 4%;
+	height: 4.58rem;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	text-align: center;
+	cursor: pointer;
+}
+.cont .coupon_ul li:nth-child(even){
+	margin-right: 0;
+}
+.cont .coupon_ul li.status2{
+	display: none;
+}
+.cont .coupon_ul i{
+	width: 1.5rem;
+	height: 1.5rem;
+	background: url(../../imgs/oilCard/daijia/duigou.png) no-repeat center;
+	background-size: 100%;
+	margin-right: .2rem;
+}
+.cont .coupon_ul .on i{
+	background-image: url(../../imgs/oilCard/daijia/duigou_on.png);
+}
+.cont .coupon_ul .coupon{
+	width: 100%;
+	height: 100%;
+	flex-shrink: 1;
+	background: url(../../imgs/oilCard/coupon.png) no-repeat center;
+	background-size: 100% 100%;
+	overflow: hidden;
+}
+.cont .coupon_ul .coupon>div{
+	-o-display: flex;
+	-moz-display: flex;
+	-webkit-display: flex;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	float: left;
+	height: 100%;
+}
+.cont .coupon_ul .coupon .intr{
+	width: 68%;
+	flex-direction: column;
+}
+.cont .coupon_ul .coupon .intr dl{
+	color: #fff;
+}
+.cont .coupon_ul .coupon .intr dl dt{
+	font-size: .7rem;
+	line-height: 1.2em;
+}
+.cont .coupon_ul .coupon .intr dl dt .num{
+	font-size: 1.15rem;
+	font-weight: bold;
+}
+.cont .coupon_ul .coupon .intr dl dd{
+	font-size: .7rem;
+	line-height: 1.2em;
+}
+.cont .coupon_ul .coupon .intr hr{
+	width: 70%;
+	height: 0;
+	border: none;
+	border-top: 1px dashed #74797f;
+	margin: .2rem 0;
+}
+.cont .coupon_ul .coupon .intr .cate{
+	color: #13629F;
+	font-size: .58rem;
+}
+.cont .coupon_ul .coupon .purchase{
+	width: 32%;
+}
+.cont .coupon_ul .coupon .purchase{
+	position: relative;
+	font-size: .75rem;
+	color: #57acee;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	padding-bottom: .5rem;
+}
+.cont .coupon_ul .coupon .purchase::after{
+	position: absolute;
+	content: ">";
+	display: block;
+	bottom: .2rem;
+	left: 50%;
+	-o-transform: translateX(-50%) rotate(90deg);
+	-moz-transform: translateX(-50%) rotate(90deg);
+	-webkit-transform: translateX(-50%) rotate(90deg);
+	transform: translateX(-50%) rotate(90deg);
+	font-size: 1rem;
+
+}
+
+
+/*立即购买*/
+#btn_pay{
+	display: block;
+    height: 2.5rem;
+    margin:  1.5rem auto 1rem;
+    font-size: 14px;
+    text-align: center;
+    border: 0;
+    box-sizing: border-box;
+    padding: 0 1rem;
+    width: 78%;
+    font-size: 18px;
+    background-color: #2aaff4;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+
+/*使用说明*/
+.kong{
+	width: 100%;
+	height: 1rem;
+	background: #eee;
+}
+#explain{
+	padding: 0 5% 3rem;
+	background: #fff;
+}
+#explain .title{
+	font-size: .9375rem;
+	padding-top: 1rem;
+}
+#explain p{
+	font-size: .75rem;
+	text-indent:-1em;
+	padding-left:1em;
+	line-height: 2em;
+	color: #666666;
+}
+
+
+/*支付弹出框*/
+
+.mui-popup .cont {
+	padding: 0.2rem 0;
+	color:#666666;
+	font-size: 18px;
+}
+.mui-popup .cont .num{
+	font-size: 22px;
+	color: #007aff;
+}

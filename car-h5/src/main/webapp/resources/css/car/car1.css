@@ -1,0 +1,217 @@
+.warp{
+	width:100%;
+	height:100%;
+	position:relative;
+	overflow: hidden;
+}
+.header{
+	background: #fff;
+	position: relative;
+	background: #FF3E5B;
+}
+.header h1{
+	font-size: 16px;
+	line-height: 2.75rem;
+	text-align: center;
+	color: #fff;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/index/back-fff.png) no-repeat center;
+	background-size:20% ;
+}
+.search{
+	background: #d6d6d6;
+	-webkit-box-sizing: border-box; 
+	-moz-box-sizing: border-box; 
+	box-sizing: border-box;
+	padding:0.9375rem 5%;
+}
+.search input{
+	display: inline-block;
+	width:100%;
+	height:100%;
+	border: 0;
+	height:1.6875rem;
+	text-align: center;
+	background:#fff url(../../imgs/index/search.png) no-repeat 4rem center;
+	background-size:0.8rem ;
+	font-size: 10px;
+}
+.search input:focus{
+	background:#fff;
+}
+/* 热门品牌 */
+.hot h2{
+	font-size: 14px;
+	background: #ecf0f3;
+	line-height: 2.75rem;
+	height: 2.75rem;
+	padding-left: 0.94117rem;
+	border-bottom: 1px solid #c6c6c6;
+}
+.hot div{
+	background: #fff;
+	font-size: 14px;
+	display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
+    display: -moz-box; /* Firefox 17- */
+    display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
+    display: -moz-flex; /* Firefox 18+ */
+    display: -ms-flexbox; /* IE 10 */
+    display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */
+	overflow: hidden;
+}
+.hot div span{
+	display: inline-block;
+	-webkit-flex: 1;
+	-moz-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	width:20%;
+	text-align: center;
+	line-height: 1.5rem;
+	height: 1.5rem;
+	padding-top: 3.125rem;
+	padding-bottom: 0.625rem;
+	color: #666;
+}
+.hot div span.dazhong{
+	background: url(../../imgs/logo/dazhong.png) no-repeat center 40%;
+	background-size:35%;
+}
+.hot div span.fute{
+	background: url(../../imgs/logo/fute.png) no-repeat center 40%;
+	background-size:35%;
+}
+.hot div span.bentian{
+	background: url(../../imgs/logo/bentian.png) no-repeat center 40%;
+	background-size:35%;
+}
+.hot div span.fengtian{
+	background: url(../../imgs/logo/fengtian.png) no-repeat center 40%;
+	background-size:35%;
+}
+.hot div span.bieke{
+	background: url(../../imgs/logo/bieke.png) no-repeat center 40%;
+	background-size:35%;
+}
+.hot div span.aodi{
+	background: url(../../imgs/logo/aodi.png) no-repeat center 40%;
+	background-size:35%;
+}
+.hot div span.xiandai{
+	background: url(../../imgs/logo/xiandai.png) no-repeat center 40%;
+	background-size:35%;
+}
+.hot div span.xuefolan{
+	background: url(../../imgs/logo/xuefolan.png) no-repeat center 40%;
+	background-size:35%;
+}
+.hot div span.benchi{
+	background: url(../../imgs/logo/benchi.png) no-repeat center 40%;
+	background-size:35%;
+}
+.hot div span.baoma{
+	background: url(../../imgs/logo/baoma.png) no-repeat center 40%;
+	background-size:35%;
+}
+/* 汽车列表 */
+.list{
+	border-top: 1px solid #c6c6c6;
+}
+.list dt{
+	background: #f1f5f4;
+	font-size: 14px;
+	line-height: 2.125rem;
+	height: 2.125rem;
+	padding-left: 1.0625rem;
+}
+.list dd{
+	background: #fff;
+	border-bottom: 1px solid #f1f5f4;
+	font-size: 14px;
+	line-height: 2.0625rem;
+	height: 2.0625rem;
+	padding-left: 2.125rem;
+}
+.list dd img{
+	width:1.2rem;
+	height:1.2rem;
+	margin-right:1rem;
+	margin-top: 0.5rem;
+}
+.list-main{
+	width:100%;
+	height:100%;
+	overflow-x: hidden;
+}
+.bg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background:rgba(0,0,0,.8);
+	z-index: 100;
+	display: none;
+}
+.sidebar{
+	position: absolute;
+	top: 0;
+	left: 100%;
+	width: 100%;
+	height: 100%;
+	z-index: 110;
+	background: #fff;
+	overflow-X:hidden ;
+	-webkit-transition:left .5s;
+	-moz-transition:left .5s;
+	-ms-transition:left .5s;
+	-o-transition:left .5s;
+	transition:left .5s;
+}
+.sidebar dt{
+	background: #f1f5f4;
+	font-size: 15px;
+	line-height: 2.125rem;
+	height: 2.125rem;
+	padding-left: 1.0625rem;
+}
+.sidebar dd{
+	background: #fff;
+	border-bottom: 1px solid #f1f5f4;
+	font-size: 14px;
+	line-height: 2.0625rem;
+	height: 2.0625rem;
+	padding-left: 2.125rem;
+}
+.sidebar h3{
+	font-size: 16px;
+	height:2.5625rem;
+	line-height:2.5625rem;
+}
+.sidebar h3 img{
+	width:1.375rem;
+	height:1.375rem;
+	margin: 0.59375rem 1rem;
+}
+.sidebar dd img{
+	width:2.0625rem;
+	height:2.0625rem;
+	margin-right:1rem ;
+}
+.sidebar dd a{
+	display:block;
+}
+.on{
+	left:15%;
+	-webkit-transition:left .5s;
+	-moz-transition:left .5s;
+	-ms-transition:left .5s;
+	-o-transition:left .5s;
+	transition:left .5s;
+}

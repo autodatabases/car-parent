@@ -1,0 +1,86 @@
+<link rel="stylesheet" type="text/css" href="resources/css/counterman/counterman-edit.css?t=1.0" />
+<script src="resources/js/counterman/counterman-edit.js?t=1.3"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>业务员</a>&nbsp;》<a class="on">业务员列表</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main table1">
+	<dl>
+		<dt><span class="table-title">新增业务员</span></dt>
+		<dd>
+			<label>姓名：</label><input type="text" id="name" value="" placeholder="请输入业务员姓名" />
+		</dd>
+		<dd>
+			<label>手机号：</label><input type="text" id="phone" value="" placeholder="请输入业务员手机号" />
+		</dd>
+		<dd>
+			<label>业务员代码：</label><input type="text" id="countermanCode" value="" placeholder="请输入业务员代码" />
+		</dd>
+		<dd>
+			<label>业务员积分：</label><input type="number" id="score" value="" placeholder="请输入业务员积分" />
+		</dd>
+		<dd>
+			<label>财险网点：</label>
+			<select id="points">
+			 	<!-- <option value="0">请选择网点</option> -->
+			</select>
+		</dd>
+		<dd>
+			<label>业务员状态：</label>
+			<select id="status">
+			 	<option value="0">在职</option>
+			    <option value="1">离职</option>
+				<!-- <option value="2">其他</option> -->
+			</select>
+		</dd>
+
+<!-- 		<dd>
+			<label>寿险职场：</label>
+			<select id="career">
+			 	<option value="0">请选择网点</option>
+			</select>
+		</dd> -->
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="counterman_button" value="提交" />
+		<input type="button" class="action-btn" onclick="$('.tables').load('counterman/counterman-list.html')" value="返回" />
+	</div>
+</div>
+<div class="tabels-main table2" style="display:none">
+	<dl>
+		<dt><span>批量新增业务员</span></dt>
+		<dd>
+			<form id="daoru" action="counterman/importcounterman" method="post" enctype="multipart/form-data" target="import-model">
+				<div class="imgUploat">
+					<input id="uploadfile" name="insert_counterman" type="file" style="width: 250px;"></input>
+					<a href="counterman/update-counterman-info.xlsx">下载模板</a>
+				</div>
+			</form>
+
+		</dd>
+		<iframe name="import-model" id="import-model"  style="width:0px;height: 0px;"></iframe>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="piliang_button" value="提交" />
+		<input type="button" class="action-btn" onclick="$('.tables').load('counterman/counterman-list.html')" value="返回" />
+	</div>
+</div>
+<div class="tabels-main table3" style="display:none">
+	<dl>
+		<dt><span>批量修改业务员</span></dt>
+		<dd>
+			<form id="xiugai" action="counterman/batchupdatecounterman" method="post" enctype="multipart/form-data" target="import-model-edit">
+				<div class="imgUploat">
+					<input id="uploadfiles" name="update_counterman" type="file" style="width: 250px;"></input>
+					<a href="counterman/update-counterman-code.xlsx">下载模板</a>
+				</div>
+			</form>
+
+		</dd>
+		<iframe name="import-model-edit" id="import-model-edit"  style="width:0px;height: 0px;"></iframe>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="pedit_button" value="提交" />
+		<input type="button" class="action-btn" onclick="$('.tables').load('counterman/counterman-list.html')" value="返回" />
+	</div>
+</div>

@@ -1,0 +1,67 @@
+<link rel="stylesheet" type="text/css" href="resources/css/keepStatistics/keepStatistics.css"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/keepStatistics/keepStatistics.js"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>追电基础服务</a>&nbsp;》<a class="on">留存统计</a></p>
+    <div class="tab-top" id="order_span">
+        <span  class="on">留存统计</span>
+    </div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<div class="search-box clearfix">
+		<form class="oil-checkForm">
+	        <label>时间:</label>
+			<select id="eYear" name="batchDate"></select>
+			<select id="eMonth" name="batchDate"></select>			
+			<button type="button" class="search-btn">
+				<span>搜索</span>
+			</button>
+	        <button type="button" class="export" id="exportSelectBtn">导出</button>
+			<br/><br/>
+		</form>
+		<div class="dateNum">
+			开卡总数量：<span id="totalNum">0</span>
+			卡的总金额：<span id="usedNum">0</span>
+			未充值账户总余额：<span id="openNum">0</span>
+            账户总余额：<span id="nuseNum">0</span>
+		</div>
+	</div>
+
+
+	<div class="tab-list tab-list-check">
+		<table>
+			<thead>
+				<tr>
+					<th>开卡时间</th>
+					<th>供应商</th>
+					<th>开通城市</th>
+					<th>卡的面值</th>
+					<th>开卡的总数</th>
+					<th>开卡的总金额</th>
+					<th>使用的卡数</th>
+					<th>使用的金额</th>
+                    <th>未充值账户总余额</th>
+					<th>账户总余额</th>                    
+					<th>操作</th> 
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<!-- <td>dongdong</td>
+					<td>13521322513</td>
+					<td>粤J12345</td>
+					<td>100</td>
+					<td>广州</td>
+					<td>成功</td>
+					<td>2017-04-07 17:45:38</td>
+					<td><a>备注</a></td> -->
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="oilcard_paga">
+	</div>
+</div>

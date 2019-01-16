@@ -1,0 +1,29 @@
+.header{
+	background: #ff3e5b;
+	position: relative;
+	border-bottom: 1px solid #e0e0e0;
+	color: #fff;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/login/back-fff.png) no-repeat center;
+	background-size:20% ;
+}
+
+.main{
+	font-size: 14px;
+	padding:0 10px;
+}
+.main p{
+	margin: 10px 0;
+	text-indent: 20px;
+}

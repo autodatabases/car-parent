@@ -1,0 +1,45 @@
+<link rel="stylesheet" type="text/css" href="resources/css/oilcard/zhizuoyouka/zhizuoyouka.css"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/oilcard/zhizuoyouka/zhizuoyouka.js"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>增值服务</a>&nbsp;》<a class="on">制卡记录</a></p>
+	<div class="tab-top">
+		<span class="on">制卡记录</span>
+        <div id="zhizuoyouka">制作油卡</div>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>编号</th>
+					<th>油卡面额</th>
+					<th>油卡数量</th>
+					<th>状态</th>
+                    <th>开卡时间</th>
+					<th>失效时间</th>
+                    <th>备注</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- <tr>
+					<td>dongdong</td>
+					<td>13521322513</td>
+					<td>粤J12345</td>
+					<td>100</td>
+					<td>广州</td>
+					<td>成功</td>
+					<td>2017-04-07 17:45:38</td>
+					<td><a>备注</a></td>
+				</tr> -->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="zhizuo_paga">
+	</div>
+</div>

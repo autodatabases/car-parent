@@ -1,0 +1,52 @@
+<link rel="stylesheet" type="text/css" href="resources/css/oilcard/zhizuoyouka/zhizuo_operate.css" />
+<script src="resources/js/My97DatePicker/WdatePicker.js"></script>
+<script src="resources/js/oilcard/zhizuoyouka/zhizuo_operate.js"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>增值服务</a>&nbsp;》<a class="on">制作油卡</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<dl>
+		<dt><span>制作油卡</span></dt>
+        <dd>
+			<label>油卡面额：</label>
+			<select id="money">
+                <option value="">选择油卡面额</option>
+			    <option value="50">50元</option>
+                <option value="100">100元</option>
+                <option value="200">200元</option>
+                <option value="500">500元</option>
+                <option value="1000">1000元</option>
+				<option value="10000">10000元</option>
+			</select>
+		</dd>
+        <dd>
+			<label>油卡数量：</label>
+            <select id="num">
+                <option value="">选择油卡数量</option>
+			    <option value="5000">5000</option>
+                <option value="10000">10000</option>
+                <option value="15000">15000</option>
+                <option value="20000">20000</option>
+                <option value="25000">25000</option>
+				<option value="30000">30000</option>
+                <option value="35000">35000</option>
+                <option value="40000">40000</option>
+                <option value="45000">45000</option>
+                <option value="50000">50000</option>
+			</select>
+		</dd>
+        <dd>
+			<label>失效时间：</label>
+            <input id="deadTime" type="text" placeholder="选择失效时间" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'%y-%M-#{%d+1}',maxDate:'#{%y+2}-%M-%d',readOnly:true})" readonly="readonly"/>
+		</dd>
+        <dd>
+			<label>备注：</label>
+            <textarea id="remark" maxlength="50" rows="8" cols="60" placeholder="请输入备注信息(最多输入50个字符)"></textarea>
+		</dd>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="oilcard_button" value="确认生成" />
+        <input type="button" class="action-btn" id="cancel_button" value="取消" />
+	</div>
+</div>

@@ -1,0 +1,62 @@
+/*头部*/
+.header{
+	background: #fff;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	margin-bottom:1rem ;
+	position: relative;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/oilCard/back.png) no-repeat center;
+	background-size:20% ;
+}
+
+/*内容部分*/
+.content {
+	width: 100%;
+}
+.con_box {
+	width:80%;
+	height: 13rem;
+	margin: 5rem auto;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 0.5rem;
+	padding-top: 3rem;
+	box-shadow: 3px 3px 1px #ccc;
+}
+.con_box div {
+	width: 80%;
+	height: 4rem;
+	margin: 0 auto;
+}
+.con_box div input {
+	margin: 0 auto;
+	height: 2.5rem;
+	color: #999;
+	border-radius: 0.4rem;
+	background-color:#eee ;
+	width: 100%;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+.con_box div:nth-child(2) {
+	width: 50%;
+	margin-top: 2rem;
+}
+.con_box div:nth-child(2) input{
+	width: 100%;
+	color: #fff;
+	background-color: #2aaff4;
+	border: 0;
+}

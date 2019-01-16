@@ -1,0 +1,53 @@
+mysql.write.url=jdbc:mysql://localhost:3306/ematecar
+mysql.write.user=root
+mysql.write.password=ikj34sM
+
+mysql.read.url=jdbc:mysql://localhost:3306/ematecar
+mysql.read.user=root
+mysql.read.password=ikj34sM
+
+car.log.level=INFO
+car.log.appender=FILE
+car.log.filename=car-service
+
+shengda.carwash.url=http://101.231.154.154:8042/ShengDaAutoPlatform/car!receiveOrder
+shengda.carwash.source=GDGSCX
+shengda.carwash.orgSource=GDGSCX
+shengda.carwash.carType=01
+shengda.carwash.generationRule=01
+shengda.carwash.userOrderType=order
+shengda.carwash.key=e34ebd9bdb8c67d53be50f77f5a8b5d5
+shengda.carwash.key3Des=C205BC5839533270jUN1d77Y
+#set expire , Unit is day
+shengda.carwash.expire=365
+
+#gaoyangxunji oil card recharge
+gyxj.oilcard.url=http://114.247.40.65:18030/game/gameEsalesServlet.do?
+gyxj.oilcard.merchantid=guoshou2
+gyxj.oilcard.key=123456789
+
+#phone recharge
+gyphone.numberserchUrl=http://219.143.36.227:101/dealer/accegment/accsegment.do?
+gyphone.ordersendUrl=http://219.143.36.227:101/dealer/directfill/directFill.do?
+gyphone.productsearchUrl=http://219.143.36.227:101/dealer/prodquery/directProduct.do?
+gyphone.ordersarchUrl=http://219.143.36.227:101/dealer/orderquery/directSearch.do?
+gyphone.agentid=test_agent_id_1
+gyphone.merchantkey=111111
+gyphone.source=esales
+#gaoyang hui diao
+gyphone.callback.url=http://car.emates.cn/oilUser/gycallback
+
+#oufei oil recharge
+ofoil.cardquery.url=http://apitest.ofpay.com/sinopec/queryCardInfo.do?
+ofoil.recharge.url=http://apitest.ofpay.com/sinopec/onlineorder.do?
+ofoil.orderquery.url=http://apitest.ofpay.com/api/query.do?
+ofoil.mobilecharge.url=http://apitest.ofpay.com/onlineorder.do?
+
+#ofoil.merchantid=A08566
+#ofoil.userpwd=4c625b7861a92c7971cd2029c2fd3c4a
+ofoil.key=OFCARD
+ofoil.version=6.0
+#ofoil.callback.url=http://car.emateglobal.com/oilUser/oufeioilback
+#ofoil.phonecallback.url=http://car.emateglobal.com/oilUser/ofphoneback
+ofoil.callback.url=http://car.emates.cn/oilUser/oufeioilback
+ofoil.phonecallback.url=http://car.emates.cn/oilUser/ofphoneback

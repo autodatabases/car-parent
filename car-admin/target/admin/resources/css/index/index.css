@@ -1,0 +1,127 @@
+/* 表单 */
+.tables{
+	float: left;
+	width: 90%;
+	min-height:580px;
+	background: #f7f7f7;
+}
+.tables>div{
+	border-left: 1px solid #ccc;
+}
+.index-top{
+	text-align: center;
+	font-size:0;
+	padding: 10px 0;
+}
+.index-top a{
+	display: inline-block;
+	font-size: 14px;
+	width:23%;
+	line-height: 60px;
+	height: 120px;
+	position: relative;
+	color:#fff;
+	margin:0 1% ;
+	padding-right:0px;
+	border-radius: 5px;
+	background: #dadada;
+	float: left;
+	margin-top: 10px;
+}
+
+/*.index-top a.link-lan{
+	background: #54b5df;
+}
+.index-top a.link-lv{
+	background: #90c657;
+}
+.index-top a.link-cheng{
+	background: #f9a94a;
+}*/
+.index-top a span{
+	float: left;
+	margin-left: 10px;
+}
+.index-top a b{
+	font-size: 20px;
+	display: block;
+}
+.index-top a p{
+	font-size: 15px;
+	display: block;
+}
+.index-top a p label{
+	font-size:20px;
+	font-weight:bold;
+}
+.index-top a img{
+	float: left;
+	width: 100px;
+	height:80px;
+	margin-left: 5px;
+	margin-top: 10px;
+}
+.index-top a i{
+	position: absolute;
+	width:30px;
+	height:30px;
+	line-height:30px;
+	top:-10px ;
+	right:0;
+	background: #ff0000;
+	border-radius: 50%;
+}
+
+.user-box{
+	min-height: 380px;
+	overflow: hidden;
+	padding:30px 2% ;
+}
+.user-box>div{
+	background: #fff;
+	line-height: 50px;
+	height:350px;
+}
+.user-box>div p{
+	padding:10px 20px;
+	font-size: 20px;
+	color: #495b79;
+	font-weight: bold;
+}
+.user-box>div p i{
+	display: inline-block;
+	margin-top: 9px;
+	margin-right: 10px;
+	vertical-align: top;
+	width:34px;
+	height:34px;
+	background: url(../../imgs/index/user-icon.png);
+}
+.user-left{
+	width:70%;
+}
+.user-left ul{
+	margin: 0 10px;
+	border:1px solid #ddd;
+	border-radius: 10px;
+}
+.user-left ul li{
+	border-bottom:1px solid #ddd;
+	padding-left: 20px;
+	color:#333;
+}
+.user-left ul li:last-child{
+	border-bottom:none;
+}
+.user-right{
+	width:27%;
+}
+.user-right ul{
+	padding-left: 20px;
+}
+
+
+
+
+
+

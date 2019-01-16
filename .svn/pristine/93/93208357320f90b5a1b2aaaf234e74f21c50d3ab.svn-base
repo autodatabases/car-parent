@@ -1,0 +1,75 @@
+/*头部*/
+.header{
+	background: #fff;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	position: relative;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/oilCard/back.png) no-repeat center;
+	background-size:20% ;
+}
+body{
+	background: #fff;
+}
+
+
+
+/*内容主体部分*/
+.container{
+	padding: 0 5%;
+}
+.container .cont_top{
+	text-align: center;
+	padding: 1.6rem 0;
+	border-bottom: 1px solid #cecece;
+	margin-bottom: 1rem;
+}
+.container .cont_top .coupon_logo{
+	width: 60px;
+	height: auto;
+}
+.container .cont_top .money{
+	padding: .3rem 0 0;
+	font-size: 1.6rem;
+	color: #29aff3;
+	font-weight: 500;
+}
+.container p{
+	font-size: .9375rem;
+}
+.container .cont_top .cardSecret{
+	font-weight: 500;
+	color: #000;
+	font-size: 1.1rem;
+	text-align: left;
+	margin-top: 5px;
+	padding-left: 5px;
+}
+.container .cont_top .cardSecret span{
+	letter-spacing: .07rem;
+}
+.container .cont_top .cardSecret:nth-child(4){
+	margin-top: 2.9rem;
+}
+.container .cont_top .cardSecret:nth-child(4) span{
+	letter-spacing: initial;
+}
+.container .cont_bottom p{
+	line-height: 2em;
+	padding-left: 5px;
+}
+.container .cont_bottom .info{
+	color: #29aff3;
+	padding-bottom: 2rem;
+}

@@ -1,0 +1,80 @@
+<link rel="stylesheet" type="text/css" href="resources/css/counterman/score_list.css?t=1.2"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/counterman/score_list.js?t=1.3"></script>
+<div class="tables-top">
+	<p class="crumbs">
+		<span>您的位置：</span><a>业务员</a>&nbsp;》<a class="on">积分列表</a>
+	</p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>业务员姓名:</label>
+				<input type="text" id="countermanName" />
+			</li>
+			<li>
+				<label>业务员代码:</label>
+				<input type="text" id="countermanCode" />
+			</li>
+ 			<li>
+				<button class="search-btn">
+					<span>搜索</span>
+				</button>
+			</li>
+		</ul>
+	</div>
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>业务员姓名</th>
+					<th>业务员代码</th>
+					<th>所属网点</th>
+					<th>常规积分</th>
+					<th>国寿天财积分</th>
+					<th>剩余积分</th>
+					<th>出单量</th>
+					<th>销售额</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--<tr>
+					<td>天河万里行轮胎店</td>
+					<td>马牌门店</td>
+					<td>快修店</td>
+					<td>刘艳会</td>
+					<td>13802910637</td>
+					<td><a>编辑</a><a>停用</a></td>
+				</tr>-->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="counterman_paga"></div>
+</div>
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p style="float: left;">修改业务员积分</p>
+			<span style="float: right;" onclick="audit_close()" class="close">x</span>
+		</div>
+		<div class="tips-center">
+			<p>业务员姓名：<span id="name">碧池</span></p>
+			<p>业务员代码：<span id="code">9527</span></p>
+			<p>所属网点：<span id="area">鸳鸯楼</span></p>
+			<p>业务员积分：<input type="number" id="score" value="" /></p>
+			<p><textarea id="remark" maxlength="2000" rows="8" cols="60" placeholder="请输入修改积分原因" value=""></textarea></p>
+		</div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="audit_button()" value="确认" />
+			<input type="button" onclick="audit_close()" value="关闭" />
+		</div>
+	</div>
+</div>

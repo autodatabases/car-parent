@@ -1,0 +1,54 @@
+<link rel="stylesheet" type="text/css" href="resources/css/product/product-list.css?t=1" />
+<link rel="stylesheet" href="resources/zTree_v3-master/css/metroStyle/metroStyle.css" type="text/css">
+<div class="tables-top">
+	<p class="crumbs">
+		<span>您的位置：</span>
+		<a>商品列表</a>&nbsp;》
+		<a class="on">商品类目管理</a>
+	</p>
+	<div class="tab-top">
+		<div id="product_list">商品列表</div>
+		<div id="add_product">新增商品</div>
+		<span class="on">商品类目管理</span>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<div class="search-box clearfix">
+		<button class="search-btn" style="float: right;background-image:none!important;padding: 0 10px;" data-t="xiugai">
+			<span style="margin-left:0!important;">修改</span>
+		</button>
+		<button class="add-btn" style="float: right;" data-t="add">
+			<span style="margin-left:0!important;">添加类目</span>
+		</button>
+	</div>
+	<div class="tab-list tab-list-send">
+		<div id="treeDemo" class="ztree"></div>
+	</div>
+	<!-- 弹窗 -->
+	<div class="tips-warp">
+		<div class="tips-bg"></div>
+		<div class="tips-box">
+			<div class="tips-top">
+				<p style="float: left;">添加类目</p>
+				<span style="float: right;" onclick="audit_closes()" class="close">x</span>
+			</div>
+			<div class="tips-center">
+
+			</div>
+			<div class="tips-bottom">
+				<input type="button" onclick="audit_closes()" value="取消">
+				<input type="button" class="ok_btn" value="提交" data-type="">
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	// 关闭窗口
+	function audit_closes() {
+		$('.tips-warp').hide()
+	}
+</script>
+<script src="resources/js/product/categoryManager.js?t=1.9"></script>
+<script src="resources/zTree_v3-master/js/jquery.ztree.core.js"></script>
+<script src="resources/zTree_v3-master/js/jquery.ztree.excheck.js"></script>

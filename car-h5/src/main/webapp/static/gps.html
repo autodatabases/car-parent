@@ -1,0 +1,234 @@
+﻿
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";font-size: 12px;}
+	.BMap_pop{
+		display: block;
+		width:250px;
+		height:130px;
+		background: rgba(0,0,0,.7);
+	}
+	.BMap_pop div.BMap_center{
+		background: rgba(0,0,0,.0);
+		display: none;
+	}
+	.BMap_pop>div:nth-child(8){
+		margin-left: -10px;
+	}
+	.BMap_pop>div:nth-child(8):before{
+		content: '';
+		display: block;
+		width:0;
+		height: 0;
+		border-top:10px solid rgba(0,0,0,.7);
+		border-right:10px solid transparent;
+		border-bottom:10px solid transparent;
+		border-left:10px solid transparent;
+		margin-top:21px;
+	}
+	.BMap_pop>div:nth-child(9){
+		overflow: auto;
+		min-width:100%;
+		min-height:100%;
+		margin-left:-16px ;
+		margin-top:-16px ;
+	}
+	.BMap_pop div>div{
+	}
+	.BMap_pop div:nth-child(1){
+		display: none;
+		min-width: 100%;
+    	min-height: 100%;
+	}
+	.BMap_pop div>img{
+		display: none;
+	}
+	.BMap_bubble_content{
+		color:#fff;
+	}
+	.BMap_pop div.BMap_top{
+		display: none;
+	}
+	.BMap_pop div.BMap_bottom{
+		display: none;
+	}
+	.BMap_pop div.info-box{
+		display: block;
+		min-width:210px;
+		min-height:110px;
+		z-index: 100;
+		position: relative;
+		line-height: 1.2;
+		padding: 10px;
+	}
+	.BMap_pop div.info-box i{
+		display: block;
+		float: right;
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+		font-style: normal;
+		padding: 10px 15px;
+		background: #da4237;
+		border-radius: 5px;
+	}
+	.BMap_pop div.info-box b{
+		display: block;
+		font-weight: normal;
+		line-height: 2;
+	}
+	.BMap_pop div.info-box span{
+		display: block;
+		line-height: 1.5;
+	}
+	.BMap_pop div.info-box span:nth-child(3){
+		position: absolute;
+		bottom: 10px;
+		left: 10px;
+	}
+	.BMap_pop div.info-box span:nth-child(3) a{
+		color: #fff;
+	}
+	.BMap_shadow img{
+		display: none;
+	}
+</style>
+<script type="text/javascript" src="../resources/js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../resources/js/common/common.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=C93b5178d7a8ebdb830b9b557abce78b"></script>
+<title>导航</title>
+</head>
+<body>
+<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+var myPoint;
+var sellerPosition= $.getUrlParam('sellerPosition');
+sellerPosition = decodeURI(sellerPosition);
+var sellerAddress= $.getUrlParam('sellerAddress');
+sellerAddress = decodeURI(sellerAddress);
+var sellerName = $.getUrlParam('sellerName');
+sellerName = decodeURI(sellerName);
+var sellerPhone = $.getUrlParam('sellerPhone');
+sellerPhone = decodeURI(sellerPhone);
+// var isDecodePosition = false;
+// var destination,myPoint;
+var myPoint;
+var sellerLng = sellerPosition.split("_")[0];
+var sellerLat = sellerPosition.split("_")[1];
+$(document).ready(function(){
+	getLocation();
+	dingwei();
+});
+function getLocation() {
+	//检查浏览器是否支持地理位置获取
+	if (navigator.geolocation) {
+		//若支持地理位置获取,成功调用showPosition(),失败调用showPositionError
+		//var config = { enableHighAccuracy: true, timeout: 3000, maximumAge: 30000 };
+		//navigator.geolocation.getCurrentPosition(showPosition,showPositionError,config);
+			var geolocation = new BMap.Geolocation();
+			geolocation.getCurrentPosition(function(r) {
+				if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+					myPoint = r.point;
+				} else {
+					console.log('failed' + this.getStatus());
+				}
+			}, {
+				enableHighAccuracy : true
+			})
+		} else {
+			console.log("Geolocation is not supported by this browser.");
+		}
+	}
+	function dingwei() {
+		var map = new BMap.Map("allmap");
+		var point = new BMap.Point(sellerLng,sellerLat);
+		map.centerAndZoom(point, 16);
+		map.enableScrollWheelZoom(true);
+		map.addControl(new BMap.ScaleControl());
+		map.addControl(new BMap.NavigationControl());
+		var marker=new BMap.Marker(point);
+		map.addOverlay(marker);
+		var licontent="<div class='info-box'><b>"+sellerName+"</b>";
+			licontent+="<span>地址："+sellerAddress+"</span>";
+			licontent+="<span>电话：<a href='tel:"+sellerPhone+"'>"+sellerPhone+"</a></span><i onclick='driving();'>导航</i></div>";
+		var opts = {
+			width : 200,
+			height: 100,
+		};
+		var  infoWindow = new BMap.InfoWindow(licontent, opts);
+		marker.openInfoWindow(infoWindow);
+		marker.addEventListener('click',function(){
+			marker.openInfoWindow(infoWindow);
+			driving();
+
+		});
+		 $('.info-box').on('click',function(){alert(1)});
+
+
+		// var lng = "";
+		// var lat = "";
+		// // 创建地址解析器实例
+		// var myGeo = new BMap.Geocoder();
+		// myGeo.getPoint(sellerAddress, function(point) {
+		// 	if (point) {
+		// 		destination = point;
+		// 		isDecodePosition = true;
+		// 		var map = new BMap.Map("allmap");
+		// 		map.centerAndZoom(point, 16);
+		// 		map.enableScrollWheelZoom(true);
+		// 		map.addControl(new BMap.ScaleControl());
+		// 		map.addControl(new BMap.NavigationControl());
+		// 		var marker=new BMap.Marker(point);
+		// 		map.addOverlay(marker);
+		// 		var licontent="<div class='info-box'><b>"+sellerName+"</b>";
+		// 		    licontent+="<span>地址："+sellerAddress+"</span>";
+		// 		    licontent+="<span>电话：<a href='tel:"+sellerPhone+"'>"+sellerPhone+"</a></span><i onclick='driving();'>导航</i></div>";
+		// 		var opts = {
+		// 		    width : 200,
+		// 		    height: 100,
+		// 		};
+		// 		var  infoWindow = new BMap.InfoWindow(licontent, opts);
+		// 		marker.openInfoWindow(infoWindow);
+		// 		marker.addEventListener('click',function(){
+		// 		    marker.openInfoWindow(infoWindow);
+		// 		    driving();
+		//
+		// 		});
+		// 		 $('.info-box').on('click',function(){alert(1)});
+		// 	} else {
+		// 		isDecodePosition = false;
+		// 		console.log("您选择地址没有解析到结果!");
+		// 		driving();
+		//
+		// 	}
+		// }, "广州市");
+
+	}
+	function driving(){
+	    	// if(typeof myPoint == 'undefined'){
+	    	// 	setTimeout(driving,100);
+	    	// }else{
+	    	// 	if(isDecodePosition){
+	    	// 		location.href="http://api.map.baidu.com/direction?origin="+myPoint.lat+","+myPoint.lng+"&destination="+destination.lat+","+destination.lng+"&mode=driving&region=广东&output=html";
+	    	// 	}else{
+			// 		 location.href="http://api.map.baidu.com/direction?origin=latlng:"+myPoint.lat
+		    //     		+","+myPoint.lng+"|name:我的位置&destination="+
+		    //     		sellerPostion+"&mode=driving&region=广东&output=html&src=gd.emateglobal.com";
+	    	// 	}
+			// }
+			if(typeof myPoint == 'undefined'){
+	    		setTimeout(driving,100);
+	    	} else {
+				if (sellerPosition) {
+					location.href="http://api.map.baidu.com/direction?origin="+myPoint.lat+","+myPoint.lng+"&destination="+sellerLat+","+sellerLng+"&mode=driving&region=广东&output=html";
+				} else {
+					alert("暂无数据！");
+				}
+			}
+
+
+	}
+</script>

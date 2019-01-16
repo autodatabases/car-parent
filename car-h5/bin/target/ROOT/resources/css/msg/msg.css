@@ -1,0 +1,56 @@
+.header{
+	background: #fff;
+	position: relative;
+	border-bottom: 1px solid #e0e0e0;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/msg/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+/* 消息列表 */
+.list a{
+	display: block;
+	border-bottom: 1px solid #e0e0e0;
+	padding:0 10px;
+	line-height: 40px;
+	height: 40px;
+}
+.list a p{
+	float: left;
+	width: 75%;
+	font-size: 14px;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis; 
+	overflow:hidden;
+}
+.list a span{
+	float: right;
+	font-size: 10px;
+	color: #868686;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

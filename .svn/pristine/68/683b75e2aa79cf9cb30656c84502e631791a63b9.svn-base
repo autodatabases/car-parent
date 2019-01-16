@@ -1,0 +1,161 @@
+<link rel="stylesheet" type="text/css" href="resources/css/oilcard/daijia_order.css" />
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/oilcard/daijia_order.js"></script>
+<script src="resources/js/My97DatePicker/WdatePicker.js"></script>
+
+
+<div class="tables-top">
+	<!-- 面包屑 -->
+	<p class="crumbs"><span>您的位置：</span><a>订单</a>&nbsp;》<a>增值服务</a>&nbsp;》<a class="on">代驾订单</a></p>
+	<!-- 切换头部 -->
+	<div class="tab-top" id="order_span">
+		<span rel="-1" class="on">全部</span>
+		<span  rel="0">待服务</span>
+		<span  rel="1">服务中</span>
+		<span  rel="2">已完成</span>
+		<span  rel="3">已取消</span>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>订单编号：</label>
+				<input type="text"  id="orderNo"/>
+				<button><span>搜索</span></button>
+			</li>
+		</ul>
+	</div>
+	<style>
+		.order-status{
+			color: red;
+			font-weight: bold;
+		}
+		.create-time{
+			color: #0e9508;
+			font-weight: normal;
+		}
+        .appoint-time {
+            color: #ee14d2;
+			font-weight: normal;
+        }
+		.finish-time{
+			color: #ee6614;
+			font-weight: normal;
+		}
+        .cancel-time{
+			color: #14c7ee;
+			font-weight: normal;
+		}
+        .start-address{
+            color: #14ee1e;
+            font-weight: normal;
+        }
+		.seller-phone{
+			color: #0961ec;
+			font-weight: normal;
+		}
+		.user-phone{
+			color: #b7a506;
+			font-weight: normal;
+		}
+	</style>
+	<!-- 切换列表 -->
+	<ul class="tab-warp">
+		<li class="on">
+			<!-- 表格 -->
+			<div class="tab-list">
+				<table style="font-size: 12px;">
+					<thead>
+						<tr>
+							<th class="bh">编号</th>
+							<th class="ddxq">订单详情</th>
+							<th class="khxx">客户信息</th>
+							<th class="sjxx">司机信息</th>
+							<th class="jsxx">备注信息</th>
+							<th class="cz">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--<tr>
+							<td class="bh">1</td>
+							<td class="ddxq">
+								<strong>电瓶服务</strong>
+								<p>下单时间：2016-09-01</p>
+								<p>订单编号：1001010101010</p>
+							</td>
+							<td class="khxx">
+								<p>姓名：陈杨</p>
+								<p>电话：18519598451</p>
+							</td>
+							<td class="sjxx">
+								<p>名称：十里河快修店</p>
+								<p>联系方式：010-9999999</p>
+							</td>
+							<td class="jsxx">
+								<p>类型：门店代销</p>
+								<p>方式：服务包结算</p>
+							</td>
+							<td class="cz">
+								<a href="">查看</a>
+								<a href="">审核</a>
+							</td>
+						</tr>-->
+
+					</tbody>
+				</table>
+			</div>
+			<!-- 分页 -->
+			<div class="page-box" id="order_paga">
+
+			</div>
+		</li>
+
+	</ul>
+</div>
+<!-- 订单弹层 -->
+<style>
+	.car-info{
+		color: red;
+		font-weight: bold;
+	}
+	.car-info-blue{
+		color: #9522a7;
+	}
+</style>
+<div class="order-tip" style="display:none;">
+	<div class="tips-bg"></div>
+	<div class="order-tip-box">
+		<div class="order-tips-top">
+			订单详情
+			<span>×</span>
+		</div>
+		<div class="order-tips-list">
+			<ul>
+
+			</ul>
+		</div>
+		<div class="order-tip-btn">
+			<button>确认</button>
+			<button>关闭</button>
+		</div>
+	</div>
+</div>
+
+
+<!-- 备注弹层 -->
+<div id="orderOperRemark" style="display:none;">
+    <div class="tips-bg"></div>
+	<div style="background: #fff;border:2px solid #ccc;border-radius:5px;position: fixed;top: 30%;left: 30%;width: 400px;height: 220px;padding: 50px 30px;z-index:12;">
+        <h2 style="font-size:20px;line-height:48px;">请输入备注信息</h2>
+        <textarea id="orderOperRemarkContent" maxlength="2000" rows="8" cols="60" placeholder="请输入备注信息"></textarea>
+        <input type="hidden" id="orderOperRemark-orderNo" name="orderOperRemark-orderNo"/>
+		<div class="tips-bottom">
+			<input type="button"  onclick="submitRemak();" value="提交" />
+			<input type="button"  onclick="closeRemak();" value="取消" />
+		</div>
+	</div>
+</div>

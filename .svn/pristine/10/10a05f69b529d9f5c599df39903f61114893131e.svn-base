@@ -1,0 +1,301 @@
+/*头部*/
+.header{
+	background: #fff;
+	text-align: center;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../../imgs/oilCard/back.png) no-repeat center;
+	background-size:20% ;
+}
+/*洗车券*/
+.content {
+	margin-top: 2.75rem;
+}
+.washCode {
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+}
+.washCode ul {
+    overflow: hidden;
+	background: #2aaff4;
+    border-bottom: 1px solid #e5e5e5;
+}
+.washCode ul li {
+	float: left;
+	width: 50%;
+    text-align: center;
+	height: 8rem;
+}
+.washCode ul li p {
+	font-size: 14px;
+    color: #fff;
+	position: relative;
+}
+.washCode ul li p:nth-child(1) {
+	color: #d7edfa;
+	padding-top: 2rem;
+
+}
+.washCode ul li p:nth-child(1)::after {
+	content: "";
+	width: 1px;
+	height: 6rem;
+	background: #e5e5e5;
+	position: absolute;
+	top: 1rem;
+	right: 0;
+}
+.washCode ul li p:nth-child(2) {
+	font-size: 32px;
+}
+.xicheBtn {
+	width: 100%;
+	overflow: hidden;
+}
+.xicheBtn button{
+	display: block;
+	float: left;
+	width: 25%;
+	background-color: #fff;
+	font-size: 14px;
+	padding: 3rem 0 0.5rem 0;
+	line-height: 2rem;
+}
+.xicheBtn button:nth-child(1){
+	background:url(../../../imgs/oilCard/home/wash_record.png) no-repeat center 0.8rem;
+	background-size:40% ;
+}
+.xicheBtn button:nth-child(2){
+	background:url(../../../imgs/oilCard/home/wash_select.png) no-repeat center 0.8rem;
+	background-size:40% ;
+}
+.xicheBtn button:nth-child(3){
+	background:url(../../../imgs/oilCard/home/wash_code.png) no-repeat center 0.8rem;
+	background-size:40% ;
+}
+.xicheBtn button:nth-child(4){
+	background:url(../../../imgs/oilCard/home/wash_now.png) no-repeat center 0.8rem;
+	background-size:40% ;
+}
+
+/*套餐*/
+.setmale {
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+    margin-top: 0.2rem;
+}
+.setmale h3 {
+    position: relative;
+    font-size: 16px;
+	text-align: center;
+	line-height: 2.5rem;
+}
+.setmale h3:after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #e5e5e5;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.setmale ul {
+	padding: 0 1rem;
+	display: flex;
+	justify-content: space-around;
+}
+.setmale ul li {
+	display: inline;
+	float: left;
+    font-size: 14px;
+	background: #fff;
+	padding: 0.5rem;
+	margin: 2%;
+	width: 42%;
+	box-sizing: border-box;
+	text-align: center;
+	border-radius: 2px;
+	border: 1px solid #e5e5e5;
+}
+.setmale .on {
+	color: #fff;
+	background: #2aaff4;
+	border: 1px solid #2aaff4;
+}
+.setmale ul li p {
+    padding-top: 0.6rem;
+}
+.setmale ul li p:nth-child(1) {
+    font-size: 16px;
+	padding-bottom: 1rem;
+}
+.setmale ul li p:nth-child(3) {
+    font-size: 12px;
+}
+.setmale ul li p:last-child {
+	padding-bottom: 1rem;
+}
+.setmale .btncon {
+	width: 90%;
+	margin: 0 auto;
+	border-top: 1px solid #e5e5e5;
+}
+.btncon button {
+	float:left;
+    width: 40%;
+	font-size: 14px;
+	margin: 0.5rem 5%;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    line-height: 2rem;
+    text-align: center;
+    background-color: #fff;
+
+}
+.btncon button:nth-child(2) {
+	color: #fff;
+	border-color: #2aaff4;
+	background: #2aaff4;
+}
+
+/*购买记录*/
+.liucheng {
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+    margin-top: 0.5rem;
+	padding-bottom: 3rem;
+}
+.liucheng h3 {
+    position: relative;
+    font-size: 16px;
+	text-align: center;
+	line-height: 2.5rem;
+}
+.liucheng h3:after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #e5e5e5;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.liucheng ul {
+	padding-top: 1rem;
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-around;
+	font-size: 14px;
+	position: relative;
+}
+.liucheng ul:nth-child(3) li {
+	border-radius: 100% 100%;
+	color: #fff;
+	width: 1.2rem;
+	height: 1.2rem;
+	text-align: center;
+	line-height: 1.2rem;
+	z-index: 3;
+}
+.liucheng ul:nth-child(3)::after {
+	content: "";
+	width: 75.8%;
+	height: 1px;
+	background: #d0d0d0;
+	position: absolute;
+	top: 75%;
+	left: 12.5%;
+	z-index: 2;
+}
+.liucheng ul:nth-child(3) li:last-child::after {
+	display: none;
+}
+.liucheng ul:nth-child(4) {
+	justify-content: space-between;
+}
+/*弹出框*/
+.tip {
+	display: none;
+}
+.tip .bg {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.3);
+	z-index: 4;
+}
+.tip .tipCon {
+	position: fixed;
+	top: 40%;
+	left: 15%;
+	width: 70%;
+	background: #fff;
+	border-radius: 8px;
+	text-align: center;
+	z-index: 5;
+}
+.tip h3 {
+	font-weight: normal;
+	font-size: 18px;
+	height: 3rem;
+	line-height: 3rem;
+}
+#tip02 .cont p:first-child {
+	display: none;
+}
+#tip02 .cont p:nth-child(-2) {
+	font-size: 12px;
+}
+
+.cont {
+	padding: 0.2rem 0;
+	color:#666666;
+	font-size: 14px;
+	padding-bottom: 1rem;
+}
+.cont span{
+	color: #29aff3;
+}
+.tipCon .btnCon {
+	border-top: 1px solid #ccc;
+}
+.btnCon > div{
+	width: 50%;
+	float: left;
+	height: 2.6rem;
+	line-height: 2.6rem;
+	position: relative;
+}
+.btnCon > div:nth-child(1):after{
+	content: "";
+	width: 1px;
+	height: 100%;
+	background: #ccc;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.btnCon > div:nth-child(2) {
+	color: #2aaff4;
+}

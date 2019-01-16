@@ -1,0 +1,105 @@
+/*头部*/
+.header{
+	background: #fff;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/oilCard/back.png) no-repeat center;
+	background-size:20% ;
+}
+.header input{
+	width: 56%;
+	margin: 0 15%;
+	border-radius: 5px;
+	background: #e8e8e8;
+	position: absolute;
+	top: 0.3725rem;
+	left:0;
+	z-index: 100;
+	border: 0;
+	height: 2rem;
+	color: #b7b7b7;
+	font-size: 0.75rem;
+	padding:0 5px;
+	display: none;
+}
+.header span.search-btn{
+	position: absolute;
+	top:0;
+	right: 3%;
+	font-size: 0.75rem;
+	line-height:2.75rem;
+	display:block;
+	width:10%;
+	height: 100%;
+	text-align:center;
+	background: url(../../imgs/index/search.png) no-repeat center;
+	background-size:50% ;
+}
+.header span.cancle-btn{
+	position: absolute;
+	top:0;
+	right: 3%;
+	font-size: 0.75rem;
+	line-height:2.75rem;
+	display:block;
+	width:10%;
+	height: 100%;
+	text-align:center;
+	display: none;
+	/* background: url(../../imgs/index/search.png) no-repeat center;
+	background-size:50% ; */
+}
+.header span.on {
+	right: 13%;
+}
+
+/*内容部分*/
+.content {
+	margin-top: 3.25rem;
+	width: 100%;
+}
+.order-list {
+    padding-bottom: 1rem;
+    overflow: hidden;
+}
+.order-list li {
+    width: 100%;
+    padding: 0 1rem;
+    font-size: 12px;
+    box-sizing: border-box;
+    color: #7d7272;
+    margin-bottom: 0.4rem;
+    background-color: #fff;
+}
+.order-list li p{
+    line-height: 1.8rem;
+}
+.order-list li p:nth-child(1){
+	line-height: 3.6rem;
+    border-bottom: 1px solid #ccc;
+}
+.order-list li p span:nth-child(2){
+    float: right;
+}
+.order-list li .money {
+    font-size: 14px;
+    color: #000;
+    font-weight: bold;
+}

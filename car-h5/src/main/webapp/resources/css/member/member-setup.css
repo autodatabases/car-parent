@@ -1,0 +1,67 @@
+.header{
+	background: #fff;
+	position: relative;
+	border-bottom: 1px solid #e0e0e0;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/member/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+/* list */
+.setup-list{
+	margin-top: 1rem;
+	border-top: 1px solid #E0E0E0;
+	font-size: 0.75rem;
+}
+.setup-list li{
+	background: #fff;
+	border-bottom: 1px solid #E0E0E0;
+}
+.setup-list a{
+	padding-left:10% ;
+	display: block;
+	line-height:2.875rem;
+	background: url(../../imgs/member/more.png) no-repeat 90% center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

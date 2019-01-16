@@ -1,0 +1,124 @@
+.header{
+	position: relative;
+	background: #fff;
+	border-bottom: 1px solid #848484;
+}
+.header h1{
+	font-size: 16px;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/login/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+.back-home{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background: url(../../imgs/index/home.png) no-repeat center;
+	background-size:45% ;
+}
+/* 步骤 */
+.step-box{
+	border-bottom:0.5rem solid #fff;
+	background: #f5f4f9;
+	overflow: hidden;
+	padding: 1rem 0 0.5rem 0;
+}
+.step-box div{
+	float: left;
+	width: 25%;
+	text-align: center;
+	font-size: 0.75rem;
+	line-height: 3;
+	position: relative;
+}
+.step-box span{
+	display: block;
+	width:2.1875rem;
+	height:2.1875rem;
+	line-height:2.1875rem;
+	background: #c8c7cd;
+	color: #fff;
+	margin: 0 auto;
+	border-radius: 50%;
+	font-size: 1.25rem;
+	z-index: 10;
+	position: relative;
+}
+.step-box i{
+	display: block;
+	position: absolute;
+	top: 24%;
+	right: 0;
+	height:2px;
+	width: 100%;
+	background: #c8c7cd;
+	z-index: 1;
+}
+.step-box div:first-child i{
+	width: 50%;
+}
+.step-box div:last-child i{
+	width: 50%;
+	left: 0;
+}
+.step-one i{
+	background: #07a6ee;
+}
+.step-one span{
+	background: #07a6ee;
+}
+.step-two i{
+	background: #07a6ee;
+}
+.step-two span{
+	background: #07a6ee;
+}
+.step-three i{
+	background: #07a6ee;
+}
+.step-three span{
+	background: #07a6ee;
+}
+.step-ok i{
+	background: #07a6ee;
+}
+.step-ok span{
+	background: #07a6ee;
+}
+
+.text{
+	text-align: center;
+	line-height: 2;
+	font-size: 16px;
+	color: #000;
+	padding: 6rem 0;
+	background: #fff;
+}
+.text i{
+	display: block;
+	width:5rem;
+	height:5rem;
+	margin: 1rem auto;
+	background: url(../../imgs/repair/ok-icon.png) no-repeat center;
+	background-size:100% ;
+}
+.text span{
+	display: block;
+	background: #f5f4f9;
+	color: #6ecd69;
+	font-size: 12px;
+	text-align: left;
+	line-height:1.5 ;
+	padding: 1rem;
+	margin-top:2rem;
+}

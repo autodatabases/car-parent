@@ -1,0 +1,243 @@
+/* 表单 */
+.tables{
+	float: left;
+	width: 90%;
+	min-height:500px;
+}
+.tables>div{
+	border-left: 1px solid #ccc;
+}
+.tables-top{
+	padding-top: 20px;
+    background: url(../../imgs/com/noise.white.png);
+	border-bottom: 1px solid #ccc;
+	min-height: 80px;
+}
+.tab-top{
+	width: 90%;
+    padding: 0 20px;
+    margin-bottom: -1px;
+}
+/* 列表 */
+.tabels-main{
+	padding: 20px 20px;
+	min-height: 400px;
+}
+/* 搜索 */
+.search-box{
+	padding: 20px;
+	border:1px solid #ccc;
+	text-align:right ;
+}
+.search-box button{
+	display: inline-block;
+    border: 1px solid #ccc;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: inset 0 1px 0 #fff;
+    -webkit-box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 #fff;
+    font-weight: bold;
+    background:#f7f7f7 url(../../imgs/sprites.png) no-repeat -10px -15px;
+    color: #666;
+    padding: 0;
+}
+.search-box button span{
+	padding: 5px 10px;
+    margin-left: 25px;
+    display: block;
+    background: #f7f7f7;
+    -moz-box-shadow: inset 0 1px 0 #fff;
+    -webkit-box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.search-box input{
+    padding:5px 10px;
+    border: 1px solid #ccc;
+    color: #333;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    margin-right: 20px;
+    background: #fff;
+}
+/* 切换列表 */
+.tab-list {
+	border-left: 1px solid #ddd;
+}
+.tab-list table{
+	width: 100%;
+	vertical-align: middle;
+}
+.tab-list thead th,.tab-list tbody td {
+    padding: 7px 10px;
+    border: 1px solid #ddd;
+    border-left: 0;
+    text-align: center;
+}
+.tab-list thead tr th{
+	text-align: center;
+	background: #fcfcfc;
+}
+.tab-list thead tr th:nth-child(odd){
+	background: #f7f7f7;
+}
+.tab-list thead tr th.bh,.tab-list thead tr th.cz{
+	background: #fcfcfc;
+}
+.tab-list tbody{
+	border-bottom:1px solid #ddd;
+}
+.tab-list tbody th{
+	border-right:1px solid #ddd;
+	line-height: 30px;
+}
+.tab-list tbody tr td:nth-child(even){
+	background: #fcfcfc;
+}
+.tab-list tbody td{
+	vertical-align: middle;
+	line-height: 24px;
+}
+.tab-list tbody td a{
+	color: #333;
+	margin: 0 10px;
+}
+.tab-list tbody td a:hover{
+	color:#fc9338;
+}
+
+.edit-box{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height:100%;
+}
+.edit-box .bg-edit{
+	width: 100%;
+	height:100%;
+	background: rgba(0,0,0,.5);
+}
+.edit-list{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width:800px;
+	margin-left: -400px;
+	margin-top: -280px;
+	background: #fff;
+	z-index: 10;
+	border-radius: 5px;
+}
+.edit-tip-top{
+	height:40px;
+	line-height: 40px;
+	border-bottom:1px solid #ddd ;
+}
+.edit-tip-top span{
+	float: right;
+	font-size: 30px;
+	display: inline-block;
+	width:40px;
+	height: 40px;
+	cursor: pointer;
+	text-align: center;
+}
+.edit-list li{
+	border-bottom:1px solid #ddd;
+	overflow: hidden;
+}
+.edit-list li input{
+	border:1px solid #ddd;
+}
+.edit-list li label{
+	display: inline-block;
+	float: left;
+	width: 20%;
+	text-align: right;
+	font-size: 16px;
+	line-height: 40px;
+	padding-top: 5px;
+}
+.edit-list li label sup{
+	color:red;
+	font-size: 10px;
+}
+.edit-list li>div{
+	float: left;
+	border-left: 1px solid #ddd;
+	padding: 10px;
+	width:75%;
+}
+.edit-list li>div input{
+	width:80%;
+	height:30px;
+	line-height:30px;
+	border-radius: 5px;
+	padding: 0 10px;
+}
+.edit-list li>div select{
+	width:84%;
+	height: 30px;
+	outline: none;
+}
+.edit-list li>div textarea{
+	width:83%;
+	resize: none;
+	height: 200px;
+}
+.edit-list li>div div{
+	width:200px;
+	border:1px solid #ddd;
+	border-radius: 5px;
+	line-height: 30px;
+	position: relative;
+	text-align: center;
+}
+.edit-list li>div div input{
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.btn-box{
+	padding:20px;
+	text-align: right;
+}
+.btn-box button{
+	border:1px solid #eee;
+	padding: 10px 15px;
+	border-radius: 5px;
+	font-size: 16px;
+	margin: 0 10px;
+	background: #fff;
+	cursor: pointer;
+	outline: none;
+}
+.btn-box button:hover{
+	background: #0D8DDB;
+	color: #fff;
+	border-color:#0D8DDB;
+}
+.btn-box button.ok-btn{
+	background: #0D8DDB;
+	color: #fff;
+	border-color:#0D8DDB;
+}
+
+
+
+
+
+
+
+
+
+
+

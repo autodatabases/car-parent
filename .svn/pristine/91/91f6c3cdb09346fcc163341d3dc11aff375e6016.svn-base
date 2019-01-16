@@ -1,0 +1,62 @@
+<link rel="stylesheet" type="text/css" href="resources/css/logRecord/logRecord.css" />
+
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<!-- <script src="resources/js/common/initAreaSelect.js" type="text/javascript" charset="utf-8"></script> -->
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/logRecord/logRecord.js?t=1.0"></script>
+<div class="tables-top">
+	<p class="crumbs">
+		<span>您的位置：</span>
+		<a>追电基础服务</a>&nbsp;》
+		<a class="on">第三方日志记录列表</a>
+	</p>
+
+	<!-- 切换头部 -->
+	<div class="tab-top">
+		<span class="on">第三方日志记录列表</span>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>订单号:</label>
+				<input type="text" id="userAcc" />
+			</li>
+ 			<li>
+				<button class="search-btn">
+					<span>搜索</span>
+				</button>
+			</li>
+		</ul>
+	</div>
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>订单号</th>
+					<th>订单类型</th>
+					<th>接口类型</th>
+					<th>请求参数</th>
+					<th>响应结果</th>
+					<th>创建时间</th>
+					<th>更新时间</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--<tr>
+					<td>天河万里行轮胎店</td>
+					<td>马牌门店</td>
+					<td>快修店</td>
+					<td>刘艳会</td>
+					<td>13802910637</td>
+					<td><a>编辑</a><a>停用</a></td>
+				</tr>-->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="busines_paga"></div>
+</div>

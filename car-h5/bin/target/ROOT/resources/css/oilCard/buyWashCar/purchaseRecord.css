@@ -1,0 +1,100 @@
+/*头部*/
+.header{
+	background: #fff;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	margin-bottom:0.2rem ;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../../imgs/oilCard/back.png) no-repeat center;
+	background-size:20% ;
+}
+
+/*记录*/
+/*.content div {
+    margin-top: 0.5rem;
+    margin-left: 2%;
+    width: 96%;
+    overflow: hidden;
+    border: 1px solid #999;
+    background: #fff;
+    border-radius: 5px;
+    padding: 1rem 0 0 1rem;
+    box-sizing: border-box;
+	box-shadow: 2px 2px 2px #8e8c8c;
+	box-shadow: inset 0 0 2px #8e8c8c;
+}*/
+.content {
+	margin-top: 3.25rem;
+}
+.content .item{
+	position: relative;
+	margin-top: 0.5rem;
+    width: 100%;
+    overflow: hidden;
+	box-sizing: border-box;
+	background: #fff;
+	padding-bottom: 1rem;
+}
+.content .item li {
+	padding-left: 1rem;
+    padding-top: 1rem;
+    color: #b2b2b2;
+	font-size: 14px;
+	position: relative;
+}
+.content .item li:first-child {
+	font-size: 16px;
+	padding-left: 2.4rem;
+	margin: 0 auto;
+	width: 94%;
+	border-bottom: 1px solid #e5e5e5;
+	padding-bottom: 1rem;
+	background: url(../../../imgs/oilCard/home/pushRecord.png) no-repeat 0.4rem center;
+	background-size: 8%;
+	box-sizing: border-box;
+	color: #000;
+}
+.content .item li:first-child::after {
+	content: "";
+
+	height: 1px;
+	position: absolute;
+	bottom: 0;
+	left: 3%;
+	background: #e5e5e5;
+}
+.content .item li span{
+    color: #666666;
+}
+.content .item li:first-child  span{
+    color: #000;
+}
+.content .item li span.colorb{
+    color: #29aff3;
+}
+
+.nullRecord {
+	display: none;
+	margin-top: 4rem;
+	width: 100%;
+	padding-top: 18rem;
+	background: url(../../../imgs/oilCard/home/nullRecord.png) no-repeat center;
+	background-size: 50%;
+	text-align: center;
+}

@@ -1,0 +1,69 @@
+<link rel="stylesheet" type="text/css" href="resources/css/shop/jilv_config.css?t=1.0" />
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/shop/jilv_config.js?t=1.0"></script>
+<script src="resources/js/My97DatePicker/WdatePicker.js"></script>
+<div class="tables-top">
+	<!-- 面包屑 -->
+	<p class="crumbs"><span>您的位置：</span><a>积分商城</a>&nbsp;》<a>机滤价格配置</a></p>
+	<!-- 切换头部 -->
+	<div class="tab-top" id="order_span">
+		<span  class="on">渠道列表</span>
+		<span id="new">新增渠道</span>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>城市名称：</label>
+				<input type="text"  id="cityName"/>
+				<button class="search-btn"><span>搜索</span></button>
+			</li>
+		</ul>
+	</div>
+
+	<!-- 切换列表 -->
+	<ul class="tab-warp">
+		<li class="on">
+			<div class="tab-list">
+				<table style="font-size: 12px;">
+					<thead>
+						<tr>
+							<th class="bh">序号</th>
+							<th class="khxx">城市</th>
+							<th class="jsxx">区间起始</th>
+							<th class="jsxx">区间结束</th>
+							<th class="jsxx">机滤价格</th>
+							<th class="cz">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<!-- 分页 -->
+			<div class="page-box" id="channel_page">
+
+			</div>
+		</li>
+
+	</ul>
+</div>
+<!-- 提示弹窗 -->
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p class="wenzi" style="float: left;">请选择是否删除该渠道相关规则</p>
+			<span onclick="audit_close()" class="close">x</span>
+		</div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="audit_button()"
+				value="确认" /> <input type="button" onclick="audit_close()"
+				value="关闭" />
+		</div>
+	</div>
+</div>

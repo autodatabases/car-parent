@@ -1,0 +1,611 @@
+package com.emate.shop.admin.controller;
+import java.io.InputStream;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import com.emate.shop.business.api.OilUserService;
+import com.emate.shop.business.model.OilBatch;
+import com.emate.shop.business.model.OilConfig;
+import com.emate.shop.business.model.OilProvider;
+import com.emate.shop.business.model.OilRechargeCode;
+import com.emate.shop.business.model.OilTransLog;
+import com.emate.shop.business.model.OilUser;
+import com.emate.shop.common.Log4jHelper;
+import com.emate.shop.exception.BusinessException;
+import com.emate.shop.rpc.aop.RemoteService;
+import com.emate.shop.rpc.dto.DatasetBuilder;
+import com.emate.shop.rpc.dto.DatasetList;
+import com.emate.shop.rpc.dto.DatasetSimple;
+import com.emate.shop.web.aop.AuthAction;
+import com.emate.shop.web.validator.Regex;
+import com.emate.shop.web.validator.Required;
+import com.emate.tools.ExcelUtil;
+import com.emate.tools.ExportExcelData;
+
+/**
+ * 油卡页面
+ * @author likk
+ *
+ */
+@Controller
+@RequestMapping("oilCard")
+public class OilController {
+	
+	private OilUserService oilUserService;
+   
+	@RemoteService
+	public void setOilUserService(OilUserService oilUserService) {
+		this.oilUserService = oilUserService;
+	}
+
+	/**
+     * 发送油卡界面
+     * @param request
+     * @return
+     */
+    @RequestMapping("sendOilCardPage")
+    public String sendOilCardPage(HttpServletRequest request) {
+        return "oilCard/sendOilCard";
+    }
+    
+	/**
+     * 发送列表
+     * @param request
+     * @return
+     */
+    @RequestMapping("sendListPage")
+    public String sendList(HttpServletRequest request) {
+        return "oilCard/sendList";
+    }
+    
+    /**
+     * 发送油卡
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="sendOilCard",method=RequestMethod.POST)
+    @ResponseBody
+    @AuthAction
+    public DatasetSimple<String> sendOilCard(HttpServletRequest request,OilRechargeCode code) {
+        return oilUserService.sendCard(code);
+    }
+    
+    /**
+     * 更新备注
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="updateRemak",method=RequestMethod.POST)
+    @ResponseBody
+    @AuthAction
+    public DatasetSimple<String> updateRemak(HttpServletRequest request,OilRechargeCode code) {
+        return oilUserService.updateCardRemark(code.getRemark(), code.getId());
+    }
+    
+    /**
+     * 接口列表
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="oilCardList",method=RequestMethod.POST)
+    @ResponseBody
+    @AuthAction
+    public DatasetList<Map<String,Object>> oilCardList(HttpServletRequest request,Integer pageNo,
+    		Integer pageSize,String userPhone,String status,String 
+    		startNum,String endNum,String phone) {
+        return oilUserService.queryCodeList(pageNo, pageSize, 
+        		userPhone,status,startNum,endNum,phone);
+    }
+    
+    /**
+     * 接口列表
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="summary",method=RequestMethod.POST)
+    @ResponseBody
+    @AuthAction
+    public DatasetSimple<Map<String, String>> summary(HttpServletRequest request,OilRechargeCode code,Integer pageNo,
+    		Integer pageSize) {
+        return oilUserService.getMoneySummary();
+    }
+    
+    
+	/**
+	 *	批量发送油卡
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "batchSendCard")
+	@ResponseBody
+	public DatasetSimple<Map<String,Object>> batchSendCard(HttpServletRequest request) throws Exception {
+	        
+	        try{
+	            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;  
+		        List<MultipartFile> fileList = multipartRequest.getFiles("file_upload");  
+		        for (MultipartFile mf : fileList) {  
+		            if(!mf.isEmpty()){
+		            	if (mf.getOriginalFilename().toLowerCase().endsWith("xls")
+		            			|| mf.getOriginalFilename().toLowerCase().endsWith("xlsx")) {
+		            		Log4jHelper.getLogger().info("开始批量发送....."+mf.getOriginalFilename());
+			        		return oilUserService.batchSendCard(readInfoFromExcel(mf.getInputStream(),mf.getOriginalFilename()));
+		        		}else{
+		        			throw new BusinessException("导入用户失败!，导入文件格式不对！");
+		        		}
+		            	
+		            }  
+		        }  
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            throw e;
+	        }
+	        return DatasetBuilder.fromMessageSimple("本次导入文件为空！");
+	}
+	
+	private static List<Map<String, Object>> readInfoFromExcel(InputStream in,String fileName) throws Exception{
+		Workbook book = ExcelUtil.createWorkBook(in,fileName);
+		String[] paramNames = new String[]{"date","user_name","phone","che_pai","money","address"};
+		List<Map<String, Object>> data = ExcelUtil.getRecodeMapByExcel(book,0,paramNames,1,1000);
+		Iterator<Map<String, Object>> it = data.iterator();
+		while(it.hasNext()){
+			Map<String, Object> m = it.next();
+			if(m.size()!=6){
+				throw new BusinessException("手机号码格式错误！");
+			}
+			if(m.get("user_name")==null || m.get("phone")==null 
+					|| m.get("money")==null){
+				throw new BusinessException("模板信息不全！用户名、手机号、金额必须填写！");
+			}
+			if(!(m.get("phone").toString()).matches("\\d{11}")){
+				throw new BusinessException("手机号码格式错误！");
+			}else{
+				m.put("phone", m.get("phone").toString());
+			}
+			
+			if(!m.get("money").toString().matches("\\d+")){
+				throw new BusinessException("金额格式不对！");
+			}
+			Log4jHelper.getLogger().info(m);
+		}
+		Log4jHelper.getLogger().info("total size : " + data.size());
+		System.err.println(data.toString());
+		return data;
+	}
+   
+	 /**
+	  * 修改服务商
+	  * @param request
+	  * @param oilConfig
+	  * @return
+	  */
+    @RequestMapping(value="updateconfig",method=RequestMethod.POST)
+    @ResponseBody
+    @AuthAction
+    public DatasetSimple<OilConfig> updateOilConfig(HttpServletRequest request,OilConfig oilConfig) {
+        return oilUserService.updateOilConfig(oilConfig);
+    }
+    
+    /**
+     * 查询服务商
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="queryconfig",method=RequestMethod.POST)
+    @ResponseBody
+    @AuthAction
+    public DatasetSimple<OilConfig> queryOilConfig(HttpServletRequest request) {
+        return oilUserService.queryOilConfig();
+    }
+    
+    /**
+     * 查询油卡订单记录
+     * @param request
+     * @param pageNo
+     * @param pageSize
+     * @param oilTransLog
+     * @return
+     */
+    @RequestMapping(value="queryoilorder",method=RequestMethod.POST)
+    @ResponseBody
+    @AuthAction
+    public DatasetList<Map<String,Object>> queryOilOrder(HttpServletRequest request,@Regex("\\d+") String pageNo,
+    		@Regex("\\d+") String pageSize,OilTransLog oilTransLog,String oilCompType,String oilCardNumber) {
+        return oilUserService.queryOilOrderLog(Integer.valueOf(pageNo),Integer.valueOf(pageSize),oilTransLog,Byte.valueOf(oilCompType),oilCardNumber);
+    }
+    
+
+    @RequestMapping("exportoilexcel")
+    public void exportOilExcel(HttpServletRequest request,HttpServletResponse response,
+    		@Required String oilCompType,@Required String date) {
+    	DatasetList<Map<String, String>> data = oilUserService.exportOilExcel(oilCompType,date);
+    	ExportExcelData.export(request, response, data.getList(), "油卡订单信息"+date, 
+    			new String[]{"服务商","订单号","订单类型","用户账号","充值卡号","充值金额","充值后余额",
+    					"订单状态","创建时间"},
+    			new String[]{"oilComp","orderNo","orderType","userPhone",
+    					"cardNo","money","surplusMoney","status","createTime"},
+    			"sheet0");
+    }
+    
+    /**
+     * 导出油卡使用情况
+     * @param request
+     * @param response
+     * @param startCode
+     * @param endCode
+     */
+    @RequestMapping("exportoilcodeexcel")
+    public void exportOilCodeExcel(HttpServletRequest request,HttpServletResponse response,
+    		@Required String startCode,@Required String endCode) {
+    	DatasetList<Map<String, String>> data = oilUserService.exportOilCodeExcel(startCode,endCode);
+    	ExportExcelData.export(request, response, data.getList(), "该序号段（"+startCode+"-"+endCode+"）的油卡详情", 
+    			new String[]{"序号","面值","使用情况","城市","到期日期"},
+    			new String[]{"phone","money","status","address","expiredTime"}, "sheet0");
+    }
+    /**
+     * 开卡之前先查询该批卡的详细信息
+     * @param request
+     * @param pageNo
+     * @param pageSize
+     * @param startCode
+     * @param endCode
+     * @return
+     */
+    @RequestMapping(value="findoilcard",method=RequestMethod.POST)
+    @ResponseBody
+    @AuthAction
+    public DatasetList<Map<String,Object>> findOilCard(HttpServletRequest request,
+    	   @Required @Regex("\\d+") String pageNo,
+    	   @Required @Regex("\\d+") String pageSize,
+    	   @Required @Regex("\\d+") String startCode,
+		   @Required @Regex("\\d+") String endCode){
+       return oilUserService.findOilCard(Integer.valueOf(pageNo),
+    		   Integer.valueOf(pageSize),startCode,endCode);
+    }
+    
+   @RequestMapping(value="openOil",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetSimple<Map<String,String>> openOilCard(HttpServletRequest request,
+		   @Required @Regex("\\d+") String startCode,
+		   @Required @Regex("\\d+") String endCode,
+		   @Required String address,
+		   @Required @Regex("\\d+") String supplier,//供应商
+		   @Required String buyer,//购买方
+		   String remark,String proposer){//申请人
+	   
+	   return oilUserService.updateOilCard(startCode,endCode,address,
+			   supplier,buyer,remark,proposer);
+   }
+   
+   /**
+    * 油卡批次接口列表
+    * @param request
+    * @return
+    */
+   @RequestMapping(value="oilBatchList",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetList<Map<String,Object>> oilBatchList(HttpServletRequest request,@Required Integer pageNo,
+		   @Required Integer pageSize,String openTime,
+		   String startNum,String endNum,String supplier) {
+       return oilUserService.queryOilBatchList(pageNo, pageSize,
+    		   openTime,startNum,endNum,supplier);
+   }
+   
+   /**
+    * 油卡明细接口列表
+    * @param request
+    * @return
+    */
+   @RequestMapping(value="oilDetailList",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetList<Map<String, Object>> oilDetailList(HttpServletRequest request,@Required Integer pageNo,
+		   @Required Integer pageSize,@Required @Regex("\\d+") String startNum,@Required @Regex("\\d+") String endNum,String startCode,String endCode) {
+       return oilUserService.queryOilDetailList(pageNo, pageSize,startNum,endNum,startCode,endCode);
+   }
+   
+   /**
+    * 油卡核销界面
+    * @param request
+    * @param pageNo
+    * @param pageSize
+    * @param startNum
+    * @param endNum
+    * @param num
+    * @param address
+    * @param date
+    * @param status
+    * @param batchDate
+    * @param batchNum
+    * @return
+    */
+   @RequestMapping(value="oilCheckList",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetList<Map<String, Object>> oilCheckList(HttpServletRequest request,
+		   @Required Integer pageNo,@Required Integer pageSize,
+		    String startNum, String endNum,
+		    String num,String address,String date,
+		   String status,String batchDate,Integer batchNum) {
+       return oilUserService.queryOilCheckList(pageNo, pageSize,startNum,endNum,num,address,date,status,batchDate,batchNum);
+   }
+   
+  
+   /**
+    * 批量或单独冻结或解冻油卡信息
+    * @param request
+    * @param startNum
+    * @param endNum
+    * @param num
+    * @param status
+    * @return
+    */
+   @RequestMapping(value="freezeoil",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetSimple<Integer> freezeOilCard(HttpServletRequest request,
+		    String startNum, String endNum,
+		    String num, @Required @Regex("^[0,1]$") String status) {
+       if(StringUtils.isNotEmpty(num)){
+    	   return oilUserService.freezeOilCardTwo(num,status); 
+       }else if(StringUtils.isNotEmpty(startNum)&&StringUtils.isNotEmpty(endNum)){
+    	   return oilUserService.freezeOilCard(startNum,endNum,status);
+       }else{
+    	   throw new BusinessException("参数序号不正常");
+       }
+	   
+   }
+   
+   /**
+    * 导出查询出的油卡核销信息
+    * @param request
+    * @param response
+    * @param startNum
+    * @param endNum
+    * @param num
+    * @param address
+    * @param date
+    * @param status
+    * @param batchDate
+    * @param batchNum
+    */
+   @RequestMapping(value="exportoilchecklist")
+   @AuthAction
+   public void exportOilCheckList(HttpServletRequest request,
+		   HttpServletResponse response,
+		    String startNum, String endNum,
+		    String num,String address,String date,
+		   String status,String batchDate,Integer batchNum) {
+	   DatasetList<Map<String, String>> data = oilUserService.exportOilCheckList(startNum,
+			   endNum,num,address,date,status,batchDate,batchNum);
+
+       ExportExcelData.export(request, response, data.getList(), "导出查询出的油卡核销信息", 
+       			new String[]{"序列号","批次","充值账户","金额","开通城市","状态","时间","备注"},
+       			new String[]{"phone","batchCode","userPhone","moeny","address","status","date",
+       					"remark"}, "sheet0");
+   }
+   
+   /**
+    * 更新批量备注
+    * @param request
+    * @return
+    */
+   @RequestMapping(value="updatebatchremark",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetSimple<String> updateBatchRemark(HttpServletRequest request,OilBatch oilBatch) {
+       return oilUserService.updateBatchRemark(oilBatch.getRemark(), oilBatch.getId());
+   }
+   
+   /**
+    * 批次号联动
+    * @param request
+    * @param openTime
+    * @return
+    */
+   @RequestMapping(value="batchlinkage",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetList<Map<Integer,String>> batchLinkage(HttpServletRequest request,String openTime,String batchNum) {
+       return oilUserService.batchLinkage(openTime,batchNum);
+   }
+   
+   /**
+    * 油卡订单记录页，根据账户手机号或订单号导出油卡订单信息
+    * @param request
+    * @param response
+    * @param userPhone
+    * @param orderNo
+    */
+   @RequestMapping("exportuseroilexcel")
+   public void exportUserOilExcel(HttpServletRequest request,HttpServletResponse response,
+   		 String userPhone,String orderNo) {
+		String flag = "";
+	   	if(StringUtils.isEmpty(userPhone)&&StringUtils.isEmpty(orderNo)){
+	   		throw new BusinessException("账户手机号或订单号必填一个");
+	   	}
+	   	if(StringUtils.isEmpty(userPhone)&&StringUtils.isNotEmpty(orderNo)){
+	   		flag = "订单号"+orderNo+"的油卡订单信息";
+	   	}else if(StringUtils.isNotEmpty(userPhone)&&StringUtils.isNotEmpty(orderNo)){
+	   		flag = userPhone+"的"+orderNo+"油卡订单信息";
+	   	}else if(StringUtils.isNotEmpty(userPhone)&&StringUtils.isEmpty(orderNo)){
+	   		flag ="账户"+userPhone+"的油卡订单信息";
+	   	}
+   	DatasetList<Map<String, String>> data = oilUserService.exportUserOilExcel(userPhone,orderNo);
+   
+   	ExportExcelData.export(request, response, data.getList(), flag, 
+   			new String[]{"服务商","订单号","订单类型","用户账号","充值卡号","充值金额","充值后余额",
+   					"订单状态","创建时间"},
+   			new String[]{"supplier","orderSn","orderType","userPhone",
+   					"cardNo","money","surplusMoney","status","createTime"},
+   			"sheet0");
+   }
+   
+   /**
+    * 根据油卡卡号查询该卡详细消费信息
+    * @param request
+    * @param pageNo
+    * @param pageSize
+    * @param cardNo
+    * @return
+    */
+   @RequestMapping(value="oilcardorderlist",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetList<Map<String, Object>> oilcardOrderList(
+		   HttpServletRequest request,@Required Integer pageNo,
+		   @Required Integer pageSize,String cardNo
+		   ) {
+       return oilUserService.queryOilcardOrderList(Integer.valueOf(pageNo), 
+    		   Integer.valueOf(pageSize),cardNo);
+   }
+   
+   /**
+    * 新查询油卡订单记录
+    * @param request
+    * @param pageNo
+    * @param pageSize
+    * @param userPhone
+    * @param orderNo
+    * @return
+    */
+   @RequestMapping(value="queryneworder",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetList<Map<String,Object>> queryNewOilOrder(HttpServletRequest request
+   		,@Regex("\\d+") String pageNo,@Regex("\\d+") String pageSize,
+   		String userPhone,String orderNo) {
+       return oilUserService.queryNewOilOrder(Integer.valueOf(pageNo),
+       		Integer.valueOf(pageSize),userPhone,orderNo);
+   }
+   
+   /**
+    * 新查询油卡订单记录子订单
+    * @param request
+    * @param pageNo
+    * @param pageSize
+    * @param userPhone
+    * @param orderNo
+    * @return
+    */
+   @RequestMapping(value="querynewchildorder",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetList<Map<String,Object>> queryNewChildOilOrder(
+		   HttpServletRequest request,
+		   @Required @Regex("\\d+")String parentOrderNo,
+		   @Required @Regex("\\d+")String orderType) {
+       return oilUserService.queryNewChildOilOrder(parentOrderNo,orderType);
+   }
+   /**
+    * 欧飞对账，导出欧飞油卡和话费订单
+    * @param request
+    * @param response
+    * @param date
+    */
+   @RequestMapping("exportoilexcelTwo")
+   public void exportOilExcelTwo(HttpServletRequest request,HttpServletResponse response,@Required String date) {
+   	DatasetList<Map<String, String>> data = oilUserService.exportOilExcelTwo(date);
+   	ExportExcelData.export(request, response, data.getList(), "油卡订单信息"+date, 
+   			new String[]{"服务商","订单号","订单类型","用户账号","充值卡号","充值金额","充值后余额",
+   					"订单状态","创建时间","接口提供者"},
+   			new String[]{"oilComp","orderNo","orderType","userPhone",
+   					"cardNo","money","surplusMoney","status","createTime","provider"},
+   			"sheet0");
+   }
+   
+   /**
+    * 查询追电账户信息列表
+    * @param request
+    * @param pageSize
+    * @param pageNo
+    * @param phone
+    * @return
+    */
+   @RequestMapping(value="oiluserlist",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetList<OilUser> oilUserList(
+		   HttpServletRequest request,
+		   @Required @Regex("\\d+")String pageSize,
+		   @Required @Regex("\\d+")String pageNo,
+		   String phone) {
+       return oilUserService.oilUserList(Integer.valueOf(pageNo)
+    		   	,Integer.valueOf(pageSize),phone);
+   }
+   
+   /**
+    * 查询欧飞账户信息
+    * @param request
+    * @param pageSize
+    * @param pageNo
+    * @param company
+    * @return
+    */
+   @RequestMapping(value="ofuserlist",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetList<OilProvider> oilProviderList(
+		   HttpServletRequest request,
+		   @Required @Regex("\\d+")String pageSize,
+		   @Required @Regex("\\d+")String pageNo,
+		   String company) {
+       return oilUserService.oufeiUserInfoList(Integer.valueOf(pageNo)
+    		   	,Integer.valueOf(pageSize),company);
+   }
+   
+   /**
+    * 添加欧飞账户
+    * @param request
+    * @param userName
+    * @param userPassword
+    * @param company
+    * @param status
+    * @return
+    */
+   @RequestMapping(value="addoilprovider",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetSimple<String> addOilProvider(
+		   HttpServletRequest request,
+		   String userName,String userPassword,
+		   String company,String status) {
+       return oilUserService.addOilProvider(userName,userPassword,company);
+   }
+   
+   @RequestMapping(value="updateOilProvider",method=RequestMethod.POST)
+   @ResponseBody
+   @AuthAction
+   public DatasetSimple<String> updateOilProvider(
+		   HttpServletRequest request,String providerId,String userPassword) {
+       return oilUserService.updateOilProvider(providerId,userPassword);
+   }
+   
+   /**
+    * 导出昨日消费的油卡信息
+    * @param request
+    * @param response
+    */
+   @RequestMapping("exportoilcardorderexcel")
+   public void exportOilCardOrderExcel(HttpServletRequest request,
+		   HttpServletResponse response,String date) {
+   	DatasetList<Map<String, String>> data = oilUserService.exportOilCardOrderExcel(date);
+   	ExportExcelData.export(request, response, data.getList(), date+"消费油卡订单信息", 
+   			new String[]{"时间","序号","金额","供应商","开通城市"},
+   			new String[]{"orderTime","cardNo","cardMoney","provider","address"},
+   			"sheet0");
+   }
+   
+}

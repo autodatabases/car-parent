@@ -1,0 +1,75 @@
+<link rel="stylesheet" type="text/css" href="resources/css/oilcard/denomination_config.css"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/oilcard/denomination_config.js?t=1.0"></script>
+<div class="tables-top">
+	<p class="crumbs">
+		<span>您的位置：</span><a>增值服务</a>&nbsp;》<a class="on">油卡充值面额配置</a>
+	</p>
+	<!-- 切换头部 -->
+	<div class="tab-top">
+		<span class="on">欧&nbsp;&nbsp;&nbsp;&nbsp;飞
+			<ul style="display:none">
+				<li rel="1" als="0">中石化</li>
+				<li rel="1" als="1">中石油</li>
+				<li rel="1" als="2">话费</li>
+			</ul>
+		</span>
+    	<span>高阳迅捷
+			<ul style="display:none">
+				<li rel="2" als="0">中石化</li>
+				<li rel="2" als="1">中石油</li>
+				<li rel="2" als="2">话费</li>
+			</ul>
+		</span>
+
+		<div id="add_denomination">新增面额</div>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>服务商</th>
+					<th>油卡厂商</th>
+					<th>产品编号</th>
+					<th>面额</th>
+					<th>状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--<tr>
+					<td>天河万里行轮胎店</td>
+					<td>马牌门店</td>
+					<td>快修店</td>
+					<td>刘艳会</td>
+					<td>13802910637</td>
+					<td><a>编辑</a><a>停用</a></td>
+				</tr>-->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="denomination_paga"></div>
+</div>
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p style="float: left;">信息弹窗</p>
+			<span onclick="audit_close()" class="close">x</span>
+		</div>
+    <div class="tips-center">
+			<p style="text-align:center;font-size:26px;">是否确认删除此面额</p>
+		</div>
+		<div class="tips-bottom" style="border-top:1px dashed #ccc">
+			<input type="button" class="ok_btn" onclick="audit_button()"
+				value="确认" /> <input type="button" onclick="audit_close()"
+				value="关闭" />
+		</div>
+	</div>
+</div>

@@ -1,0 +1,102 @@
+@charset "utf-8";
+.header{
+	background: #fff;
+	position: relative;
+	border-bottom: 1px solid #e0e0e0;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/coupon/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+/* 管理 */
+.list dt{
+	display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
+    display: -moz-box; /* Firefox 17- */
+    display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
+    display: -moz-flex; /* Firefox 18+ */
+    display: -ms-flexbox; /* IE 10 */
+    display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */
+	margin-bottom: 0.75rem;
+	overflow: hidden;
+}
+.list dt a{
+	display: inline-block;
+	-webkit-flex: 1;
+	-moz-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	float: left;
+	text-align: center;
+	width:33.333333%;
+	background: #f5f5f5;
+	padding: 0.5rem 0;
+	font-size: 1rem;
+}
+.list dt a.on{
+	background: #fff;
+	color: #ff3e5b;
+}
+.list dt i{
+	font-style: normal;
+	display: block;
+}
+.list dt span{
+	font-size: 0.75rem;
+}
+.list dd{
+	border-bottom:1px solid #eaeaea;
+	border-top:1px solid #eaeaea;
+	background: #fff;
+	margin-bottom: 0.75rem;
+}
+.list-top{
+	border-bottom:1px solid #eaeaea;
+	font-size: 12px;
+	padding:5px 0.625rem;
+}
+.list-bottom{
+	border-top:1px solid #eaeaea;
+}
+.list-bottom span{
+	float: right;
+}
+.list-main{
+	font-size: 0.75rem;
+	padding: 0.625rem 0 0.625rem 0.625rem;
+	overflow: hidden;
+	position: relative;
+}
+.list-main div{
+	line-height: 2;
+	vertical-align: top;
+}
+.list-main>span{
+	position: absolute;
+	top: 10%;
+	right: 0.625rem;
+	font-size: 1rem;
+	color: #ff3e5b;
+}
+.list-main div label{
+	width: 3.75rem;
+	display: inline-block;
+	/*text-align: justify;
+    text-align-last: justify;*/
+   text-align: right;
+}
+.list-main div span{
+	display: inline-block;
+	width:60%;
+	vertical-align: top;
+}
+

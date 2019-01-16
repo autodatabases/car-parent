@@ -1,0 +1,19 @@
+remote.service.url=${remote.service.url}
+
+login.url=/auth/login.html
+auth.token.name=CAR_SELLER_TOKEN
+# Redis settings
+#redis.host=${redis.host}
+redis.port=${redis.port}
+redis.pass=${redis.pass}
+
+redis.maxIdle=${redis.maxIdle}
+redis.maxTotal=${redis.maxTotal}
+redis.maxWait=${redis.maxWait}
+redis.testOnBorrow=${redis.testOnBorrow}
+
+wx.domain=${wx.domain}
+wx.token=${wx.token}
+wx.encodingAESKey=${wx.encodingAESKey}
+wx.corpId=${wx.corpId}
+wx.secret=${wx.secret}

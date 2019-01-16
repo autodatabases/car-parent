@@ -1,0 +1,74 @@
+html,body {
+	background: #fff;
+}
+.header{
+	background: #fff;
+	position: relative;
+	background: #FF3E5B;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+	color: #fff;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/dot/back-fff.png) no-repeat center;
+	background-size:20% ;
+}
+.content {
+	width: 100%;
+	overflow: hidden;
+}
+.search {
+	width: 100%;
+	height: 31px;
+	background: #cac9cf;
+	padding-top: 6px;
+	position: relative;
+}
+.search input {
+	display: block;
+	width: 94%;
+	border-radius: 5px;
+	background: #fff;
+	border: 0;
+	height: 25px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 12px;
+}
+.search span {
+	display: block;
+	height: 20px;
+	width: 40%;
+	position: absolute;
+	top: 8px;
+	left: 30%;
+	background: url(../../imgs/guoshou/serach.png) no-repeat left center;
+	background-size: 9%;
+	color: #ccc;
+	padding-left: 22px;
+	font-size: 12px;
+	line-height: 20px;
+}
+.dot_list {
+	width: 100%;
+	overflow: hidden;
+}
+.dot_list li {
+	height: 60px;
+	width: 100%;
+	font-size: 16px;
+	line-height: 60px;
+	padding-left: 20px;
+	box-sizing: border-box;
+}
+.dot_list li:nth-child(even) {
+	background: #eee;
+}

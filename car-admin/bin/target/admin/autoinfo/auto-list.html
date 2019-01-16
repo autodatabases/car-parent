@@ -1,0 +1,123 @@
+<link rel="stylesheet" type="text/css" href="resources/css/autoinfo/auto-list.css?t=1.1"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/autoinfo/auto-list.js?t=1.2"></script>
+<div class="tables-top">
+	<!--所处位置  -->
+	<p class="crumbs">
+		<span>您的位置：</span><a>商品</a>&nbsp;》<a class="on">车型列表</a>
+	</p>
+	<!-- 切换头部 -->
+	<div class="tab-top">
+		<span class="on">车型列表</span>
+		<div id="add_autoInfo">+添加新车型</div>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>品牌:</label>
+				<input type="text" id="brand" />
+			</li>
+			<li>
+				<label>车系:</label>
+				<input type="text" id="autolineName" />
+			</li>
+			<li>
+				<label>生产年份:</label>
+				<input type="text" id="productTime" />
+			</li>
+			<li>
+				<label>排量:</label>
+				<input type="text" id="engineDisp" />
+				<button>
+					<span id="search">搜索</span>
+				</button>
+				<button style="background:#f7f7f7;">
+					<span id="addAuto" style="margin-left: 5px;">添加车型</span>
+				</button>
+			</li>
+		</ul>
+	</div>
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>品牌</th>
+					<th>车系</th>
+					<th>生产年份</th>
+					<th>排量</th>
+					<th>机油用量</th>
+					<th>匹配机滤Id</th>
+					<th>匹配机油Id</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="autoInfo_paga"></div>
+</div>
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p class="wenzi" style="float: left;">是否删除该车型</p>
+			<span onclick="auto_close()" class="close">x</span>
+		</div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="auto_button()"
+				value="确认" /> <input type="button" onclick="auto_close()"
+				value="关闭" />
+		</div>
+	</div>
+</div>
+<style>
+	#rela dd,#rela dt{
+		height: 50px;
+	}
+	#rela input[type=button]{
+		border: 1px soild #efefef;
+		background: #f7f7f7;
+		padding: 5px 10px;
+		width: 100px;
+		margin: 10px 10px;
+		cursor:pointer;
+		font-weight: bold;
+	}
+</style>
+<!-- 关联弹层 -->
+<div id="rela" style="display:none;background: #fff;border:5px solid #34e461;box-shadow:20px 20px 5px #888888;
+border-radius:5px;
+position: fixed;top: 30%;left: 30%;width: 300px;height: 200px;padding: 50px 10%;">
+	<div>
+		<dl>
+			<dt>
+				<span>关联配件</span>
+				<input type="hidden" id="autoId" value="" />
+			</dt>
+			<dd>
+				<label>配件类型：</label> <select id="type">
+					<option value="2">机滤</option>
+					<option value="25">机油</option>
+				</select>
+			</dd>
+			<dd>
+			<input type="hidden" id="autoId"/>
+				<label>配件id：</label><input type="text" id="autoPartId" value="" style="border: 1px solid #efefef;padding: 5px;"/>
+			</dd>
+		</dl>
+		<div>
+			<input type="button" class="action-btn" id="submitRelation" value="提交" />
+			<input type="button" class="action-btn"
+				onclick="fanhui()" value="取消" />
+		</div>
+	</div>
+</div>

@@ -1,0 +1,48 @@
+.header{
+	background: #fff;
+	position: relative;
+	background: #FF3E5B;
+}
+.header h1{
+	font-size: 16px;
+	line-height: 2.75rem;
+	text-align: center;
+	color: #fff;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/index/back-fff.png) no-repeat center;
+	background-size:20% ;
+}
+/* 品牌 */
+.brand{
+	background: #fff;
+	height:2.125rem;
+	line-height:2.125rem;
+	font-size: 16px;
+}
+.brand img{
+	width:1.4375rem;
+	height: 1.4375rem;
+	margin: 0.34375rem 0.625rem;
+}
+/* 排量列表 */
+.list dt{
+	background: #f2f2f2;
+	line-height: 1.4375rem;
+	padding-left:0.9375rem ;
+	border-top: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	font-size: 15px;
+}
+.list dd{
+	background: #fff;
+	line-height: 2.4375rem;
+	padding-left:0.9375rem ;
+	font-size: 14px;
+	border-bottom: 1px solid #e0e0e0;
+}

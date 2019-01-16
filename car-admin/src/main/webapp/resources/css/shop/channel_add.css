@@ -1,0 +1,262 @@
+/* 表单 */
+.tables{
+	float: left;
+	width: 90%;
+	min-height:500px;
+	background: #fff;
+}
+.tables>div{
+	border-left: 1px solid #ccc;
+}
+.tables-top{
+	padding-top:20px;
+    background: url(../../imgs/com/noise.white.png);
+	border-bottom: 1px solid #ccc;
+}
+.tab-top{
+	width: 90%;
+    padding: 0 20px;
+    margin-bottom: -1px;
+}
+.tab-top span{
+	display: inline-block;
+    padding: 10px 20px;
+    background: #ccc;
+    color: #fff;
+    font-size: 14px;
+    -moz-border-radius: 2px 2px 0 0;
+    -webkit-border-radius: 2px 2px 0 0;
+    border-radius: 2px 2px 0 0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.tab-top span:hover{
+    color: #fc9338;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+.tab-top span.on{
+    color: #fc9338;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.tabels-main{
+	padding: 30px;
+}
+.tabels-main dl{
+	border-bottom: 1px dashed #d2d2d2;
+	padding-bottom:0px;
+	margin-bottom: 20px;
+}
+.tabels-main dl dt{
+	padding-bottom: 10px;
+}
+.tabels-main dl dt span{
+	display: inline-block;
+	border-bottom: 4px solid #fb9337;
+	line-height: 40px;
+	font-size: 20px;
+	padding: 0 10px;
+
+}
+.tabels-main dl dd{
+	padding: 5px 0;
+}
+.tabels-main dl dd label{
+	display: inline-block;
+	line-height: 32px;
+	width:180px;
+	text-align: right;
+}
+.myInp{
+	border:1px solid #dbdbdb;
+	border-radius:3px;
+	height:30px;
+	width: 260px;
+	margin-right: 10px;
+	text-indent: 5px;
+	background: #fff;
+}
+
+.myLitInp{
+	border:1px solid #dbdbdb;
+	border-radius:3px;
+	height:30px;
+	width: 120px;
+	margin-right: 10px;
+	text-indent: 5px;
+	background: #fff;
+}
+
+.tabels-main dl dd .myCbox{
+	border:1px solid #dbdbdb;
+	border-radius:3px;
+	height:30px;
+	margin-right: 10px;
+	text-indent: 5px;
+	background: #fff;
+}
+
+.tabels-main dl dd.upload{
+	overflow: hidden;
+}
+.tabels-main dl dd.upload div div{
+	float: left;
+	width:150px;
+	height:150px;
+	border:1px solid #ddd;
+	position: relative;
+	margin-right: 20px;
+}
+.tabels-main dl dd.upload div.img-warp{
+	width:100%;
+	overflow: hidden;
+}
+.tabels-main dl dd.upload div.upload-btn{
+	border:2px dashed #ddd;
+	background: #efefef url(../../imgs/com/add-img.png) no-repeat;
+}
+.tabels-main dl dd.upload div div input{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	cursor: pointer;
+	opacity: 0;
+	filter:alpha(opacity:0);
+	z-index: 10;
+}
+.tabels-main dl dd.upload div div.img-box img{
+	width: 100%;
+	height: 100%;
+}
+.tabels-main dl dd.upload p{
+	padding: 20px;
+}
+
+/*弹窗*/
+.tips-warp .tips-box {
+	width: 500px;
+	margin-left: -250px;
+	margin-top: -200px;
+	top: 50%;
+	z-index: 99;
+	animation: none;
+	-webkit-animation: none;
+	-moz-animation: none;
+	-o-animation: none;
+}
+.tips-warp .tips-center {
+	margin: 10px 0;
+}
+.tips-warp .tips-bg{
+	z-index: 89;
+}
+.tips-warp .tips-center input{
+	border: 1px solid #ccc;
+	width: 200px;
+	height: 30px;
+	border-radius: 5px;
+	line-height: 30px;
+	text-align: center;
+	font-size: 12px;
+	margin: 0;
+}
+.tips-warp .tips-center .myInp{
+	width: 200px;
+}
+.tips-warp .tips-center .myLitInp{
+	width: 90px;
+}
+
+.tips-warp .tips-center p{
+	padding-left: 80px;
+	text-align: left;
+}
+.action-btn{
+	padding: 10px 15px;
+	border:1px solid #ef811f;
+	background: #fc9338;
+	color:#fff;
+	font-size:16px;
+	border-radius: 3px;
+	width: 150px;
+	margin-left: 50px;
+	cursor:pointer;
+}
+
+.my-action-btn{
+	padding: 0px 15px;
+	border:1px solid #ef811f;
+	background: #fc9338;
+	color:#fff;
+	font-size:16px;
+	border-radius: 3px;
+	width: 175px;
+	cursor:pointer;
+}
+
+.tabels-main dl dd select{
+	width:8%;
+}
+
+.inBlock{
+	display: inline-block;
+}
+
+#jiyouList tr td{
+	width: 100px;
+	height: 25px;
+}
+#jiyouList tr td span{
+	font-size: 20px;
+	cursor:pointer;
+	display: inline-block;
+}
+.carType{
+	display: none;
+}
+.carType1{
+	display: none;
+}
+#carTypeList ul{
+	overflow:hidden;
+	margin-left: 110px;
+}
+#carTypeList ul li{
+	float:left;
+	text-align: center;
+	height: 25px;
+	margin-left:25px;
+}
+#carTypeList ul li span{
+	margin-left:10px;
+}
+#fwBao  tr td{
+	text-align: center;
+	border: 1px solid #ddd;
+}
+
+#fwBao{
+	margin-left: 50px;
+}
+
+#fwBao  tr th{
+	width: 100px;
+	height: 25px;
+	text-align: center;
+	border: 1px solid #ddd;
+	background: #f7f7f7;
+}
+#fwBao  tr th:first-child{
+	width: 200px;
+}
+
+#fwbList tr td span{
+	font-size: 20px;
+	cursor:pointer;
+	display: inline-block;
+}

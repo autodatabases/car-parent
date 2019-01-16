@@ -1,0 +1,315 @@
+.header{
+	background: #fff;
+	position: relative;
+	background: #FF3E5B;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+	color: #fff;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/dot/back-fff.png) no-repeat center;
+	background-size:20% ;
+}
+.header input{
+	width: 65%;
+	margin: 0 15%;
+	border-radius: 5px;
+	background: #fff;
+	position: absolute;
+	z-index: 100;
+	border: 1px solid #efefef;
+	height: 1.8rem;
+	top: 0.3725rem;
+	font-size: 0.75rem;
+	padding:0 5px;
+	display: none;
+}
+.header span.search-btn{
+	position: absolute;
+	top:0;
+	right: 0.75rem;
+	font-size: 0.75rem;
+	line-height:2.75rem;
+	display:block;
+	width:10%;
+	height: 100%;
+	text-align:center;
+	color: #fff;
+	background: url(../../imgs/index/search-write.png) no-repeat center;
+	background-size:75% ;
+}
+.header span.on{
+	background: none;
+}
+.header span.on:before{
+	content: "取消";
+}
+/* tab-list */
+.tab-list dt{
+	font-size: 14px;
+	border-bottom: 1px solid #dbdbdb;
+	background: #fff;
+	position: relative;
+	min-height: 1.9375rem;
+}
+.tab-list dt div{
+	width: 25%;
+	border:none;
+	overflow: hidden;
+	float: left;
+	border-bottom:1px solid #ddd;
+	position: relative;
+	z-index: 11;
+	background: #fff;
+}
+.tab-list dt div span{
+	display: block;
+	height: 1.9375rem;
+	line-height: 1.9375rem;
+	font-size: 0.75rem;
+	border-right:1px solid #ddd;
+	background:#fff url(../../imgs/dot/xia.png) no-repeat 88% center;
+	background-size:24%;
+	margin:0 5px;
+}
+.tab-list dt div span.on{
+	background:#fff url(../../imgs/dot/xia_on.png) no-repeat 88% center;
+	background-size:24%;
+	color: #FF3E5B;
+}
+.tab-list .select-list {
+	display:none;
+}
+.tab-list dt div:nth-child(5) span{
+	border-right:1px solid #fff;
+}
+.tab-list dt ul{
+	display: none;
+	width: 100%;
+	height:13.3125rem;
+	overflow-y:scroll;
+	background: #fff;
+	position: absolute;
+	z-index: 10;
+	left: 0;
+    top: 1.9375rem;
+}
+.tab-list dt ul li{
+	margin: 0 10px;
+	border-bottom:1px solid #ddd;
+	line-height: 3;
+}
+.tab-list dt div.bg-box{
+	display: none;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background: rgba(0,0,0,.3);
+	z-index: 1;
+	left: 0;
+	top:  2.75rem;
+}
+/*  */
+.tab-list dd{
+	border-bottom:1px solid #e0e0e0;
+	border-top:1px solid #e0e0e0;
+	background: #fff;
+	margin-bottom: 5px;
+	padding: 10px;
+}
+.main{
+	overflow: hidden;
+}
+.main>div{
+	float: left;
+}
+.img-box{
+	margin-right: 10px;
+	width:20%;
+}
+.img-box p{
+	margin-top: 0.75rem;
+	font-size: 12px;
+	line-height: 1.25rem;
+	text-align: center;
+	color:#fff;
+}
+.img-box p.blue{
+	background:#4b92e4 ;
+}
+.img-box p.green{
+	background:#62bc5a;
+}
+.text-box{
+	width: 75%;
+	font-size: 0.75rem;
+	color: #6a6a6a;
+}
+.text-box h3{
+	font-size:1rem;
+	line-height: 1.2;
+}
+.text-t{
+	overflow: hidden;
+	line-height:0.825rem ;
+	margin: 10px 0;
+}
+.text-t p{
+	color: #eb5060;
+	float: left;
+}
+.text-t p i{
+	display: inline-block;
+	width: 0.75rem;
+    height: 0.75rem;
+    margin: 0 1px;
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+	vertical-align: top;
+}
+/* 状态1 */
+.text-t p.on-1 i:nth-child(1){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-1 i:nth-child(2){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-1 i:nth-child(3){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-1 i:nth-child(4){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-1 i:nth-child(5){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+/* 状态2 */
+.text-t p.on-2 i:nth-child(1){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-2 i:nth-child(2){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-2 i:nth-child(3){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-2 i:nth-child(4){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-2 i:nth-child(5){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+/* 状态3 */
+.text-t p.on-3 i:nth-child(1){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-3 i:nth-child(2){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-3 i:nth-child(3){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-3 i:nth-child(4){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-3 i:nth-child(5){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+/* 状态4 */
+.text-t p.on-4 i:nth-child(1){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-4 i:nth-child(2){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-4 i:nth-child(3){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-4 i:nth-child(4){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-4 i:nth-child(5){
+	background: url(../../imgs/dot/start2.png) no-repeat;
+	background-size:100% ;
+}
+/* 状态5 */
+.text-t p.on-5 i:nth-child(1){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-5 i:nth-child(2){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-5 i:nth-child(3){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-5 i:nth-child(4){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+.text-t p.on-5 i:nth-child(5){
+	background: url(../../imgs/dot/start1.png) no-repeat;
+	background-size:100% ;
+}
+
+.text-t>span{
+	float: right;
+}
+.text-t span b{
+	font-weight: normal;
+	color: #eb5060;
+}
+.text-b{
+	margin: 10px 0;
+	overflow: hidden;
+	line-height: 2;
+}
+.text-b p{
+	width:72%;
+	float: left;
+}
+.text-b span{
+	display: block;
+	width:28%;
+	float: right;
+	text-align: right;
+}
+.text-b a{
+	display: block;
+	float: right;
+	color:#FF3E5B;
+	border:1px solid #FF3E5B;
+	padding: 0 5px;
+	border-radius: 5px;
+	font-size: 12px;
+	margin-top: 15px;
+}

@@ -1,0 +1,86 @@
+package com.emate.shop.h5.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.emate.shop.web.aop.AuthAction;
+import com.emate.shop.web.aop.AuthUtil;
+
+@Controller
+@RequestMapping
+public class IndexController implements AuthUtil{
+	
+	/**
+	 * 首页
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/")
+	public String index(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		return "index";
+	}
+	
+	/**
+	 * 附近网点
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/dot.html")
+	@AuthAction
+	public String dot(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		return "dot/dot";
+	}
+	
+	/**
+	 * 跳转到电源订单页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/powerorder.html")
+	@AuthAction
+	public String toPowerOrder(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		return "repair/powerorder";
+	}
+	
+	/**
+	 * 消息列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/msg.html")
+	@AuthAction
+	public String msg(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		return "msg/msg";
+	}
+	
+	/**
+	 * 消息列表页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/msgdetail.html")
+	@AuthAction
+	public String msgdetail(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		return "msg/msg-details";
+	}
+
+	
+	/**
+	 * 用户注册协议
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/reg-agrment.html")
+	public String agrment(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		return "login/reg-agrment";
+	}
+}

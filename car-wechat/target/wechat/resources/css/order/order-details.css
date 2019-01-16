@@ -1,0 +1,166 @@
+@charset "utf-8";
+.header{
+	background: #fff;
+	position: relative;
+	border-bottom: 1px solid #e0e0e0;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/coupon/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+/* 详情 */
+.state{
+	text-align: center;
+	color: #ff3e5b;
+	font-size: 1rem;
+	line-height: 3rem;
+}
+.list dt{
+	text-align: center;
+	background: #fff;
+	border-top: 1px solid #eaeaea;
+	border-bottom: 1px solid #eaeaea;
+	padding: 0.8rem;
+	font-size: 0.75rem;
+	height: 1.25rem;
+	line-height: 1.25rem;
+	margin-bottom: 0.625rem;
+	overflow: hidden;
+}
+.list dt img{
+	width:1.25rem;
+	height:1.25rem;
+	margin-right: 5px;
+	vertical-align: top;
+}
+.list dt div{
+	display: inline-block;
+	margin: 0 auto;
+	width:40px;
+	height: 0.625rem;
+	line-height: 0.625rem;
+	vertical-align: top;
+	position: relative;
+}
+.list dt div img{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.list dd{
+	margin-bottom: 0.625rem;
+	background: #fff;
+}
+.car {
+	border-top: 1px solid #eaeaea;
+	font-size: 0;	
+}
+.car span{
+	font-size: 0.75rem;
+	display: inline-block;
+	width: 50%;
+	line-height: 1.875rem;
+	text-indent: 0.625rem;
+	border-bottom: 1px solid #eaeaea;
+}
+.list dd.goods{
+	margin-bottom:0;
+	overflow: hidden;
+	border-top: 1px solid #eaeaea;
+	border-bottom: 1px solid #eaeaea;
+}
+.list dd.goods img{
+	float: left;
+	width:4rem;
+	height:4rem;
+	margin: 0.5rem;
+	vertical-align: middle;
+}
+.list dd.goods div{
+	float: left;
+	width:70%;
+	font-size: 0.75rem;
+	padding: 0.5rem 0;
+}
+.list dd.order{
+	border-bottom: 1px solid #eaeaea;
+	padding: 0.8rem 0 0.8rem 0.5rem;
+}
+.list dd.order p{
+	line-height: 1.625rem;
+	font-size: 0.875rem;
+}
+.btn{
+	width:94%;
+	color: #FFF;
+	background:#ff3e5b ;
+	border:1px solid #ff3e5b;
+	border-radius: 5px;
+	margin-left: 3%;
+	margin-top:0.625rem;
+	margin-bottom:1.6rem;
+	height:2.5rem;	
+	font-size: 0.875rem;
+}
+
+/* 上传图片 */
+.upload-warp{
+	background: #fff;
+	border-top:1px solid #eaeaea;
+	border-bottom:1px solid #eaeaea;
+	margin-bottom: 1.6rem;
+}
+.upload-warp p{
+	border-bottom:1px solid #eaeaea;
+	padding:0 0.625rem;
+	line-height: 1.625rem;
+	height: 1.625rem;
+	font-size: 0.75rem;
+}
+.upload-warp p span{
+	float: right;
+	color: #ff3e5b;
+}
+#submit_form>p{
+	text-align: center;
+	font-size: 0.75rem;
+}
+.upload{
+	width: 5rem;
+	height: 5rem;
+	border:1px dashed #eaeaea;
+	margin:1rem 10px ;
+	background: url(../../imgs/busines/upload-bg.png) no-repeat center 35% ;
+	background-size:25% ;
+	text-align: center;
+	position: relative;
+	display:inline-block;
+}
+.upload span{
+	position: absolute;
+	bottom: 10%;
+	left: 0;
+	display: block;
+	width: 100%;
+	font-size: 0.75rem;
+}
+.upload input{
+	width:100%;
+	height: 100%;
+	opacity: 0;
+}
+
+
+
+
+

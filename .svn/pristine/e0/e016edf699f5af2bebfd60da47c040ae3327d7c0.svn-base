@@ -1,0 +1,20 @@
+<link rel="stylesheet" type="text/css" href="resources/css/product/product-list.css?t=1"/>
+<script src="resources/js/product/categoryManager.js?t=1.9"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>商品列表</a>&nbsp;》<a class="on">商品类目管理</a></p>
+	<div class="tab-top">
+		<div id="product_list">新增商品</div>
+		<div id="add_product">新增商品</div>
+		<span class="on">商品类目管理</span>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<div class="search-box clearfix">
+		<button class="search-btn">
+			<span>添加类目</span>
+		</button>
+	</div>
+	<div class="tab-list tab-list-send">
+	</div>
+</div>

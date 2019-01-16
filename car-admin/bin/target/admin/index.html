@@ -1,0 +1,129 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<title>惠+车服后台管理首页</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/com.css?t=1.5"/>
+	<link rel="stylesheet" type="text/css" href="resources/css/index/index.css?t=1.0"/>
+	<script src="resources/js/jquery/jquery.min.js"></script>
+	<script src="resources/js/common/common.js?t=1.4"></script>
+	<script src="resources/js/index.js?t=3.22"></script>
+</head>
+<body class="clearfix">
+	<!-- 提醒弹窗 -->
+	<div class="info-box" style="display:none;">
+		<span>×</span>
+		<p>您有新的订单，请您尽快处理！</p>
+		<b>确定</b>
+	</div>
+	<!-- 头部 -->
+	<div class="header clearfix">
+		<h1>惠+车服</h1>
+		<span>后台管理系统</span>
+		<span><i style="color:red;">您好[<font id="adminName"></font>]现在时间是：</i><i style="color:yellow;" id="nowTime"></i></span>
+		<div class="user-info">
+			<span>设置分页大小</span>
+			<select id="globalPageSize">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="15">15</option>
+				<option value="20">20</option>
+				<option value="25">25</option>
+			</select>
+			<span>管理员</span>
+			<span class="exit_login">退出</span>
+		</div>
+	</div>
+	<!-- 导航 -->
+	<div class="nav">
+		<div class="nav-warp clearfix">
+			<a href="" class="index"><i></i>首页</a>
+		</div>
+	</div>
+	<!-- 侧栏 -->
+	<div class="sidebar">
+		<ul>
+			<li class="on">
+				<a href="javascript:void(0)">后台首页</a>
+			</li>
+			<li style="display: none;">
+				<a href="javascript:void(0)">管理员列表</a>
+			</li>
+		</ul>
+	</div>
+	<!-- 表单 -->
+	<div class="tables" style="display:block;">
+		<div class="index-top" style="padding-top: 20px;display:none;">
+			<a href="javascript:void(0);" class="link-lan">
+				<img src="resources/imgs/index/icon-lan.png" alt="" />
+				<span>已完成订单</span><b id="finishOrder"></b>
+				<span>订单总量</span>	<b id="allOrders"></b>
+				<span></span><b></b>
+			</a>
+			<a href="javascript:void(0);" class="link-lv">
+				<img src="resources/imgs/index/icon-lv.png" alt="" />
+				<span>导入保单总数</span><b id="importPolicy"></b>
+				<span>国寿交易总金额</span>	<b id="allMoney"></b>
+				<span></span><b></b>
+			</a>
+			<a href="javascript:void(0);" class="link-cheng">
+				<img src="resources/imgs/index/icon-cheng.png" alt="" />
+				<span>已加盟商家</span><b id="seller"></b>
+				<span></span><b></b>
+			</a>
+			<a href="javascript:void(0);" class="link-cheng">
+				<img src="resources/imgs/index/icon-cheng.png" alt="" />
+				<span>已注册用户</span>	<b id="member"></b>
+				<span>已激活用户</span>	<b id="bindmember"></b>
+			</a>
+		</div>
+		<div class="index-top" style="display:none;">
+			<a href="javascript:void(0);" class="link-lan">
+				<img src="resources/imgs/index/icon-lan.png" alt="" />
+				<span>昨日下单 </span><p id="yesterdayOrder"></p>
+				<span>今日下单 </span><p id="todayOrder"></p>
+			</a>
+			<a href="javascript:void(0);" class="link-lv">
+				<img src="resources/imgs/index/icon-lv.png" alt="" />
+				<span>昨日绑定会员</span><b id="yesterdaymember"></b>
+				<span>今日绑定会员</span><b id="todaymember"></b>
+			</a>
+			<a href="javascript:void(0);" class="link-cheng">
+				<img src="resources/imgs/index/icon-cheng.png" alt="" />
+				<span>昨日导入保单</span><b id="yesterdayPolicy"></b>
+				<span>今日导入保单</span><b id="todayPolicy"></b>
+			</a>
+			<a href="javascript:void(0);" class="link-cheng">
+				<img src="resources/imgs/index/icon-cheng.png" alt="" />
+				<span>昨日新增商家</span><b id="yesterdaySeller">0</b>
+				<span>今日新增商家</span><b id="todaySeller">0</b>
+			</a>
+		</div>
+
+		<div class="user-box" style="display:none;">
+			<div class="user-right fr">
+				<p>系统信息</p>
+				<ul>
+					<li><label>当前操作系统：</label></li>
+					<li><label>当前数据库版本：</label>Mysql 5.0</li>
+					<li><label>服务器所在地：</label>北京</li>
+					<li><label>当前版本：</label>V2.0</li>
+				</ul>
+			</div>
+			<div class="user-left fl">
+				<p><i></i>用户身份</p>
+				<ul>
+					<li><label>管理员账号：</label>test</li>
+					<li><label>管理员组：</label>test</li>
+					<li><label>最后登录时间：</label>2016-11-02 16:40:38</li>
+					<li><label>最后登录IP/地址：</label>36.110.29.52</li>
+					<li><label>登录次数：</label>813</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

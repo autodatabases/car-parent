@@ -1,0 +1,153 @@
+/* 表单 */
+.tables{
+	float: left;
+	width: 90%;
+	height:500px;
+}
+.tables>div{
+	border-left: 1px solid #ccc;
+}
+.tables-top{
+	padding-top: 20px;
+    background: url(../../imgs/order/noise.white.png);
+	border-bottom: 1px solid #ccc;
+}
+
+.tab-top{
+	width: 90%;
+    padding: 0 20px;
+    margin-bottom: -1px;
+}
+.tab-top span{
+	display: inline-block;
+    padding: 10px 20px;
+    background: #ccc;
+    color: #fff;
+    font-size: 14px;
+    -moz-border-radius: 2px 2px 0 0;
+    -webkit-border-radius: 2px 2px 0 0;
+    border-radius: 2px 2px 0 0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.tab-top span:hover{
+    color: #fc9338;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+.tab-top span.on{
+    color: #fc9338;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+/* 列表 */
+.tabels-main{
+	padding: 20px 20px;
+	min-height: 400px;
+}
+.title{
+	padding: 20px 0;
+}
+.title span{
+	display: inline-block;
+	line-height: 50px;
+	font-size: 24px;
+	border-bottom: 3px solid #fc9338;
+}
+.tabels-main>select{
+	width: 140px;
+}
+.list{
+	border: 1px solid #e0e0e0;
+	margin-bottom: 30px;
+}
+.list table{
+	width: 100%;
+}
+.list table tr{
+	border-bottom: 1px solid #e0e0e0;
+}
+.list table tr td{
+	border-right: 1px solid #e0e0e0;
+	font-size: 14px;
+	padding:1% ;
+	width:10%;
+	font-size: 18px;
+	text-indent: 2%;
+}
+.list tr td:nth-child(2){
+	border-right:none;
+	width:90%;
+	text-indent: 0;
+}
+.list tr:nth-child(1) td input[type="text"]{
+	width:80%;
+}
+.list tr td input[type="text"]{
+	border:1px solid red;
+	border-radius: 5px;
+	width:;
+	height:32px;
+	border:1px solid #dcdcdc;
+	text-indent: 10px;
+	box-shadow: inset 1px 1px 5px rgba(0,0,0,.1);
+}
+.list tr td select{
+	width:140px;
+}
+.list tr td input[type="radio"]{
+	margin:0 10px;
+	width:20px;
+	height:20px;
+	vertical-align: bottom;
+}
+.list tr td>img{
+	width:154px;
+	height:135px;
+	margin-right: 20px;
+}
+.list tr td span{
+	display: inline-block;
+}
+.list tr td span img{
+	width:154px;
+	height:135px;
+}
+.list tr td i{
+	margin-right: 20px;
+	font-size: 16px;
+}
+.list tr td i:hover{
+	color: #0D8DDB;
+}
+.upload-btn{
+	width:154px;
+	height:135px;
+	position: relative;
+	cursor: pointer;
+}
+.upload-btn input{
+	width: 100%;
+	height:100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+.page-box{
+	padding: 10px;
+}
+.page-box input{
+	padding: 5px 40px;
+	background: #fc9338;
+	color: #fff;
+	border-radius: 3px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+#reset-btn{
+	background: #eee;
+	color: #333;
+}
+

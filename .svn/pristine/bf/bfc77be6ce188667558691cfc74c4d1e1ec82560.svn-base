@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>分类列表</title>
+		<link rel="stylesheet" type="text/css" href="../resources/css/com.css?v=时间戳或者随机数"/>
+		<link rel="stylesheet" type="text/css" href="../resources/css/article/classification-list.css" />
+	</head>
+	<body class="clearfix">
+		<!-- 头部 -->
+		<div class="header clearfix">
+			<h1>惠+车服</h1>
+			<span>后台管理系统</span>
+			<div class="user-info">
+				<span>管理员</span>
+			</div>
+		</div>
+		<!-- 导航 -->
+		<div class="nav">
+			<div class="nav-warp clearfix">
+				<a class="index"><i></i>首页</a>
+				<a class="goods"><i></i>商品</a>
+				<a class="busines"><i></i>商家</a>
+				<a class="order on"><i></i>订单</a>
+				<a class="statics"><i></i>报表</a>
+				<a class="statics"><i></i>会员</a>
+				<a class="statics"><i></i>系统</a>
+				<a class="statics"><i></i>文章</a>
+			</div>
+		</div>
+		<!-- 侧栏 -->
+		<div class="sidebar sidebar-on">
+			<ul>
+				<li class="on"><a>分类列表</a></li>
+				<li><a>文章列表</a></li>
+			</ul>
+		</div>
+		<!-- 表单 -->
+		<div class="tables tables-on">
+			<div class="tables-top">
+				<!-- 面包屑 -->
+				<p class="crumbs"><span>您的位置：</span><a>文章</a>&nbsp;》<a class="on">分类列表</a></p>
+			</div>
+			<!-- 列表 -->
+			<div class="tabels-main">
+				<!-- 搜索 -->
+				<div class="search-box clearfix">
+				    <span>新增分类</span>
+					<input type="text"  id=""/>
+					<button><span>搜索</span></button>
+				</div>
+				<!-- 表格 -->
+				<div class="tab-list">
+					<table>
+						<thead>
+							<tr>
+								<th>排序</th>
+								<th>文章分类</th>
+								<th>显示位置</th>
+								<th>是否可删除</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>关于我们</td>
+								<td>车资讯</td>
+								<td>是</td>
+								<td><a>编辑</a><a>删除</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- 分页 -->
+				<div class="page-box" id="busines_paga">
+							
+				</div>
+			</div>
+			<!-- 新增分类弹窗 -->
+			<div class="add-fenlei">
+				<div class="add-bg"></div>
+				<div class="add-box">
+					<p><b>新增文章分类</b><span>!提示</span><i>×</i></p>
+					<ul>
+						<li>
+							<p>分类名称<sup>*</sup>：</p>
+							<input type="text" id="" placeholder="请输入分类名称"/>
+						</li>
+						<li>
+							<p>显示位置</p>
+							<select name="">
+								<option value="">文章列表</option>
+							</select>
+						</li>
+						<li>
+							<p>分类排序<sup>*</sup>：</p>
+							<input type="number" min="0" id="" value="0"/>
+						</li>
+					</ul>
+					<div class="btn-box">
+						<button class="no-btn">放弃操作</button>
+						<button class="ok-btn">确认提交</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

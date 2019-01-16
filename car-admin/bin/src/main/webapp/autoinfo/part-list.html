@@ -1,0 +1,76 @@
+<link rel="stylesheet" type="text/css" href="resources/css/autoinfo/auto-list.css?t=1.0"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/autoinfo/parts-list.js?t=1.1"></script>
+<div class="tables-top">
+	<p class="crumbs">
+		<span>您的位置：</span><a>商品</a>&nbsp;》<a class="on">配件列表</a>
+	</p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>配件类型:</label>
+				<select id="partsTypeId">
+					<option value="2">机油滤清器</option>
+					<option value="25">机油</option>
+				</select>
+			</li>
+			<li>
+				<label>机油品牌:</label>
+				<select id="brand">
+					<option value="" selected="selected">全部</option>
+					<option value="嘉实多（Castrol）" selected="selected">嘉实多（Castrol）</option>
+					<option value="福斯（Fuchs）">福斯（Fuchs）</option>
+					<option value="美孚（Mobil）">美孚（Mobil）</option>
+					<option value="壳牌（Shell）">壳牌（Shell）</option>
+					<option value="百适通（Prestone）">百适通（Prestone）</option>
+					<option value="力魔（LIQUI MOLY）">力魔（LIQUI MOLY）</option>
+					<option value="道达尔（Total）">道达尔（Total）</option>
+					<option value="摩特（MOTUL）">摩特（MOTUL）</option>
+					<option value="锐先（RED LINE）">锐先（RED LINE）</option>
+					<option value="博世（BOSCH）">博世（BOSCH）</option>
+				</select>
+			</li>
+			<li>
+				<label>产品编码:</label>
+				<input type="text" id="productCode" />
+			</li>
+			<li>
+				<button id="search"><span>搜索</span></button>
+			</li>
+		</ul>
+	</div>
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>配件类型</th>
+					<th>产品编码</th>
+					<th>详细名称</th>
+					<th>价格</th>
+					<th>图片</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--<tr>
+					<td>天河万里行轮胎店</td>
+					<td>马牌门店</td>
+					<td>快修店</td>
+					<td>刘艳会</td>
+					<td>13802910637</td>
+					<td><a>编辑</a><a>停用</a></td>
+				</tr>-->
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="partsList_paga"></div>
+</div>
+</div>

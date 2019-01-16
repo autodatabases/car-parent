@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.emate.shop.mapper.DefinedMapper" >
+  <select id="queryAutoInfoMaxId" resultType="java.lang.Long" >
+  	select max(id) from auto_info
+  </select>
+    <select id="queryAutoPartsMaxId" resultType="java.lang.Long" >
+  		select max(id) from auto_parts
+  	</select>
+  	
+    <select id="queryTotalTradeAmount" resultType="java.lang.Float" >
+  		SELECT sum(service_money)+sum(money_amount) from orders where status != 4
+  	</select>
+  	
+  	<select id="queryTotalMoneyBycounterman" parameterType="hashmap" resultType="java.math.BigDecimal" >
+  		SELECT sum(order_price) from counterman_info
+  		 where  counterman_code = #{countermanCode}
+  		 and order_type = #{orderType}
+  		 and payment_time between #{startTime} and #{endTime}
+  	</select>
+  	<update id="updateCountermanCareer" parameterType="com.emate.shop.business.model.CountermanCareer">
+    	update counterman_career
+    	set
+       		cai_dot_name = #{caiDotName,jdbcType=VARCHAR}
+		where
+			cai_dot_id = #{caiDotId}
+  	</update>
+  	
+  	<update id="updateCounterman" parameterType="com.emate.shop.business.model.Counterman">
+    	update counterman
+    	set
+       		cai_dot_name = #{caiDotName,jdbcType=VARCHAR}
+		where 
+       		cai_dot_id =  #{caiDotId}
+  	</update>
+  	
+  	<update id="updateCountermanGood" parameterType="com.emate.shop.business.model.CountermanGood">
+    	update counterman_good
+    	set
+       		cai_dot_name = #{caiDotName,jdbcType=VARCHAR}
+		where 
+       		cai_dot_id =  #{caiDotId}
+  	</update>
+  	<delete id="delScoreChannel" parameterType="com.emate.shop.business.model.ScoreChannel">
+    	delete from score_channel
+		where 1=1
+       	 and city_name = #{cityName}
+  		 and channel = #{channel}
+  	</delete>
+  	<delete id="delCarwashConfig" parameterType="java.lang.String">
+    	delete from carwash_config
+		where 1=1
+       	 and city_name = #{cityName}
+  	</delete>
+  	  	
+  	 <select id="queryDotList" resultType="java.lang.String" parameterType="java.lang.String">
+  	 	SELECT DISTINCT dot from gs_agent
+  	 	where 1=1
+  	 	<if test="dotName != null and dotName!=''">
+       		and dot like #{dotName}
+      	</if>
+  	</select>
+  	<select id="queryOrderAnalysisList" resultType="hashmap" parameterType="hashmap">
+		select i.bao_dan as baoDan,date_format(o.create_time,'%Y-%m-%d')as dateTime,count(*) as number  from orders o
+		LEFT JOIN user_info u ON o.user_id = u.user_id
+		LEFT JOIN import_user_info i ON u.license = i.che_pai
+		where o.create_time  BETWEEN #{startTime} and #{endTime} and o.order_type = #{orderType}
+		GROUP BY i.bao_dan,date_format(o.create_time,'%Y-%m-%d');
+  	</select>
+  	
+  	<!-- 油卡统计 -->
+  	<select id="getOilMoneySummary1" resultType="java.lang.Float">
+		SELECT sum(money) from oil_recharge_code where che_pai != 'system'
+  	</select>
+  	
+  	<select id="getOilMoneySummary2" resultType="java.lang.Float">
+		SELECT sum(tarde_money) from oil_trans_log where trans_type = 0
+  	</select>
+  	
+  	<select id="getOilMoneySummary3" resultType="java.lang.Float">
+		SELECT sum(tarde_money) from oil_trans_log where trans_type != 0 and remark like '%成功%'
+  	</select>
+  	<select id="queryOrderNumByType" resultType="hashmap">
+		select o.order_type as orderType,count(*) as orderNum from orders o
+		LEFT JOIN user_info u ON o.user_id = u.user_id
+		LEFT JOIN import_user_info i on i.che_pai = u.license
+		where o.`status` != '4' and i.che_pai in 
+		<foreach collection="list" item="chePai" index="index"
+			open="(" close=")" separator=",">
+				#{chePai}
+		</foreach>
+		GROUP BY o.order_type;
+  	</select>
+   	<select id="queryOrderData" resultType="hashmap" parameterType="hashmap">
+		select o.user_id as userId,o.order_type as orderType,m.order_price as baoPrice,case 
+		when o.order_type = '3' then o.money_amount 
+		ELSE o.money_amount+o.service_money END as orderPrice from orders o
+		left join user_info u on o.user_id = u.user_id
+		left  join import_user_info m ON m.che_pai = u.license
+		where o.`status` != '4' and o.create_time BETWEEN #{startTime} 
+		and #{endTime} and m.address = #{address};
+  	</select> 
+  	<select id="queryOrderDataone" resultType="hashmap" parameterType="hashmap">
+		select o.user_id as userId,o.order_type as orderType,m.order_price as baoPrice,case 
+		when o.order_type = '3' then o.money_amount 
+		ELSE o.money_amount+o.service_money END as orderPrice from orders o
+		left join user_info u on o.user_id = u.user_id
+		left  join import_user_info m ON m.che_pai = u.license
+		where 
+			(o.`status` != '4' 
+				and o.create_time BETWEEN #{startTime} and #{endTime} 
+				and m.address = #{address}
+				and m.source like #{source}) or 
+			(o.`status` != '4' 
+				and o.create_time BETWEEN #{startTime} and #{endTime} 
+				and m.address = #{address}
+				and m.source = '销售渠道');
+  	</select>
+  	<select id="queryOrderDatatwo" resultType="hashmap" parameterType="hashmap">
+		select o.user_id as userId,o.order_type as orderType,m.order_price as baoPrice,case 
+		when o.order_type = '3' then o.money_amount 
+		ELSE o.money_amount+o.service_money END as orderPrice from orders o
+		left join user_info u on o.user_id = u.user_id
+		left  join import_user_info m ON m.che_pai = u.license
+		where 
+			o.`status` != '4' 
+				and o.create_time BETWEEN #{startTime} and #{endTime} 
+				and m.address = #{address}
+				and m.source like #{source} ;
+  	</select>
+  	<select id="queryOrderDatathree" resultType="hashmap" parameterType="hashmap">
+		select o.user_id as userId,o.order_type as orderType,m.order_price as baoPrice,case 
+		when o.order_type = '3' then o.money_amount 
+		ELSE o.money_amount+o.service_money END as orderPrice from orders o
+		left join user_info u on o.user_id = u.user_id
+		left  join import_user_info m ON m.che_pai = u.license
+		where 
+			o.`status` != '4' 
+				and o.create_time BETWEEN #{startTime} and #{endTime} 
+				and m.address = #{address}
+				and m.source like #{source};
+  	</select>
+  	<select id="queryOrderDatafour" resultType="hashmap" parameterType="hashmap">
+		select o.user_id as userId,o.order_type as orderType,m.order_price as baoPrice,case 
+		when o.order_type = '3' then o.money_amount 
+		ELSE o.money_amount+o.service_money END as orderPrice from orders o
+		left join user_info u on o.user_id = u.user_id
+		left  join import_user_info m ON m.che_pai = u.license
+		where 
+			o.`status` != '4' 
+				and o.create_time BETWEEN #{startTime} and #{endTime} 
+				and m.address = #{address}
+				and m.source is null;
+  	</select>
+  	
+  	<select id="queryOrderDatafive" resultType="hashmap" parameterType="hashmap">
+		select o.user_id as userId,o.order_type as orderType,m.order_price as baoPrice,case 
+		when o.order_type = '3' then o.money_amount 
+		ELSE o.money_amount+o.service_money END as orderPrice from orders o
+		left join user_info u on o.user_id = u.user_id
+		left  join import_user_info m ON m.che_pai = u.license
+		where 
+			o.`status` != '4' 
+				and o.create_time BETWEEN #{startTime} and #{endTime} 
+				and m.address = #{address}
+				and m.source = #{source};
+  	</select>
+  	
+  	<select id="queryOrderDatasix" resultType="hashmap" parameterType="hashmap">
+		select o.user_id as userId,o.order_type as orderType,m.order_price as baoPrice,case 
+		when o.order_type = '3' then o.money_amount 
+		ELSE o.money_amount+o.service_money END as orderPrice from orders o
+		left join user_info u on o.user_id = u.user_id
+		left  join import_user_info m ON m.che_pai = u.license
+		where 
+			o.`status` != '4' 
+				and o.create_time BETWEEN #{startTime} and #{endTime} 
+				and m.address = #{address}
+				and m.source = #{source};
+  	</select>
+  	
+  	<update id="updateAgentData" parameterType="hashmap">
+		update gs_agent_data 
+		set replace_rate = #{replaceRate},
+		    loss_rate = #{lossRate}
+		where year = #{year} and agency_id = #{agencyId}
+  	</update>
+  	<select id="queryScore" resultType="hashmap" parameterType="hashmap">
+		select counterman_code as countermanCode,sum(score) as score from counterman_score_record
+		where create_time BETWEEN #{startTime} and #{endTime} 
+		<if test="caiDotId != null and caiDotId!=''">
+       		and cai_dot_id = #{caiDotId}
+      	</if>
+		group by counterman_code;
+  	</select>
+  	<select id="queryLicense" resultType="java.lang.String" parameterType="java.lang.String">
+  	 	select s.license from user_info s 
+		left join `user` u on u.id = s.user_id
+  	 	where 1=1
+      	<if test="userPhone != null and userPhone !=''">
+       		and u.name like #{userPhone}
+      	</if>
+  	</select>
+  	<select id="queryPhone" resultType="hashmap">
+		select s.license as license,u.name as userPhone from user_info s
+		left join `user` u on u.id = s.user_id
+		where s.license in 
+		<foreach collection="list" item="chePai" index="index"
+			open="(" close=")" separator=",">
+				#{chePai}
+		</foreach>
+  	</select>
+  	<select id="queryRechargeCode" resultType="java.lang.String" parameterType="java.lang.String">
+  	 	select remark from oil_trans_log l 
+  	 		left join oil_user u on l.user_id = u.id
+			where l.trans_type = '0' 
+		<if test="userPhone != null and userPhone !=''">
+       		and u.phone = #{userPhone};
+      	</if>
+  	</select>
+  	
+   	<select id="queryUnfinishOilLog" parameterType="java.util.Date" resultType="java.lang.String">
+  	 	select g.orderid from gy_oil_log g
+  	 		where g.orderstatus IS NULL
+  	 		and g.create_time &lt; #{date}; 
+  	</select>
+  	
+  	<select id="queryExpiredUserInfo" parameterType="java.util.Date" resultType="hashmap">
+  	 	select u.name as phone,i.che_pai as license from import_user_info i
+  	 		left join user_info f on i.che_pai = f.license
+  	 		left join user u on u.id = f.user_id  
+  	 		where i.end_time = #{date} 
+  	 		and (i.baoyang_times>0 OR i.xieche_times>0 OR i.penqi_times>0); 
+  	</select>
+  	<update id="updateDriverOrder" parameterType="hashmap">
+  	 	update driver_order_sheng
+  	 	 set
+  	 	 	appointment_time = #{appointmentTime},
+  	 	 	appointment_num = 0
+  	 	 	where order_no = #{orderNo} and appointment_num &gt; 0;
+  	</update>
+  	<update id="updateOilRechargeCodeTwo" parameterType="java.lang.String">
+    	update oil_recharge_code
+    	set
+       		status = #{status},
+       		update_time =now()
+		where
+			phone between #{startNum} and #{endNum}
+  	</update>
+  	<select id="findMaxBatchNum" parameterType="java.lang.String" resultType = "java.lang.Integer">
+  		select IFNULL(max(batch_number),0)  from oil_batch
+  		where 
+  			open_time = #{openTime}
+  	</select>
+  	
+  	<select id="queryOilCount" resultType="hashmap">
+  	 	select status,count(id) as count,SUM(money) as totalMoney 
+  	 		FROM oil_recharge_code 
+  	 		where
+  	 				1=1
+  	 			<if test="startTime != null">
+       				and open_time >= #{startTime}
+      			</if>
+      			<if test="endTime != null">
+       				and open_time &lt; #{endTime}
+      			</if>
+      			<if test="batchNum != null">
+       				and batch_code = #{batchNum}
+      			</if>
+      		GROUP BY status;
+  	</select>
+  	<select id="queryOilCountTwo" resultType="hashmap">
+  	 	select count(id) as count,SUM(money) as totalMoney FROM oil_recharge_code 
+  	 	where 
+  	 			status = 1 and 
+  	 			recharge_time is null
+  	 		<if test="startTime != null">
+       			and open_time >= #{startTime}
+      		</if>
+      		<if test="endTime != null">
+       			and open_time &lt; #{endTime}
+      		</if>
+      		<if test="batchNum != null">
+       			and batch_code = #{batchNum}
+      		</if>
+  	</select>
+  	<select id="queryRoleByName" resultType="java.lang.String" >
+  		select r.name from system_user u
+  			left join system_user_role_relation re on re.user_id = u.id
+  			left join system_role r on r.id = re.role_id
+  			where u.id = #{adminId}
+  	</select>
+    <insert id="insertAccount">
+  		insert INTO oil_account_recharge (user_id,user_phone,supplier,card_no,money,create_time,update_time) 
+  		VALUES
+		<foreach collection="list" item="account" index="index" separator=",">
+				(#{account.userId},#{account.userPhone},#{account.supplier},
+				#{account.cardNo},#{account.money},#{account.createTime},
+				#{account.updateTime})
+		</foreach>
+  	</insert>
+  	<select id="queryOilUserbyId" resultType="com.emate.shop.business.model.OilUser" >
+  		select id,phone,name,money,wash_number as washNumber,create_time as createTime,update_time as updateTime from oil_user
+  			where id = #{id} for update
+  	</select>
+  	<update id="updateAccount" parameterType="java.util.Map">
+		<foreach collection="list" item="oilAccount" index="index" separator=";">
+			update oil_account_recharge
+    			set
+       				money = #{oilAccount.money},
+       				update_time = #{oilAccount.updateTime}
+				where
+					id =#{oilAccount.id}
+		</foreach>
+  	</update>
+  	<update id="updateOilCardOrder">
+		
+			update oilcard_order_relation
+    			set
+       				money = 0,
+       				update_time = now()
+				where id in
+					<foreach collection="list" item="oilorder" index="index"
+							open="(" close=")" separator=",">
+						#{oilorder.id}
+					</foreach>
+  	</update>
+  	
+  	<select id="queryOilMakeOrderMaxEndCode" resultType="java.lang.String" >
+  		select MAX(end_code) 
+  			from oil_make_order
+  	</select>
+  	
+  	<select id="oilCardLiucunList" resultType="hashmap">
+  	 	select DATE_FORMAT(o.open_time,'%y-%m-%d') as openDate,o.supplier as supplier,
+  	 		o.address as address,o.money as content,count(o.id) as openNum,
+  	 		SUM(o.money) as openMoney,count(r.card_no) as useNum,SUM(r.money) as useMoney,
+			(SUM(o.money)-IFNULL(SUM(t.tarde_money),0)) as cardMoney,SUM(a.money) as accountMoney
+			from oil_recharge_code o
+			LEFT JOIN oil_account_recharge a on o.phone = a.card_no and LENGTH(card_no)= 9
+			LEFT JOIN oil_trans_log t on o.recharge_code = t.remark
+			LEFT JOIN 
+				(select card_no,SUM(money) as money from oilcard_order_relation where LENGTH(card_no)= 9 
+					GROUP BY card_no) r on r.card_no = o.phone
+			where o.open_time BETWEEN #{startTime} and #{endTime}
+				and o.money !=10000
+			GROUP BY DATE_FORMAT(o.open_time,'%y-%m-%d'),o.supplier,o.address,o.money
+			ORDER BY DATE_FORMAT(o.open_time,'%y-%m-%d');
+  	</select>
+  	<select id="exportOilCardLiucun" resultType="hashmap">
+  	 	select DATE_FORMAT(o.open_time,'%y-%m-%d') as openTime,o.supplier as provider,o.address as address,o.phone as cardNo,o.money as content,a.money as cardMoney,r.dates as useTime,r.money as useMoney from oil_recharge_code o
+			LEFT JOIN (select card_no,DATE_FORMAT(create_time,'%y-%m-%d') as dates,SUM(money) as money from oilcard_order_relation
+			GROUP BY card_no,DATE_FORMAT(create_time,'%y-%m-%d')) r on o.phone = r.card_no
+			LEFT JOIN oil_account_recharge a on a.card_no=o.phone
+			where o.open_time BETWEEN #{startTime} and #{endTime} and o.money !=10000;
+  	</select>
+  	
+</mapper>

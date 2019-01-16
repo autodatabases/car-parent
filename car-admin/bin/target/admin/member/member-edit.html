@@ -1,0 +1,60 @@
+<link rel="stylesheet" type="text/css" href="resources/css/member/member-edit.css"/>
+<script src="resources/js/common/initAreaSelect.js" type="text/javascript" charset="utf-8"></script>
+<script src="resources/js/member/member-adit.js"></script>
+<div class="tables-top">
+	<p class="crumbs"><span>您的位置：</span><a>会员</a>&nbsp;》<a class="on">会员编辑</a></p>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<dl>
+		<dt><span>会员信息</span></dt>
+		<dd>
+			<label>姓名：</label><input type="text" id="nickName" value="" />
+		</dd>
+		<dd>
+			<label>手机号：</label><input type="text" id="name" value="" />
+		</dd>
+		<dd>
+			<label>省市区：</label>
+			<select id="province">
+			</select>
+			<select id="city">
+			</select>
+			<select id="area">
+			</select>
+		</dd>
+		
+	</dl>
+	<dl>
+		<dt><span>汽车型号</span></dt>
+		<dd>
+			<label>品牌：</label><input type="text" id="autoBrand" value="" />
+			<label>车系：</label><input type="text" id="autoType" value="" />
+		</dd>
+		<dd>
+			<label>车型：</label><input type="text" id="autoLine" value="" />
+			<label>年份：</label><input type="text" id="productYear" value="" />
+		</dd>
+		<dd>
+			<label>排量：</label><input type="text" id="engineDisp" value="" />
+			<label>车牌号：</label><input type="text" id="license" value="" />
+		</dd>
+		<dd>
+			<label>车架号：</label><input type="text" id="chejia" value="" />
+		</dd>
+	</dl>
+	<dl>
+		<dt><span>服务包</span></dt>
+		<dd>
+			<label>洗车：</label><input type="text" id="xiecheTimes" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" value="" />
+			<label>更换电瓶：</label><input type="text" id="dianpingTimes" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" value="" />
+		</dd>
+		<dd>
+			<label>小保养：</label><input type="text" id="baoyangTimes" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" value="" />
+		</dd>
+	</dl>
+	<div>
+		<input type="button" class="action-btn" id="member_button" value="提交" />
+		<input type="button" class="action-btn" id="member_fanhui" onclick="$('.tables').load('member/member-list.html')"  value="返回"/>
+	</div>
+</div>

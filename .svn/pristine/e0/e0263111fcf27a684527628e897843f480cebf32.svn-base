@@ -1,0 +1,451 @@
+package com.emate.shop.business.service;
+
+import java.math.BigDecimal;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+
+import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.alibaba.druid.util.StringUtils;
+import com.emate.shop.business.api.OilMakeService;
+import com.emate.shop.business.constants.PaginationUtil;
+import com.emate.shop.business.model.OilMakeOrder;
+import com.emate.shop.business.model.OilMakeOrderExample;
+import com.emate.shop.business.model.OilMakeOrderExample.Criteria;
+import com.emate.shop.common.Log4jHelper;
+import com.emate.shop.common.RandomUtil;
+import com.emate.shop.business.model.OilMakeRecord;
+import com.emate.shop.business.model.OilMakeRecordExample;
+import com.emate.shop.business.model.OilRechargeCode;
+import com.emate.shop.business.model.OilRechargeCodeExample;
+import com.emate.shop.datasource.Read;
+import com.emate.shop.datasource.Write;
+import com.emate.shop.exception.BusinessException;
+import com.emate.shop.mapper.DefinedMapper;
+import com.emate.shop.mapper.OilMakeOrderMapper;
+import com.emate.shop.mapper.OilMakeRecordMapper;
+import com.emate.shop.mapper.OilRechargeCodeMapper;
+import com.emate.shop.rpc.dto.DatasetBuilder;
+import com.emate.shop.rpc.dto.DatasetList;
+import com.emate.shop.rpc.dto.DatasetSimple;
+
+@Service
+public class OilMakeServiceImpl implements OilMakeService{
+	
+	@Resource
+	private OilMakeRecordMapper oilMakeRecordMapper;
+	
+	@Resource
+	private OilMakeOrderMapper oilMakeOrderMapper;
+	
+	@Resource
+	private OilRechargeCodeMapper oilRechargeCodeMapper;
+	
+	@Resource
+	private DefinedMapper definedMapper;
+
+	/**
+	 * 一级主表数据
+	 */
+	@Override
+	@Read
+	public DatasetList<OilMakeRecord> queryAllRecord(Integer pageNo, Integer pageSize) {
+		//分页
+		OilMakeRecordExample oilMakeRecordEx = new OilMakeRecordExample();
+		PaginationUtil page = new PaginationUtil(pageNo, pageSize, oilMakeRecordMapper.countByExample(oilMakeRecordEx));
+		//按创建时间倒叙
+		oilMakeRecordEx.setOrderByClause(OilMakeRecordExample.CREATE_TIME_DESC);
+		oilMakeRecordEx.setLimitStart(page.getStartRow());
+		oilMakeRecordEx.setLimitEnd(page.getSize());
+		List<OilMakeRecord> oilMakeRecordList = oilMakeRecordMapper.selectByExample(oilMakeRecordEx);
+		//返回结果
+		return DatasetBuilder.fromDataList(oilMakeRecordList, page.createPageInfo());
+	}
+	/**
+	 * 添加一级表数据
+	 */
+	@Override
+	@Write
+	@Transactional
+	public DatasetSimple<String> addRecord(String money,String num,String deadTime,String remark) {
+		//校验参数
+		if(StringUtils.isEmpty(money)){
+			throw new BusinessException("油卡面额不能为空！！！");
+		}
+		if(Objects.isNull(num)){
+			throw new BusinessException("油卡数量不能为空！！！");
+		}
+		if(Objects.isNull(deadTime)){
+			throw new BusinessException("该批油卡失效时间不能为空！！！");
+		}
+		//组织数据
+		OilMakeRecord oilMakeRecord = new OilMakeRecord();
+		oilMakeRecord.setMoney(money);
+		oilMakeRecord.setNum(Integer.valueOf(num));
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date deadTimes = null;
+		try {
+			deadTimes =format.parse(deadTime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new BusinessException("失效日期转化失败！！！");
+		}
+		Calendar now = Calendar.getInstance(Locale.CHINA);
+		now.set(Calendar.HOUR_OF_DAY, 0);
+		now.set(Calendar.MINUTE, 0);
+		now.set(Calendar.SECOND, 0);
+		now.set(Calendar.MILLISECOND, 0);
+		Date startTime = now.getTime();
+		if(deadTimes.compareTo(startTime)<=0){
+			throw new BusinessException("失效时间不能是当天！！");
+		}
+		now.add(Calendar.YEAR, 2);
+		Date endTime = now.getTime();
+		if(deadTimes.compareTo(endTime)>0){
+			throw new BusinessException("失效时间不能超过两年！！");
+		}
+		oilMakeRecord.setDeadTime(deadTimes);
+		oilMakeRecord.setRemark(remark);
+		oilMakeRecord.setResidueNum(Integer.valueOf(num));
+		oilMakeRecord.setCreateTime(new Date());
+		oilMakeRecord.setUpdateTime(new Date());
+		oilMakeRecord.setStatus(OilMakeRecord.STATUS_0);
+		//更新数据库
+		if(1!=oilMakeRecordMapper.insertSelective(oilMakeRecord)){
+			throw new BusinessException("更新做卡一级主表失败！！！");
+		}
+		return DatasetBuilder.fromDataSimple("SUCCESS");
+	}
+	/**
+	 * 二级表信息
+	 */
+	@Override
+	@Read
+	public DatasetList<OilMakeOrder> queryAllOrder(String recordId, String startNum, 
+			String endNum, Integer pageNo,Integer pageSize) {
+		OilMakeOrderExample oilMakeOrderEx = new OilMakeOrderExample();
+		//参数校验和组织参数
+		if(StringUtils.isEmpty(recordId)){
+			throw new BusinessException("做卡一级主表id不能为空！！！");
+		}
+		if(!StringUtils.isEmpty(startNum)&&!StringUtils.isEmpty(endNum)){
+			if(startNum.length()!=9){
+				throw new BusinessException("起始序号格式不对！！！");
+			}
+			if(endNum.length()!=9){
+				throw new BusinessException("起始序号格式不对！！！");
+			}
+			oilMakeOrderEx.or().andMakeRecordIdEqualTo(Long.valueOf(recordId)).andStartCodeBetween(startNum, endNum);//.andStartCodeNotEqualTo(endNum);
+			oilMakeOrderEx.or().andMakeRecordIdEqualTo(Long.valueOf(recordId)).andEndCodeBetween(startNum, endNum).andEndCodeNotEqualTo(startNum);
+		}else if(StringUtils.isEmpty(startNum)&&StringUtils.isEmpty(endNum)){
+			oilMakeOrderEx.or().andMakeRecordIdEqualTo(Long.valueOf(recordId));
+		}else{
+			throw new BusinessException("若起始序号和结束序号，一个不能空，另一个一定不为空");
+		}
+		//分页
+		PaginationUtil page = new PaginationUtil(pageNo, pageSize, 
+				oilMakeOrderMapper.countByExample(oilMakeOrderEx));
+		oilMakeOrderEx.setLimitStart(page.getStartRow());
+		oilMakeOrderEx.setLimitEnd(page.getSize());
+		//根据创建时间倒叙
+		oilMakeOrderEx.setOrderByClause(OilMakeOrderExample.ID_DESC);
+		List<OilMakeOrder> oilMakeOrderList = oilMakeOrderMapper.
+				selectByExample(oilMakeOrderEx);
+		return DatasetBuilder.fromDataList(oilMakeOrderList, page.createPageInfo());
+	}
+	/**
+	 * 三级表信息
+	 */
+	@Override
+	@Read
+	public DatasetList<Map<String,Object>> queryAllCode(String orderId, Integer pageNo, Integer pageSize) {
+		//参数校验
+		if(StringUtils.isEmpty(orderId)){
+			throw new BusinessException("做卡二级表id不能为空！！！");
+		}
+		//查询二级表数据
+		OilMakeOrder oilMakeOrder = oilMakeOrderMapper.selectByPrimaryKey(Long.valueOf(orderId));
+		if(Objects.isNull(oilMakeOrder)){
+			throw new BusinessException("未查询到做卡二级表信息！！！");
+		}
+		//查询三级表数据
+		OilRechargeCodeExample oilRechargeCodeEx = new OilRechargeCodeExample();
+		com.emate.shop.business.model.OilRechargeCodeExample.Criteria c = oilRechargeCodeEx.
+				createCriteria();
+		c.andPhoneGreaterThanOrEqualTo(oilMakeOrder.getStartCode());
+		c.andPhoneLessThan(oilMakeOrder.getEndCode());
+		//分页
+		PaginationUtil page = new PaginationUtil(pageNo, pageSize, 
+				oilRechargeCodeMapper.countByExample(oilRechargeCodeEx));
+		oilRechargeCodeEx.setOrderByClause(OilRechargeCodeExample.PHONE_ASC);
+		oilRechargeCodeEx.setLimitStart(page.getStartRow());
+		oilRechargeCodeEx.setLimitEnd(page.getSize());
+		List<OilRechargeCode> oilRechargeCodes = oilRechargeCodeMapper.
+				selectByExample(oilRechargeCodeEx);
+		List<Map<String, Object>> results = new ArrayList<Map<String,Object>>();
+		oilRechargeCodes.stream().forEach(oilRechargeCode -> {
+			Map<String, Object> result = new HashMap<String,Object>();
+			result.put("id", oilRechargeCode.getId());
+			result.put("money", oilRechargeCode.getMoney());
+			result.put("phone", oilRechargeCode.getPhone());
+			result.put("rechargeCode", oilRechargeCode.getRechargeCode());
+			result.put("deadTime", oilRechargeCode.getDeadTime());
+			result.put("createTime", oilRechargeCode.getCreateTime());
+			if(Objects.equals(OilRechargeCode.STATUS_1, oilRechargeCode.getStatus())
+					&&Objects.isNull(oilRechargeCode.getRechargeTime())){
+				result.put("status", 9);
+			}else{
+				result.put("status", oilRechargeCode.getStatus());
+			}
+			results.add(result);
+		});
+		
+		return DatasetBuilder.fromDataList(results, page.createPageInfo());
+	}
+	@Override
+	@Write
+	@Transactional
+	public DatasetSimple<String> addOrder() {
+		Log4jHelper.getLogger().info("开始做卡！！！");
+		String startCode = definedMapper.queryOilMakeOrderMaxEndCode();
+		Calendar now = Calendar.getInstance(Locale.CHINA);
+		String year = String.valueOf(now.get(Calendar.YEAR));
+		year=year.substring(year.length()-1);
+		String month = String.valueOf(now.get(Calendar.MONTH)+1);
+		if(month.length()==1){
+			month="0"+month;
+		}
+		String str1 = year+month;
+		if(!StringUtils.isEmpty(startCode)){
+			String str2 = startCode.substring(0, 3);
+			if(str2.equals(str1)){
+				startCode=String.valueOf(Long.valueOf(startCode));
+			}else{
+				startCode=str1+"000000";
+			}
+		}else{
+			startCode=str1+"000000";
+		};
+		OilMakeRecordExample oilMakeRecordEx = new OilMakeRecordExample();
+		com.emate.shop.business.model.OilMakeRecordExample.Criteria c = oilMakeRecordEx.createCriteria();
+		c.andStatusNotEqualTo(OilMakeRecord.STATUS_2);
+		oilMakeRecordEx.setOrderByClause(OilMakeRecordExample.CREATE_TIME_ASC);
+		List<OilMakeRecord> oilMakeRecordList = oilMakeRecordMapper.selectByExample(oilMakeRecordEx);
+		if(oilMakeRecordList.isEmpty()){
+			Log4jHelper.getLogger().info("做卡主表没有做卡记录！！！");
+			return DatasetBuilder.fromDataSimple("SUCCESS");
+		}
+		List<OilMakeRecord> oilMakeRecords = new ArrayList<OilMakeRecord>();
+		Integer num = 0;
+		for(OilMakeRecord oilMakeRecord:oilMakeRecordList){
+			Integer residueNum = oilMakeRecord.getResidueNum();
+			num = num+residueNum;
+			if(num==10000){
+				oilMakeRecords.add(oilMakeRecord);
+				OilMakeRecord oilMakeRecord2 = new OilMakeRecord();
+				oilMakeRecord2.setId(oilMakeRecord.getId());
+				oilMakeRecord2.setResidueNum(0);
+				oilMakeRecord2.setStatus(OilMakeRecord.STATUS_2);
+				oilMakeRecord2.setUpdateTime(new Date());
+				oilMakeRecordMapper.updateByPrimaryKeySelective(oilMakeRecord2);
+				break;
+			}else if(num>10000){
+				oilMakeRecord.setResidueNum(residueNum-(num-10000));
+				oilMakeRecords.add(oilMakeRecord);
+				OilMakeRecord oilMakeRecord2 = new OilMakeRecord();
+				oilMakeRecord2.setId(oilMakeRecord.getId());
+				oilMakeRecord2.setResidueNum(num-10000);
+				oilMakeRecord2.setStatus(OilMakeRecord.STATUS_1);
+				oilMakeRecord2.setUpdateTime(new Date());
+				oilMakeRecordMapper.updateByPrimaryKeySelective(oilMakeRecord2);
+				break;
+			}else{
+				oilMakeRecords.add(oilMakeRecord);
+				OilMakeRecord oilMakeRecord2 = new OilMakeRecord();
+				oilMakeRecord2.setId(oilMakeRecord.getId());
+				oilMakeRecord2.setResidueNum(0);
+				oilMakeRecord2.setStatus(OilMakeRecord.STATUS_2);
+				oilMakeRecord2.setUpdateTime(new Date());
+				oilMakeRecordMapper.updateByPrimaryKeySelective(oilMakeRecord2);
+			}
+		}
+		for(OilMakeRecord oilMakeRecord:oilMakeRecords){
+			for (int i = 0; i < oilMakeRecord.getResidueNum(); i=i+500) {//包头不包尾
+				String endCode =String.valueOf(Integer.valueOf(startCode)+500);
+				OilMakeOrder oilMakeOrder = new OilMakeOrder();
+				oilMakeOrder.setCreateTime(new Date());
+				oilMakeOrder.setUpdateTime(new Date());
+				oilMakeOrder.setDeadTime(oilMakeRecord.getDeadTime());
+				oilMakeOrder.setMakeRecordId(oilMakeRecord.getId());
+				oilMakeOrder.setMoney(oilMakeRecord.getMoney());
+				oilMakeOrder.setStartCode(startCode);
+				oilMakeOrder.setEndCode(endCode);
+				oilMakeOrder.setNum(500);
+				oilMakeOrder.setStatus(OilMakeOrder.STATUS_0);
+				oilMakeOrderMapper.insert(oilMakeOrder);
+				startCode=endCode;
+			}
+		}
+		return DatasetBuilder.fromDataSimple("SUCCESS");
+	}
+	@Override
+	@Write
+	@Transactional
+	public DatasetSimple<String> addOilRechargeCode() {
+		OilMakeOrderExample oilMakeOrderEx = new OilMakeOrderExample();
+		Criteria c = oilMakeOrderEx.createCriteria();
+		c.andStatusEqualTo(OilMakeOrder.STATUS_0);
+		oilMakeOrderEx.setOrderByClause(OilMakeOrderExample.DEAD_TIME_ASC);
+		oilMakeOrderEx.setLimitStart(0);
+		oilMakeOrderEx.setLimitEnd(1);
+		List<OilMakeOrder> oilMakeOrderList = oilMakeOrderMapper.selectByExample(oilMakeOrderEx);
+		if(oilMakeOrderList.isEmpty()){
+			Log4jHelper.getLogger().info("做卡二级表没有做卡记录！！！");
+			return DatasetBuilder.fromDataSimple("SUCCESS");
+		}
+		OilMakeOrder oilMakeOrder = oilMakeOrderList.get(0);
+		Integer startCode =Integer.valueOf(oilMakeOrder.getStartCode());
+		for (int i = 0; i < oilMakeOrder.getNum(); i++) {
+			OilRechargeCode oilRechargeCode = new OilRechargeCode();
+			oilRechargeCode.setCreateTime(new Date());
+			oilRechargeCode.setUpdateTime(new Date());
+			oilRechargeCode.setMoney(new BigDecimal(oilMakeOrder.getMoney()));
+			oilRechargeCode.setStatus(OilRechargeCode.STATUS_1);
+			oilRechargeCode.setSmsStatus(OilRechargeCode.SMS_STATUS_1);
+			oilRechargeCode.setPhone(String.valueOf(startCode+i));
+			oilRechargeCode.setRechargeCode(RandomUtil.randomNumber(18));
+			oilRechargeCode.setDeadTime(oilMakeOrder.getDeadTime());
+			oilRechargeCode.setChePai("system");
+			oilRechargeCode.setAddress("system");
+			oilRechargeCode.setUserName("system");
+			oilRechargeCodeMapper.insertSelective(oilRechargeCode);
+		}
+		oilMakeOrder.setStatus(OilMakeOrder.STATUS_1);
+		oilMakeOrder.setUpdateTime(new Date());
+		oilMakeOrderMapper.updateByPrimaryKeySelective(oilMakeOrder);
+		return DatasetBuilder.fromDataSimple("SUCCESS");
+	}
+	
+	@Override
+	@Read
+	public DatasetList<Map<String, String>> exportOilReChargeCode(
+		String orderId) {
+		if(StringUtils.isEmpty(orderId)){
+			throw new BusinessException("参数为空");
+		}
+		OilMakeOrder oilMakeOrder = oilMakeOrderMapper.selectByPrimaryKey(Long.
+			 valueOf(orderId));
+		if(Objects.isNull(oilMakeOrder)){
+			throw new BusinessException("二级表数据不存在！！");
+		}
+		if(OilMakeOrder.STATUS_0.equals(oilMakeOrder.getStatus())){
+			throw new BusinessException("该批订单在处理中！！！");
+		}
+		String startCode = oilMakeOrder.getStartCode();
+		String endCode = oilMakeOrder.getEndCode();
+		OilRechargeCodeExample oilRechargeCodeEx = new 
+				OilRechargeCodeExample();
+		com.emate.shop.business.model.OilRechargeCodeExample.
+				Criteria c = oilRechargeCodeEx.createCriteria();
+		c.andPhoneGreaterThanOrEqualTo(startCode);
+		c.andPhoneLessThan(endCode);
+		oilRechargeCodeEx.setOrderByClause(
+				OilRechargeCodeExample.CREATE_TIME_DESC);
+		List<OilRechargeCode> oilRechargeCodes = 
+				oilRechargeCodeMapper.selectByExample(
+						oilRechargeCodeEx);
+		ArrayList<Map<String, String>> results =
+				new ArrayList<Map<String,String>>();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		oilRechargeCodes.stream().forEach(oilRechargeCode->{
+			Map<String, String> result = new HashMap<String,String>();
+			result.put("phone", oilRechargeCode.getPhone());
+			result.put("money", String.valueOf(oilRechargeCode.
+					getMoney().intValue()));
+			result.put("rechargeCode", oilRechargeCode.
+					getRechargeCode());
+			result.put("deadTime", format.format(
+					oilRechargeCode.getDeadTime()));
+			results.add(result);
+		});
+		return DatasetBuilder.fromDataList(results);
+	}
+	
+	@Read
+	@Override
+	public DatasetList<Map<String, String>> exportOilReChargeCodeTwo(
+			String recordId,String startCode, String endCode) {
+		if(StringUtils.isEmpty(recordId)){
+			throw new BusinessException("一级主表id不能为空");
+		}
+		OilMakeOrderExample oilMakeOrderEx = new OilMakeOrderExample();
+		Criteria c = oilMakeOrderEx.createCriteria();
+		c.andMakeRecordIdEqualTo(Long.valueOf(recordId));
+		c.andStatusEqualTo(OilMakeOrder.STATUS_1);
+		List<OilMakeOrder> oilMakeOrders = oilMakeOrderMapper.
+				selectByExample(oilMakeOrderEx);
+		if(oilMakeOrders.isEmpty()){
+			throw new BusinessException("数据正在处理中！！！");
+		}
+		
+		String startCodeTwo=oilMakeOrders.get(0).getStartCode();
+		String endCodeTwo=oilMakeOrders.get(0).getEndCode();
+		for(OilMakeOrder oilMakeOrder : oilMakeOrders){
+			String startCode2 = oilMakeOrder.getStartCode();
+			String endCode2 = oilMakeOrder.getEndCode();
+			if(Integer.valueOf(startCode2)<Integer.valueOf(startCodeTwo)){
+				startCodeTwo=startCode2;
+			}
+			if(Integer.valueOf(endCode2)>Integer.valueOf(endCodeTwo)){
+				endCodeTwo=endCode2;
+			}
+		}
+		if(!StringUtils.isEmpty(startCode)){
+			if(Integer.valueOf(startCode)>Integer.valueOf(startCodeTwo)){
+				startCodeTwo=startCode;
+			}
+		}
+		if(!StringUtils.isEmpty(endCode)){
+			if(Integer.valueOf(endCode)<Integer.valueOf(endCodeTwo)){
+				endCodeTwo=endCode;
+			}
+		}
+		OilRechargeCodeExample oilRechargeCodeEx = new 
+				OilRechargeCodeExample();
+		com.emate.shop.business.model.OilRechargeCodeExample.
+				Criteria cr = oilRechargeCodeEx.createCriteria();
+		cr.andPhoneGreaterThanOrEqualTo(startCodeTwo);
+		cr.andPhoneLessThan(endCodeTwo);
+		oilRechargeCodeEx.setOrderByClause(
+				OilRechargeCodeExample.CREATE_TIME_DESC);
+		List<OilRechargeCode> oilRechargeCodes = 
+				oilRechargeCodeMapper.selectByExample(
+						oilRechargeCodeEx);
+		ArrayList<Map<String, String>> results =
+				new ArrayList<Map<String,String>>();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		oilRechargeCodes.stream().forEach(oilRechargeCode->{
+			Map<String, String> result = new HashMap<String,String>();
+			result.put("phone", oilRechargeCode.getPhone());
+			result.put("money", String.valueOf(oilRechargeCode.
+					getMoney().intValue()));
+			result.put("rechargeCode", oilRechargeCode.
+					getRechargeCode());
+			result.put("deadTime", format.format(
+					oilRechargeCode.getDeadTime()));
+			results.add(result);
+		});
+		return DatasetBuilder.fromDataList(results);
+	}
+}

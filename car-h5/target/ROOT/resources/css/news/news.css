@@ -1,0 +1,48 @@
+html,body{
+	background: #fff;
+}
+.header {
+    background: #fff;
+    text-align: center;
+    position: relative;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/index/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+/* 消息列表 */
+.news-lists{
+	padding:0 5%;
+}
+.news-lists ul li{
+	overflow: hidden;
+	border-bottom:1px solid #ddd;
+	font-size: 14px;
+}
+.title-box{
+	line-height: 1.5;
+	padding: 5px 0;	
+}
+.img-box{
+	height:4.0625rem;
+	text-align: center;
+}
+.img-box img{
+	width:30%;
+	height: 3.5rem;
+	margin: 0 2px;
+}
+.times-box{
+	line-height: 2;
+}

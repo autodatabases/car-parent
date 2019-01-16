@@ -1,0 +1,266 @@
+html,body {background: #fff;}
+html{
+	animation:myfirst 1s;
+	-webkit-animation:myfirst 1s;
+	-moz-animation:myfirst 1s;
+	-o-animation:myfirst 1s;
+}
+@keyframes myfirst{
+	0%{
+		transform: none;
+		-webkit-transform: none;
+		-moz-transform: none;
+		-o-transform: none;
+	}
+	100%{
+		transform: none;
+		-webkit-transform: none;
+		-moz-transform: none;
+		-o-transform: none;
+	}
+}
+-webkit-@keyframes myfirst{
+	0%{
+		transform: none;
+		-webkit-transform: none;
+		-moz-transform: none;
+		-o-transform: none;
+	}
+	100%{
+		transform: none;
+		-webkit-transform: none;
+		-moz-transform: none;
+		-o-transform: none;
+	}
+}
+-moz-@keyframes myfirst{
+	0%{
+		transform: none;
+		-webkit-transform: none;
+		-moz-transform: none;
+		-o-transform: none;
+	}
+	100%{
+		transform: none;
+		-webkit-transform: none;
+		-moz-transform: none;
+		-o-transform: none;
+	}
+}
+-o-@keyframes myfirst{
+	0%{
+		transform: none;
+		-webkit-transform: none;
+		-moz-transform: none;
+		-o-transform: none;
+	}
+	100%{
+		transform: none;
+		-webkit-transform: none;
+		-moz-transform: none;
+		-o-transform: none;
+	}
+}
+.header{
+	background: #fff;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	margin-bottom:1rem ;
+	position: relative;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.header .register_a{
+	font-size:0.9375rem;
+	color: #ff3e5b;
+	position: absolute;
+	right: 0;
+	top: 0;
+	line-height: 2.75rem;
+	padding:0 1rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/member/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+/*.forms{
+	box-shadow: 0 0 4px rgba(0,0,0,1);
+}*/
+/* 用户选择 */
+.user-tab{
+	font-size: 0;
+	margin-bottom:1rem ;
+}
+.user-tab span{
+	display: inline-block;
+	width:46%;
+	margin: 0 2%;
+	border-radius: 8px;
+	background: #fff;
+	color: #333;
+	font-size:16px;
+	text-align: center;
+	line-height: 2rem;
+}
+.user-tab span.on{
+	background: #ff3e5b;
+	color: #fff;
+}
+/* 表单 */
+.forms div{
+	background: #fff;
+	padding: 0 1rem;
+	position: relative;
+	overflow: hidden;
+}
+.forms div label{
+	display: inline-block;
+	width:10%;
+	height:2rem;
+	float: left;
+	padding: 0.5rem 0;
+}
+.forms div input{
+	height:2rem;
+	font-size: 0.813rem;
+	border:none;
+	width:90%;
+	padding: 0.5rem 0;
+	float: left;
+}
+.forms div.tel:after,.forms div.pas:after,.forms div.car:after,.forms div.card:after{
+	content: "";
+	display: block;
+	height:1px;
+	background: #dfdfdf;
+	width: 90%;
+	position: absolute;
+	bottom: 0;
+	left:5%;
+}
+
+.forms div.tel label{
+	background: url(../../imgs/login/user-icon.png) no-repeat center;
+	background-size:1rem ;
+}
+.forms div.pas label{
+	background: url(../../imgs/login/pas-icon.png) no-repeat center;
+	background-size:1rem ;
+}
+.forms div.car label{
+	background: url(../../imgs/login/car-icon.png) no-repeat center;
+	background-size:1rem ;
+}
+.forms div.card label{
+	background: url(../../imgs/login/card-icon.png) no-repeat center;
+	background-size:1rem ;
+}
+.forms #getcode{
+	position: absolute;
+	right: 1rem;
+	top: 50%;
+	margin-top: -1rem;
+	width:4.8375rem;
+	height:1.75rem;
+	line-height:1.75rem;
+	font-size: 0.75rem;
+	color: #ff3e5b;
+	border:1px solid #ff3e5b;
+	border-radius: 5px;
+	background: #fff;
+	outline: none;
+	padding: 0;
+}
+.forms #getcode:active{
+	background:#ff3e5b;
+	color: #fff;
+}
+.changeNum span {
+	display: block;
+	float: right;
+	text-align: center;
+	width: 7rem;
+	height: 4rem;
+	line-height: 4rem;
+	color: #ff3e5b;
+	font-size: 12px;
+}
+.action{
+	border:1px solid #ff3e5b;
+	background: #ff3e5b;
+	width:90%;
+	height:2.5rem;
+	line-height:2.5rem;
+	color: #fff;
+	font-size: 0.8125rem;
+	margin: 0 5%;
+	border-radius: 5px;
+}
+
+.reg-agment{
+	text-align: center;
+	color: #7b7b7b;
+	width: 100%;
+	font-size: 0.6875rem;
+	line-height: 4;
+	display: block;
+}
+.reg-agment a{
+	color:#ff3e5b;
+}
+/* 注册提示 */
+.notes{
+	padding:5%  5%;
+	font-size: 0.6875rem;
+	color:#333;
+}
+.notes p{
+	line-height: 2;
+	text-indent: 1rem;
+}
+
+
+.car{
+}
+.car select{
+	width:50px;
+	background: #fff;
+	height: 3rem;
+    font-size: 0.813rem;
+    border: none;
+    padding: 0.5rem 0;
+    float: left;
+    outline: none;
+}
+#login-car0{
+	width:73%;
+}
+#login-car1{
+	display: none;
+}
+.car>span{
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    margin-top: -1rem;
+    width: 4.8375rem;
+    height: 1.75rem;
+    line-height: 1.75rem;
+    font-size: 0.75rem;
+    color: #ff3e5b;
+    border: 1px solid #ff3e5b;
+    border-radius: 5px;
+    background: #fff;
+    outline: none;
+    padding: 0;
+    z-index: 20;
+    text-align: center;
+}

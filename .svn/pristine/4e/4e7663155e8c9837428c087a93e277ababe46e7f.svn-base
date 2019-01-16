@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>惠+车服</title>
+<meta charset="utf-8">
+<meta name="keywords" content="惠+车服" />
+<meta name="description" content="惠+车服" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<link rel="shortcut icon" href="../resources/imgs/favicon.ico" type="image/x-icon">
+<link href="../resources/hplus/css/login.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../resources/css/com.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/css/login/login.css"/>
+<script src="../resources/js/jquery/jquery.min.js?v=2.1.4"></script>
+<script src="../resources/js/common/common.js?t=1.1"></script>
+<script src="../resources/js/auth/login.js"></script>
+</head>
+<body>
+	<div class="warp">
+		<div class="main">
+			<h1>后台<span>管理系统</span></h1>
+			<form class="forms" action="" method="post">
+				<div class="user"><input id="userName" type="text" placeholder="用户名"/></div>
+				<div class="pwd"><input id="password" type="password" placeholder="密码"/></div>
+				<input type="button" id="login_sub" value="登录"/>
+				<span id="processText"></span>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

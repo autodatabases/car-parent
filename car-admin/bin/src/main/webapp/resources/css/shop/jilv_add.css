@@ -1,0 +1,112 @@
+* 表单 */
+.tables{
+	float: left;
+	width: 90%;
+	min-height:500px;
+	background: #fff;
+}
+.tables>div{
+	border-left: 1px solid #ccc;
+}
+.tables-top{
+	padding-top:20px;
+    background: url(../../imgs/com/noise.white.png);
+	border-bottom: 1px solid #ccc;
+}
+.tab-top{
+	width: 90%;
+    padding: 0 20px;
+    margin-bottom: -1px;
+}
+.tab-top span{
+	display: inline-block;
+    padding: 10px 20px;
+    background: #ccc;
+    color: #fff;
+    font-size: 14px;
+    -moz-border-radius: 2px 2px 0 0;
+    -webkit-border-radius: 2px 2px 0 0;
+    border-radius: 2px 2px 0 0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.tab-top span:hover{
+    color: #fc9338;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+.tab-top span.on{
+    color: #fc9338;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.tabels-main{
+	padding: 30px;
+}
+.tabels-main dl{
+	border-bottom: 1px dashed #d2d2d2;
+	padding-bottom:0px;
+	margin-bottom: 20px;
+}
+.tabels-main dl dt{
+	padding-bottom: 10px;
+}
+.tabels-main dl dt span{
+	display: inline-block;
+	border-bottom: 4px solid #fb9337;
+	line-height: 40px;
+	font-size: 20px;
+	padding: 0 10px;
+
+}
+.tabels-main dl dd{
+	padding: 5px 0;
+}
+.tabels-main dl dd label{
+	display: inline-block;
+	line-height: 32px;
+	width:180px;
+	text-align: right;
+}
+.myInp{
+	border:1px solid #dbdbdb;
+	border-radius:3px;
+	height:30px;
+	width: 260px;
+	margin-right: 10px;
+	text-indent: 5px;
+	background: #fff;
+}
+
+
+.action-btn{
+	padding: 10px 15px;
+	border:1px solid #ef811f;
+	background: #fc9338;
+	color:#fff;
+	font-size:16px;
+	border-radius: 3px;
+	width: 150px;
+	margin-left: 50px;
+	cursor:pointer;
+}
+
+.my-action-btn{
+	padding: 0px 15px;
+	border:1px solid #ef811f;
+	background: #fc9338;
+	color:#fff;
+	font-size:16px;
+	border-radius: 3px;
+	width: 175px;
+	cursor:pointer;
+}
+
+.tabels-main dl dd select{
+	width:12%;
+}
+
+.inBlock{
+	display: inline-block;
+}

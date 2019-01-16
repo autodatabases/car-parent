@@ -1,0 +1,231 @@
+/* 表单 */
+.tables{
+	float: left;
+	width: 90%;
+	min-height:500px;
+}
+.tables>div{
+	border-left: 1px solid #ccc;
+}
+.tables-top{
+	padding-top: 20px;
+    background: url(../../imgs/com/noise.white.png);
+	border-bottom: 1px solid #ccc;
+	min-height: 80px;
+}
+.tab-top{
+	width: 90%;
+    padding: 0 20px;
+    margin-bottom: -1px;
+}
+/* 列表 */
+.tabels-main{
+	padding: 20px 20px;
+	min-height: 400px;
+}
+/* 搜索 */
+.search-box{
+	padding: 20px;
+	border:1px solid #ccc;
+	text-align:right ;
+}
+.search-box button{
+	display: inline-block;
+    border: 1px solid #ccc;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: inset 0 1px 0 #fff;
+    -webkit-box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 #fff;
+    font-weight: bold;
+    background:#f7f7f7 url(../../imgs/sprites.png) no-repeat -10px -15px;
+    color: #666;
+    padding: 0;
+}
+.search-box>span{
+	display: inline-block;
+	float:left;
+	background: #0D8DDB;
+	color: #fff;
+	font-size: 18px;
+	height:30px;
+	line-height:30px;
+	padding: 0 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.search-box button span{
+	padding: 5px 10px;
+    margin-left: 25px;
+    display: block;
+    background: #f7f7f7;
+    -moz-box-shadow: inset 0 1px 0 #fff;
+    -webkit-box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.search-box input{
+    padding:5px 10px;
+    border: 1px solid #ccc;
+    color: #333;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    margin-right: 20px;
+    background: #fff;
+}
+/* 切换列表 */
+.tab-list {
+	border-left: 1px solid #ddd;
+}
+.tab-list table{
+	width: 100%;
+	vertical-align: middle;
+}
+.tab-list thead th,.tab-list tbody td {
+    padding: 7px 10px;
+    border: 1px solid #ddd;
+    border-left: 0;
+    text-align: center;
+}
+.tab-list thead tr th{
+	text-align: center;
+	background: #fcfcfc;
+}
+.tab-list thead tr th:nth-child(odd){
+	background: #f7f7f7;
+}
+.tab-list thead tr th.bh,.tab-list thead tr th.cz{
+	background: #fcfcfc;
+}
+.tab-list tbody{
+	border-bottom:1px solid #ddd;
+}
+.tab-list tbody th{
+	border-right:1px solid #ddd;
+	line-height: 30px;
+}
+.tab-list tbody tr td:nth-child(even){
+	background: #fcfcfc;
+}
+.tab-list tbody td{
+	vertical-align: middle;
+	line-height: 24px;
+}
+.tab-list tbody td a{
+	color: #333;
+	margin: 0 10px;
+}
+.tab-list tbody td a:hover{
+	color:#fc9338;
+}
+/* 新增分类弹窗 */
+.add-fenlei{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height:100%;
+	display: none;
+}
+.add-bg{
+	position: absolute;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height:100%;
+	background: rgba(0,0,0,.3);
+}
+.add-box{
+	position: absolute;
+	z-index: 100;
+	top:50%;
+	left:50%;
+	margin-left: -400px;
+	margin-top: -238px;
+	width: 800px;
+	background: #fff;
+	border-radius:8px;
+}
+.add-box>p{
+	border-bottom: 1px solid #ddd;
+	height:40px;
+	line-height: 40px;
+	padding: 15px;
+	font-size: 24px;
+}
+.add-box>p i{
+	float: right;
+	display: inline-block;
+	width:40px;
+	height:40px;
+	text-align: center;
+	font-size: 40px;
+	cursor: pointer;
+}
+.add-box>p b{
+	font-weight: normal;
+}
+.add-box>p span{
+	background: #54b5df;
+	color: #fff;
+	border-radius: 5px;
+	font-size: 16px;
+	padding: 5px;
+	margin-left:10px;
+	line-height: 1;
+}
+.add-box ul {
+	padding: 20px;
+}
+.add-box ul li{
+	margin-bottom: 20px;
+}
+.add-box ul li p{
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+.add-box ul li p sup{
+	color:red;
+}
+.add-box ul li input{
+	border:1px solid #ddd;
+	width:98%;
+	padding: 0 1%;
+	height:40px;
+	border-radius: 5px;
+}
+.add-box ul li select{
+	width:100%;
+	height:40px;
+}
+.btn-box{
+	border-top: 1px solid #ddd;
+	padding:20px;
+	text-align: right;
+}
+.btn-box button{
+	border:1px solid #eee;
+	padding: 10px 15px;
+	border-radius: 5px;
+	font-size: 16px;
+	margin: 0 10px;
+	background: #fff;
+	cursor: pointer;
+	outline: none;
+}
+.btn-box button:hover{
+	background: #0D8DDB;
+	color: #fff;
+	border-color:#0D8DDB;
+}
+.btn-box button.ok-btn{
+	background: #0D8DDB;
+	color: #fff;
+	border-color:#0D8DDB;
+}

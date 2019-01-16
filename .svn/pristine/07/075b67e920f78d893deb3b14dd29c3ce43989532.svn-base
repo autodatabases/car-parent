@@ -1,0 +1,38 @@
+//白名单设置
+$('#account_button').click(function(){
+	cai_dot_list.dataList()
+})
+
+var cai_dot_list = {};
+
+cai_dot_list.dataList = function() {
+	$.ajax({
+		url : DOMIN.MAIN + "/accountSwitching/update",
+		type : "post",
+		async : true,
+		dataType : "json",
+		data:{
+			id:$('#openQuota option:selected').val()
+		},
+		success : function(data, textStatus) {
+			console.log(data)
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			$.tip(errorThrown);
+		}
+	});
+}
+
+$.ajax({
+	url : DOMIN.MAIN + "/accountSwitching/query",
+	type : "post",
+	async : true,
+	dataType : "json",
+	success : function(data, textStatus) {
+		console.log(data)
+		$('.accounts').html(data.data.company)
+	},
+	error : function(XMLHttpRequest, textStatus, errorThrown) {
+		$.tip(errorThrown);
+	}
+});

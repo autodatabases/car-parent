@@ -1,0 +1,43 @@
+#gaoyangxunji oil card recharge
+gyxj.oilcard.url=${gyxj.oilcard.url}
+gyxj.oilcard.merchantid=${gyxj.oilcard.merchantid}
+gyxj.oilcard.key=${gyxj.oilcard.key}
+
+#phone recharge
+gyphone.numberserchUrl=${gyphone.numberserchUrl}
+gyphone.ordersendUrl=${gyphone.ordersendUrl}
+gyphone.productsearchUrl=${gyphone.productsearchUrl}
+gyphone.ordersarchUrl=${gyphone.ordersarchUrl}
+gyphone.agentid=${gyphone.agentid}
+gyphone.merchantkey=${gyphone.merchantkey}
+gyphone.source=${gyphone.source}
+gyphone.callback.url=${gyphone.callback.url}
+
+#oufei oil recharge
+
+ofoil.emate.merchantid=${ofoil.emate.merchantid}
+ofoil.emate.userpwd=${ofoil.emate.userpwd}
+
+ofoil.tengmu.merchantid=${ofoil.tengmu.merchantid}
+ofoil.tengmu.userpwd=${ofoil.tengmu.userpwd}
+
+ofoil.tengshuang.merchantid=${ofoil.tengshuang.merchantid}
+ofoil.tengshuang.userpwd=${ofoil.tengshuang.userpwd}
+
+ofoil.taikui.merchantid=${ofoil.taikui.merchantid}
+ofoil.taikui.userpwd=${ofoil.taikui.userpwd}
+
+ofoil.taidou.merchantid=${ofoil.taidou.merchantid}
+ofoil.taidou.userpwd=${ofoil.taidou.userpwd}
+
+#ofoil.merchantid=${ofoil.merchantid}
+#ofoil.userpwd=${ofoil.userpwd}
+
+ofoil.cardquery.url=${ofoil.cardquery.url}
+ofoil.recharge.url=${ofoil.recharge.url}
+ofoil.orderquery.url=${ofoil.orderquery.url}
+ofoil.mobilecharge.url=${ofoil.mobilecharge.url}
+ofoil.key=${ofoil.key}
+ofoil.version=${ofoil.version}
+ofoil.callback.url=${ofoil.callback.url}
+ofoil.phonecallback.url=${ofoil.phonecallback.url}

@@ -1,0 +1,67 @@
+/*头部*/
+body {
+	font-size: 14px;
+}
+/*头部*/
+.header{
+	background: #f8f8f8;
+	border-bottom:1px solid #cecece;
+	text-align: center;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../../imgs/oilCard/back.png) no-repeat center;
+	background-size:20% ;
+}
+
+.content {
+    margin-top: 2.75rem;
+}
+.content section {
+    margin-bottom: 0.5rem;
+    background: #fff;
+    padding: 0 1rem;
+    padding-top: 1rem;
+	overflow: hidden;
+}
+.content section p {
+    line-height: 2rem;
+	width: 100%;
+	overflow: hidden;
+}
+.content section p span:nth-child(1){
+	float: left;
+	display: inline-block;
+    color: #bcbcbc;
+    width: 25%;
+}
+.content section p span:nth-child(2){
+	float: right;
+	display: inline-block;
+	width: 75%;
+}
+.content section p:last-child {
+    border-top: 1px solid #ccc;
+    margin-top: 1rem;
+    padding: 1rem 0;
+}
+
+.content section p:last-child span:nth-child(2){
+    color: #2aaff4;
+    font-weight: bolder;
+	text-align: right;
+}

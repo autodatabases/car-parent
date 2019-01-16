@@ -1,0 +1,129 @@
+@charset "utf-8";
+.header{
+	background: #fff;
+	position: relative;
+	border-bottom: 1px solid #e0e0e0;
+}
+.header h1{
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+	text-align: center;
+} 
+.back{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width:15%;
+	height:100%;
+	background:url(../../imgs/coupon/back-icon.png) no-repeat center;
+	background-size:20% ;
+}
+/* 本月 */
+.list{
+	background: #fff;
+}
+.list dt{
+	background: #eee;
+	line-height:2.125rem;
+	height:2.125rem;
+	padding:0 0.875rem;
+	font-size: 0.75rem;
+	border-bottom: 1px solid #eaeaea;
+}
+.list dt span{
+	float: right;
+	background: #fff;
+	border:1px solid #7B7B7B;
+	border-radius: 10px;
+	display: block;
+	line-height: 1.5rem;
+	padding: 0 0.5rem;
+	margin-top: 0.25rem;
+}
+.list dd{
+	overflow: hidden;
+	padding: 1.625rem 0.8125rem;
+	border-bottom: 1px solid #eaeaea;
+	color: #9b9b9b;
+}
+.list dd div{
+	float: left;
+	font-size: 0.75rem;
+}
+.list dd div.datas{
+	text-align: center;	
+	width: 15%;
+	height:2.3125rem;
+}
+.list dd div.datas span{
+	display: block;
+}
+.list dd div.imgs{
+	width:2.3125rem;
+	height:2.3125rem;
+	margin-right: 0.5rem;
+	margin-top: -0.1rem;
+}
+.list dd div.detals{
+	height:2.3125rem;
+}
+.list dd div.detals strong{
+	color: #333;
+	font-weight: normal;
+	font-size: 1rem;
+	line-height: 2.3125rem;
+}
+.list dd a{
+	float: right;
+	line-height: 2.3125rem;
+	color: #c5c5c5;
+}
+.list-warp{
+	position: relative;
+	padding-bottom: 2rem;
+}
+.more-btn{
+	position: absolute;
+	height: 2rem;
+	line-height: 2rem;
+	width: 100%;
+	background: rgba(0,0,0,.4);
+	color: #fff;
+	text-align: center;
+	font-size:12px;
+}
+.query-data{
+	background: #fff;
+	line-height:2.125rem;
+	height:2.125rem;
+	padding:0 0.875rem;
+	font-size: 0.75rem;
+	border-bottom: 1px solid #eaeaea;
+}
+.query-data select{
+	width: 50%;
+	height:1.6rem;
+	border:1px solid #7B7B7B;
+	border-radius: 10px;
+	outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

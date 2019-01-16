@@ -1,0 +1,216 @@
+/*头部*/
+.header{
+	background: #41bdfb;
+	background: linear-gradient(left,#32b5f7,#47c0fd);/*Mozilla*/
+	background:-moz-linear-gradient(left,#32b5f7,#47c0fd);/*Mozilla*/
+	background:-webkit-gradient(linear,0 50%,100% 50%,from(#32b5f7),to(#47c0fd));/*Old gradient for webkit*/
+	background:-webkit-linear-gradient(left,#32b5f7,#47c0fd);/*new gradient for Webkit*/
+	background:-o-linear-gradient(left,#32b5f7,#47c0fd); /*Opera11*/
+	text-align: center;
+	position: relative;
+	color: #fff;
+}
+.header h1{
+	height:2.75rem;
+	font-size: 0.9375rem;
+	line-height: 2.75rem;
+}
+/*body,html {
+	background: #fff;
+}*/
+
+/*个人信息部分*/
+.content {
+	width: 100%;
+}
+.content .info {
+	width: 100%;
+	padding: 1rem 0;
+	color: #fff;
+	text-align: center;
+	background: #41bdfb;
+	background: linear-gradient(left,#32b5f7,#47c0fd);/*Mozilla*/
+	background:-moz-linear-gradient(left,#32b5f7,#47c0fd);/*Mozilla*/
+	background:-webkit-gradient(linear,0 50%,100% 50%,from(#32b5f7),to(#47c0fd));/*Old gradient for webkit*/
+	background:-webkit-linear-gradient(left,#32b5f7,#47c0fd);/*new gradient for Webkit*/
+	background:-o-linear-gradient(left,#32b5f7,#47c0fd); /*Opera11*/
+}
+.info img {
+	width: 5rem;
+	height: 5rem;
+	border-radius: 100%;
+	border: 0.3rem solid #70cffd;
+
+}
+.account_phone {
+	font-size: 22px;
+	line-height: 36px;
+}
+.balance {
+	width: 12rem;
+	height: 2rem;
+	line-height: 2rem;
+	border-radius: 2rem;
+	background: #21a1e0;
+	margin: 0 auto;
+	color: #d6e9f7;
+}
+.account_number {
+	color: #fff;
+}
+/*操作部分*/
+/*.operate {
+	width: 100%;
+	height: 21.5rem;
+	background-color: #fff;
+}*/
+/*.operate li {
+	width: 88%;
+	margin: 0 6%;
+	height: 3rem;
+	background-color: #fff;
+	line-height: 3rem;
+	border-bottom: 1px solid #ccc;
+	background: url(../../imgs/oilCard/recharge/right.jpg) no-repeat bottom right;
+	background-size: 6%;
+}
+.operate ul li:nth-child(7) {
+	border: 0;
+}*/
+.operate {
+	width: 100%;
+	font-size: 0;
+	overflow: hidden;
+	padding: 10px 10px;
+	background-color: #fff;
+	box-sizing: border-box;
+}
+.operate li{
+	display: inline-block;
+	vertical-align: top;
+	padding-top: 10%;
+	width: 22%;
+	margin: 10px 1.5%;
+	line-height: 32px;
+    font-size: 13px;
+    color: #333;
+    text-align: center;
+}
+.operate .order {
+	background: url(../../imgs/oilCard/home/home_chongzhijilu.png) no-repeat center top;
+	background-size: 40% auto;
+}
+.operate .recharge {
+	background: url(../../imgs/oilCard/home/home_zhanghuchongzhi.png) no-repeat center top;
+	background-size: 40% auto;
+}
+.operate .coupons {
+	background: url(../../imgs/oilCard/home/home_dianziquan.png) no-repeat center top;
+	background-size: 40% auto;
+}
+.operate .chargecard {
+	background: url(../../imgs/oilCard/home/home_youkachongzhi.png) no-repeat center top;
+	background-size: 40% auto;
+}
+.operate .mobile {
+	background: url(../../imgs/oilCard/home/home_huafeichongzhi.png) no-repeat center top;
+	background-size: 30% auto;
+}
+.operate .didi {
+	background: url(../../imgs/oilCard/home/home_didi.png) no-repeat center 5%;
+	background-size: 38% auto;
+}
+.operate .daijia {
+	background: url(../../imgs/oilCard/home/home_daijia.png) no-repeat center top;
+	background-size: 40% auto;
+}
+.operate .buy {
+	background: url(../../imgs/oilCard/home/home_goumaixiche.png) no-repeat center top;
+	background-size: 40% auto;
+}
+.operate .guide {
+	background: url(../../imgs/oilCard/home/home_shiyongzhinan.png) no-repeat center top;
+	background-size: 40% auto;
+}
+.operate .exitOil {
+	background: url(../../imgs/oilCard/home/home_tuichudenglu.png) no-repeat center top;
+	background-size: 40% auto;
+}
+/* 猫眼 */
+.operate .cateyes {
+	background: url(../../imgs/oilCard/home/home_cateyes.png) no-repeat center top;
+	background-size: 40% auto;
+}
+/* 视频卡 */
+.operate .videoCard{
+	background: url(../../imgs/oilCard/home/home_video.png) no-repeat center top;
+	background-size: 40% auto;
+}
+.phone {
+	margin: 0.5rem 0 0 0;
+	font-size: 14px;
+	padding: 0.8rem 1rem;
+	background: #fff;
+}
+.phone span {
+	font-size: 12px;
+	padding-left: 0.2rem;
+}
+/*弹出框*/
+.tip {
+	display: none;
+}
+.tip .bg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.5);
+}
+.tip .tipCon {
+	position: absolute;
+	top: 35%;
+	left: 15%;
+	width: 70%;
+	background: #fff;
+	border-radius: 8px;
+	text-align: center;
+}
+.tip h3 {
+	font-weight: normal;
+	font-size: 18px;
+	height: 3rem;
+	line-height: 3rem;
+}
+.cont {
+	padding: 0.2rem 1rem;
+	color:#666666;
+	font-size: 14px;
+	padding-bottom: 1rem;
+}
+.cont span{
+	color: #29aff3;
+}
+.tipCon .btnCon {
+	border-top: 1px solid #ccc;
+}
+.btnCon > div{
+	width: 50%;
+	float: left;
+	height: 2.6rem;
+	line-height: 2.6rem;
+	position: relative;
+}
+.btnCon > div:nth-child(1):after{
+	content: "";
+	width: 1px;
+	height: 100%;
+	background: #ccc;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.btnCon > div:nth-child(2) a{
+	color: #2aaff4;
+}

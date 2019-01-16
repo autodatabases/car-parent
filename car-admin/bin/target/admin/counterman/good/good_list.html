@@ -1,0 +1,83 @@
+<link rel="stylesheet" type="text/css" href="resources/css/counterman/good/good_list.css?t=1.0"/>
+<link rel="stylesheet" type="text/css" href="resources/js/jquery/page/myJquery.page.css?t=1.0" />
+<script src="resources/js/jquery/page/myJquery.page.js"></script>
+<script src="resources/js/counterman/good/good_list.js?t=1.4"></script>
+<div class="tables-top">
+	<p class="crumbs">
+		<span>您的位置：</span><a>业务员</a>&nbsp;》<a class="on">商品列表</a>
+	</p>
+	<!-- 切换头部 -->
+	<div class="tab-top">
+		<span class="on">商品列表</span>
+		<div id="add_countermanGood">新增商品</div>
+		<div id="batch_increase">批量新增商品</div>
+	</div>
+</div>
+<!-- 列表 -->
+<div class="tabels-main">
+	<!-- 搜索 -->
+	<div class="search-box clearfix">
+		<ul>
+			<li>
+				<label>商品名称:</label>
+				<input type="text" id="goodName" />
+			</li>
+			<li>
+				<label>商品状态:</label>
+				<select id="goodStatus">
+			 		<option value="">请选择商品状态</option>
+			 		<option value="0">上架</option>
+			 		<option value="1">下架</option>
+				</select>
+			</li>
+			<li>
+			<button class="search-btn">
+				<span>搜索</span>
+			</button>
+			</li>
+		</ul>
+	</div>
+	<!-- 表格 -->
+	<div class="tab-list">
+		<table>
+			<thead>
+				<tr>
+					<th>商品名称</th>
+					<th>商品价格</th>
+					<th>商品积分</th>
+					<th>结算价格</th>
+					<th>商品库存</th>
+					<th>所属网点</th>
+					<th>商品状态 </th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>华为荣耀6</td>
+					<td>1999</td>
+					<td>400</td>
+					<td>黄埔本部</td>
+					<td>上架</td>
+					<td><a>编辑</a><a>下架</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+	<div class="page-box" id="countermanGood_paga"></div>
+</div>
+<div class="tips-warp" style="display: none;">
+	<div class="tips-bg"></div>
+	<div class="tips-box">
+		<div class="tips-top">
+			<p class="wenzi" style="float: left;">是否下架该商品</p>
+			<span onclick="audit_close()" class="close">x</span>
+		</div>
+		<div class="tips-bottom">
+			<input type="button" class="ok_btn" onclick="audit_button()"
+				value="确认" /> <input type="button" onclick="audit_close()"
+				value="关闭" />
+		</div>
+	</div>
+</div>
